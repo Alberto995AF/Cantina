@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="MudBlazor" Version="6.0.17" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.4.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove=".\Data\Cantina.db" />
+    <None Remove="Microsoft.EntityFrameworkCore.Design" />
+    <None Remove="Cantina.db" />
+    <None Remove="Migrations\" />
+    <None Remove="Cantina.db-wal" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Logs\Logs\log20221015.txt" />
+    <None Remove="Logs\Logs\log20221016.txt" />
+    <None Remove="Logs\Logs\log20221017.txt" />
+    <None Remove="Logs\Logs\log20221024.txt" />
+    <None Remove="Logs\Logs\log20221108.txt" />
+    <None Remove="Logs\Logs\log20221112.txt" />
+    <None Remove="Logs\Logs\log20221115.txt" />
+    <None Remove="SeedData\" />
+    <None Remove="Pages\page_old\" />
+    <None Remove="Data\DTO\" />
+    <None Remove="Readme\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
+    <Content Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
+    <Content Remove="wwwroot\css\open-iconic\FONT-LICENSE" />
+    <Content Remove="wwwroot\css\open-iconic\ICON-LICENSE" />
+    <Content Remove="wwwroot\css\open-iconic\README.md" />
+    <Content Remove="wwwroot\css\open-iconic\font\css\open-iconic-bootstrap.min.css" />
+    <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
+    <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.woff" />
+    <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.ttf" />
+    <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.eot" />
+    <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.otf" />
+    <Content Remove="Pages\CantinaAlbe %28copia%29.razor" />
+    <Content Remove="wwwroot\js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logs\" />
+    <Folder Include="wwwroot\js\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="SeedData\" />
+    <Folder Include="Pages\page_old\" />
+    <Folder Include="Data\DTO\" />
+    <Folder Include="Readme\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Data\AziendaVinicola %28copia%29.cs" />
+    <Compile Remove="Migrations\20220904102845_InitialCreate23.Designer.cs" />
+    <Compile Remove="Migrations\20220904102845_InitialCreate23.cs" />
+  </ItemGroup>
+</Project>

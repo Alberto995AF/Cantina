@@ -1,0 +1,25 @@
+﻿@inject Cantina.Data.VinoService VinoService
+@using Cantina.Data
+
+<MudDialog>
+    <DialogContent>
+        <MudContainer Style="max-height: 100%; overflow-y: scroll">
+            <MudTextField Label="Annata" HelperText="Max. 8 characters" @bind-Value="annata" For="@(() => annata)" />
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton EndIcon="@Icons.Material.Filled.Save" Color="Color.Success" Variant="Variant.Filled" OnClick="Submit">Salva</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+@code {
+    //Vino vinoBar = new Vino();
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    int annata;
+
+    void Submit()
+    {
+        MudDialog.Close(DialogResult.Ok(annata));
+    }
+}

@@ -1,0 +1,52 @@
+﻿@page "/cantinaalbe"
+
+<PageTitle>Cantina</PageTitle>
+
+@using Cantina.Data
+@inject Cantina.Data.VinoService VinoService
+@inject NavigationManager NavigationManager
+
+
+
+<MudGrid>
+    <MudItem xs="12">
+        <MudText Typo="Typo.h4">CANTINA</MudText>
+    </MudItem>
+    @foreach (var item in listaVini)
+    {
+        <MudItem xs="12" sm="3">
+            <MudCard Elevation="5" @onclick="() => OnclickDetail(item.ID)" Height="400px">
+                <MudCardContent>
+                    <MudStack>
+                        <MudStack Row="true" Justify="Justify.SpaceBetween">
+                            <MudImage Width="64" Height="240" Src=@item.linkImmagine Alt="Mony the dog" Class="rounded-lg" />
+                            <MudStack>
+                                <MudStack Row="true" AlignItems="AlignItems.Center">
+                                    <MudIcon Icon="@Icons.Filled.Numbers" Color="Color.Primary" />
+                                    <MudText Typo="Typo.h6">@item.bottglieInCantina</MudText>
+                                </MudStack>
+                            </MudStack>
+                        </MudStack>
+                        <MudText Typo="Typo.h5">@item.Nome - @item.Annata</MudText>
+                        <MudText Typo="Typo.h6">@item.AziendaVinicola</MudText>
+                    </MudStack>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+
+@code {
+    private List<VinoDTO> listaVini = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaVini = await VinoService.GetViniCantina();
+    }
+
+    protected async Task OnclickDetail(int id)
+    {
+        NavigationManager.NavigateTo("/dettaglivino/" + id);
+    }
+}

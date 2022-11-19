@@ -1,0 +1,237 @@
+﻿@page "/"
+@inject Cantina.Data.VinoService VinoService
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+@using Cantina.Data
+
+<PageTitle>Index</PageTitle>
+
+<MudGrid>
+    <MudItem xs="12" sm="12">
+        <MudPaper Elevation="3" Class="pa-3">
+            <MudStack>
+                @*<MudStack>
+                    <MudNumericField AutoFocus="true" HideSpinButtons="true" @bind-Value="@barcode_ins" Immediate="true" @onkeydown="@pressEnter" Clearable="true" Label="Standard" Variant="Variant.Text" />
+                </MudStack>
+                <MudStack Justify="Justify.FlexEnd" AlignItems="AlignItems.End">
+                    <MudButton id="btnSubmit" OnClick="Register" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                </MudStack>*@
+                <MudAutocomplete T="VinoDTO" Label="Periodic Table Element" ValueChanged="@(x => Register(x))"
+                                 SearchFunc="@functionResearchField" ToStringFunc="@(e=> e==null?null : $"{e.Nome} {e.AziendaVinicola} {e.Annata}")">
+                    <MoreItemsTemplate>
+                        <MudText Align="Align.Center" Class="px-4 py-1">
+                            Only the first 10 items are shown
+                        </MudText>
+                    </MoreItemsTemplate>
+                </MudAutocomplete>
+            </MudStack>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="4">
+        <MudPaper Elevation="3" Class="pa-3">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="4">
+                <MudStack>
+                    <MudIcon Icon="@Icons.Filled.Payment" Color="Color.Primary" Size="Size.Large" />
+                </MudStack>
+                <MudStack Spacing="0">
+                    <MudText Typo="Typo.button">Bottiglie Acquistate</MudText>
+                    <MudText Typo="Typo.h6">@numBottigleAcquistate</MudText>
+                </MudStack>
+            </MudStack>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="4">
+        <MudPaper Elevation="3" Class="pa-3">
+            <MudStack Row="true" AlignItems="AlignItems.Center">
+                <MudStack>
+                    <MudIcon Icon="@Icons.Filled.WineBar" Color="Color.Error" Size="Size.Large" />
+                </MudStack>
+                <MudStack Spacing="0">
+                    <MudText Typo="Typo.button">Bottiglie Bevute</MudText>
+                    <MudText Typo="Typo.h6">@numBottiglieBevute</MudText>
+                </MudStack>
+            </MudStack>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="4">
+        <MudPaper Elevation="3" Class="pa-3">
+            <MudStack Row="true" AlignItems="AlignItems.Center">
+                <MudStack>
+                    <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" Size="Size.Large" />
+                </MudStack>
+                <MudStack Spacing="0">
+                    <MudText Typo="Typo.button">Bottiglie in Cantina</MudText>
+                    <MudText Typo="Typo.h6">@numBottiglieCantina</MudText>
+                </MudStack>
+            </MudStack>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+
+@code {
+    Vino vinoBar = new Vino();
+    bool success;
+    int barcode_ins;
+    int numBottiglieBevute;
+    int numBottiglieCantina;
+    int numBottigleAcquistate;
+    int numTotaleViniSlide;
+
+    int i = 0;
+    int k = 0;
+    int j = 0;
+    string si = "";
+
+    //parametri per la ricerca
+    private VinoDTO researchVinoDTO;
+    List<VinoDTO> vinoListResearch = new();
+
+    List<VinoDTO> vinoList = new();
+    List<VinoDTO> listaVini = new();
+    List<VinoDTO> listaViniRidotta = new(); //serve per il carosello
+    List<int> numeriBottiglie = new();
+    List<tipoVino> tipiVino = new();
+    List<MovimentoDTO> listaMovimentiTotale = new();
+    List<MovimentoDTO> listaMovimentiRidotta = new();
+    int dataSizeCircleChart;
+    private Transition transition = Transition.Slide;
+    string[] labelsCircle;
+    double[] data;
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaVini = await VinoService.GetViniRandom();
+        numTotaleViniSlide = listaVini.Count();
+
+        numeriBottiglie = await VinoService.GetInfoNumeriche();
+        numBottiglieBevute = numeriBottiglie[0];
+        numBottiglieCantina = numeriBottiglie[1];
+        numBottigleAcquistate = numeriBottiglie[2];
+
+        listaMovimentiTotale = await VinoService.GetMovimenti();
+
+        //prendo tutti i tipi di vino
+        tipiVino = await VinoService.GetTipiVino();
+        dataSizeCircleChart = tipiVino.Count();
+
+        labelsCircle= new string[dataSizeCircleChart];
+        data = new double[dataSizeCircleChart];
+
+        int i = 0;
+        foreach (var item in tipiVino)
+        {
+            if (item.Tipo == "Rosso")
+            {
+                labelsCircle[0] = item.Tipo;
+                data[0] = numeriBottiglie[3];
+            }
+
+            if (item.Tipo == "Bianco")
+            {
+                labelsCircle[1] = item.Tipo;
+                data[1] = numeriBottiglie[4];
+            }
+
+            if (item.Tipo == "Bianco Frizzante")
+            {
+                labelsCircle[2] = item.Tipo;
+                data[2] = numeriBottiglie[5];
+            }
+
+            if (item.Tipo == "Prosecco")
+            {
+                labelsCircle[3] = item.Tipo;
+                data[3] = numeriBottiglie[6];
+            }
+
+            if (item.Tipo == "Champagne")
+            {
+                labelsCircle[4] = item.Tipo;
+                data[4] = numeriBottiglie[7];
+            }
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="vinoList"> lista dei vini trovati con la ricerca nel campo di ricerca </param>
+    /// <returns></returns>
+    //protected async Task Register(List<VinoDTO> vinoList)
+    //{
+    //    //togliamo la parte in cui si cercava il vino per barcode
+
+    //    //vinoList = await VinoService.GetVinoBarcodeDTO(barcode_ins);
+    //    //if (vinoList.Count() == 0)
+    //    //{
+    //    //    Snackbar.Add("Errore: Vino non trovato", Severity.Error, config =>
+    //    //    {
+    //    //        config.RequireInteraction = false;
+    //    //        config.ShowCloseIcon = false;
+    //    //        config.VisibleStateDuration = 2000;
+    //    //        config.ShowTransitionDuration = 500;
+    //    //        config.Onclick = snackbar =>
+    //    //        {
+    //    //            return Task.CompletedTask;
+    //    //        };
+    //    //    });
+    //    //    return;
+    //    //}
+
+    //    DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true };
+    //    var parameter = new DialogParameters();
+    //    parameter.Add("vino", vinoList);
+
+    //    var dialog = DialogService.Show<DialogAddOrRemoveVino>("AddOrRemoveVino Dialog", parameter, maxWidth);
+
+    //    var result = await dialog.Result;
+    //    if (!result.Cancelled && result.Data != null)
+    //    {
+    //        var newItem = (MovimentiVino)result.Data;
+    //        await VinoService.AddMovimento(newItem);
+    //    }
+
+    //}
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="vino"> vino da mostrare nella dialog </param>
+    /// <returns></returns>
+    protected async Task Register(VinoDTO vino)
+    {
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true };
+        var parameter = new DialogParameters();
+        parameter.Add("vino", vino);
+
+        var dialog = DialogService.Show<DialogAddOrRemoveVino>("AddOrRemoveVino Dialog", parameter, maxWidth);
+
+        var result = await dialog.Result;
+        if (!result.Cancelled && result.Data != null)
+        {
+            var newItem = (MovimentiVino)result.Data;
+            await VinoService.AddMovimento(newItem);
+        }
+    }
+
+
+    //protected async Task pressEnter(KeyboardEventArgs e)
+    //{
+    //    if (e.Code == "Enter" || e.Code == "NumpadEnter")
+    //    {
+    //        Register(vinoListResearch);
+    //    }
+    //}
+
+    private async Task<IEnumerable<VinoDTO>> functionResearchField(string value)
+    {
+        //chiamo una funzione che in base a quello che è stato digitato tira fuori i vini che corrispondono
+        //alla ricerca
+
+        vinoListResearch = await VinoService.GetVinoDTOSearch(value);
+
+        return vinoListResearch;
+    }
+}

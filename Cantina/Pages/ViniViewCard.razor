@@ -1,0 +1,92 @@
+﻿@page "/viniviewcard"
+
+<PageTitle>Vini</PageTitle>
+
+@using Cantina.Data
+
+@inject Cantina.Data.VinoService VinoService
+@inject IDialogService DialogService
+@inject NavigationManager NavigationManager
+
+
+<MudGrid>
+    <MudItem xs="12">
+        <MudText Typo="Typo.h4">CATALOGO VINI</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudStack Row="true" Spacing="3" Justify="Justify.SpaceBetween">
+            <MudTooltip Text="Change View">
+                <MudIconButton Href="/vini" Icon="@Icons.Filled.List" aria-label="modView"></MudIconButton>
+            </MudTooltip>
+            <MudFab Color="Color.Primary" Href="/createvino" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" />
+        </MudStack>
+    </MudItem>
+    @foreach(var item in listaVini)
+    {
+        <MudItem xs="12" sm="3">
+            <MudCard Elevation="5" @onclick="() => OnclickDetail(item.ID)" Height="400px">
+                <MudCardContent>
+                    <MudStack>
+                        <MudStack Row="true" Justify="Justify.SpaceBetween">
+                            <MudImage Width="64" Height="240" Src=@item.linkImmagine Alt="Mony the dog" Class="rounded-lg" />
+                            <MudStack>
+                                <MudStack AlignItems="AlignItems.Center" Row="true">
+                                    <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" />
+                                    <MudText Typo="Typo.h6">  @item.bottglieInCantina</MudText>
+                                </MudStack>
+                                <MudStack AlignItems="AlignItems.Center" Row="true">
+                                    <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
+                                    <MudText Typo="Typo.h6">  @item.QuantitàBottiglePossedute</MudText>
+                                </MudStack>
+                            </MudStack>
+                        </MudStack>
+                        <MudText Typo="Typo.h5">@item.Nome - @item.Annata</MudText>
+                        <MudText Typo="Typo.h6">@item.AziendaVinicola</MudText>
+                    </MudStack>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+    @code {
+        private bool hover = true;
+        private List<VinoDTO> listaVini = new();
+        private List<AziendaVinicola> listaAziende = new();
+        private readonly HttpClient _httpClient;
+        private VinoDTO selectedVino = null;
+
+
+        protected override async Task OnInitializedAsync()
+        {
+            listaVini = await VinoService.GetVini();
+        }
+
+        //funzione per editare i vini nella dialog
+        private Vino vino = new();
+        protected async Task OnclickEdit(int id)
+        {
+            vino = await VinoService.GetVinoID(id);
+
+            //prendo la lista delle aziende vinicole
+            listaAziende = await VinoService.GetAziende();
+
+            var parameter = new DialogParameters();
+            parameter.Add("Vino", vino);
+            parameter.Add("AziendaVinicola", listaAziende);
+            var dialog = DialogService.Show<DialogVino>("Options Dialog", parameter);
+
+            var result = await dialog.Result;
+            if (!result.Cancelled && result.Data != null)
+            {
+                var newItem = (Vino)result.Data;
+                await VinoService.UpdateVinoBarcode(newItem);
+            }
+        }
+
+        //Dettagli Vino
+        protected async Task OnclickDetail(int id)
+        {
+            NavigationManager.NavigateTo("/dettaglivino/" + id);
+        }
+    }

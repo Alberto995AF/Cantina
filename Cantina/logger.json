@@ -1,0 +1,39 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Hangfire": "Warning",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File" ],
+    "MinimumLevel": {
+      "Default": "Debug",
+      "Override": {
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console",
+        "Args": { "outputTemplate": "[{Timestamp:Timestamp:HH:mm:ss} [IP {IPAddress}] [{RequestId}] [{Level:u3}] {SourceContext:l} {Message}{NewLine}{Exception}" }
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "Logs\\log.txt",
+          "rollingInterval": "Day",
+          "outputTemplate": "[{Timestamp:dd-MM-yyyy HH:mm:ss} [IP {IPAddress}] [{RequestId}] [{Level:u3}] {SourceContext:l} {Message}{NewLine}{Exception}",
+          "retainedFileCountLimit": 7
+        }
+      }
+    ],
+    "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+    "Properties": {
+      "Application": "InCIA API"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+﻿@page "/createaziendavinicola"
+
+@inject Cantina.Data.VinoService VinoService
+@using System.ComponentModel.DataAnnotations
+
+@using Cantina.Data
+
+<PageTitle>Create Azienda Vinicola</PageTitle>
+
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Nome Cantina"
+                                  @bind-Value="model.Nome" For="@(() => model.Nome)" />
+                </MudCardContent>
+                <MudCardContent>
+                    <MudTextField Label="Indirizzo"
+                                  @bind-Value="model.Indirizzo" For="@(() => model.Indirizzo)" />
+                </MudCardContent>
+                <MudCardContent>
+                    <MudTextField Label="Nazione"
+                                  @bind-Value="model.NazioneId" For="@(() => model.NazioneId)" />
+                </MudCardContent>
+                <MudCardContent>
+                    <MudTextField Label="Regione"
+                                  @bind-Value="model.RegioneId" For="@(() => model.RegioneId)" />
+                </MudCardContent>
+                <MudCardContent>
+                    <MudTextField Label="Descrizione"
+                                  @bind-Value="model.Descrizione" For="@(() => model.Descrizione)" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+
+@code {
+    AziendaVinicola model = new AziendaVinicola();
+    bool success;
+
+    private async Task OnValidSubmit(EditContext context)
+    {
+
+        success = true;
+        await VinoService.AddAziendaVinicola(model);
+        //StateHasChanged();
+    }
+}

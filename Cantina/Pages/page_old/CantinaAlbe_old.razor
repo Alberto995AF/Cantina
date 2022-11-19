@@ -1,0 +1,35 @@
+﻿@page "/cantinaalbe_old"
+
+<PageTitle>Cantina</PageTitle>
+
+@using Cantina.Data
+
+<h1>Cantina</h1>
+
+@inject Cantina.Data.VinoService VinoService
+
+<MudTable Items="@listaVini" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+    <HeaderContent>
+        <MudTh>Nome</MudTh>
+        <MudTh>Annata</MudTh>
+        <MudTh>AziendaVinicola</MudTh>
+        <MudTh>Tipo Vino</MudTh>
+        <MudTh>QuantitàBottigle</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Nr">@context.Nome</MudTd>
+        <MudTd DataLabel="Sign">@context.Annata</MudTd>
+        <MudTd DataLabel="Name">@context.AziendaVinicola</MudTd>
+        <MudTd DataLabel="Name">@context.tipoVino</MudTd>
+        <MudTd DataLabel="Name">@context.bottglieInCantina</MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    private List<VinoDTO> listaVini = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaVini = await VinoService.GetViniCantina();
+    }
+}

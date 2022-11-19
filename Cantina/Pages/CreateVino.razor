@@ -1,0 +1,150 @@
+﻿@page "/createvino"
+
+@inject Cantina.Data.VinoService VinoService
+@using System.ComponentModel.DataAnnotations
+@inject IDialogService DialogService
+@inject NavigationManager NavigationManager
+
+@using Cantina.Data
+
+<PageTitle>Create Vino</PageTitle>
+
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Nome Vino" HelperText="Max. 8 characters" @bind-Value="model.Nome" For="@(() => model.Nome)" />
+                </MudCardContent>
+                <MudCardContent>
+                    <MudTextField Label="Annata" HelperText="Max. 8 characters" @bind-Value="model.Annata" For="@(() => model.Annata)" />
+                </MudCardContent>
+                <MudCardContent>
+                    <MudStack Spacing="3" Row="true">
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudAutocomplete T="string" Label="Cantina" @bind-Value="AziendaVinicola" SearchFunc="@SearchAziendeVinicole" ResetValueOnEmptyText="@resetValueOnEmptyText" CoerceText="@coerceText" CoerceValue="@coerceValue" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudFab Color="Color.Primary" OnClick="@AddCantina" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" />
+                        </MudItem>
+                    </MudStack>
+                </MudCardContent>
+                <MudCardContent>
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudAutocomplete T="string" Label="TipoVino" @bind-Value="TipoVino" SearchFunc="@SearchTipiVino" ResetValueOnEmptyText="@resetValueOnEmptyText" CoerceText="@coerceText" CoerceValue="@coerceValue" />
+                    </MudItem>
+                </MudCardContent>
+                @*<MudCardContent>
+            <MudItem xs="12" sm="6" md="4">
+                <MudAutocomplete T="string" Label="TipoUva" @bind-Value="value2" SearchFunc="@SearchTipiVino" ResetValueOnEmptyText="@resetValueOnEmptyText" CoerceText="@coerceText" CoerceValue="@coerceValue" />
+            </MudItem>
+        </MudCardContent>*@
+                <MudCardContent>
+                    <MudTextField Label="Barcode" @bind-Value="model.Barcode" For="@(() => model.Barcode)" />
+                </MudCardContent>
+                <MudCardContent>
+                    <MudTextField Label="Link Vivino" @bind-Value="model.linkAppVivino" For="@(() => model.linkAppVivino)" />
+                </MudCardContent>
+                <MudCardContent>
+                    <MudTextField Label="Link Tannico" @bind-Value="model.linkAppTannico" For="@(() => model.linkAppTannico)" />
+                </MudCardContent>
+                <MudCardContent>
+                    <MudTextField Label="Link Immagine" @bind-Value="model.linkImmagine" For="@(() => model.linkImmagine)" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+
+@code {
+    Vino model = new Vino();
+    bool success;
+    string AziendaVinicola;
+    string TipoVino;
+    private bool resetValueOnEmptyText;
+    private bool coerceText;
+    private bool coerceValue;
+    List<AziendaVinicola> listAziende = new List<AziendaVinicola>();
+    List<tipoVino> listTipoVino = new List<tipoVino>();
+    string[] tipiVino = new string[10];
+    string[] nomiAziendeVinicole = new string[1000];
+    AziendaVinicola AzVino = new AziendaVinicola();
+
+    protected override async Task OnInitializedAsync()
+    {
+        listAziende = await VinoService.GetAziende();
+        listTipoVino = await VinoService.GetTipoVino();
+        int i = 0;
+        foreach (var s in listAziende)
+        {
+            nomiAziendeVinicole[i] = s.Nome;
+            i++;
+        }
+
+        i = 0;
+        foreach (var s in listTipoVino)
+        {
+            tipiVino[i] = s.Tipo;
+            i++;
+        }
+    }
+
+    private async Task<IEnumerable<string>> SearchAziendeVinicole(string value)
+    {
+        await Task.Delay(5);
+
+        if (string.IsNullOrEmpty(value))
+            return nomiAziendeVinicole;
+        return nomiAziendeVinicole.Where(x => x.Contains(value, StringComparison.CurrentCultureIgnoreCase));
+    }
+
+    private async Task<IEnumerable<string>> SearchTipiVino(string value)
+    {
+        await Task.Delay(5);
+
+        if (string.IsNullOrEmpty(value))
+            return tipiVino;
+        return tipiVino.Where(x => x.Contains(value, StringComparison.CurrentCultureIgnoreCase));
+    }
+
+    @*private async Task<IEnumerable<string>> SearchTipoUva(string value)
+    {
+        await Task.Delay(5);
+
+        if (string.IsNullOrEmpty(value))
+            return tipiVino;
+        return tipiVino.Where(x => x.Contains(value, StringComparison.CurrentCultureIgnoreCase));
+    }*@
+
+        private async Task OnValidSubmit(EditContext context)
+    {
+        var azienda = listAziende.Where(x => x.Nome == AziendaVinicola).FirstOrDefault();
+        var tipoVino = listTipoVino.Where(x => x.Tipo == TipoVino).FirstOrDefault();
+        int aziendaID = azienda.ID;
+        int tipoVinoID = tipoVino.ID;
+        model.AziendaVinicolaId = aziendaID;
+        model.tipoVinoId = tipoVinoID;
+        if (model.linkImmagine == null)
+            model.linkImmagine = "https://www.vivino.com/packs/f1b798fa2a2afa4f598391f35cba7e57.png";
+        success = true;
+        await VinoService.AddVino(model);
+        NavigationManager.NavigateTo("/vini");
+    }
+
+    protected async Task AddCantina()
+    {
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true };
+        var dialog = DialogService.Show<DialogAddAziendaVinicola>("Aggiungi Cantina", maxWidth);
+        var result = await dialog.Result;
+        if (!result.Cancelled && result.Data != null)
+        {
+            var newItem = (AziendaVinicola)result.Data;
+            await VinoService.AddAziendaVinicola(newItem);
+        }
+    }
+}

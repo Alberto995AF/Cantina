@@ -1,0 +1,48 @@
+﻿@page "/timelineMovimenti"
+
+<PageTitle>Vini</PageTitle>
+
+@using Cantina.Data
+
+@inject Cantina.Data.VinoService VinoService
+@inject IDialogService DialogService
+@inject NavigationManager NavigationManager
+
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12">
+        <MudStack Row="true" Spacing="3" Justify="Justify.SpaceBetween">
+            <MudText Typo="Typo.h4">MOVIMENTI</MudText>
+        </MudStack>
+    </MudItem>
+    <MudItem xs="5">
+        <MudTimeline>
+            @foreach (var item in listaMovimenti)
+            {
+                @if(item.Movimento < 0)
+                {
+                    <MudTimelineItem TimelineAlign="TimelineAlign.End" Color="Color.Error">
+                        <MudText>@item.Nome - @item.Annata.</MudText>
+                        <MudText Color="Color.Error">Bevuto - @item.Data.ToString("dd/mm/yyyy")</MudText>
+                    </MudTimelineItem>
+                }
+                else
+                {
+                    <MudTimelineItem TimelineAlign="TimelineAlign.Start" Color="Color.Success">
+                        <MudText>@item.Nome - @item.Annata</MudText>
+                        <MudText Color="Color.Success">Comprato - @item.Data.ToString("dd/mm/yyyy")</MudText>
+                    </MudTimelineItem>  
+                }
+            }
+        </MudTimeline>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private List<MovimentoDTO> listaMovimenti = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaMovimenti = await VinoService.GetMovimenti();
+    }
+}

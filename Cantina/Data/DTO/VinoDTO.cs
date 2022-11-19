@@ -1,0 +1,39 @@
+namespace Cantina.Data
+{
+    public class VinoDTO
+    {
+        public int ID { get; set; }
+
+        public string Nome { get; set; }
+
+        public int? Annata { get; set; }
+
+        public string tipoVino { get; set; }
+
+        public int AziendaVinicolaId { get; set; }
+
+        public string AziendaVinicola { get; set; }
+
+        public string Nazione { get; set; }
+
+        public string Regione { get; set; }
+
+        public string Denominazione { get; set; }
+
+        public int QuantitàBottiglePossedute { get; set; }
+
+        public bool inCantina { get; set; }
+
+        public int bottglieInCantina { get; set; }
+
+        public int bottiglieBevute { get; set; }
+
+        public int? Barcode { get; set; }
+
+        public string? linkAppVivino { get; set; }
+
+        public string? linkAppTannico { get; set; }
+
+        public string? linkImmagine { get; set; }
+    }
+}

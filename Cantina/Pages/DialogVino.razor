@@ -1,0 +1,55 @@
+﻿@inject Cantina.Data.VinoService VinoService
+@using Cantina.Data
+
+<MudDialog>
+    <DialogContent>
+        <MudContainer Style="max-height: 100%; overflow-y: scroll">
+            <MudGrid>
+                <MudItem>
+                    <MudCard>
+                        <MudCardContent>
+                            <MudTextField Label="Nome" @bind-Value="vino.Nome" />
+                            <MudTextField Label="Annata" @bind-Value="vino.Annata" />
+                            @*<MudTextField Label="Azienda Vinicola" @bind-Value="vino.AziendaVinicolaId" />*@
+                            @*<MudTextField Label="Prezzo" @bind-Value="vino.Price" />
+                            <MudTextField Label="Quantità" @bind-Value="vino.Quantità" />
+                            <MudTextField Label="In Cantina" @bind-Value="vino.inCantina" />
+                            <MudTextField Label="Barcode" @bind-Value="vino.Barcode" />*@
+                            <MudTextField Label="Link" @bind-Value="vino.linkAppVivino" />
+                        </MudCardContent>
+                        @*<MudCardActions>
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Confirm</MudButton>
+                        </MudCardActions>*@
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        @*<MudButton OnClick="Cancel" Variant="Variant.Outlined" Style="color: #000000;">Annulla</MudButton>*@
+        <MudButton EndIcon="@Icons.Material.Filled.Save" Color="Color.Success" Variant="Variant.Filled" OnClick="Submit">Salva</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+@code {
+    //Vino vinoBar = new Vino();
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public Vino vino { get; set; }
+    [Parameter] public List<AziendaVinicola> listaAziende { get; set; }
+
+    @*[Parameter] public string Nome { get; set; }
+    [Parameter] public int Annata { get; set; }
+    [Parameter] public string AziendaVinicola { get; set; }
+    [Parameter] public decimal Price { get; set; }
+    [Parameter] public int Quantità { get; set; }
+    [Parameter] public int inCantina { get; set; }
+    [Parameter] public int Barcode { get; set; }
+    [Parameter] public string linkAppVino { get; set; }*@
+
+    void Submit()
+    {
+        MudDialog.Close(DialogResult.Ok(vino));
+    }
+}

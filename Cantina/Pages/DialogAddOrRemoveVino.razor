@@ -1,0 +1,113 @@
+﻿@inject Cantina.Data.VinoService VinoService
+@inject IDialogService DialogService
+
+@using Cantina.Data
+
+<MudDialog>
+    @*<DialogContent>
+            <MudStack>
+                <MudTable Items="@vino" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+                    <HeaderContent>
+                        <MudTh>Nome</MudTh>
+                        <MudTh>Annata</MudTh>
+                        <MudTh>AziendaVinicola</MudTh>
+                        <MudTh>inCantina</MudTh>
+                        <MudTh>Bottigle</MudTh>
+                        <MudTh>Edit</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Nome">@context.Nome</MudTd>
+                        <MudTd DataLabel="Annata">@context.Annata</MudTd>
+                        <MudTd DataLabel="AziendaVinicola">@context.AziendaVinicola</MudTd>
+                        <MudTd DataLabel="inCantina">@context.inCantina</MudTd>
+                        <MudTd DataLabel="Bottigle">@context.bottglieInCantina</MudTd>
+                        <MudTd DataLabel="Edit">
+                            <MudButton Variant="Variant.Outlined" Color="Color.Primary" @onclick="() => Add(context.ID)">Add</MudButton>
+                            <MudButton Variant="Variant.Outlined" Color="Color.Error" @onclick="() => Remove(context.ID)">Remove</MudButton>
+                            <MudButton Variant="Variant.Outlined" @onclick="() => AddVino(context.ID)" DisableElevation="true" Color="Color.Primary">Annata Diversa</MudButton>
+                        </MudTd>
+                    </RowTemplate>
+                </MudTable>
+                <MudStack AlignItems="AlignItems.End">
+                </MudStack>
+            </MudStack>
+        </DialogContent>*@
+    <DialogContent>
+        <MudStack>
+            <MudTable Items="@vinoList" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+                <HeaderContent>
+                    <MudTh>Nome</MudTh>
+                    <MudTh>Annata</MudTh>
+                    <MudTh>AziendaVinicola</MudTh>
+                    <MudTh>inCantina</MudTh>
+                    <MudTh>Bottigle</MudTh>
+                    <MudTh>Edit</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Nome">@context.Nome</MudTd>
+                    <MudTd DataLabel="Annata">@context.Annata</MudTd>
+                    <MudTd DataLabel="AziendaVinicola">@context.AziendaVinicola</MudTd>
+                    <MudTd DataLabel="inCantina">@context.inCantina</MudTd>
+                    <MudTd DataLabel="Bottigle">@context.bottglieInCantina</MudTd>
+                    <MudTd DataLabel="Edit">
+                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" @onclick="() => Add(context.ID)">Add</MudButton>
+                        <MudButton Variant="Variant.Outlined" Color="Color.Error" @onclick="() => Remove(context.ID)">Remove</MudButton>
+                        <MudButton Variant="Variant.Outlined" @onclick="() => AddVino(context.ID)" DisableElevation="true" Color="Color.Primary">Annata Diversa</MudButton>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+            <MudStack AlignItems="AlignItems.End">
+            </MudStack>
+        </MudStack>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    Vino vinoBar = new Vino();
+    MovimentiVino movimento = new MovimentiVino();
+    int newAnnata;
+    bool disable = true;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public VinoDTO vino { get; set; }
+    List<VinoDTO> vinoList = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        vinoList.Add(vino);
+    }
+
+
+    protected async Task AddVino(int idVino)
+    {
+        var dialog = DialogService.Show<DialogNewAnnata>("New Annata Dialog");
+
+        var result = await dialog.Result;
+        if (!result.Cancelled && result.Data != null)
+        {
+            newAnnata = (int)result.Data;
+        }
+        int id = await VinoService.AddVinoNewAnnata(idVino, newAnnata);
+        Add(id);
+    }
+
+    void Add(int idVino)
+    {
+        movimento.VinoId = idVino;
+        movimento.Movimento = 1;
+        movimento.Data = DateTime.Now;
+        movimento.Prezzo = 0;
+        movimento.Note = "-";
+        MudDialog.Close(DialogResult.Ok(movimento));
+    }
+
+    void Remove(int idVino)
+    {
+        movimento.VinoId = idVino;
+        movimento.Movimento = -1;
+        movimento.Data = DateTime.Now;
+        movimento.Prezzo = 0;
+        movimento.Note = "-";
+        MudDialog.Close(DialogResult.Ok(movimento));
+    }
+}

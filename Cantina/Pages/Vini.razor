@@ -1,0 +1,92 @@
+﻿@page "/vini"
+
+<PageTitle>Vini</PageTitle>
+
+@using Cantina.Data
+
+@inject Cantina.Data.VinoService VinoService
+@inject IDialogService DialogService
+@inject NavigationManager NavigationManager
+
+
+<MudGrid>
+    <MudItem xs="12">
+        <MudText Typo="Typo.h4">CATALOGO VINI</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudStack Row="true" Spacing="3" Justify="Justify.SpaceBetween">
+            <MudTooltip Text="Change View">
+                <MudIconButton Href="/viniviewcard" Icon="@Icons.Filled.GridView" aria-label="modView"></MudIconButton>
+            </MudTooltip>
+            <MudFab Color="Color.Primary" Href="/createvino" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" />
+        </MudStack>
+    </MudItem>
+    <MudItem xs="12">
+        <MudTable Items="@listaVini" Breakpoint="Breakpoint.Sm" Striped="true" LoadingProgressColor="Color.Info" Hover="@hover" OnRowClick="funDettagliVino" @bind-SelectedItem="selectedVino" T="VinoDTO">
+            <HeaderContent>
+                <MudTh>Nome</MudTh>
+                <MudTh>Annata</MudTh>
+                <MudTh>AziendaVinicola</MudTh>
+                <MudTh>Tipo Vino</MudTh>
+                <MudTh>TotBottigle</MudTh>
+                <MudTh>inCantina</MudTh>
+                <MudTh>BottigleInCantina</MudTh>
+                <MudTh>Edit</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Nome">@context.Nome</MudTd>
+                <MudTd DataLabel="Annata">@context.Annata</MudTd>
+                <MudTd DataLabel="AziendaVinicola">@context.AziendaVinicola</MudTd>
+                <MudTd DataLabel="Tipo Vino">@context.tipoVino</MudTd>
+                <MudTd DataLabel="TotBottigle">@context.QuantitàBottiglePossedute</MudTd>
+                <MudTd DataLabel="inCantina">@context.inCantina</MudTd>
+                <MudTd DataLabel="BottigleInCantina">@context.bottglieInCantina</MudTd>
+                <MudTd DataLabel="Edit">
+                    <MudFab Class="BlueGrey Darken3" Size="Size.Small" StartIcon="@Icons.Material.Filled.Edit" @onclick="() => OnclickEdit(context.ID)"/>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudItem>
+</MudGrid>
+
+    @code {
+        private bool hover = true;
+        private List<VinoDTO> listaVini = new();
+        private List<AziendaVinicola> listaAziende = new();
+        private readonly HttpClient _httpClient;
+        private VinoDTO selectedVino = null;
+
+
+        protected override async Task OnInitializedAsync()
+        {
+            listaVini = await VinoService.GetVini();
+        }
+
+        //funzione per editare i vini nella dialog
+        private Vino vino = new();
+        protected async Task OnclickEdit(int id)
+        {
+            vino = await VinoService.GetVinoID(id);
+
+            //prendo la lista delle aziende vinicole
+            listaAziende = await VinoService.GetAziende();
+
+            var parameter = new DialogParameters();
+            parameter.Add("Vino", vino);
+            parameter.Add("AziendaVinicola", listaAziende);
+            var dialog = DialogService.Show<DialogVino>("Options Dialog", parameter);
+
+            var result = await dialog.Result;
+            if (!result.Cancelled && result.Data != null)
+            {
+                var newItem = (Vino)result.Data;
+                await VinoService.UpdateVinoBarcode(newItem);
+            }
+        }
+
+        //Dettagli Vino
+        protected void funDettagliVino(TableRowClickEventArgs<VinoDTO> tableRowClickEventArgs)
+        {
+            NavigationManager.NavigateTo("/dettaglivino/" + selectedVino.ID);
+        }
+    }

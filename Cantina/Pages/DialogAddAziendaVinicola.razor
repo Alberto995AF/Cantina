@@ -1,0 +1,52 @@
+﻿@inject Cantina.Data.VinoService VinoService
+@using Cantina.Data
+
+<MudDialog>
+    <DialogContent>
+        <PageTitle>Create Azienda Vinicola</PageTitle>
+
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudCard>
+                        <MudCardContent>
+                            <MudTextField Label="Nome Cantina" HelperText="Max. 8 characters"
+                                          @bind-Value="model.Nome" For="@(() => model.Nome)" />
+                        </MudCardContent>
+                        <MudCardContent>
+                            <MudTextField Label="Indirizzo" HelperText="Max. 8 characters"
+                                          @bind-Value="model.Indirizzo" For="@(() => model.Indirizzo)" />
+                        </MudCardContent>
+                        <MudCardContent>
+                            <MudTextField Label="Nazione" HelperText="Max. 8 characters"
+                                          @bind-Value="model.NazioneId" For="@(() => model.NazioneId)" />
+                        </MudCardContent>
+                        <MudCardContent>
+                            <MudTextField Label="Regione" HelperText="Max. 8 characters"
+                                          @bind-Value="model.RegioneId" For="@(() => model.RegioneId)" />
+                        </MudCardContent>
+                        <MudCardContent>
+                            <MudTextField Label="Regione" HelperText="Max. 8 characters"
+                                          @bind-Value="model.Descrizione" For="@(() => model.Descrizione)" />
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">SALVA</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+
+@code {
+    //Vino vinoBar = new Vino();
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    AziendaVinicola model = new AziendaVinicola();
+
+    private async Task OnValidSubmit(EditContext context)
+    {
+        MudDialog.Close(DialogResult.Ok(model));
+    }
+}

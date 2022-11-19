@@ -1,0 +1,66 @@
+INSERT INTO Nazione (Nome) VALUES
+("Spagna"),
+("Germania"),
+("Inghlterra");
+
+INSERT INTO RegioniItaliane (Nome) VALUES
+("Emilia Romagna"),
+("Abruzzo"),
+("Basilicata"),
+("Calabria"),
+("Friuli Venezia Giulia"),
+("Lazio"),
+("Liguria"),
+("Marche"),
+("Molise"),
+("Puglia"),
+("Sicilia"),
+("Trentino-Alto Adige"),
+("Umbria"),
+("Valle d'Aosta"),
+("Sardegna");
+
+INSERT INTO Uva (Nome) VALUES
+("Sangiovese"),
+("Merlot"),
+("Cabernet"),
+("Sauvignon"),
+("Chardonnay"),
+("Syrah"),
+("Blanc De Morgex"),
+("Barbera"),
+("Nebbiolo"),
+("Grignolino"),
+("Moscato D'Asti"),
+("Brachetto D'Acqui"),
+("Dolcetto"),
+("Croatina"),
+("Pinot Nero"),
+("Groppello"),
+("Schiava"),
+("Marzemino"),
+("Riesling"),
+("Muller Thurgau"),
+("Raboso"),
+("Sauvignon Blanc"),
+("Ribolla"),
+("Vermentino"),
+("Canaiolo"),
+("Trebbiano"),
+("Falanghina"),
+("Malvasia"),
+("Cannonau"),
+("Nero D'Avola"),
+("Teroldego"),
+("Pinot Bianco"),
+("Pinot Grigio"),
+("Sagrantino");
+
+
+INSERT INTO AziendaVinicola (Nome, Indirizzo, NazioneId, RegioneId) VALUES
+("Tenuta Argentiera Bolgheri", "Castagneto Carducci", 1, 1),
+("Badia di Morrona", "Terricciola", 1, 1),
+("Michele Mascarello", "Cuneo", 1, 1),
+
+
+
