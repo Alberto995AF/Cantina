@@ -22,6 +22,7 @@ namespace Cantina.Data
             List<VinoDTO> listVinoDto = new List<VinoDTO>();
             var items = _context.Vino.Include(a => a.AziendaVinicola).ToList();
             items = _context.Vino.Include(a => a.tipoVino).ToList();
+            items = _context.Vino.Include(a => a.Denominazione).ToList();
 
             foreach (var vino in items)
             {
@@ -29,7 +30,7 @@ namespace Cantina.Data
                 int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
                 int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
                 bool inCant = numBottigleCantina > 0 ? true : false;
-                listVinoDto.Add(new VinoDTO() {ID = vino.ID, Nome = vino.Nome, Annata = vino.Annata, AziendaVinicolaId = vino.AziendaVinicolaId ,AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine=vino.linkImmagine });
+                listVinoDto.Add(new VinoDTO() {ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId ,AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine=vino.linkImmagine });
             }
 
             return Task.FromResult(listVinoDto);
@@ -54,7 +55,7 @@ namespace Cantina.Data
                 int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
                 int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
                 bool inCant = numBottigleCantina > 0 ? true : false;
-                listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, Annata = vino.Annata, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
+                listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
             }
 
             return Task.FromResult(listVinoDto.ToList());
@@ -102,6 +103,8 @@ namespace Cantina.Data
             int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == items.FirstOrDefault().ID && x.Movimento > 0).Count();
             int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == items.FirstOrDefault().ID)).Sum(x => x.Movimento);
             int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == items.FirstOrDefault().ID && x.Movimento < 0).Count();
+            List<MovimentiVino> movList = _context.MovimentiVino.Where(x => x.VinoId == items.FirstOrDefault().ID).ToList();
+            List<int> annate = movList.Select(x => x.Annata).Distinct().ToList();
             bool inCant = numBottigleCantina > 0 ? true : false;
 
             VinoDto.ID = items.FirstOrDefault().ID;
@@ -114,7 +117,7 @@ namespace Cantina.Data
             VinoDto.bottglieInCantina = numBottigleCantina;
             VinoDto.QuantitàBottiglePossedute = numBottigleViste;
             VinoDto.bottiglieBevute = numBottiglieBevute;
-            VinoDto.Annata = items.FirstOrDefault().Annata;
+            VinoDto.Annata = annate;
             VinoDto.linkImmagine = items.FirstOrDefault().linkImmagine;
 
             return Task.FromResult(VinoDto);
@@ -135,7 +138,7 @@ namespace Cantina.Data
                 int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
                 bool inCant = numBottigleCantina > 0 ? true : false;
                 if (inCant)
-                    listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, Annata = vino.Annata, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
+                    listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
             }
             return Task.FromResult(listVinoDto);
         }
@@ -161,7 +164,7 @@ namespace Cantina.Data
                 int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
                 int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
                 bool inCant = numBottigleCantina > 0 ? true : false;
-                listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, Annata = vino.Annata, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina });
+                listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina });
             }
 
             return Task.FromResult(listVinoDto);
@@ -176,7 +179,7 @@ namespace Cantina.Data
             Vino newVino = new();
             vino = await GetVinoID(idVino);
             newVino.AziendaVinicolaId = vino.AziendaVinicolaId;           
-            newVino.Annata = annata;
+            //newVino.Annata = annata;
             newVino.Barcode = vino.Barcode;
             newVino.DenominazioneVinoId = vino.DenominazioneVinoId;
             newVino.linkAppVivino = vino.linkAppVivino;
@@ -216,7 +219,7 @@ namespace Cantina.Data
                 int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
                 int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
                 bool inCant = numBottigleCantina > 0 ? true : false;
-                listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, Annata = vino.Annata, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, linkImmagine = vino.linkImmagine });
+                listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, linkImmagine = vino.linkImmagine });
             }
             return Task.FromResult(listVinoDto);
         }
@@ -322,7 +325,7 @@ namespace Cantina.Data
 
             foreach (var movimento in items)
             {
-                listMovimentiDto.Add(new MovimentoDTO() { ID = movimento.ID, Nome = movimento.Vino.Nome, Annata = (int)movimento.Vino.Annata, Movimento = movimento.Movimento, Data = movimento.Data});
+                //listMovimentiDto.Add(new MovimentoDTO() { ID = movimento.ID, Nome = movimento.Vino.Nome, Annata = (int)movimento.Vino.Annata, Movimento = movimento.Movimento, Data = movimento.Data});
             }
 
             return Task.FromResult(listMovimentiDto);
@@ -348,7 +351,7 @@ namespace Cantina.Data
                     int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
                     int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
                     bool inCant = numBottigleCantina > 0 ? true : false;
-                    listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, Annata = vino.Annata, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
+                    listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
 
                 }
             }

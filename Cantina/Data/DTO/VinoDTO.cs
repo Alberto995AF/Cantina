@@ -6,7 +6,7 @@ namespace Cantina.Data
 
         public string Nome { get; set; }
 
-        public int? Annata { get; set; }
+        public List<int> Annata { get; set; }
 
         public string tipoVino { get; set; }
 
@@ -29,6 +29,8 @@ namespace Cantina.Data
         public int bottiglieBevute { get; set; }
 
         public int? Barcode { get; set; }
+
+        public List<String> Uva { get; set; }
 
         public string? linkAppVivino { get; set; }
 

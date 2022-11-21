@@ -98,11 +98,18 @@ namespace Cantina.Data
                     Nome = "Rosso Di Montalcino DOC",
                     AreaGeografica = "Montalcino"
                 };
+                var tipologia6 = new Denominazione
+                {
+                    ID = 6,
+                    Nome = "Vermentino IGT",
+                    AreaGeografica = "Toscana, Liguria, Sardegna"
+                };
                 context.Denominazione.AddRange(tipologia1);
                 context.Denominazione.AddRange(tipologia2);
                 context.Denominazione.AddRange(tipologia3);
                 context.Denominazione.AddRange(tipologia4);
                 context.Denominazione.AddRange(tipologia5);
+                context.Denominazione.AddRange(tipologia6);
                 ///************************************************************
                 ///
 
@@ -262,7 +269,7 @@ namespace Cantina.Data
                 var uva3 = new Uva
                 {
                     ID = 3,
-                    Nome = "Cabernet"
+                    Nome = "Cabernet Sauvignon"
                 };
                 context.Uva.AddRange(uva3);
                 var uva4 = new Uva
@@ -313,6 +320,24 @@ namespace Cantina.Data
                     Nome = "Pinot Nero"
                 };
                 context.Uva.AddRange(uva11);
+                var uva12 = new Uva
+                {
+                    ID = 12,
+                    Nome = "Cabernet Franc"
+                };
+                context.Uva.AddRange(uva12);
+                var uva13 = new Uva
+                {
+                    ID = 13,
+                    Nome = "Petit Verdot"
+                };
+                context.Uva.AddRange(uva13);
+                var uva14 = new Uva
+                {
+                    ID = 14,
+                    Nome = "Vermentino"
+                };
+                context.Uva.AddRange(uva14);
 
                 ///************************************************************
                 ///
@@ -563,6 +588,7 @@ namespace Cantina.Data
                 ///************************************************************
                 ///
 
+
                 ///
                 /// VINO *************************************************
                 ///
@@ -570,7 +596,6 @@ namespace Cantina.Data
                 {
                     ID = 1,
                     Nome = "Barolo",
-                    Annata = 2000,
                     tipoVinoId = tipo1.ID,
                     AziendaVinicolaId = azV3.ID,
                     DenominazioneVinoId = tipologia4.ID,
@@ -582,7 +607,6 @@ namespace Cantina.Data
                 {
                     ID = 2,
                     Nome = "Poggio Ai Ginepri Rosso",
-                    Annata = 2020,
                     tipoVinoId = tipo1.ID,
                     AziendaVinicolaId = azV1.ID,
                     DenominazioneVinoId = tipologia1.ID,
@@ -594,10 +618,9 @@ namespace Cantina.Data
                 {
                     ID = 3,
                     Nome = "Felciaio",
-                    Annata = 2020,
                     tipoVinoId = tipo2.ID,
                     AziendaVinicolaId = azV2.ID,
-                    DenominazioneVinoId = null,
+                    DenominazioneVinoId = tipologia6.ID,
                     Barcode = 1002,
                     linkAppVivino = "https://www.vivino.com/IT/it/badia-di-morrona-felciaio/w/2478006?ref=nav-search",
                     linkImmagine = "https://images.vivino.com/thumbs/dHuGvbrCQQS9zzOTfJjTOw_pb_x960.png"
@@ -607,6 +630,78 @@ namespace Cantina.Data
                 context.Vino.AddRange(vino3);
                 ///************************************************************
                 ///
+
+
+                ///
+                /// MOVIMENI VINO *************************************************
+                ///
+                var mov1 = new MovimentiVino
+                {
+                    ID = 1,
+                    VinoId = vino1.ID,
+                    Annata = 2020,
+                    Movimento = 1
+                };
+                context.MovimentiVino.AddRange(mov1);
+
+                ///************************************************************
+                ///
+
+
+                ///
+                /// UVA VINO *************************************************
+                ///
+                var uvaVino1 = new UvaVino
+                {
+                    ID = 1,
+                    VinoId = vino1.ID,
+                    UvaId = uva9.ID,
+                    Percentuale = 100
+                };
+                context.UvaVino.AddRange(uvaVino1);
+                var uvaVino2 = new UvaVino
+                {
+                    ID = 2,
+                    VinoId = vino2.ID,
+                    UvaId = uva3.ID,
+                    Percentuale = 40
+                };
+                context.UvaVino.AddRange(uvaVino2);
+                var uvaVino3 = new UvaVino
+                {
+                    ID = 3,
+                    VinoId = vino2.ID,
+                    UvaId = uva2.ID,
+                    Percentuale = 30
+                };
+                context.UvaVino.AddRange(uvaVino3);
+                var uvaVino4 = new UvaVino
+                {
+                    ID = 4,
+                    VinoId = vino2.ID,
+                    UvaId = uva12.ID,
+                    Percentuale = 20
+                };
+                context.UvaVino.AddRange(uvaVino4);
+                var uvaVino5 = new UvaVino
+                {
+                    ID = 5,
+                    VinoId = vino2.ID,
+                    UvaId = uva13.ID,
+                    Percentuale = 10
+                };
+                context.UvaVino.AddRange(uvaVino5);
+                var uvaVino6 = new UvaVino
+                {
+                    ID = 6,
+                    VinoId = vino3.ID,
+                    UvaId = uva14.ID,
+                    Percentuale = 100
+                };
+                context.UvaVino.AddRange(uvaVino6);
+                ///************************************************************
+                ///
+
 
                 context.SaveChanges();
             }

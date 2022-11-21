@@ -17,6 +17,7 @@ namespace Cantina.Persistence
         public DbSet<tipoVino> tipoVino { get; set; }
         public DbSet<Denominazione> Denominazione { get; set; }
         public DbSet<Uva> Uva { get; set; }
+        public DbSet<UvaVino> UvaVino { get; set; }
     }
 }
 
