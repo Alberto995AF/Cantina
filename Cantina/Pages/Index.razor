@@ -97,8 +97,6 @@
     List<MovimentoDTO> listaMovimentiRidotta = new();
     int dataSizeCircleChart;
     private Transition transition = Transition.Slide;
-    string[] labelsCircle;
-    double[] data;
 
     protected override async Task OnInitializedAsync()
     {
@@ -111,47 +109,6 @@
         numBottigleAcquistate = numeriBottiglie[2];
 
         listaMovimentiTotale = await VinoService.GetMovimenti();
-
-        //prendo tutti i tipi di vino
-        tipiVino = await VinoService.GetTipiVino();
-        dataSizeCircleChart = tipiVino.Count();
-
-        labelsCircle= new string[dataSizeCircleChart];
-        data = new double[dataSizeCircleChart];
-
-        int i = 0;
-        foreach (var item in tipiVino)
-        {
-            if (item.Tipo == "Rosso")
-            {
-                labelsCircle[0] = item.Tipo;
-                data[0] = numeriBottiglie[3];
-            }
-
-            if (item.Tipo == "Bianco")
-            {
-                labelsCircle[1] = item.Tipo;
-                data[1] = numeriBottiglie[4];
-            }
-
-            if (item.Tipo == "Bianco Frizzante")
-            {
-                labelsCircle[2] = item.Tipo;
-                data[2] = numeriBottiglie[5];
-            }
-
-            if (item.Tipo == "Prosecco")
-            {
-                labelsCircle[3] = item.Tipo;
-                data[3] = numeriBottiglie[6];
-            }
-
-            if (item.Tipo == "Champagne")
-            {
-                labelsCircle[4] = item.Tipo;
-                data[4] = numeriBottiglie[7];
-            }
-        }
     }
 
     /// <summary>
@@ -202,7 +159,7 @@
     /// <returns></returns>
     protected async Task Register(VinoDTO vino)
     {
-        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true };
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Large, FullWidth = true };
         var parameter = new DialogParameters();
         parameter.Add("vino", vino);
 
@@ -213,6 +170,20 @@
         {
             var newItem = (MovimentiVino)result.Data;
             await VinoService.AddMovimento(newItem);
+        }
+        else
+        {
+            Snackbar.Add("Errore: Vino da rimuovere non trovato", Severity.Error, config =>
+            {
+                config.RequireInteraction = false;
+                config.ShowCloseIcon = false;
+                config.VisibleStateDuration = 2000;
+                config.ShowTransitionDuration = 500;
+                config.Onclick = snackbar =>
+                {
+                    return Task.CompletedTask;
+                };
+            });
         }
     }
 

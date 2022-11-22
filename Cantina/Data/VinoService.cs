@@ -120,7 +120,7 @@ namespace Cantina.Data
                 sumAnnate = 0;
             }
             bool inCant = numBottigleCantina > 0 ? true : false;
-
+            annate.Sort();
             VinoDto.ID = items.FirstOrDefault().ID;
             VinoDto.Nome = items.FirstOrDefault().Nome;
             VinoDto.AziendaVinicolaId = items.FirstOrDefault().AziendaVinicolaId;
@@ -310,7 +310,7 @@ namespace Cantina.Data
             //devo controllare che non si stia rimuovendo un vino non presente in cantina
             //nel caso in cui si stia rimuovendo un vino che non è presente in cantina ci verrà notificato e richiesto se si vuole aggiungere il "doppio movimento"
             //di ingresso in cantina e di uscita dalla cantina
-            int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == movVino.VinoId)).Sum(x => x.Movimento);
+            int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == movVino.VinoId && x.Annata == movVino.Annata)).Sum(x => x.Movimento);
             if (numBottigleCantina == 0 & movVino.Movimento < 0)
             {
                 MovimentiVino newMov = new();
@@ -324,6 +324,23 @@ namespace Cantina.Data
 
             _context.MovimentiVino.Add(movVino);
             await _context.SaveChangesAsync();
+        }
+        // **************************************
+
+        // ****** CHECK MOVIMENTO *****************
+        // controlliamo se il movimento negativo inserito è riferito ad un vino ed un'annata presenti in cantina
+        public bool CheckMovimento(int idVino, int annata)
+        {
+            int numBottiglie = _context.MovimentiVino.Where(x => x.VinoId == idVino && x.Annata == annata).Sum(x => x.Movimento);
+
+            if(numBottiglie > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         // **************************************
 

@@ -50,9 +50,14 @@
                     <MudTd DataLabel="inCantina">@context.inCantina</MudTd>
                     <MudTd DataLabel="Bottigle">@context.bottglieInCantina</MudTd>
                     <MudTd DataLabel="Edit">
+                        <MudSelect T="int" @bind-Value="selectedYear" Label="Annata" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var year in annate)
+                            {
+                                <MudSelectItem T="int" Value=@year />
+                            }
+                        </MudSelect>
                         <MudButton Variant="Variant.Outlined" Color="Color.Primary" @onclick="() => Add(context.ID)">Add</MudButton>
                         <MudButton Variant="Variant.Outlined" Color="Color.Error" @onclick="() => Remove(context.ID)">Remove</MudButton>
-                        <MudButton Variant="Variant.Outlined" @onclick="() => AddVino(context.ID)" DisableElevation="true" Color="Color.Primary">Annata Diversa</MudButton>
                     </MudTd>
                 </RowTemplate>
             </MudTable>
@@ -72,9 +77,17 @@
     [Parameter] public VinoDTO vino { get; set; }
     List<VinoDTO> vinoList = new();
 
+    //gestione annate
+    int annata;
+    int annataPartenza = 1990;
+    DateTime data = DateTime.Today;
+    List<int> annate = new();
+    int selectedYear;
+
     protected override async Task OnInitializedAsync()
     {
         vinoList.Add(vino);
+        CreateYears();
     }
 
 
@@ -93,21 +106,43 @@
 
     void Add(int idVino)
     {
-        movimento.VinoId = idVino;
-        movimento.Movimento = 1;
-        movimento.Data = DateTime.Now;
-        movimento.Prezzo = 0;
-        movimento.Note = "-";
-        MudDialog.Close(DialogResult.Ok(movimento));
+        if(selectedYear != 0)
+        {
+            movimento.VinoId = idVino;
+            movimento.Movimento = 1;
+            movimento.Annata = selectedYear;
+            movimento.Data = DateTime.Now;
+            movimento.Prezzo = 0;
+            movimento.Note = "-";
+            MudDialog.Close(DialogResult.Ok(movimento));
+        }
     }
 
     void Remove(int idVino)
     {
-        movimento.VinoId = idVino;
-        movimento.Movimento = -1;
-        movimento.Data = DateTime.Now;
-        movimento.Prezzo = 0;
-        movimento.Note = "-";
-        MudDialog.Close(DialogResult.Ok(movimento));
+        if(selectedYear != 0)
+        {
+            bool result = VinoService.CheckMovimento(idVino, selectedYear);
+            if(!result)
+            {
+                MudDialog.Close(DialogResult.Cancel());
+            }
+            movimento.VinoId = idVino;
+            movimento.Movimento = -1;
+            movimento.Annata = selectedYear;
+            movimento.Data = DateTime.Now;
+            movimento.Prezzo = 0;
+            movimento.Note = "-";
+            MudDialog.Close(DialogResult.Ok(movimento));
+        }
+    }
+
+    protected async Task CreateYears()
+    {
+        for (int i = 0; annataPartenza <= data.Year; i++)
+        {
+            annate.Add(annataPartenza);
+            annataPartenza++;
+        }
     }
 }
