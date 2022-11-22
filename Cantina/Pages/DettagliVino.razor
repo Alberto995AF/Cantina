@@ -1,5 +1,7 @@
 ﻿@page "/dettaglivino/{VinoID:int?}"
 
+@inject IDialogService DialogService
+
 <PageTitle>Dettagli Vini</PageTitle>
 
 
@@ -60,12 +62,10 @@
                     <MudStack Row="true">
                         <MudIcon Icon="@Icons.Filled.RemoveCircle" @onclick="() => OnButtonClickedRemove(vino.ID)" Size="Size.Large" Color="Color.Error" Title="Remove" />
                         <MudIcon Icon="@Icons.Filled.AddCircle" @onclick="() => OnButtonClickedAdd(vino.ID)" Size="Size.Large" Color="Color.Success" Title="Add" />
-                        @*<MudAvatar @onclick="() => OnButtonClickedRemove(vino.ID)" Square="true" Size="Size.Large" Color="Color.Error" Variant="Variant.Outlined">-</MudAvatar>
-                    <MudAvatar @onclick="() => OnButtonClickedAdd(vino.ID)" Square="true" Size="Size.Large" Color="Color.Success" Variant="Variant.Outlined">+</MudAvatar>*@
                     </MudStack>
                     <MudGrid Class="mt-5">
                         <MudItem xs="12" sm="12">Annate presenti</MudItem>
-                        @foreach(var item in vino.Annata)
+                        @foreach (var item in vino.Annata)
                         {
                             <MudItem xs="3" sm="3">
                                 <MudPaper Class="d-flex align-center justify-center mud-width-full py-5">@item</MudPaper>
@@ -77,28 +77,28 @@
         </MudGrid>
     </MudItem>
     @*<MudItem xs="12" sm="12">
-        <MudDivider DividerType="DividerType.Middle" Class="my-12" />
-        <MudStack Row="true" Justify="Justify.SpaceBetween">
-            <MudItem xs="4">
-                <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
-                    <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
-                    <MudText Typo="Typo.h6">  @vino.QuantitàBottiglePossedute</MudText>
-                </MudStack>
-            </MudItem>
-            <MudItem xs="4">
-                <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
-                    <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" />
-                    <MudText Typo="Typo.h6">  @vino.bottglieInCantina</MudText>
-                </MudStack>
-            </MudItem>
-            <MudItem xs="4">
-                <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
-                    <MudIcon Icon="@Icons.Filled.WineBar" Color="Color.Error" />
-                    <MudText Typo="Typo.h6"> @vino.bottiglieBevute</MudText>
-                </MudStack>
-            </MudItem>
-        </MudStack>
-    </MudItem>*@
+            <MudDivider DividerType="DividerType.Middle" Class="my-12" />
+            <MudStack Row="true" Justify="Justify.SpaceBetween">
+                <MudItem xs="4">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
+                        <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
+                        <MudText Typo="Typo.h6">  @vino.QuantitàBottiglePossedute</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="4">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
+                        <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" />
+                        <MudText Typo="Typo.h6">  @vino.bottglieInCantina</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="4">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
+                        <MudIcon Icon="@Icons.Filled.WineBar" Color="Color.Error" />
+                        <MudText Typo="Typo.h6"> @vino.bottiglieBevute</MudText>
+                    </MudStack>
+                </MudItem>
+            </MudStack>
+        </MudItem>*@
     <MudItem xs="12" sm="12">
         <MudDivider DividerType="DividerType.Middle" Class="my-12" />
     </MudItem>
@@ -124,7 +124,7 @@
                                 </MudStack>
                             </MudStack>
                         </MudStack>
-                        <MudText Typo="Typo.h5">@item.Nome - @item.Annata</MudText>
+                        <MudText Typo="Typo.h5">@item.Nome</MudText>
                         <MudText Typo="Typo.h6">@item.AziendaVinicola</MudText>
                     </MudStack>
                 </MudCardContent>
@@ -144,6 +144,9 @@
 
     string state = "Message box hasn't been opened yet";
 
+    //parametro per mostrare o il pulsnate di aggiunta o il pulsante di remove nella dialog
+    string remORadd = "";
+
     public VinoDTO vino = new();
 
     //prendiamo l'ID del vino cliccato
@@ -159,45 +162,66 @@
         NavigationManager.NavigateTo("/dettaglivino/" + id);
     }
 
-    private async void OnButtonClickedAdd(int id)
+    private async void OnButtonClickedAdd(int idVino)
     {
-        bool? result = await DialogService.ShowMessageBox(
-            "Attenzione",
-            "Vuoi aggiungere questo vino alla tua cantina?",
-            yesText: "Aggiungi", cancelText: "Cancel");
-        state = result == null ? "Cancel" : "Aggiungi";
+        //bool? result = await DialogService.ShowMessageBox(
+        //    "Attenzione",
+        //    "Vuoi aggiungere questo vino alla tua cantina?",
+        //    yesText: "Aggiungi", cancelText: "Cancel");
+        //state = result == null ? "Cancel" : "Aggiungi";
+        //MovimentiVino movVino = new();
+        remORadd = "add";
+        var parameter = new DialogParameters();
+        parameter.Add("idVino", idVino);
+        parameter.Add("remORadd", remORadd);
 
-        if (result == true)
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Small, FullWidth = true };
+
+        var dialog = DialogService.Show<DialogAddOrRemoveWineYear>("AddOrRemoveVino Dialog", parameter, maxWidth);
+
+        var result = await dialog.Result;
+        if (!result.Cancelled && result.Data != null)
         {
-            MovimentiVino item = new MovimentiVino();
-            item.VinoId = id;
-            item.Data = DateTime.Now;
-            item.Movimento = 1;
-            item.Prezzo = 0;
-            item.Note = "-";
-            await VinoService.AddMovimento(item);
+            var newItem = (MovimentiVino)result.Data;
+            await VinoService.AddMovimento(newItem);
         }
 
         StateHasChanged();
     }
 
-    private async void OnButtonClickedRemove(int id)
+    private async void OnButtonClickedRemove(int idVino)
     {
-        bool? result = await DialogService.ShowMessageBox(
-            "Attenzione",
-            "Vuoi rimuovere questo vino dalla tua cantina?",
-            yesText: "Rimuovi", cancelText: "Cancel");
-        state = result == null ? "Cancel" : "Rimuovi";
+        //bool? result = await DialogService.ShowMessageBox(
+        //    "Attenzione",
+        //    "Vuoi rimuovere questo vino dalla tua cantina?",
+        //    yesText: "Rimuovi", cancelText: "Cancel");
+        //state = result == null ? "Cancel" : "Rimuovi";
 
-        if (result == true)
+        //if (result == true)
+        //{
+        //    MovimentiVino item = new MovimentiVino();
+        //    item.VinoId = id;
+        //    item.Data = DateTime.Now;
+        //    item.Movimento = -1;
+        //    item.Prezzo = 0;
+        //    item.Note = "-";
+        //    await VinoService.AddMovimento(item);
+        //}
+
+        remORadd = "remove";
+        var parameter = new DialogParameters();
+        parameter.Add("idVino", idVino);
+        parameter.Add("remORadd", remORadd);
+
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Small, FullWidth = true };
+
+        var dialog = DialogService.Show<DialogAddOrRemoveWineYear>("AddOrRemoveVino Dialog", parameter, maxWidth);
+
+        var result = await dialog.Result;
+        if (!result.Cancelled && result.Data != null)
         {
-            MovimentiVino item = new MovimentiVino();
-            item.VinoId = id;
-            item.Data = DateTime.Now;
-            item.Movimento = -1;
-            item.Prezzo = 0;
-            item.Note = "-";
-            await VinoService.AddMovimento(item);
+            var newItem = (MovimentiVino)result.Data;
+            await VinoService.AddMovimento(newItem);
         }
 
         StateHasChanged();

@@ -104,7 +104,21 @@ namespace Cantina.Data
             int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == items.FirstOrDefault().ID)).Sum(x => x.Movimento);
             int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == items.FirstOrDefault().ID && x.Movimento < 0).Count();
             List<MovimentiVino> movList = _context.MovimentiVino.Where(x => x.VinoId == items.FirstOrDefault().ID).ToList();
-            List<int> annate = movList.Select(x => x.Annata).Distinct().ToList();
+
+            var group = movList.GroupBy(x => x.Annata).ToList();
+            List<int> annate = new();
+            int sumAnnate = 0;
+            foreach(var item in group)
+            {
+                foreach(var item2 in item)
+                {
+                    sumAnnate += item2.Movimento;
+                }
+                if (sumAnnate > 0)
+                    annate.Add(item.First().Annata);
+
+                sumAnnate = 0;
+            }
             bool inCant = numBottigleCantina > 0 ? true : false;
 
             VinoDto.ID = items.FirstOrDefault().ID;

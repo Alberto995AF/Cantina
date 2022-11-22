@@ -1,0 +1,58 @@
+﻿@inject Cantina.Data.VinoService VinoService
+@inject IDialogService DialogService
+
+@using Cantina.Data
+
+<MudDialog>
+    <DialogContent>
+            <MudTextField @bind-Value="annata" Label="Annata" />
+    </DialogContent>
+    <DialogActions>
+        @if (string.Compare(remORadd, "add") == 0)
+        {
+            <MudButton Color="Color.Primary" OnClick="Add">Add</MudButton>
+        }
+        else
+        {
+            <MudButton Color="Color.Error" OnClick="Remove">Remove</MudButton>
+        }
+    </DialogActions>
+</MudDialog>
+
+@code {
+    Vino vinoBar = new Vino();
+    MovimentiVino movimento = new MovimentiVino();
+    int annata;
+    bool disable = true;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public int idVino { get; set; }
+    [Parameter] public string remORadd { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //vinoList.Add(vino);
+    }
+
+    void Add()
+    {
+        movimento.VinoId = idVino;
+        movimento.Movimento = 1;
+        movimento.Annata = annata;
+        movimento.Data = DateTime.Now;
+        movimento.Prezzo = 0;
+        movimento.Note = "-";
+        MudDialog.Close(DialogResult.Ok(movimento));
+    }
+
+    void Remove()
+    {
+        movimento.VinoId = idVino;
+        movimento.Movimento = -1;
+        movimento.Annata = annata;
+        movimento.Data = DateTime.Now;
+        movimento.Prezzo = 0;
+        movimento.Note = "-";
+        MudDialog.Close(DialogResult.Ok(movimento));
+    }
+}
