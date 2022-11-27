@@ -22,7 +22,10 @@
                 <MudText Typo="Typo.h6">@vino.AziendaVinicola</MudText>
             </MudItem>
             <MudItem xs="12">
-                <MudText>@vino.Nazione - @vino.Regione - @vino.Denominazione</MudText>
+                <MudStack Row="true">
+                    <MudText>@vino.Nazione - @vino.Regione - @vino.Denominazione</MudText>
+                    <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Secondary" aria-label="add to favorite"></MudIconButton>
+                </MudStack>
                 <MudDivider DividerType="DividerType.Middle" Class="my-6" />
             </MudItem>
             <MudItem xs="12">

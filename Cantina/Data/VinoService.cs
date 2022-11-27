@@ -296,11 +296,29 @@ namespace Cantina.Data
 
         }
 
-        //funzione per aggiungere un nuovo vino
+        /// <summary>
+        /// funzione per aggiungere un nuovo vino
+        /// </summary>
+        /// <param name="vino"> vino da aggiungere </param>
+        /// <returns></returns>
         public async Task AddVino(Vino vino)
         {
             _context.Vino.Add(vino);
             await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Funzione per aggiungere  l'associazione fra un vino e l'uva di cui è composto
+        /// </summary>
+        /// <param name="uvaVinoList">lista di record da inserire</param>
+        /// <returns></returns>
+        public async Task AddUvaVino(List<UvaVino> uvaVinoList)
+        {
+            foreach(var items in uvaVinoList)
+            {
+                _context.UvaVino.Add(items);
+                await _context.SaveChangesAsync();
+            }
         }
 
 
@@ -388,7 +406,82 @@ namespace Cantina.Data
             }
             return Task.FromResult(listVinoDto);
         }
-       
+
+
+        /// <summary>
+        /// GET AZIENDE IN FUNZIONE DELLA RICERCA
+        /// </summary>
+        /// <param name="value"> stringa scritta nel campo di ricerca</param>
+        /// <returns>ritarna una lista di Aziende di tipi AziendaVinicola</returns>
+        public Task<List<AziendaVinicola>> GetAziendeSearch(string value)
+        {
+            List<AziendaVinicola> listAziende = new();
+            var item = _context.AziendaVinicola;
+
+            foreach(var azd in item)
+            {
+                if(azd.Nome.Contains(value))
+                {
+                    listAziende.Add(azd);
+                }
+            }
+            return Task.FromResult(listAziende);
+        }
+
+
+        /// <summary>
+        /// GET TIPO VINO IN FUNZIONE DELLA RICERCA
+        /// </summary>
+        /// <param name="value"> stringa scritta nel campo di ricerca</param>
+        /// <returns>ritarna una lista di tipi di vino</returns>
+        public Task<List<tipoVino>> GetTipoVinoSearch(string value)
+        {
+            List<tipoVino> tipoVino = new();
+            var item = _context.tipoVino;
+
+            foreach (var azd in item)
+            {
+                if (azd.Tipo.Contains(value))
+                {
+                    tipoVino.Add(azd);
+                }
+            }
+            return Task.FromResult(tipoVino);
+        }
+
+
+        /// <summary>
+        /// GET DENOMINAZIONE IN FUNZIONE DELLA RICERCA
+        /// </summary>
+        /// <param name="value"> stringa scritta nel campo di ricerca</param>
+        /// <returns>ritorna una lista di tipi di denomiazioni</returns>
+        public Task<List<Denominazione>> GetDenominazioneSearch(string value)
+        {
+            List<Denominazione> denominazioneVino = new();
+            var item = _context.Denominazione;
+
+            foreach (var azd in item)
+            {
+                if (azd.Nome.Contains(value))
+                {
+                    denominazioneVino.Add(azd);
+                }
+            }
+            return Task.FromResult(denominazioneVino);
+        }
+
+
+        /// <summary>
+        /// GET UVA 
+        /// </summary>
+        /// <returns>ritorna una lista di uve</returns>
+        public Task<List<Uva>> GetUvaSearch()
+        {
+            var item = _context.Uva.ToList();
+
+            return Task.FromResult(item);
+        }
+
 
 
         //funzione per aggiungere una nuova Azienda Vinicola

@@ -26,5 +26,11 @@ namespace Cantina.Data
         public string? linkAppTannico { get; set; }
 
         public string? linkImmagine { get; set; }
+
+        public bool? Preferito { get; set; }
+
+        public bool? VinoDaTavola { get; set; }
+
+        public bool? VinoPregiato { get; set; }
     }
 }
