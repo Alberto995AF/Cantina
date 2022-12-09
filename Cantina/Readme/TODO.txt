@@ -1,8 +1,5 @@
-﻿Da Fare
+﻿
+Da Fare
 
-1- Nella homepage dovremmo mettere due campi di ricerca:
-    a- Un campo per andare a ricercare il vino in base anche all'annata che pare la ialog per aggiungerlo/toglierlo ecc
-    b- Un campo di ricerca per cercare il vino che porti poi alla pagina di dettaglio del vino
-2- Si potrebbe sganciare l'annata dal vino così da poter avere per ogni vino poi le varie annate presenti. In questo modo possiamo avere la
-   visione del totale del vino particolare che abbiamo in cantina, poi nel dettaglio per ogni annata avremo il numero delle bottiglie
-
+1- Rendere cliccabili i vini suggeriti della stessa cantina quando siamo nei dettagli di un vino
+2- Rendere cliccabili i link alle app vivino e tannico

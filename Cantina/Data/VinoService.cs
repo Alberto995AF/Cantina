@@ -2,6 +2,7 @@
 using Cantina.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using static MudBlazor.CategoryTypes;
 
 namespace Cantina.Data
@@ -105,6 +106,20 @@ namespace Cantina.Data
             int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == items.FirstOrDefault().ID && x.Movimento < 0).Count();
             List<MovimentiVino> movList = _context.MovimentiVino.Where(x => x.VinoId == items.FirstOrDefault().ID).ToList();
 
+            //recuper la denominazione del vino se presente
+            Denominazione denominazione = null;
+            if(items.FirstOrDefault().DenominazioneVinoId != null)
+                denominazione = _context.Denominazione.Where(a => a.ID == items.FirstOrDefault().DenominazioneVinoId).FirstOrDefault();
+
+            //recupero le uve del vino se sono presenti
+            var listaUve = _context.UvaVino.Where(a => a.VinoId == items.FirstOrDefault().ID);
+            List<String> uvaList = new();
+            foreach(var uvaVino in listaUve)
+            {
+                var uva = _context.Uva.Where(a => a.ID == uvaVino.UvaId).FirstOrDefault();
+                uvaList.Add(uva.Nome.ToString());  
+            }
+
             var group = movList.GroupBy(x => x.Annata).ToList();
             List<int> annate = new();
             int sumAnnate = 0;
@@ -128,6 +143,11 @@ namespace Cantina.Data
             VinoDto.Nazione = items.FirstOrDefault().AziendaVinicola.Nazione.Nome;
             VinoDto.Regione = items.FirstOrDefault().AziendaVinicola.Regione.Nome;
             VinoDto.Barcode = items.FirstOrDefault().Barcode;
+            if(denominazione != null)
+            {
+                VinoDto.Denominazione = denominazione.Nome;
+            }
+            VinoDto.Uva = uvaList;
             VinoDto.bottglieInCantina = numBottigleCantina;
             VinoDto.QuantitàBottiglePossedute = numBottigleViste;
             VinoDto.bottiglieBevute = numBottiglieBevute;
@@ -303,8 +323,16 @@ namespace Cantina.Data
         /// <returns></returns>
         public async Task AddVino(Vino vino)
         {
-            _context.Vino.Add(vino);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Vino.Add(vino);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("ERROR in AddVino: " + ex.Message);
+                return;
+            }
         }
 
         /// <summary>
