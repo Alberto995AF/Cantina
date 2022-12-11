@@ -18,9 +18,25 @@
     </MudItem>
     <MudItem xs="12" sm="6" Class="my-10">
         <MudGrid>
-            <MudItem xs="12">
+            <MudStack AlignItems="AlignItems.Center" Row="true">
+                <!--<MudItem xs="12" Class="align-center">
+                    <MudText Typo="Typo.h6">@vino.AziendaVinicola</MudText>
+                </MudItem>-->
                 <MudText Typo="Typo.h6">@vino.AziendaVinicola</MudText>
-            </MudItem>
+
+                @*<MudToggleIconButton @bind-toggle="@prefVino" ToggledChanged="changeFavorite"
+                                     Icon="@Icons.TwoTone.BookmarkBorder" Color="@Color.Error" Title=False
+                                     ToggledIcon="@Icons.TwoTone.Bookmark" ToggledColor="@Color.Success" ToggledTitle=True />*@
+                @if (prefVino)
+                {
+                    <MudIconButton @onclick="changeFavorite" Color="@Color.Success" Icon="@Icons.TwoTone.Bookmark" aria-label="Favorite"></MudIconButton>
+                }
+                else
+                {
+                    <MudIconButton @onclick="changeFavorite" Color="@Color.Error" Icon="@Icons.TwoTone.BookmarkBorder" aria-label="Not Favorite"></MudIconButton>
+                }
+            </MudStack>
+
             <MudItem xs="12">
                 <MudText Typo="Typo.h3">@vino.Nome</MudText>
             </MudItem>
@@ -152,6 +168,8 @@
     [Parameter]
     public int VinoID { get; set; } = 0;
 
+    //Variabile per i preferiti
+    public bool prefVino { get; set; }
 
     string state = "Message box hasn't been opened yet";
 
@@ -164,6 +182,7 @@
     protected override async void OnInitialized()
     {
         vino = await VinoService.GetVinoIDdto(VinoID);
+        prefVino = vino.Preferito;
         listaVini = await VinoService.GetViniAziendaVinicola(vino.AziendaVinicolaId, vino.ID);
     }
 
@@ -198,7 +217,7 @@
         }
 
         StateHasChanged();
-        
+
     }
 
     private async void OnButtonClickedRemove(int idVino)
@@ -239,6 +258,18 @@
         StateHasChanged();
     }
 
+
+    //Funzione per inserire o togliere un vino dai preferiti
+    private async void changeFavorite()
+    {
+        if (prefVino)
+            prefVino = false;
+        else
+            prefVino = true;
+
+        await VinoService.ChangeFavorite(VinoID, prefVino);
+        StateHasChanged();
+    }
 
 }
 

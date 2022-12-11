@@ -30,6 +30,8 @@ namespace Cantina.Data
 
         public int? Barcode { get; set; }
 
+        public bool Preferito { get; set; } = false;
+
         public List<String> Uva { get; set; }
 
         public string? linkAppVivino { get; set; }

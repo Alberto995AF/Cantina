@@ -1,4 +1,4 @@
-﻿@page "/timelineMovimenti"
+﻿@page "/preferiti"
 
 <PageTitle>Vini</PageTitle>
 
@@ -12,37 +12,47 @@
 <MudGrid Justify="Justify.Center">
     <MudItem xs="12">
         <MudStack Row="true" Spacing="3" Justify="Justify.SpaceBetween">
-            <MudText Typo="Typo.h4">MOVIMENTI</MudText>
+            <MudText Typo="Typo.h4">PREFERITI</MudText>
         </MudStack>
     </MudItem>
-    <MudItem xs="5">
-        <MudTimeline>
-            @foreach (var item in listaMovimenti)
-            {
-                @if(item.Movimento < 0)
-                {
-                    <MudTimelineItem TimelineAlign="TimelineAlign.End" Color="Color.Error">
-                        <MudText>@item.Nome - @item.Annata.</MudText>
-                        <MudText Color="Color.Error">Bevuto - @item.Data.ToString("dd/mm/yyyy")</MudText>
-                    </MudTimelineItem>
-                }
-                else
-                {
-                    <MudTimelineItem TimelineAlign="TimelineAlign.Start" Color="Color.Success">
-                        <MudText>@item.Nome - @item.Annata</MudText>
-                        <MudText Color="Color.Success">Comprato - @item.Data.ToString("dd/mm/yyyy")</MudText>
-                    </MudTimelineItem>  
-                }
-            }
-        </MudTimeline>
-    </MudItem>
+    @foreach (var item in listaVini)
+    {
+        <MudItem xs="12" sm="3">
+            <MudCard Elevation="5" @onclick="() => OnclickDetail(item.ID)" Height="400px">
+                <MudCardContent>
+                    <MudStack>
+                        <MudStack Row="true" Justify="Justify.SpaceBetween">
+                            <MudImage Width="64" Height="240" Src=@item.linkImmagine Alt="Mony the dog" Class="rounded-lg" />
+                            <MudStack>
+                                <MudStack AlignItems="AlignItems.Center" Row="true">
+                                    <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" />
+                                    <MudText Typo="Typo.h6">  @item.bottglieInCantina</MudText>
+                                </MudStack>
+                                <MudStack AlignItems="AlignItems.Center" Row="true">
+                                    <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
+                                    <MudText Typo="Typo.h6">  @item.QuantitàBottiglePossedute</MudText>
+                                </MudStack>
+                            </MudStack>
+                        </MudStack>
+                        <MudText Typo="Typo.h5">@item.Nome</MudText>
+                        <MudText Typo="Typo.h6">@item.AziendaVinicola</MudText>
+                    </MudStack>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    }
 </MudGrid>
 
 @code {
-    private List<MovimentoDTO> listaMovimenti = new();
+    private List<VinoDTO> listaVini = new();
 
     protected override async Task OnInitializedAsync()
     {
-        listaMovimenti = await VinoService.GetMovimenti();
+        listaVini = await VinoService.GetFavoriteVini();
+    }
+
+    protected async Task OnclickDetail(int id)
+    {
+        NavigationManager.NavigateTo("/dettaglivino/" + id);
     }
 }

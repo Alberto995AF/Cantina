@@ -600,6 +600,7 @@ namespace Cantina.Data
                     AziendaVinicolaId = azV3.ID,
                     DenominazioneVinoId = tipologia4.ID,
                     Barcode = 1000,
+                    Preferito = false,
                     linkAppVivino = "https://www.vivino.com/wineries/it-mascarello-michele",
                     linkImmagine = "https://images.vivino.com/thumbs/PneHihhLTi2OkB0VehxNeg_pb_x960.png"
                 };
@@ -611,6 +612,7 @@ namespace Cantina.Data
                     AziendaVinicolaId = azV1.ID,
                     DenominazioneVinoId = tipologia1.ID,
                     Barcode = 1001,
+                    Preferito = false,
                     linkAppVivino = "https://www.vivino.com/IT/it/tenuta-argentiera-poggio-ai-ginepri-bolgheri/w/1768500",
                     linkImmagine = "https://images.vivino.com/thumbs/AXpJL5rDTpCa7GcuGObVow_pb_x960.png"
                 };
@@ -622,6 +624,7 @@ namespace Cantina.Data
                     AziendaVinicolaId = azV2.ID,
                     DenominazioneVinoId = tipologia6.ID,
                     Barcode = 1002,
+                    Preferito = false,
                     linkAppVivino = "https://www.vivino.com/IT/it/badia-di-morrona-felciaio/w/2478006?ref=nav-search",
                     linkImmagine = "https://images.vivino.com/thumbs/dHuGvbrCQQS9zzOTfJjTOw_pb_x960.png"
                 };

@@ -27,7 +27,7 @@ namespace Cantina.Data
 
         public string? linkImmagine { get; set; }
 
-        public bool? Preferito { get; set; }
+        public bool Preferito { get; set; } = false;
 
         public bool? VinoDaTavola { get; set; }
 
