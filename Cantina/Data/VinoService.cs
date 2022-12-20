@@ -543,6 +543,28 @@ namespace Cantina.Data
             await _context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// funzione per aggiungere una nuova denominazione
+        /// </summary>
+        /// <param name="den"></param>
+        /// <returns></returns>
+        public async Task AddDenominazione(Denominazione den)
+        {
+            _context.Denominazione.Add(den);
+            await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// funzione per aggiungere un tipo di uva
+        /// </summary>
+        /// <param name="uva"></param>
+        /// <returns></returns>
+        public async Task AddUva(Uva uva)
+        {
+            _context.Uva.Add(uva);
+            await _context.SaveChangesAsync();
+        }
+
         public Task<int> GetQuantitàVino(int vinoID)
         {
             int numMovimenti = _context.MovimentiVino.Where(x => x.VinoId == vinoID).Count();

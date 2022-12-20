@@ -1,0 +1,35 @@
+﻿@inject Cantina.Data.VinoService VinoService
+@using Cantina.Data
+
+<MudDialog>
+    <DialogContent>
+        <PageTitle>Crea Uva</PageTitle>
+
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudCard>
+                        <MudCardContent>
+                            <MudTextField Label="Nome Cantina" HelperText="Max. 8 characters"
+                                          @bind-Value="model.Nome" For="@(() => model.Nome)" />
+                        </MudCardContent>
+                    </MudCard>
+                    <MudCardActions>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">SALVA</MudButton>
+                    </MudCardActions>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    Uva model = new Uva();
+
+    private async Task OnValidSubmit(EditContext context)
+    {
+        MudDialog.Close(DialogResult.Ok(model));
+    }
+}

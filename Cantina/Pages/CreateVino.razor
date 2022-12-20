@@ -44,21 +44,33 @@
                     </MudAutocomplete>
                 </MudCardContent>
                 <MudCardContent>
-                    <MudAutocomplete T="Denominazione" Label="Denominazione" @bind-Value="selectedDenominazione"
-                                     SearchFunc="@functionResearchFieldDenominazione" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")">
-                        <MoreItemsTemplate>
-                            <MudText Align="Align.Center" Class="px-4 py-1">
-                                Only the first 10 items are shown
-                            </MudText>
-                        </MoreItemsTemplate>
-                    </MudAutocomplete>
+                    <MudStack Spacing="3" Row="true">
+                        <MudAutocomplete T="Denominazione" Label="Denominazione" @bind-Value="selectedDenominazione"
+                                         SearchFunc="@functionResearchFieldDenominazione" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")">
+                            <MoreItemsTemplate>
+                                <MudText Align="Align.Center" Class="px-4 py-1">
+                                    Only the first 10 items are shown
+                                </MudText>
+                            </MoreItemsTemplate>
+                        </MudAutocomplete>
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudFab Color="Color.Primary" OnClick="@AddDenominazione" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" />
+                        </MudItem>
+                    </MudStack>
                 </MudCardContent>
-                <MudSelect T="Uva" Label="Tipo Uva" MultiSelection="true" @bind-Value="Uva" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")" @bind-SelectedValues="selectedUva">
-                    @foreach (var uva in listUva)
-                    {
-                        <MudSelectItem T="Uva" Value="@uva">@uva.Nome</MudSelectItem>
-                    }
-                </MudSelect>
+                <MudCardContent>
+                    <MudStack Spacing="3" Row="true">
+                        <MudSelect T="Uva" Label="Tipo Uva" MultiSelection="true" @bind-Value="Uva" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")" @bind-SelectedValues="selectedUva">
+                            @foreach (var uva in listUva)
+                            {
+                                <MudSelectItem T="Uva" Value="@uva">@uva.Nome</MudSelectItem>
+                            }
+                        </MudSelect>
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudFab Color="Color.Primary" OnClick="@AddUva" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" />
+                        </MudItem>
+                    </MudStack>
+                </MudCardContent>
                 <MudCardContent>
                     <MudTextField Label="Barcode" @bind-Value="model.Barcode" For="@(() => model.Barcode)" />
                 </MudCardContent>
@@ -145,6 +157,31 @@
             var newItem = (AziendaVinicola)result.Data;
             await VinoService.AddAziendaVinicola(newItem);
         }
+    }
+
+    protected async Task AddDenominazione()
+    {
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true };
+        var dialog = DialogService.Show<DialogAddDenominazione>("Aggiungi Denominazione", maxWidth);
+        var result = await dialog.Result;
+        if (!result.Cancelled && result.Data != null)
+        {
+            var newItem = (Denominazione)result.Data;
+            await VinoService.AddDenominazione(newItem);
+        }
+    }
+
+    protected async Task AddUva()
+    {
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true };
+        var dialog = DialogService.Show<DialogAddUva>("Aggiungi Uva", maxWidth);
+        var result = await dialog.Result;
+        if (!result.Cancelled && result.Data != null)
+        {
+            var newItem = (Uva)result.Data;
+            await VinoService.AddUva(newItem);
+        }
+
     }
 
     //funzione per restituire le cantine nel campo di ricerca

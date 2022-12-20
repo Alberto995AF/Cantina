@@ -3,6 +3,7 @@ using System.Diagnostics.Metrics;
 using Cantina.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using static System.Net.WebRequestMethods;
 
 namespace Cantina.Data
 {
@@ -104,12 +105,68 @@ namespace Cantina.Data
                     Nome = "Vermentino IGT",
                     AreaGeografica = "Toscana, Liguria, Sardegna"
                 };
+                var tipologia7 = new Denominazione
+                {
+                    ID = 7,
+                    Nome = "Valpolicella Superiore DOC",
+                    AreaGeografica = "Veneto, Valpolicella"
+                };
+                var tipologia8 = new Denominazione
+                {
+                    ID = 8,
+                    Nome = "Bolgheri Superiore DOC",
+                    AreaGeografica = "Bolgheri, Castagneto Carducci"
+                };
+                var tipologia9 = new Denominazione
+                {
+                    ID = 9,
+                    Nome = "Toscana Rosso IGT",
+                    AreaGeografica = "Toscana"
+                };
+                var tipologia10 = new Denominazione
+                {
+                    ID = 10,
+                    Nome = "Nebbiolo D'Alba DOC",
+                    AreaGeografica = "Cuneo"
+                };
+                var tipologia11 = new Denominazione
+                {
+                    ID = 11,
+                    Nome = "Barbaresco DOCG",
+                    AreaGeografica = "Cuneo"
+                };
+                var tipologia12 = new Denominazione
+                {
+                    ID = 12,
+                    Nome = "Chianti DOCG",
+                    AreaGeografica = "Chianti"
+                };
+                var tipologia13 = new Denominazione
+                {
+                    ID = 13,
+                    Nome = "Chianti Rufina DOCG",
+                    AreaGeografica = "Sottozona Chianti"
+                };
+                var tipologia14 = new Denominazione
+                {
+                    ID = 14,
+                    Nome = "Morellino Di Scansano DOCG",
+                    AreaGeografica = "Maremma"
+                };
                 context.Denominazione.AddRange(tipologia1);
                 context.Denominazione.AddRange(tipologia2);
                 context.Denominazione.AddRange(tipologia3);
                 context.Denominazione.AddRange(tipologia4);
                 context.Denominazione.AddRange(tipologia5);
                 context.Denominazione.AddRange(tipologia6);
+                context.Denominazione.AddRange(tipologia7);
+                context.Denominazione.AddRange(tipologia8);
+                context.Denominazione.AddRange(tipologia9);
+                context.Denominazione.AddRange(tipologia10);
+                context.Denominazione.AddRange(tipologia11);
+                context.Denominazione.AddRange(tipologia12);
+                context.Denominazione.AddRange(tipologia13);
+                context.Denominazione.AddRange(tipologia14);
                 ///************************************************************
                 ///
 
@@ -561,6 +618,60 @@ namespace Cantina.Data
                     Indirizzo = "Poggio alle Mura, Montalcino",
                     Descrizione = "-"
                 };
+                var azV25 = new AziendaVinicola
+                {
+                    ID = 25,
+                    Nome = "Musella",
+                    NazioneId = naz1.ID,
+                    RegioneId = reg18.ID,
+                    Indirizzo = "San Martino Buon Albergo, VR",
+                    Descrizione = "-"
+                };
+                var azV26 = new AziendaVinicola
+                {
+                    ID = 26,
+                    Nome = "Poggio Al Tesoro",
+                    NazioneId = naz1.ID,
+                    RegioneId = reg1.ID,
+                    Indirizzo = "Bolgheri",
+                    Descrizione = "-"
+                };
+                var azV27 = new AziendaVinicola
+                {
+                    ID = 27,
+                    Nome = "Michele Satta",
+                    NazioneId = naz1.ID,
+                    RegioneId = reg1.ID,
+                    Indirizzo = "Bolgheri",
+                    Descrizione = "-"
+                };
+                var azV28 = new AziendaVinicola
+                {
+                    ID = 28,
+                    Nome = "Podere Guado al Melo",
+                    NazioneId = naz1.ID,
+                    RegioneId = reg1.ID,
+                    Indirizzo = "Bolgheri",
+                    Descrizione = "-"
+                };
+                var azV29 = new AziendaVinicola
+                {
+                    ID = 29,
+                    Nome = "Fattoria di Doccia",
+                    NazioneId = naz1.ID,
+                    RegioneId = reg1.ID,
+                    Indirizzo = "Chianti",
+                    Descrizione = "-"
+                };
+                var azV30 = new AziendaVinicola
+                {
+                    ID = 30,
+                    Nome = "Capua Winery",
+                    NazioneId = naz1.ID,
+                    RegioneId = reg1.ID,
+                    Indirizzo = "Maremma",
+                    Descrizione = "-"
+                };
                 context.AziendaVinicola.AddRange(azV1);
                 context.AziendaVinicola.AddRange(azV2);
                 context.AziendaVinicola.AddRange(azV3);
@@ -585,6 +696,12 @@ namespace Cantina.Data
                 context.AziendaVinicola.AddRange(azV22);
                 context.AziendaVinicola.AddRange(azV23);
                 context.AziendaVinicola.AddRange(azV24);
+                context.AziendaVinicola.AddRange(azV25);
+                context.AziendaVinicola.AddRange(azV26);
+                context.AziendaVinicola.AddRange(azV27);
+                context.AziendaVinicola.AddRange(azV28);
+                context.AziendaVinicola.AddRange(azV29);
+                context.AziendaVinicola.AddRange(azV30);
                 ///************************************************************
                 ///
 
@@ -628,9 +745,132 @@ namespace Cantina.Data
                     linkAppVivino = "https://www.vivino.com/IT/it/badia-di-morrona-felciaio/w/2478006?ref=nav-search",
                     linkImmagine = "https://images.vivino.com/thumbs/dHuGvbrCQQS9zzOTfJjTOw_pb_x960.png"
                 };
+                var vino4 = new Vino
+                {
+                    ID = 4,
+                    Nome = "Musella",
+                    tipoVinoId = tipo1.ID,
+                    AziendaVinicolaId = azV25.ID,
+                    DenominazioneVinoId = tipologia7.ID,
+                    Preferito = false,
+                    linkAppVivino = "https://www.vivino.com/IT/it/musella-valpolicella-superiore/w/15717?ref=nav-search",
+                    linkAppTannico = "https://www.tannico.it/valpolicella-superiore-doc-2018-musella.html?_gl=1*nydluw*_up*MQ..&gclid=Cj0KCQiAnNacBhDvARIsABnDa69DVOOMZ3ZWgoWT4TEc8FLBvdA_PR5cn7VBJuunUSqgFlRbspmTpiYaAixOEALw_wcB",
+                    linkImmagine = "https://images.vivino.com/thumbs/sSj8RNdYTHy2N87Ue83_kw_pb_x960.png"
+                };
+                var vino5 = new Vino
+                {
+                    ID = 5,
+                    Nome = "Badia a Passignano Riserva",
+                    tipoVinoId = tipo1.ID,
+                    AziendaVinicolaId = azV23.ID,
+                    DenominazioneVinoId = tipologia2.ID,
+                    Preferito = false,
+                    linkAppVivino = "https://www.vivino.com/IT/it/antinori-tuscany-badia-a-passignano-gran-selezione-chianti-classico/w/1653?ref=nav-search",
+                    linkAppTannico = "https://www.tannico.it/chianti-classico-gran-selezione-docg-badia-a-passignano-2001-antinori.html",
+                    linkImmagine = "https://images.vivino.com/thumbs/hxzM5LQaQEmv24npsUIXfQ_pb_x960.png"
+                };
+                var vino6 = new Vino
+                {
+                    ID = 6,
+                    Nome = "Sondraia Bolgheri Superiore",
+                    tipoVinoId = tipo1.ID,
+                    AziendaVinicolaId = azV26.ID,
+                    DenominazioneVinoId = tipologia8.ID,
+                    Preferito = false,
+                    linkAppVivino = "https://www.vivino.com/IT/it/poggio-al-tesoro-bolgheri-superiore-sondraia/w/1269657",
+                    linkAppTannico = "https://www.tannico.it/bolgheri-superiore-doc-sondraia-2018-poggio-al-tesoro.html?_gl=1*q7gp0g*_up*MQ..&gclid=Cj0KCQiAnNacBhDvARIsABnDa69DVOOMZ3ZWgoWT4TEc8FLBvdA_PR5cn7VBJuunUSqgFlRbspmTpiYaAixOEALw_wcB",
+                    linkImmagine = "https://images.vivino.com/thumbs/HAG04pizRbuBQ85_Sge4pw_pb_x960.png"
+                };
+                var vino7 = new Vino
+                {
+                    ID = 7,
+                    Nome = "I Castagni Bolgheri Superiore",
+                    tipoVinoId = tipo1.ID,
+                    AziendaVinicolaId = azV27.ID,
+                    DenominazioneVinoId = tipologia8.ID,
+                    Preferito = false,
+                    linkAppVivino = "https://www.vivino.com/IT/it/michele-satta-i-castagni-bolgheri-superiore/w/1929051",
+                    linkImmagine = "https://images.vivino.com/thumbs/PECSQcmlRb6yvKwyVWrK-A_pb_x960.png"
+                };
+                var vino8 = new Vino
+                {
+                    ID = 8,
+                    Nome = "Jassarte",
+                    tipoVinoId = tipo1.ID,
+                    AziendaVinicolaId = azV28.ID,
+                    DenominazioneVinoId = tipologia9.ID,
+                    Preferito = false,
+                    linkAppVivino = "https://www.vivino.com/IT/it/it-guado-al-melo-jassarte/w/1219254?ref=nav-search",
+                    linkAppTannico = "https://www.tannico.it/toscana-rosso-igt-jassarte-2011-podere-guado-al-melo-13523.html",
+                    linkImmagine = "https://images.vivino.com/thumbs/Q62bdJnQS6OCxUxjgJK5bw_pb_x960.png"
+                };
+                var vino9 = new Vino
+                {
+                    ID = 9,
+                    Nome = "Nebbiolo D'Alba",
+                    tipoVinoId = tipo1.ID,
+                    AziendaVinicolaId = azV3.ID,
+                    DenominazioneVinoId = tipologia10.ID,
+                    Preferito = false,
+                    linkAppVivino = "https://www.vivino.com/IT/it/it-mascarello-michele-nebbiolo-d-alba/w/1538679",
+                    linkImmagine = "https://www.vivino.com/packs/f1b798fa2a2afa4f598391f35cba7e57.png"
+                };
+                var vino10 = new Vino
+                {
+                    ID = 10,
+                    Nome = "Barbaresco",
+                    tipoVinoId = tipo1.ID,
+                    AziendaVinicolaId = azV3.ID,
+                    DenominazioneVinoId = tipologia11.ID,
+                    Preferito = false,
+                    linkImmagine = "https://www.vivino.com/packs/f1b798fa2a2afa4f598391f35cba7e57.png"
+                };
+                var vino11 = new Vino
+                {
+                    ID = 11,
+                    Nome = "Chianti Colli Senesi",
+                    tipoVinoId = tipo1.ID,
+                    AziendaVinicolaId = azV22.ID,
+                    DenominazioneVinoId = tipologia12.ID,
+                    Preferito = false,
+                    linkAppVivino = "https://www.vivino.com/IT/it/geografico-chianti-colli-senesi/w/15339",
+                    linkImmagine = "https://images.vivino.com/thumbs/ADsXD-vOSqK0qy5viOpDbA_pb_x960.png"
+                };
+                var vino12 = new Vino
+                {
+                    ID = 12,
+                    Nome = "Fattoria di Doccia Chianti Rufina",
+                    tipoVinoId = tipo1.ID,
+                    AziendaVinicolaId = azV29.ID,
+                    DenominazioneVinoId = tipologia13.ID,
+                    Preferito = false,
+                    linkAppVivino = "https://www.vivino.com/IT/it/fattoria-di-doccia-chianti-rufina/w/1301281",
+                    linkImmagine = "https://www.vivino.com/packs/f1b798fa2a2afa4f598391f35cba7e57.png"
+                };
+                var vino13 = new Vino
+                {
+                    ID = 13,
+                    Nome = "L'anime a Rallegrar",
+                    tipoVinoId = tipo1.ID,
+                    AziendaVinicolaId = azV30.ID,
+                    DenominazioneVinoId = tipologia14.ID,
+                    Preferito = false,
+                    linkAppVivino = "https://www.vivino.com/IT/it/capua-winery-l-anime-a-rallegrar/w/7882714",
+                    linkImmagine = "https://www.vivino.com/packs/f1b798fa2a2afa4f598391f35cba7e57.png"
+                };
                 context.Vino.AddRange(vino1);
                 context.Vino.AddRange(vino2);
                 context.Vino.AddRange(vino3);
+                context.Vino.AddRange(vino4);
+                context.Vino.AddRange(vino5);
+                context.Vino.AddRange(vino6);
+                context.Vino.AddRange(vino7);
+                context.Vino.AddRange(vino8);
+                context.Vino.AddRange(vino9);
+                context.Vino.AddRange(vino10);
+                context.Vino.AddRange(vino11);
+                context.Vino.AddRange(vino12);
+                context.Vino.AddRange(vino13);
                 ///************************************************************
                 ///
 

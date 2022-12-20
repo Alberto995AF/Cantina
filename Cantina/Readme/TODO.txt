@@ -3,3 +3,4 @@ Da Fare
 
 1- Rendere cliccabili i vini suggeriti della stessa cantina quando siamo nei dettagli di un vino
 2- Rendere cliccabili i link alle app vivino e tannico
+3- Non funziona iltasto meno nei dettaglidel vino. Funziona la diaglog ma non viene tolto il vino

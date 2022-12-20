@@ -16,7 +16,7 @@
         }
         else
         {
-            <MudSelect T="int" Label="Annata" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+            <MudSelect T="int" @bind-Value="selectedYear" Label="Annata" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                 @foreach (var year in vino.Annata)
                 {
                     <MudSelectItem T="int" Value=@year />
