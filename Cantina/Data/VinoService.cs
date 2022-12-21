@@ -68,7 +68,14 @@ namespace Cantina.Data
         public Task<List<tipoVino>> GetTipiVino()
         {
             var items = _context.tipoVino.ToList();
+            return Task.FromResult(items);
+        }
+        //*********************************************
 
+        // ****** GET TIPO VINO ID***********************
+        public Task<tipoVino> GetTipVinoId(int id)
+        {
+            var items = _context.tipoVino.Where(x =>x.ID == id).FirstOrDefault();
             return Task.FromResult(items);
         }
         //*********************************************
@@ -79,10 +86,15 @@ namespace Cantina.Data
             return Task.FromResult(items);
         }
 
+        public Task<AziendaVinicola> GetAziendeId(int id)
+        {
+            var items = _context.AziendaVinicola.Where(x =>x.ID == id).FirstOrDefault();
+            return Task.FromResult(items);
+        }
+
         public Task<List<tipoVino>> GetTipoVino()
         {
             var items = _context.tipoVino.ToList();
-
             return Task.FromResult(items);
         }
 
@@ -180,6 +192,19 @@ namespace Cantina.Data
             }
 
             return Task.FromResult(listVinoDto);
+        }
+
+        public Task<List<Uva>> GetUvaVinoId(int id)
+        {
+            //recupero le uve del vino se sono presenti
+            var listaUve = _context.UvaVino.Where(a => a.VinoId == id);
+            List<Uva> uvaList = new();
+            foreach (var uvaVino in listaUve)
+            {
+                var uva = _context.Uva.Where(a => a.ID == uvaVino.UvaId).FirstOrDefault();
+                uvaList.Add(uva);
+            }
+            return Task.FromResult(uvaList);
         }
 
 
@@ -535,6 +560,16 @@ namespace Cantina.Data
         }
 
 
+        /// <summary>
+        /// GET DENOMINAZIONE ID 
+        /// </summary>
+        /// <returns>ritorna la denominazione del vino</returns>
+        public Task<Denominazione> GetDenominazioneId(int id)
+        {
+            var item = _context.Denominazione.Where(x => x.ID == id).FirstOrDefault();
+            return Task.FromResult(item);
+        }
+
 
         //funzione per aggiungere una nuova Azienda Vinicola
         public async Task AddAziendaVinicola(AziendaVinicola azienda)
@@ -582,6 +617,46 @@ namespace Cantina.Data
             var vino = _context.Vino.Where(x => x.ID == vinoId).FirstOrDefault();
             vino.Preferito = pref;
             await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// GET NAZIONE IN FUNZIONE DELLA RICERCA
+        /// </summary>
+        /// <param name="value"> stringa scritta nel campo di ricerca</param>
+        /// <returns>ritarna una lista di Nazioni di tipi Nazione</returns>
+        public Task<List<Nazione>> GetNazioneSearch(string value)
+        {
+            List<Nazione> listNazione = new();
+            var item = _context.Nazione;
+
+            foreach (var naz in item)
+            {
+                if (naz.Nome.Contains(value))
+                {
+                    listNazione.Add(naz);
+                }
+            }
+            return Task.FromResult(listNazione);
+        }
+
+        /// <summary>
+        /// GET REGIONE IN FUNZIONE DELLA RICERCA
+        /// </summary>
+        /// <param name="value"> stringa scritta nel campo di ricerca</param>
+        /// <returns>ritarna una lista di REgioni di tipi RegioniItaliane</returns>
+        public Task<List<RegioniItaliane>> GetRegioneSearch(string value)
+        {
+            List<RegioniItaliane> listRegioni = new();
+            var item = _context.RegioniItaliane;
+
+            foreach (var reg in item)
+            {
+                if (reg.Nome.Contains(value))
+                {
+                    listRegioni.Add(reg);
+                }
+            }
+            return Task.FromResult(listRegioni);
         }
     }
 }

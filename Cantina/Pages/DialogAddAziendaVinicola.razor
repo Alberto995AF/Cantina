@@ -18,15 +18,31 @@
                                           @bind-Value="model.Indirizzo" For="@(() => model.Indirizzo)" />
                         </MudCardContent>
                         <MudCardContent>
-                            <MudTextField Label="Nazione" HelperText="Max. 8 characters"
-                                          @bind-Value="model.NazioneId" For="@(() => model.NazioneId)" />
+                            <MudStack Spacing="3" Row="true">
+                                <MudAutocomplete T="Nazione" Label="Nazione" @bind-Value="selectedNazione"
+                                                 SearchFunc="@functionResearchFieldNazione" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")">
+                                    <MoreItemsTemplate>
+                                        <MudText Align="Align.Center" Class="px-4 py-1">
+                                            Only the first 10 items are shown
+                                        </MudText>
+                                    </MoreItemsTemplate>
+                                </MudAutocomplete>
+                            </MudStack>
                         </MudCardContent>
                         <MudCardContent>
-                            <MudTextField Label="Regione" HelperText="Max. 8 characters"
-                                          @bind-Value="model.RegioneId" For="@(() => model.RegioneId)" />
+                            <MudStack Spacing="3" Row="true">
+                                <MudAutocomplete T="RegioniItaliane" Label="Regione" @bind-Value="selectedRegione"
+                                                 SearchFunc="@functionResearchFieldRegione" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")">
+                                    <MoreItemsTemplate>
+                                        <MudText Align="Align.Center" Class="px-4 py-1">
+                                            Only the first 10 items are shown
+                                        </MudText>
+                                    </MoreItemsTemplate>
+                                </MudAutocomplete>
+                            </MudStack>
                         </MudCardContent>
                         <MudCardContent>
-                            <MudTextField Label="Regione" HelperText="Max. 8 characters"
+                            <MudTextField Label="Descrizione" HelperText="Max. 8 characters"
                                           @bind-Value="model.Descrizione" For="@(() => model.Descrizione)" />
                         </MudCardContent>
                         <MudCardActions>
@@ -45,8 +61,31 @@
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
     AziendaVinicola model = new AziendaVinicola();
 
+    //parametri per selezione Nazione
+    Nazione selectedNazione = new();
+    List<Nazione> listNazione = new List<Nazione>();
+
+    //parametri per selezione Regione
+    RegioniItaliane selectedRegione = new();
+    List<RegioniItaliane> listRegione = new List<RegioniItaliane>();
+
+
     private async Task OnValidSubmit(EditContext context)
     {
         MudDialog.Close(DialogResult.Ok(model));
+    }
+
+    //funzione per restituire le Nazioni nel campo di ricerca
+    private async Task<IEnumerable<Nazione>> functionResearchFieldNazione(string value)
+    {
+        listNazione = await VinoService.GetNazioneSearch(value);
+        return listNazione;
+    }
+
+    //funzione per restituire le Regioni nel campo di ricerca
+    private async Task<IEnumerable<RegioniItaliane>> functionResearchFieldRegione(string value)
+    {
+        listRegione = await VinoService.GetRegioneSearch(value);
+        return listRegione;
     }
 }

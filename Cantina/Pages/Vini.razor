@@ -51,7 +51,7 @@
     @code {
         private bool hover = true;
         private List<VinoDTO> listaVini = new();
-        private List<AziendaVinicola> listaAziende = new();
+        private AziendaVinicola listaAziende = new();
         private readonly HttpClient _httpClient;
         private VinoDTO selectedVino = null;
 
@@ -67,13 +67,10 @@
         {
             vino = await VinoService.GetVinoID(id);
 
-            //prendo la lista delle aziende vinicole
-            listaAziende = await VinoService.GetAziende();
-
+            DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Large, FullWidth = true };
             var parameter = new DialogParameters();
             parameter.Add("Vino", vino);
-            parameter.Add("AziendaVinicola", listaAziende);
-            var dialog = DialogService.Show<DialogVino>("Options Dialog", parameter);
+            var dialog = DialogService.Show<DialogVino>("Options Dialog", parameter, maxWidth);
 
             var result = await dialog.Result;
             if (!result.Cancelled && result.Data != null)
