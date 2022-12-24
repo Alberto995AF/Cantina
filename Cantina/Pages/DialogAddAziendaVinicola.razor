@@ -72,6 +72,8 @@
 
     private async Task OnValidSubmit(EditContext context)
     {
+        model.NazioneId = selectedNazione.ID;
+        model.RegioneId = selectedNazione.ID;
         MudDialog.Close(DialogResult.Ok(model));
     }
 
