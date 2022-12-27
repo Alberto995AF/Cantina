@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Cantina.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,7 @@ namespace Cantina.Data
                 int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
                 int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
                 bool inCant = numBottigleCantina > 0 ? true : false;
-                listVinoDto.Add(new VinoDTO() {ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId ,AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine=vino.linkImmagine });
+                listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
             }
 
             return Task.FromResult(listVinoDto);
@@ -48,7 +49,7 @@ namespace Cantina.Data
             List<VinoDTO> listVinoDto = new List<VinoDTO>();
             var items = _context.Vino.Include(a => a.AziendaVinicola).ToList();
             items = _context.Vino.Include(a => a.tipoVino).ToList();
-            items = _context.Vino.Where(x => x.AziendaVinicolaId == idAzienda && x.ID !=idVino).ToList();
+            items = _context.Vino.Where(x => x.AziendaVinicolaId == idAzienda && x.ID != idVino).ToList();
 
             foreach (var vino in items)
             {
@@ -75,7 +76,7 @@ namespace Cantina.Data
         // ****** GET TIPO VINO ID***********************
         public Task<tipoVino> GetTipVinoId(int id)
         {
-            var items = _context.tipoVino.Where(x =>x.ID == id).FirstOrDefault();
+            var items = _context.tipoVino.Where(x => x.ID == id).FirstOrDefault();
             return Task.FromResult(items);
         }
         //*********************************************
@@ -88,7 +89,7 @@ namespace Cantina.Data
 
         public Task<AziendaVinicola> GetAziendeId(int id)
         {
-            var items = _context.AziendaVinicola.Where(x =>x.ID == id).FirstOrDefault();
+            var items = _context.AziendaVinicola.Where(x => x.ID == id).FirstOrDefault();
             return Task.FromResult(items);
         }
 
@@ -120,24 +121,24 @@ namespace Cantina.Data
 
             //recuper la denominazione del vino se presente
             Denominazione denominazione = null;
-            if(items.FirstOrDefault().DenominazioneVinoId != null)
+            if (items.FirstOrDefault().DenominazioneVinoId != null)
                 denominazione = _context.Denominazione.Where(a => a.ID == items.FirstOrDefault().DenominazioneVinoId).FirstOrDefault();
 
             //recupero le uve del vino se sono presenti
             var listaUve = _context.UvaVino.Where(a => a.VinoId == items.FirstOrDefault().ID);
             List<String> uvaList = new();
-            foreach(var uvaVino in listaUve)
+            foreach (var uvaVino in listaUve)
             {
                 var uva = _context.Uva.Where(a => a.ID == uvaVino.UvaId).FirstOrDefault();
-                uvaList.Add(uva.Nome.ToString());  
+                uvaList.Add(uva.Nome.ToString());
             }
 
             var group = movList.GroupBy(x => x.Annata).ToList();
             List<int> annate = new();
             int sumAnnate = 0;
-            foreach(var item in group)
+            foreach (var item in group)
             {
-                foreach(var item2 in item)
+                foreach (var item2 in item)
                 {
                     sumAnnate += item2.Movimento;
                 }
@@ -155,7 +156,7 @@ namespace Cantina.Data
             VinoDto.Nazione = items.FirstOrDefault().AziendaVinicola.Nazione.Nome;
             VinoDto.Regione = items.FirstOrDefault().AziendaVinicola.Regione.Nome;
             VinoDto.Barcode = items.FirstOrDefault().Barcode;
-            if(denominazione != null)
+            if (denominazione != null)
             {
                 VinoDto.Denominazione = denominazione.Nome;
             }
@@ -261,14 +262,14 @@ namespace Cantina.Data
             Vino vino = new();
             Vino newVino = new();
             vino = await GetVinoID(idVino);
-            newVino.AziendaVinicolaId = vino.AziendaVinicolaId;           
+            newVino.AziendaVinicolaId = vino.AziendaVinicolaId;
             //newVino.Annata = annata;
             newVino.Barcode = vino.Barcode;
             newVino.DenominazioneVinoId = vino.DenominazioneVinoId;
             newVino.linkAppVivino = vino.linkAppVivino;
             newVino.linkImmagine = vino.linkImmagine;
             newVino.tipoVinoId = vino.tipoVinoId;
-            newVino.Nome = vino.Nome; 
+            newVino.Nome = vino.Nome;
             _context.Vino.Add(newVino);
             await _context.SaveChangesAsync();
             return newVino.ID;
@@ -289,7 +290,7 @@ namespace Cantina.Data
             for (int i = 0; i < numViniRandom; i++)
             {
                 Random random = new Random();
-                int numeroCasuale = random.Next(from, to_maxID+1);
+                int numeroCasuale = random.Next(from, to_maxID + 1);
                 numeriRandom.Add(numeroCasuale);
             }
 
@@ -391,7 +392,7 @@ namespace Cantina.Data
         /// <returns></returns>
         public async Task AddUvaVino(List<UvaVino> uvaVinoList)
         {
-            foreach(var items in uvaVinoList)
+            foreach (var items in uvaVinoList)
             {
                 _context.UvaVino.Add(items);
                 await _context.SaveChangesAsync();
@@ -428,7 +429,7 @@ namespace Cantina.Data
         {
             int numBottiglie = _context.MovimentiVino.Where(x => x.VinoId == idVino && x.Annata == annata).Sum(x => x.Movimento);
 
-            if(numBottiglie > 0)
+            if (numBottiglie > 0)
             {
                 return true;
             }
@@ -441,10 +442,9 @@ namespace Cantina.Data
 
 
         // ***************** GET MOVIMENTI *********************
-        public Task<List<MovimentoDTO>> GetMovimenti()
+        public Task<List<MovimentiVino>> GetMovimenti()
         {
-            List<MovimentoDTO> listMovimentiDto = new List<MovimentoDTO>();
-            List<VinoDTO> listVinoDto = new List<VinoDTO>();
+            List<MovimentiVino> listMovimentiDto = new List<MovimentiVino>();
 
             var items = _context.MovimentiVino.Include(a => a.Vino).ToList();
             items.OrderBy(x => x.Data);
@@ -457,6 +457,32 @@ namespace Cantina.Data
             return Task.FromResult(listMovimentiDto);
         }
         // ****************************************************
+
+        /// <summary>
+        /// Get movimenti positivi
+        /// </summary>
+        /// <returns></returns>
+        public Task<List<MovimentiVino>> GetMovimentiPositivi()
+        {
+            var items = _context.MovimentiVino.Where(a => a.Movimento > 0).ToList();
+            var result = items.GroupBy(a => a.Data?.Date).Select(t => new MovimentiVino { Data = t.First().Data?.Date, Movimento = t.Sum(a => a.Movimento) }).OrderBy(x => x.Data?.Date).ToList();
+
+            return Task.FromResult(result);
+
+        }
+
+        /// <summary>
+        /// Get movimenti negativi
+        /// </summary>
+        /// <returns></returns>
+        public Task<List<MovimentiVino>> GetMovimentiNegativi()
+        {
+            var items = _context.MovimentiVino.Where(a => a.Movimento < 0).ToList();
+            var result = items.GroupBy(a => a.Data?.Date).Select(t => new MovimentiVino { Data = t.First().Data?.Date, Movimento = t.Sum(a => a.Movimento) }).OrderBy(x => x.Data?.Date).ToList();
+
+            return Task.FromResult(result);
+
+        }
 
         /// <summary>
         /// GET VINI DTO IN FUNZIONE DELLA RICERCA

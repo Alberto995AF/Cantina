@@ -9,7 +9,7 @@
 @inject NavigationManager NavigationManager
 
 
-<MudGrid Justify="Justify.Center">
+@*<MudGrid Justify="Justify.Center">
     <MudItem xs="12">
         <MudStack Row="true" Spacing="3" Justify="Justify.SpaceBetween">
             <MudText Typo="Typo.h4">MOVIMENTI</MudText>
@@ -36,10 +36,10 @@
             }
         </MudTimeline>
     </MudItem>
-</MudGrid>
+</MudGrid>*@
 
 @code {
-    private List<MovimentoDTO> listaMovimenti = new();
+    private List<MovimentiVino> listaMovimenti = new();
 
     protected override async Task OnInitializedAsync()
     {

@@ -12,11 +12,11 @@
         <MudPaper Elevation="3" Class="pa-3">
             <MudStack>
                 @*<MudStack>
-                    <MudNumericField AutoFocus="true" HideSpinButtons="true" @bind-Value="@barcode_ins" Immediate="true" @onkeydown="@pressEnter" Clearable="true" Label="Standard" Variant="Variant.Text" />
-                </MudStack>
-                <MudStack Justify="Justify.FlexEnd" AlignItems="AlignItems.End">
-                    <MudButton id="btnSubmit" OnClick="Register" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
-                </MudStack>*@
+                        <MudNumericField AutoFocus="true" HideSpinButtons="true" @bind-Value="@barcode_ins" Immediate="true" @onkeydown="@pressEnter" Clearable="true" Label="Standard" Variant="Variant.Text" />
+                    </MudStack>
+                    <MudStack Justify="Justify.FlexEnd" AlignItems="AlignItems.End">
+                        <MudButton id="btnSubmit" OnClick="Register" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                    </MudStack>*@
                 <MudAutocomplete T="VinoDTO" Label="Periodic Table Element" ValueChanged="@(x => Register(x))"
                                  SearchFunc="@functionResearchField" ToStringFunc="@(e=> e==null?null : $"{e.Nome} {e.AziendaVinicola} {e.Annata}")">
                     <MoreItemsTemplate>
@@ -67,6 +67,22 @@
             </MudStack>
         </MudPaper>
     </MudItem>
+    <MudItem xs="12" sm="4">
+        <MudPaper Elevation="3" Class="pa-3">
+            <MudStack Row="true" AlignItems="AlignItems.Center">
+                <MudStack>
+                    <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" Size="Size.Large" />
+                </MudStack>
+                <MudStack Spacing="0">
+                    <MudText Typo="Typo.button">Valore Cantina</MudText>
+                    <MudText Typo="Typo.h6">@numBottiglieCantina</MudText>
+                </MudStack>
+            </MudStack>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="12">
+        <MudChart ChartType="ChartType.Line" ChartSeries="@_series" XAxisLabels="@_xAxisLabels" ChartOptions="@_options" Height="600px"></MudChart>
+    </MudItem>
 </MudGrid>
 
 
@@ -93,10 +109,28 @@
     List<VinoDTO> listaViniRidotta = new(); //serve per il carosello
     List<int> numeriBottiglie = new();
     List<tipoVino> tipiVino = new();
-    List<MovimentoDTO> listaMovimentiTotale = new();
     List<MovimentoDTO> listaMovimentiRidotta = new();
     int dataSizeCircleChart;
     private Transition transition = Transition.Slide;
+
+    //variabili per grafico andamento bevuti/comprati
+    private readonly List<ChartSeries> _series = new();
+    private readonly ChartOptions _options = new();
+    List<string> _xAxisLabels_list = new();
+    List<double> acquistati = new();
+    List<double> bevuti = new();
+    private string[] _xAxisLabels;
+    //private double[] bevuti = new double[1000];
+    //private double[] acquistati = new double[1000];
+    List<MovimentiVino> listaMovimentiTotaleAcquisto = new();
+    List<MovimentiVino> listaMovimentiTotale = new();
+    List<MovimentiVino> listaMovimentiTotaleBevute = new();
+    int contatoreAcquisti = 0;
+    int contatoreBevuti = 0;
+    int maxDimList = 0;
+    int maxDimListAcquisti = 0;
+    int maxDimListBevuti = 0;
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -108,55 +142,109 @@
         numBottiglieCantina = numeriBottiglie[1];
         numBottigleAcquistate = numeriBottiglie[2];
 
+        //funzione per il grafico andamento bevuti/comprati
         listaMovimentiTotale = await VinoService.GetMovimenti();
+        listaMovimentiTotaleAcquisto = await VinoService.GetMovimentiPositivi();
+        listaMovimentiTotaleBevute = await VinoService.GetMovimentiNegativi();
+
+        maxDimListAcquisti = listaMovimentiTotaleAcquisto.Count();
+        maxDimListBevuti = listaMovimentiTotaleBevute.Count();
+        maxDimList = maxDimListAcquisti > maxDimListBevuti ? maxDimListAcquisti : maxDimListBevuti;
+
+        for(int i = 0; i < maxDimList; i++)
+        {
+            if(i >= maxDimListBevuti)
+            {
+                MovimentiVino newMov = new();
+                newMov.Annata = 0;
+                newMov.Data = null;
+                newMov.Movimento = contatoreBevuti;
+                listaMovimentiTotaleBevute.Insert(i, newMov);
+            }
+            else if(i >= maxDimListAcquisti)
+            {
+                MovimentiVino newMov = new();
+                newMov.Annata = 0;
+                newMov.Data = null;
+                newMov.Movimento = contatoreAcquisti;
+                listaMovimentiTotaleAcquisto.Insert(i, newMov);
+            }
+
+            if(listaMovimentiTotaleAcquisto[i].Data != listaMovimentiTotaleBevute[i].Data)
+            {
+                if(listaMovimentiTotaleAcquisto[i].Data < listaMovimentiTotaleBevute[i].Data || listaMovimentiTotaleBevute[i].Data == null)
+                {
+                    if(listaMovimentiTotaleBevute[i].Data != null)
+                    {
+                        MovimentiVino newMov = new();
+                        newMov.Annata = 0;
+                        newMov.Data = listaMovimentiTotaleAcquisto[i].Data;
+                        newMov.Movimento = contatoreBevuti;
+                        listaMovimentiTotaleBevute.Insert(i, newMov);
+
+                    }
+                    else
+                    {
+                        listaMovimentiTotaleBevute[i].Data = listaMovimentiTotaleAcquisto[i].Data;
+                    }
+                    contatoreAcquisti += listaMovimentiTotaleAcquisto[i].Movimento;
+                    listaMovimentiTotaleAcquisto[i].Movimento = contatoreAcquisti;
+                    if (maxDimListBevuti > maxDimListAcquisti)
+                        maxDimList++;
+                    maxDimListBevuti++;
+                }
+                else
+                {
+                    if(listaMovimentiTotaleAcquisto[i].Data != null)
+                    {
+                        MovimentiVino newMov = new();
+                        newMov.Annata = 0;
+                        newMov.Data = listaMovimentiTotaleBevute[i].Data;
+                        newMov.Movimento = contatoreAcquisti;
+                        listaMovimentiTotaleAcquisto.Insert(i, newMov);
+                    }
+                    else
+                    {
+                        listaMovimentiTotaleAcquisto[i].Data = listaMovimentiTotaleBevute[i].Data;
+                    }
+                    contatoreBevuti = contatoreBevuti + (listaMovimentiTotaleBevute[i].Movimento);
+                    listaMovimentiTotaleBevute[i].Movimento = contatoreBevuti;
+                    if (maxDimListBevuti < maxDimListAcquisti)
+                        maxDimList++;
+                    maxDimListAcquisti++;
+                }
+            }
+            else
+            {
+                contatoreAcquisti += listaMovimentiTotaleAcquisto[i].Movimento;
+                listaMovimentiTotaleAcquisto[i].Movimento = contatoreAcquisti;
+                contatoreBevuti += listaMovimentiTotaleBevute[i].Movimento;
+                listaMovimentiTotaleBevute[i].Movimento = contatoreBevuti;
+            }
+        }
+
+        int j = 0;
+        foreach(var item in listaMovimentiTotaleAcquisto)
+        {
+            _xAxisLabels_list.Add(item.Data?.ToString("dd/MM"));
+            acquistati.Add(item.Movimento);
+            j++;
+        }
+        j = 0;
+        foreach(var item in listaMovimentiTotaleBevute)
+        {
+            bevuti.Add(item.Movimento * (-1));
+            j++;
+        }
+
+        _xAxisLabels = _xAxisLabels_list.ToArray();
+
+        _series.Add(new ChartSeries { Name = "Acquistati", Data = acquistati.ToArray() });
+        _series.Add(new ChartSeries { Name = "Bevuti", Data = bevuti.ToArray() });
+
+        _options.YAxisTicks = contatoreAcquisti;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="vinoList"> lista dei vini trovati con la ricerca nel campo di ricerca </param>
-    /// <returns></returns>
-    //protected async Task Register(List<VinoDTO> vinoList)
-    //{
-    //    //togliamo la parte in cui si cercava il vino per barcode
-
-    //    //vinoList = await VinoService.GetVinoBarcodeDTO(barcode_ins);
-    //    //if (vinoList.Count() == 0)
-    //    //{
-    //    //    Snackbar.Add("Errore: Vino non trovato", Severity.Error, config =>
-    //    //    {
-    //    //        config.RequireInteraction = false;
-    //    //        config.ShowCloseIcon = false;
-    //    //        config.VisibleStateDuration = 2000;
-    //    //        config.ShowTransitionDuration = 500;
-    //    //        config.Onclick = snackbar =>
-    //    //        {
-    //    //            return Task.CompletedTask;
-    //    //        };
-    //    //    });
-    //    //    return;
-    //    //}
-
-    //    DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true };
-    //    var parameter = new DialogParameters();
-    //    parameter.Add("vino", vinoList);
-
-    //    var dialog = DialogService.Show<DialogAddOrRemoveVino>("AddOrRemoveVino Dialog", parameter, maxWidth);
-
-    //    var result = await dialog.Result;
-    //    if (!result.Cancelled && result.Data != null)
-    //    {
-    //        var newItem = (MovimentiVino)result.Data;
-    //        await VinoService.AddMovimento(newItem);
-    //    }
-
-    //}
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="vino"> vino da mostrare nella dialog </param>
-    /// <returns></returns>
     protected async Task Register(VinoDTO vino)
     {
         DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Large, FullWidth = true };
@@ -205,4 +293,5 @@
 
         return vinoListResearch;
     }
+
 }
