@@ -684,5 +684,16 @@ namespace Cantina.Data
             }
             return Task.FromResult(listRegioni);
         }
+
+        /// <summary>
+        /// GET VALORE CANTINA ATTUALE
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Task<decimal> GetValoreCantina()
+        {
+            var item = _context.MovimentiVino.Where(a => a.Movimento > 0).Sum(a => (double)a.Prezzo);
+            return Task.FromResult((decimal)item);
+        }
     }
 }

@@ -11,13 +11,7 @@
     <MudItem xs="12" sm="12">
         <MudPaper Elevation="3" Class="pa-3">
             <MudStack>
-                @*<MudStack>
-                        <MudNumericField AutoFocus="true" HideSpinButtons="true" @bind-Value="@barcode_ins" Immediate="true" @onkeydown="@pressEnter" Clearable="true" Label="Standard" Variant="Variant.Text" />
-                    </MudStack>
-                    <MudStack Justify="Justify.FlexEnd" AlignItems="AlignItems.End">
-                        <MudButton id="btnSubmit" OnClick="Register" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
-                    </MudStack>*@
-                <MudAutocomplete T="VinoDTO" Label="Periodic Table Element" ValueChanged="@(x => Register(x))"
+                <MudAutocomplete T="VinoDTO" Label="Cerca vino.." ValueChanged="@(x => Register(x))"
                                  SearchFunc="@functionResearchField" ToStringFunc="@(e=> e==null?null : $"{e.Nome} {e.AziendaVinicola} {e.Annata}")">
                     <MoreItemsTemplate>
                         <MudText Align="Align.Center" Class="px-4 py-1">
@@ -71,17 +65,17 @@
         <MudPaper Elevation="3" Class="pa-3">
             <MudStack Row="true" AlignItems="AlignItems.Center">
                 <MudStack>
-                    <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" Size="Size.Large" />
+                    <MudIcon Icon="@Icons.Filled.Analytics" Color="Color.Primary" Size="Size.Large" />
                 </MudStack>
                 <MudStack Spacing="0">
                     <MudText Typo="Typo.button">Valore Cantina</MudText>
-                    <MudText Typo="Typo.h6">@numBottiglieCantina</MudText>
+                    <MudText Typo="Typo.h6">@valoreCantina €</MudText>
                 </MudStack>
             </MudStack>
         </MudPaper>
     </MudItem>
     <MudItem xs="12" sm="12">
-        <MudChart ChartType="ChartType.Line" ChartSeries="@_series" XAxisLabels="@_xAxisLabels" ChartOptions="@_options" Height="600px"></MudChart>
+        <MudChart ChartType="ChartType.Line" ChartSeries="@_series" XAxisLabels="@_xAxisLabels" ChartOptions="@_options" Width="100%" Height="600px"></MudChart>
     </MudItem>
 </MudGrid>
 
@@ -130,6 +124,9 @@
     int maxDimList = 0;
     int maxDimListAcquisti = 0;
     int maxDimListBevuti = 0;
+
+    //varibile per il valore della cantina
+    decimal valoreCantina;
 
 
     protected override async Task OnInitializedAsync()
@@ -243,6 +240,9 @@
         _series.Add(new ChartSeries { Name = "Bevuti", Data = bevuti.ToArray() });
 
         _options.YAxisTicks = contatoreAcquisti;
+
+        //funzione per prendere il valore della cantina
+        valoreCantina = await VinoService.GetValoreCantina();
     }
 
     protected async Task Register(VinoDTO vino)

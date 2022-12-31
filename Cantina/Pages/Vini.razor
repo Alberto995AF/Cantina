@@ -21,6 +21,20 @@
             <MudFab Color="Color.Primary" Href="/createvino" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" />
         </MudStack>
     </MudItem>
+    <MudItem xs="12" sm="12">
+        <MudPaper Elevation="3" Class="pa-3">
+            <MudStack>
+                <MudAutocomplete T="VinoDTO" ResetValueOnEmptyText="true" Label="Cerca vino.." CoerceText="true" ValueChanged="@(x => Register(x))"
+                                 SearchFunc="@functionResearchField" ToStringFunc="@(e=> e==null?null : $"{e.Nome} {e.AziendaVinicola} {e.Annata}")">
+                    <MoreItemsTemplate>
+                        <MudText Align="Align.Center" Class="px-4 py-1">
+                            Only the first 10 items are shown
+                        </MudText>
+                    </MoreItemsTemplate>
+                </MudAutocomplete>
+            </MudStack>
+        </MudPaper>
+    </MudItem>
     <MudItem xs="12">
         <MudTable Items="@listaVini" Breakpoint="Breakpoint.Sm" Striped="true" LoadingProgressColor="Color.Info" Hover="@hover" OnRowClick="funDettagliVino" @bind-SelectedItem="selectedVino" T="VinoDTO">
             <HeaderContent>
@@ -28,20 +42,17 @@
                 <MudTh>AziendaVinicola</MudTh>
                 <MudTh>Tipo Vino</MudTh>
                 <MudTh>TotBottigle</MudTh>
-                <MudTh>inCantina</MudTh>
                 <MudTh>BottigleInCantina</MudTh>
                 <MudTh>Edit</MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Nome">@context.Nome</MudTd>
-                <MudTd DataLabel="Annata">@context.Annata</MudTd>
                 <MudTd DataLabel="AziendaVinicola">@context.AziendaVinicola</MudTd>
                 <MudTd DataLabel="Tipo Vino">@context.tipoVino</MudTd>
                 <MudTd DataLabel="TotBottigle">@context.QuantitàBottiglePossedute</MudTd>
-                <MudTd DataLabel="inCantina">@context.inCantina</MudTd>
                 <MudTd DataLabel="BottigleInCantina">@context.bottglieInCantina</MudTd>
                 <MudTd DataLabel="Edit">
-                    <MudFab Class="BlueGrey Darken3" Size="Size.Small" StartIcon="@Icons.Material.Filled.Edit" @onclick="() => OnclickEdit(context.ID)"/>
+                    <MudFab Class="BlueGrey Darken3" Size="Size.Small" StartIcon="@Icons.Material.Filled.Edit" @onclick="() => OnclickEdit(context.ID)" />
                 </MudTd>
             </RowTemplate>
         </MudTable>
@@ -54,6 +65,9 @@
         private AziendaVinicola listaAziende = new();
         private readonly HttpClient _httpClient;
         private VinoDTO selectedVino = null;
+
+        //parametri per la ricerca
+        List<VinoDTO> vinoListResearch = new();
 
 
         protected override async Task OnInitializedAsync()
@@ -84,6 +98,38 @@
         protected void funDettagliVino(TableRowClickEventArgs<VinoDTO> tableRowClickEventArgs)
         {
             NavigationManager.NavigateTo("/dettaglivino/" + selectedVino.ID);
+        }
+
+        protected async Task Register(VinoDTO vino)
+        {
+            listaVini.Clear();
+            if(vino == null)
+                listaVini = await VinoService.GetVini();
+            else
+                listaVini.Add(vino);
+        }
+
+        private async Task<IEnumerable<VinoDTO>> functionResearchField(string value)
+        {
+            //chiamo una funzione che in base a quello che è stato digitato tira fuori i vini che corrispondono
+            //alla ricerca
+            if(value is null)
+            {
+                vinoListResearch = null;
+                //listaVini = await VinoService.GetVini();
+            }
+            else
+            {
+                vinoListResearch = await VinoService.GetVinoDTOSearch(value);
+            }
+
+            if(vinoListResearch != null)
+            {
+                listaVini.Clear();
+                listaVini = vinoListResearch;
+            }
+            //listaVini = vinoListResearch;
+            return vinoListResearch;
         }
     }
 @*//prova git*@
