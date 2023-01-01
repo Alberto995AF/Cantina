@@ -19,14 +19,7 @@
     <MudItem xs="12" sm="6" Class="my-10">
         <MudGrid>
             <MudStack AlignItems="AlignItems.Center" Row="true">
-                <!--<MudItem xs="12" Class="align-center">
-                    <MudText Typo="Typo.h6">@vino.AziendaVinicola</MudText>
-                </MudItem>-->
                 <MudText Typo="Typo.h6">@vino.AziendaVinicola</MudText>
-
-                @*<MudToggleIconButton @bind-toggle="@prefVino" ToggledChanged="changeFavorite"
-                                     Icon="@Icons.TwoTone.BookmarkBorder" Color="@Color.Error" Title=False
-                                     ToggledIcon="@Icons.TwoTone.Bookmark" ToggledColor="@Color.Success" ToggledTitle=True />*@
                 @if (prefVino)
                 {
                     <MudIconButton @onclick="changeFavorite" Color="@Color.Success" Icon="@Icons.TwoTone.Bookmark" aria-label="Favorite"></MudIconButton>
@@ -38,7 +31,12 @@
             </MudStack>
 
             <MudItem xs="12">
-                <MudText Typo="Typo.h3">@vino.Nome</MudText>
+                <MudStack Row="true" Spacing="16">
+                    <MudText Typo="Typo.h3">@vino.Nome</MudText> 
+                    <MudText>
+                        <MudText Typo="Typo.h3">@vino.avgPrice €</MudText>
+                    </MudText>
+                </MudStack>
             </MudItem>
             <MudItem xs="12">
                 <MudStack>
@@ -92,10 +90,14 @@
                     </MudStack>
                     <MudGrid Class="mt-5">
                         <MudItem xs="12" sm="12">Annate presenti</MudItem>
-                        @foreach (var item in vino.Annata)
+                        @foreach (var item in vino.annoPrezzo)
                         {
                             <MudItem xs="3" sm="3">
-                                <MudPaper Class="d-flex align-center justify-center mud-width-full py-5">@item</MudPaper>
+                                <MudPaper Class="d-flex align-center justify-center mud-width-full py-5">
+                                    <MudStack>
+                                        <MudText>@item.annata (@item.prezzo€)</MudText>
+                                    </MudStack>
+                                </MudPaper>
                             </MudItem>
                         }
                     </MudGrid>

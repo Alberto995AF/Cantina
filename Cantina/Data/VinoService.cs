@@ -133,19 +133,47 @@ namespace Cantina.Data
                 uvaList.Add(uva.Nome.ToString());
             }
 
-            var group = movList.GroupBy(x => x.Annata).ToList();
-            List<int> annate = new();
-            int sumAnnate = 0;
-            foreach (var item in group)
+            //calcoliamo l prezzo medio del vino su tutte le annate considerando solo i movimenti di acquisto
+            decimal avgPrice = 0;
+            int num = 0;
+            foreach(var movItem in movList)
             {
-                foreach (var item2 in item)
+                if(movItem.Movimento>0)
+                {
+                    avgPrice += (decimal)movItem.Prezzo;
+                    num++;
+                }
+            }
+            avgPrice = avgPrice / num;
+
+            var movListGroupByYear = movList.GroupBy(x => x.Annata).ToList();
+            List<int> annate = new();
+            List<decimal> prezzi = new();
+
+            List<annataPrezzo> annataPrezzo = new();
+            int sumAnnate = 0;
+            int numPrezzi = 0;
+            decimal mediaPrezzi = 0;
+            foreach (var mov in movListGroupByYear)
+            {
+                foreach (var item2 in mov)
                 {
                     sumAnnate += item2.Movimento;
+                    if (item2.Prezzo > 0)
+                        numPrezzi++;
+                    mediaPrezzi += (decimal)item2.Prezzo;
                 }
                 if (sumAnnate > 0)
-                    annate.Add(item.First().Annata);
-
+                {
+                    mediaPrezzi = mediaPrezzi / numPrezzi;
+                    annataPrezzo newAnPr = new();
+                    newAnPr.annata = mov.First().Annata;
+                    newAnPr.prezzo = mediaPrezzi;
+                    annataPrezzo.Add(newAnPr);
+                }
                 sumAnnate = 0;
+                numPrezzi = 0;
+                mediaPrezzi = 0;
             }
             bool inCant = numBottigleCantina > 0 ? true : false;
             annate.Sort();
@@ -164,9 +192,10 @@ namespace Cantina.Data
             VinoDto.bottglieInCantina = numBottigleCantina;
             VinoDto.QuantitàBottiglePossedute = numBottigleViste;
             VinoDto.bottiglieBevute = numBottiglieBevute;
-            VinoDto.Annata = annate;
             VinoDto.Preferito = items.FirstOrDefault().Preferito;
             VinoDto.linkImmagine = items.FirstOrDefault().linkImmagine;
+            VinoDto.annoPrezzo = annataPrezzo;
+            VinoDto.avgPrice = avgPrice;
 
             return Task.FromResult(VinoDto);
         }

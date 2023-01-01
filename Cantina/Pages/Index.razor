@@ -12,7 +12,7 @@
         <MudPaper Elevation="3" Class="pa-3">
             <MudStack>
                 <MudAutocomplete T="VinoDTO" Label="Cerca vino.." ValueChanged="@(x => Register(x))"
-                                 SearchFunc="@functionResearchField" ToStringFunc="@(e=> e==null?null : $"{e.Nome} {e.AziendaVinicola} {e.Annata}")">
+                                 SearchFunc="@functionResearchField" ToStringFunc="@(e=> e==null?null : $"{e.Nome} {e.AziendaVinicola}")">
                     <MoreItemsTemplate>
                         <MudText Align="Align.Center" Class="px-4 py-1">
                             Only the first 10 items are shown

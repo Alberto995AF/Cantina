@@ -6,8 +6,6 @@ namespace Cantina.Data
 
         public string Nome { get; set; }
 
-        public List<int> Annata { get; set; }
-
         public string tipoVino { get; set; }
 
         public int AziendaVinicolaId { get; set; }
@@ -39,5 +37,15 @@ namespace Cantina.Data
         public string? linkAppTannico { get; set; }
 
         public string? linkImmagine { get; set; }
+
+        public List<annataPrezzo>? annoPrezzo { get; set; }
+
+        public decimal? avgPrice { get; set; }
     }
+
+    public struct annataPrezzo
+    {
+        public int annata;
+        public decimal prezzo;
+    };
 }
