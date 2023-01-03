@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject Cantina.Data.VinoService VinoService
+@inject Cantina.Data.CostiVinoService costiVinoService
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 
@@ -74,9 +75,35 @@
             </MudStack>
         </MudPaper>
     </MudItem>
-    <MudItem xs="12" sm="12">
-        <MudChart ChartType="ChartType.Line" ChartSeries="@_series" XAxisLabels="@_xAxisLabels" ChartOptions="@_options" Width="100%" Height="600px"></MudChart>
+    <MudItem xs="12" sm="4">
+        <MudPaper Elevation="3" Class="pa-3">
+            <MudStack Row="true" AlignItems="AlignItems.Center">
+                <MudStack>
+                    <MudIcon Icon="@Icons.Filled.Analytics" Color="Color.Primary" Size="Size.Large" />
+                </MudStack>
+                <MudStack Spacing="0">
+                    <MudText Typo="Typo.button">Totlae spese vino</MudText>
+                    <MudText Typo="Typo.h6">@totSpese €</MudText>
+                </MudStack>
+            </MudStack>
+        </MudPaper>
     </MudItem>
+    <MudItem xs="12" sm="4">
+        <MudPaper Elevation="3" Class="pa-3">
+            <MudStack Row="true" AlignItems="AlignItems.Center">
+                <MudStack>
+                    <MudIcon Icon="@Icons.Filled.Analytics" Color="Color.Primary" Size="Size.Large" />
+                </MudStack>
+                <MudStack Spacing="0">
+                    <MudText Typo="Typo.button">Valore medio a bottiglia</MudText>
+                    <MudText Typo="Typo.h6">@avgBottigla €</MudText>
+                </MudStack>
+            </MudStack>
+        </MudPaper>
+    </MudItem>
+    @*<MudItem xs="12" sm="12">
+            <MudChart ChartType="ChartType.Line" ChartSeries="@_series" XAxisLabels="@_xAxisLabels" ChartOptions="@_options" Width="100%" Height="600px"></MudChart>
+        </MudItem>*@
 </MudGrid>
 
 
@@ -128,6 +155,12 @@
     //varibile per il valore della cantina
     decimal valoreCantina;
 
+    //varibile per il totale delle spese per il vino
+    int totSpese;
+
+    //varibile per il prezzo medio a bottigla
+    decimal avgBottigla;
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -139,86 +172,86 @@
         numBottiglieCantina = numeriBottiglie[1];
         numBottigleAcquistate = numeriBottiglie[2];
 
-        //funzione per il grafico andamento bevuti/comprati
-        listaMovimentiTotale = await VinoService.GetMovimenti();
-        listaMovimentiTotaleAcquisto = await VinoService.GetMovimentiPositivi();
-        listaMovimentiTotaleBevute = await VinoService.GetMovimentiNegativi();
+        ////funzione per il grafico andamento bevuti/comprati
+        //listaMovimentiTotale = await VinoService.GetMovimenti();
+        //listaMovimentiTotaleAcquisto = await VinoService.GetMovimentiPositivi();
+        //listaMovimentiTotaleBevute = await VinoService.GetMovimentiNegativi();
 
-        maxDimListAcquisti = listaMovimentiTotaleAcquisto.Count();
-        maxDimListBevuti = listaMovimentiTotaleBevute.Count();
-        maxDimList = maxDimListAcquisti > maxDimListBevuti ? maxDimListAcquisti : maxDimListBevuti;
+        //maxDimListAcquisti = listaMovimentiTotaleAcquisto.Count();
+        //maxDimListBevuti = listaMovimentiTotaleBevute.Count();
+        //maxDimList = maxDimListAcquisti > maxDimListBevuti ? maxDimListAcquisti : maxDimListBevuti;
 
-        for(int i = 0; i < maxDimList; i++)
-        {
-            if(i >= maxDimListBevuti)
-            {
-                MovimentiVino newMov = new();
-                newMov.Annata = 0;
-                newMov.Data = null;
-                newMov.Movimento = contatoreBevuti;
-                listaMovimentiTotaleBevute.Insert(i, newMov);
-            }
-            else if(i >= maxDimListAcquisti)
-            {
-                MovimentiVino newMov = new();
-                newMov.Annata = 0;
-                newMov.Data = null;
-                newMov.Movimento = contatoreAcquisti;
-                listaMovimentiTotaleAcquisto.Insert(i, newMov);
-            }
+        //for(int i = 0; i < maxDimList; i++)
+        //{
+        //    if(i >= maxDimListBevuti)
+        //    {
+        //        MovimentiVino newMov = new();
+        //        newMov.Annata = 0;
+        //        newMov.Data = null;
+        //        newMov.Movimento = contatoreBevuti;
+        //        listaMovimentiTotaleBevute.Insert(i, newMov);
+        //    }
+        //    else if(i >= maxDimListAcquisti)
+        //    {
+        //        MovimentiVino newMov = new();
+        //        newMov.Annata = 0;
+        //        newMov.Data = null;
+        //        newMov.Movimento = contatoreAcquisti;
+        //        listaMovimentiTotaleAcquisto.Insert(i, newMov);
+        //    }
 
-            if(listaMovimentiTotaleAcquisto[i].Data != listaMovimentiTotaleBevute[i].Data)
-            {
-                if(listaMovimentiTotaleAcquisto[i].Data < listaMovimentiTotaleBevute[i].Data || listaMovimentiTotaleBevute[i].Data == null)
-                {
-                    if(listaMovimentiTotaleBevute[i].Data != null)
-                    {
-                        MovimentiVino newMov = new();
-                        newMov.Annata = 0;
-                        newMov.Data = listaMovimentiTotaleAcquisto[i].Data;
-                        newMov.Movimento = contatoreBevuti;
-                        listaMovimentiTotaleBevute.Insert(i, newMov);
+        //    if(listaMovimentiTotaleAcquisto[i].Data != listaMovimentiTotaleBevute[i].Data)
+        //    {
+        //        if(listaMovimentiTotaleAcquisto[i].Data < listaMovimentiTotaleBevute[i].Data || listaMovimentiTotaleBevute[i].Data == null)
+        //        {
+        //            if(listaMovimentiTotaleBevute[i].Data != null)
+        //            {
+        //                MovimentiVino newMov = new();
+        //                newMov.Annata = 0;
+        //                newMov.Data = listaMovimentiTotaleAcquisto[i].Data;
+        //                newMov.Movimento = contatoreBevuti;
+        //                listaMovimentiTotaleBevute.Insert(i, newMov);
 
-                    }
-                    else
-                    {
-                        listaMovimentiTotaleBevute[i].Data = listaMovimentiTotaleAcquisto[i].Data;
-                    }
-                    contatoreAcquisti += listaMovimentiTotaleAcquisto[i].Movimento;
-                    listaMovimentiTotaleAcquisto[i].Movimento = contatoreAcquisti;
-                    if (maxDimListBevuti > maxDimListAcquisti)
-                        maxDimList++;
-                    maxDimListBevuti++;
-                }
-                else
-                {
-                    if(listaMovimentiTotaleAcquisto[i].Data != null)
-                    {
-                        MovimentiVino newMov = new();
-                        newMov.Annata = 0;
-                        newMov.Data = listaMovimentiTotaleBevute[i].Data;
-                        newMov.Movimento = contatoreAcquisti;
-                        listaMovimentiTotaleAcquisto.Insert(i, newMov);
-                    }
-                    else
-                    {
-                        listaMovimentiTotaleAcquisto[i].Data = listaMovimentiTotaleBevute[i].Data;
-                    }
-                    contatoreBevuti = contatoreBevuti + (listaMovimentiTotaleBevute[i].Movimento);
-                    listaMovimentiTotaleBevute[i].Movimento = contatoreBevuti;
-                    if (maxDimListBevuti < maxDimListAcquisti)
-                        maxDimList++;
-                    maxDimListAcquisti++;
-                }
-            }
-            else
-            {
-                contatoreAcquisti += listaMovimentiTotaleAcquisto[i].Movimento;
-                listaMovimentiTotaleAcquisto[i].Movimento = contatoreAcquisti;
-                contatoreBevuti += listaMovimentiTotaleBevute[i].Movimento;
-                listaMovimentiTotaleBevute[i].Movimento = contatoreBevuti;
-            }
-        }
+        //            }
+        //            else
+        //            {
+        //                listaMovimentiTotaleBevute[i].Data = listaMovimentiTotaleAcquisto[i].Data;
+        //            }
+        //            contatoreAcquisti += listaMovimentiTotaleAcquisto[i].Movimento;
+        //            listaMovimentiTotaleAcquisto[i].Movimento = contatoreAcquisti;
+        //            if (maxDimListBevuti > maxDimListAcquisti)
+        //                maxDimList++;
+        //            maxDimListBevuti++;
+        //        }
+        //        else
+        //        {
+        //            if(listaMovimentiTotaleAcquisto[i].Data != null)
+        //            {
+        //                MovimentiVino newMov = new();
+        //                newMov.Annata = 0;
+        //                newMov.Data = listaMovimentiTotaleBevute[i].Data;
+        //                newMov.Movimento = contatoreAcquisti;
+        //                listaMovimentiTotaleAcquisto.Insert(i, newMov);
+        //            }
+        //            else
+        //            {
+        //                listaMovimentiTotaleAcquisto[i].Data = listaMovimentiTotaleBevute[i].Data;
+        //            }
+        //            contatoreBevuti = contatoreBevuti + (listaMovimentiTotaleBevute[i].Movimento);
+        //            listaMovimentiTotaleBevute[i].Movimento = contatoreBevuti;
+        //            if (maxDimListBevuti < maxDimListAcquisti)
+        //                maxDimList++;
+        //            maxDimListAcquisti++;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        contatoreAcquisti += listaMovimentiTotaleAcquisto[i].Movimento;
+        //        listaMovimentiTotaleAcquisto[i].Movimento = contatoreAcquisti;
+        //        contatoreBevuti += listaMovimentiTotaleBevute[i].Movimento;
+        //        listaMovimentiTotaleBevute[i].Movimento = contatoreBevuti;
+        //    }
+        //}
 
         int j = 0;
         foreach(var item in listaMovimentiTotaleAcquisto)
@@ -242,7 +275,14 @@
         _options.YAxisTicks = contatoreAcquisti;
 
         //funzione per prendere il valore della cantina
-        valoreCantina = await VinoService.GetValoreCantina();
+        valoreCantina = await costiVinoService.GetValoreCantina();
+
+        //funzione per prendere il totale delle spese
+        totSpese = await costiVinoService.GetValoreTotaleSpesaVino();
+
+        //funzione per prendere il valore della cantina
+        avgBottigla = await costiVinoService.GetSpesaMediaBottiglia();
+
     }
 
     protected async Task Register(VinoDTO vino)

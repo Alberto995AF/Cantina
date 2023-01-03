@@ -133,7 +133,7 @@ namespace Cantina.Data
                 uvaList.Add(uva.Nome.ToString());
             }
 
-            //calcoliamo l prezzo medio del vino su tutte le annate considerando solo i movimenti di acquisto
+            //calcoliamo il prezzo medio del vino su tutte le annate considerando solo i movimenti di acquisto
             decimal avgPrice = 0;
             int num = 0;
             foreach(var movItem in movList)
@@ -144,7 +144,8 @@ namespace Cantina.Data
                     num++;
                 }
             }
-            avgPrice = avgPrice / num;
+            if(num > 0)
+                avgPrice = avgPrice / num;
 
             var movListGroupByYear = movList.GroupBy(x => x.Annata).ToList();
             List<int> annate = new();
@@ -165,7 +166,8 @@ namespace Cantina.Data
                 }
                 if (sumAnnate > 0)
                 {
-                    mediaPrezzi = mediaPrezzi / numPrezzi;
+                    if(numPrezzi > 0)
+                        mediaPrezzi = mediaPrezzi / numPrezzi;
                     annataPrezzo newAnPr = new();
                     newAnPr.annata = mov.First().Annata;
                     newAnPr.prezzo = mediaPrezzi;
@@ -714,15 +716,16 @@ namespace Cantina.Data
             return Task.FromResult(listRegioni);
         }
 
-        /// <summary>
-        /// GET VALORE CANTINA ATTUALE
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public Task<decimal> GetValoreCantina()
-        {
-            var item = _context.MovimentiVino.Where(a => a.Movimento > 0).Sum(a => (double)a.Prezzo);
-            return Task.FromResult((decimal)item);
-        }
+        ///// <summary>
+        ///// GET VALORE CANTINA ATTUALE
+        ///// </summary>
+        ///// <param name="value"></param>
+        ///// <returns></returns>
+        //public Task<decimal> GetValoreCantina()
+        //{
+
+        //    var item = _context.MovimentiVino.Where(a => a.Movimento > 0).Sum(a => (double)a.Prezzo);
+        //    return Task.FromResult((decimal)item);
+        //}
     }
 }

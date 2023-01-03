@@ -43,6 +43,8 @@
     <None Remove="Pages\page_old\" />
     <None Remove="Data\DTO\" />
     <None Remove="Readme\" />
+    <None Remove="Data\Service\" />
+    <None Remove="Data\Service\FunzioniCalcoloCosti\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
@@ -67,6 +69,8 @@
     <Folder Include="Pages\page_old\" />
     <Folder Include="Data\DTO\" />
     <Folder Include="Readme\" />
+    <Folder Include="Data\Service\" />
+    <Folder Include="Data\Service\FunzioniCalcoloCosti\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Data\AziendaVinicola %28copia%29.cs" />

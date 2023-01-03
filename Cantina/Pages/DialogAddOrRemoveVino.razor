@@ -54,6 +54,7 @@
                                 <MudSelectItem T="int" Value=@year />
                             }
                         </MudSelect>
+                        <MudTextField Label="Prezzo" @bind-Value="price" />
                         <MudButton Variant="Variant.Outlined" Color="Color.Primary" @onclick="() => Add(context.ID)">Add</MudButton>
                         <MudButton Variant="Variant.Outlined" Color="Color.Error" @onclick="() => Remove(context.ID)">Remove</MudButton>
                     </MudTd>
@@ -74,6 +75,8 @@
 
     [Parameter] public VinoDTO vino { get; set; }
     List<VinoDTO> vinoList = new();
+
+    decimal price;
 
     //gestione annate
     int annata;
@@ -110,7 +113,7 @@
             movimento.Movimento = 1;
             movimento.Annata = selectedYear;
             movimento.Data = DateTime.Now;
-            movimento.Prezzo = 0;
+            movimento.Prezzo = price;
             movimento.Note = "-";
             MudDialog.Close(DialogResult.Ok(movimento));
         }

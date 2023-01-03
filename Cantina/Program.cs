@@ -29,6 +29,7 @@ builder.Host.UseSerilog();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<VinoService>();
+builder.Services.AddScoped<CostiVinoService>();
 builder.Services.AddMudServices();
 builder.Services.AddMudServices(config =>
 {
