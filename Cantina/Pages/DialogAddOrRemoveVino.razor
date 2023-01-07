@@ -48,15 +48,20 @@
                     <MudTd DataLabel="inCantina">@context.inCantina</MudTd>
                     <MudTd DataLabel="Bottigle">@context.bottglieInCantina</MudTd>
                     <MudTd DataLabel="Edit">
-                        <MudSelect T="int" @bind-Value="selectedYear" Label="Annata" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
-                            @foreach (var year in annate)
-                            {
-                                <MudSelectItem T="int" Value=@year />
-                            }
-                        </MudSelect>
-                        <MudTextField Label="Prezzo" @bind-Value="price" />
-                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" @onclick="() => Add(context.ID)">Add</MudButton>
-                        <MudButton Variant="Variant.Outlined" Color="Color.Error" @onclick="() => Remove(context.ID)">Remove</MudButton>
+                        <MudStack>
+                            <MudSelect T="int" @bind-Value="selectedYear" Label="Annata" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                                @foreach (var year in annate)
+                                {
+                                    <MudSelectItem T="int" Value=@year />
+                                }
+                            </MudSelect>
+                            <MudStack Row="true">
+                                <MudTextField Label="Prezzo" @bind-Value="price" />
+                                <MudDatePicker Label="Date" @bind-Date="date" />
+                            </MudStack>
+                            <MudButton Variant="Variant.Outlined" Color="Color.Primary" @onclick="() => Add(context.ID)">Add</MudButton>
+                            <MudButton Variant="Variant.Outlined" Color="Color.Error" @onclick="() => Remove(context.ID)">Remove</MudButton>
+                        </MudStack>
                     </MudTd>
                 </RowTemplate>
             </MudTable>
@@ -75,6 +80,8 @@
 
     [Parameter] public VinoDTO vino { get; set; }
     List<VinoDTO> vinoList = new();
+
+    DateTime? date = DateTime.Today;
 
     decimal price;
 
@@ -112,7 +119,7 @@
             movimento.VinoId = idVino;
             movimento.Movimento = 1;
             movimento.Annata = selectedYear;
-            movimento.Data = DateTime.Now;
+            movimento.Data = date;
             movimento.Prezzo = price;
             movimento.Note = "-";
             MudDialog.Close(DialogResult.Ok(movimento));

@@ -23,7 +23,9 @@
                 }
             </MudSelect>
         }
-    <MudTextField Label="Prezzo" @bind-Value="price" />
+        <MudTextField Label="Prezzo" @bind-Value="price" />
+        <MudDatePicker Label="Date" @bind-Date="date" />
+
     </DialogContent>
     <DialogActions>
         @if (string.Compare(remORadd, "add") == 0)
@@ -50,6 +52,8 @@
     List<int> annate = new();
     int selectedYear;
 
+    DateTime? date = DateTime.Today;
+
     VinoDTO vino = new();
 
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
@@ -70,7 +74,7 @@
             movimento.VinoId = idVino;
             movimento.Movimento = 1;
             movimento.Annata = selectedYear;
-            movimento.Data = DateTime.Now;
+            movimento.Data = date;
             movimento.Prezzo = price;
             movimento.Note = "-";
             MudDialog.Close(DialogResult.Ok(movimento));
@@ -84,7 +88,7 @@
             movimento.VinoId = idVino;
             movimento.Movimento = -1;
             movimento.Annata = selectedYear;
-            movimento.Data = DateTime.Now;
+            movimento.Data = date;
             movimento.Prezzo = 0;
             movimento.Note = "-";
             MudDialog.Close(DialogResult.Ok(movimento));

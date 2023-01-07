@@ -541,6 +541,45 @@ namespace Cantina.Data
             return Task.FromResult(listVinoDto);
         }
 
+        /// <summary>
+        /// GET VINI DTO IN FUNZIONE DELLA RICERCA E PRESENTI IN CANTINA
+        /// </summary>
+        /// <param name="value"> stringa scritta nel campo di ricerca</param>
+        /// <returns>ritarna una lista di Vini di tipi VinoDTO</returns>
+        public Task<List<VinoDTO>> GetVinoDTOCantinaSearch(string value)
+        {
+            List<VinoDTO> listVinoDto = new List<VinoDTO>();
+            var items = _context.Vino.Include(a => a.AziendaVinicola).ToList();
+            items = _context.Vino.Include(a => a.tipoVino).ToList();
+
+            foreach (var vino in items)
+            {
+                if (vino.Nome.Contains(value) || vino.AziendaVinicola.Nome.Contains(value))
+                {
+                    int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
+                    int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
+                    int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
+                    bool inCant = numBottigleCantina > 0 ? true : false;
+                    if (inCant)
+                        listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
+                }
+            }
+
+            //foreach (var vino in items)
+            //{
+            //    if (vino.Nome.Contains(value) || vino.AziendaVinicola.Nome.Contains(value))
+            //    {
+            //        int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
+            //        int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
+            //        int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
+            //        bool inCant = numBottigleCantina > 0 ? true : false;
+            //        listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
+
+            //    }
+            //}
+            return Task.FromResult(listVinoDto);
+        }
+
 
         /// <summary>
         /// GET AZIENDE IN FUNZIONE DELLA RICERCA

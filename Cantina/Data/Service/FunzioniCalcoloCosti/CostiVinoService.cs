@@ -35,9 +35,9 @@ namespace Cantina.Data
                     //devo ora calcolare il valore che quel vino ha nella mia cantina
                     //per fare questo conto prendo il valore di mov.Prezzo che comprende la somma di tutti i prezzi che abbiamo comprato
                     //compresi i vini che nel frattempo ho bevuto
-                    //per calcolare il prezzo totale dei vini presenti prendo questo valore e lo diviso per il numero totale di movimenti positivi di questo vino per questa annata
+                    //per calcolare il prezzo totale dei vini presenti prendo questo valore e lo divido per il numero totale di movimenti positivi di questo vino per questa annata
                     var numMovPos = _context.MovimentiVino.Where(x => x.VinoId == mov.VinoId && x.Annata == mov.Annata && x.Movimento > 0).Count();
-                    totValoreCantina += (int)(mov.Prezzo / numMovPos);
+                    totValoreCantina += (int)(mov.Prezzo / numMovPos * mov.Movimento);
                 }
             }
             return Task.FromResult((int)totValoreCantina);
