@@ -30,6 +30,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<VinoService>();
 builder.Services.AddScoped<CostiVinoService>();
+builder.Services.AddScoped<FiltriService>();
 builder.Services.AddMudServices();
 builder.Services.AddMudServices(config =>
 {

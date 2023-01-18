@@ -49,7 +49,12 @@ namespace Cantina.Data
             List<VinoDTO> listVinoDto = new List<VinoDTO>();
             var items = _context.Vino.Include(a => a.AziendaVinicola).ToList();
             items = _context.Vino.Include(a => a.tipoVino).ToList();
-            items = _context.Vino.Where(x => x.AziendaVinicolaId == idAzienda && x.ID != idVino).ToList();
+
+            if(idVino != 0)
+                items = _context.Vino.Where(x => x.AziendaVinicolaId == idAzienda && x.ID != idVino).ToList();
+            else
+                items = _context.Vino.Where(x => x.AziendaVinicolaId == idAzienda).ToList();
+
 
             foreach (var vino in items)
             {
@@ -578,6 +583,18 @@ namespace Cantina.Data
             //    }
             //}
             return Task.FromResult(listVinoDto);
+        }
+
+        /// <summary>
+        /// FUNZIONE CHE RESTITUISCE LE CANTINE IN FUNZIONE DELLA RICERCA EFFETTUATA (VALUE)
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Task<List<AziendaVinicola>> GetCantinaSearch(string value)
+        {
+            var items = _context.AziendaVinicola.Where(x => x.Nome.Contains(value)).ToList();
+
+            return Task.FromResult(items);
         }
 
 
