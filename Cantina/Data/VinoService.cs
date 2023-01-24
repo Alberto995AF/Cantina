@@ -70,13 +70,13 @@ namespace Cantina.Data
 
 
 
-        // ****** GET TIPI VINO ***********************
+        // ****** GET TIPI VINO ************************
         public Task<List<tipoVino>> GetTipiVino()
         {
             var items = _context.tipoVino.ToList();
             return Task.FromResult(items);
         }
-        //*********************************************
+        //***********************************************
 
         // ****** GET TIPO VINO ID***********************
         public Task<tipoVino> GetTipVinoId(int id)

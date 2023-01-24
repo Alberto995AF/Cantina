@@ -1,0 +1,73 @@
+﻿@page "/bevute"
+
+<PageTitle>Vini Bevuti</PageTitle>
+
+@using Cantina.Data
+
+@inject Cantina.Data.VinoService VinoService
+@inject Cantina.Data.MovimentiService MovimentiService
+@inject IDialogService DialogService
+@inject NavigationManager NavigationManager
+
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12">
+        <MudStack Row="true" Spacing="3" Justify="Justify.SpaceBetween">
+            <MudText Typo="Typo.h4">BEVUTI</MudText>
+        </MudStack>
+    </MudItem>
+    @foreach (var date in listDate)
+    {
+        <MudItem xs="12">
+            <MudText Typo="Typo.h6">@date.ToString("Y")</MudText>
+        </MudItem>
+        @foreach (var item in listaVini)
+        {
+            if (item.Data.Value.Month == date.Month)
+            {
+                <MudItem xs="12" sm="3">
+                    <MudCard Elevation="5" @onclick="() => OnclickDetail(item.Vino.ID)" Height="400px">
+                        <MudCardContent>
+                            <MudStack>
+                                <MudStack Row="true" Justify="Justify.SpaceBetween">
+                                    <MudImage Width="64" Height="240" Src=@item.Vino.linkImmagine Alt="Mony the dog" Class="rounded-lg" />
+                                </MudStack>
+                                <MudStack Row="true">
+                                    <MudText Typo="Typo.h5">@item.Vino.Nome</MudText>
+                                    <MudText Typo="Typo.h6">@item.Annata</MudText>
+                                </MudStack>
+                                <MudText Typo="Typo.h6">@item.Vino.AziendaVinicola.Nome</MudText>
+                            </MudStack>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        }
+        <MudItem xs="12" sm="12">
+            <MudDivider DividerType="DividerType.Middle" Class="my-12" />
+        </MudItem>
+    }
+</MudGrid>
+
+@code {
+    private List<MovimentiVino> listaVini = new();
+    private List<MovimentiVino> listaViniMesi = new();
+    private List<DateTime> listDate = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaVini = await MovimentiService.GetViniBevuti();
+        var dateList = listaVini.GroupBy(x => x.Data.Value.Month);
+        foreach(var j in dateList)
+        {
+            if(j != null)
+                listDate.Add(j.FirstOrDefault().Data.Value);
+        }
+        var i = 5;
+    }
+
+    protected async Task OnclickDetail(int id)
+    {
+        NavigationManager.NavigateTo("/dettaglivino/" + id);
+    }
+}
