@@ -1,0 +1,338 @@
+﻿@page "/dettaglivino/{VinoID:int?}"
+
+@inject IDialogService DialogService
+
+<PageTitle>Dettagli Vini</PageTitle>
+
+
+@using Cantina.Data
+
+@inject Cantina.Data.VinoService VinoService
+@inject IDialogService DialogService
+@using Microsoft.Extensions.Primitives;
+@inject NavigationManager NavigationManager
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" sm="6" Class="d-flex align-center justify-center mud-width-full py-8 my-10">
+        <MudImage Width="128" Height="500" Src=@vino.linkImmagine Alt="Mony the dog" Class="rounded-lg" />
+    </MudItem>
+    <MudItem xs="12" sm="6" Class="d-flex align-center justify-center mud-width-full py-8 my-10">
+        <MudGrid>
+            <MudStack AlignItems="AlignItems.Center" Row="true">
+                <MudText Typo="Typo.h6">@vino.AziendaVinicola</MudText>
+                @if (prefVino)
+                {
+                    <MudIconButton @onclick="changeFavorite" Color="@Color.Success" Icon="@Icons.TwoTone.Bookmark" aria-label="Favorite"></MudIconButton>
+                }
+                else
+                {
+                    <MudIconButton @onclick="changeFavorite" Color="@Color.Error" Icon="@Icons.TwoTone.BookmarkBorder" aria-label="Not Favorite"></MudIconButton>
+                }
+            </MudStack>
+            <MudItem xs="12">
+                <MudStack Row="true" Spacing="16">
+                    <MudText Typo="Typo.h4">@vino.Nome</MudText> 
+                    <MudText>
+                        <MudText Typo="Typo.h5">@vino.avgPrice €</MudText>
+                    </MudText>
+                </MudStack>
+            </MudItem>
+            <MudItem xs="12">
+                <MudStack>
+                    <MudText>· @vino.Nazione · @vino.Regione · @vino.Denominazione </MudText>
+                    <MudStack Row="true">
+                        @foreach (var uva in vino.Uva)
+                        {
+                            <MudText>· @uva</MudText>
+                        }
+                    </MudStack>
+                </MudStack>
+                <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudStack Row="true">
+                    <MudItem xs="4">
+                        <MudStack Row="true" AlignItems="AlignItems.Center">
+                            <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
+                            <MudText Typo="Typo.h6">  @vino.QuantitàBottiglePossedute</MudText>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudStack Row="true" AlignItems="AlignItems.Center">
+                            <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" />
+                            <MudText Typo="Typo.h6">  @vino.bottglieInCantina</MudText>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudStack Row="true" AlignItems="AlignItems.Center">
+                            <MudIcon Icon="@Icons.Filled.WineBar" Color="Color.Error" />
+                            <MudText Typo="Typo.h6"> @vino.bottiglieBevute</MudText>
+                        </MudStack>
+                    </MudItem>
+                </MudStack>
+            </MudItem>
+            <MudItem xs="12">
+                <MudStack Row="true">
+                    <MudLink Href="@vino.linkAppVivino">
+                        <MudImage Src="data:image/png;base64,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" Alt="Vivino" Width="50" Height="50" Class="rounded-lg" />
+                    </MudLink>
+                    <MudLink Href="@vino.linkAppVivino">
+                        <MudImage Src="https://media-exp1.licdn.com/dms/image/C4E0BAQH4Z-BriCwhrw/company-logo_200_200/0/1519867265006?e=2147483647&v=beta&t=58bqf-jgMXlIbs58FQi05gLtvDDGhFnPjU2aTyCfpGg" Alt="Tannico" Width="50" Height="50" Class="rounded-lg" />
+                    </MudLink>
+                </MudStack>
+            </MudItem>
+            <MudItem xs="12" Class="">
+                <MudStack>
+                    <MudStack Row="true">
+                        <MudIcon Icon="@Icons.Filled.RemoveCircle" @onclick="() => OnButtonClickedRemove(vino.ID)" Size="Size.Large" Color="Color.Error" Title="Remove" />
+                        <MudIcon Icon="@Icons.Filled.AddCircle" @onclick="() => OnButtonClickedAdd(vino.ID)" Size="Size.Large" Color="Color.Success" Title="Add" />
+                    </MudStack>
+                    <MudGrid Class="mt-5">
+                        <MudItem xs="12" sm="12">Annate presenti</MudItem>
+                        @foreach (var item in vino.annoPrezzo)
+                        {
+                            <MudItem xs="3" sm="3">
+                                <MudPaper Class="d-flex align-center justify-center mud-width-full py-5">
+                                    <MudStack>
+                                        <MudText>@item.annata (@item.prezzo€)</MudText>
+                                    </MudStack>
+                                </MudPaper>
+                            </MudItem>
+                        }
+                    </MudGrid>
+                </MudStack>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+    @*<MudItem xs="12" sm="12">
+            <MudDivider DividerType="DividerType.Middle" Class="my-12" />
+            <MudStack Row="true" Justify="Justify.SpaceBetween">
+                <MudItem xs="4">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
+                        <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
+                        <MudText Typo="Typo.h6">  @vino.QuantitàBottiglePossedute</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="4">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
+                        <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" />
+                        <MudText Typo="Typo.h6">  @vino.bottglieInCantina</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="4">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
+                        <MudIcon Icon="@Icons.Filled.WineBar" Color="Color.Error" />
+                        <MudText Typo="Typo.h6"> @vino.bottiglieBevute</MudText>
+                    </MudStack>
+                </MudItem>
+            </MudStack>
+        </MudItem>*@
+    <MudItem xs="12" sm="12">
+        <MudDivider DividerType="DividerType.Middle" Class="my-12" />
+    </MudItem>
+    <MudItem xs="12" sm="12" Class="d-flex align-center justify-center ">
+        <MudText Typo="Typo.h4">Potrebbe interessarti anche</MudText>
+    </MudItem>
+    @foreach (var item in listaVini)
+    {
+        <MudItem xs="12" sm="3">
+            <MudCard id="detailCard" Elevation="5" @onclick="() => OnclickDetail(item.ID)" Height="400px">
+                <MudCardContent id="detailCard">
+                    <MudStack>
+                        <MudStack Row="true" Justify="Justify.SpaceBetween">
+                            <MudImage Width="64" Height="240" Src=@item.linkImmagine Alt="Mony the dog" Class="rounded-lg" />
+                            <MudStack>
+                                <MudStack AlignItems="AlignItems.Center" Row="true">
+                                    <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" />
+                                    <MudText Typo="Typo.h6">  @item.bottglieInCantina</MudText>
+                                </MudStack>
+                                <MudStack AlignItems="AlignItems.Center" Row="true">
+                                    <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
+                                    <MudText Typo="Typo.h6">  @item.QuantitàBottiglePossedute</MudText>
+                                </MudStack>
+                            </MudStack>
+                        </MudStack>
+                        <MudText Typo="Typo.h5">@item.Nome</MudText>
+                        <MudText Typo="Typo.h6">@item.AziendaVinicola</MudText>
+                    </MudStack>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+
+
+@code {
+    private List<VinoDTO> listaVini = new();
+
+    [Parameter]
+    public int VinoID { get; set; } = 0;
+
+    //Variabile per i preferiti
+    public bool prefVino { get; set; }
+
+    string state = "Message box hasn't been opened yet";
+
+    //parametro per mostrare o il pulsnate di aggiunta o il pulsante di remove nella dialog
+    string remORadd = "";
+
+    public VinoDTO vino = new();
+
+    //prendiamo l'ID del vino cliccato
+    protected override async void OnInitialized()
+    {
+        vino = await VinoService.GetVinoIDdto(VinoID);
+        prefVino = vino.Preferito;
+        listaVini = await VinoService.GetViniAziendaVinicola(vino.AziendaVinicolaId, vino.ID);
+    }
+
+    //Dettagli Vino - TODO: non funziona
+    protected async Task OnclickDetail(int id)
+    {
+        NavigationManager.NavigateTo("/dettaglivino/" + id);
+    }
+
+    private async void OnButtonClickedAdd(int idVino)
+    {
+        //bool? result = await DialogService.ShowMessageBox(
+        //    "Attenzione",
+        //    "Vuoi aggiungere questo vino alla tua cantina?",
+        //    yesText: "Aggiungi", cancelText: "Cancel");
+        //state = result == null ? "Cancel" : "Aggiungi";
+        //MovimentiVino movVino = new();
+        remORadd = "add";
+        var parameter = new DialogParameters();
+        parameter.Add("idVino", idVino);
+        parameter.Add("remORadd", remORadd);
+
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Small, FullWidth = true };
+
+        var dialog = DialogService.Show<DialogAddOrRemoveWineYear>("AddOrRemoveVino Dialog", parameter, maxWidth);
+
+        var result = await dialog.Result;
+        if (!result.Cancelled && result.Data != null)
+        {
+            var newItem = (MovimentiVino)result.Data;
+            await VinoService.AddMovimento(newItem);
+        }
+
+        StateHasChanged();
+
+    }
+
+    private async void OnButtonClickedRemove(int idVino)
+    {
+        //bool? result = await DialogService.ShowMessageBox(
+        //    "Attenzione",
+        //    "Vuoi rimuovere questo vino dalla tua cantina?",
+        //    yesText: "Rimuovi", cancelText: "Cancel");
+        //state = result == null ? "Cancel" : "Rimuovi";
+
+        //if (result == true)
+        //{
+        //    MovimentiVino item = new MovimentiVino();
+        //    item.VinoId = id;
+        //    item.Data = DateTime.Now;
+        //    item.Movimento = -1;
+        //    item.Prezzo = 0;
+        //    item.Note = "-";
+        //    await VinoService.AddMovimento(item);
+        //}
+
+        remORadd = "remove";
+        var parameter = new DialogParameters();
+        parameter.Add("idVino", idVino);
+        parameter.Add("remORadd", remORadd);
+
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Small, FullWidth = true };
+
+        var dialog = DialogService.Show<DialogAddOrRemoveWineYear>("AddOrRemoveVino Dialog", parameter, maxWidth);
+
+        var result = await dialog.Result;
+        if (!result.Cancelled && result.Data != null)
+        {
+            var newItem = (MovimentiVino)result.Data;
+            await VinoService.AddMovimento(newItem);
+        }
+
+        StateHasChanged();
+    }
+
+
+    //Funzione per inserire o togliere un vino dai preferiti
+    private async void changeFavorite()
+    {
+        if (prefVino)
+            prefVino = false;
+        else
+            prefVino = true;
+
+        await VinoService.ChangeFavorite(VinoID, prefVino);
+        StateHasChanged();
+    }
+
+}
+
+
+
+@*<MudStack Row="true" Class="pa-5" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+        <MudItem xs="12" sm="6" Class="d-flex align-center justify-center mud-width-full py-8">
+            <MudImage Width="128" Height="480" Src=@vino.linkImmagine Alt="Mony the dog" Class="rounded-lg" />
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudPaper Class="pa-4 rounded" Style="@($"background:{Colors.Amber.Lighten5};")" Elevation="5">
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudText Typo="Typo.h6">@vino.AziendaVinicola</MudText>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudText Typo="Typo.h4">@vino.Nome @vino.Annata</MudText>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudText>Bottiglie in Cantina: @vino.bottglieInCantina</MudText>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudText>Bottigle Acquistate: @vino.QuantitàBottiglePossedute</MudText>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudText>Vivino: @vino.linkAppVino</MudText>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudText>Barcode: @vino.Barcode</MudText>
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudStack Row="true" AlignItems="AlignItems.Center">
+                            <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
+                            <MudText Typo="Typo.h6">  @vino.QuantitàBottiglePossedute</MudText>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudStack Row="true" AlignItems="AlignItems.Center">
+                            <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" />
+                            <MudText Typo="Typo.h6">  @vino.bottglieInCantina</MudText>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudStack Row="true" AlignItems="AlignItems.Center">
+                            <MudIcon Icon="@Icons.Filled.WineBar" Color="Color.Error" />
+                            <MudText Typo="Typo.h6"> @vino.bottglieBevute</MudText>
+                        </MudStack>
+                    </MudItem>
+                </MudGrid>
+            </MudPaper>
+        </MudItem>
+    </MudStack>*@
+
+@*<MudStack Row="true">
+        <MudItem xs="2">
+            <MudLink Href="@vino.linkAppVino">
+                <MudImage Href="@vino.linkAppVino" Src="data:image/png;base64,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" Alt="Vivino" Width="50" Height="50" Class="rounded-lg" />
+            </MudLink>
+        </MudItem>
+        <MudItem xs="12">
+            <MudLink Href="@vino.linkAppVino">
+                <MudImage Href="@vino.linkAppVino" Src="data:image/png;base64,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" Alt="Vivino" Width="50" Height="50" Class="rounded-lg" />
+            </MudLink>
+        </MudItem>
+    </MudStack>*@

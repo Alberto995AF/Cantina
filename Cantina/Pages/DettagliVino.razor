@@ -12,15 +12,17 @@
 @using Microsoft.Extensions.Primitives;
 @inject NavigationManager NavigationManager
 
-<MudGrid Justify="Justify.Center">
+<MudGrid>
     <MudItem xs="12" sm="6" Class="d-flex align-center justify-center mud-width-full py-8 my-10">
         <MudImage Width="128" Height="500" Src=@vino.linkImmagine Alt="Mony the dog" Class="rounded-lg" />
     </MudItem>
-    <MudItem xs="12" sm="6" Class="my-10">
+    <MudItem xs="12" sm="6" Class="d-flex align-center justify-center mud-width-full py-8 my-10">
         <MudGrid>
-            <MudStack AlignItems="AlignItems.Center" Row="true">
+            <MudItem xs="6" sm="6">
                 <MudText Typo="Typo.h6">@vino.AziendaVinicola</MudText>
-                @if (prefVino)
+            </MudItem>
+            <MudItem xs="6" sm="6">
+                @if(prefVino)
                 {
                     <MudIconButton @onclick="changeFavorite" Color="@Color.Success" Icon="@Icons.TwoTone.Bookmark" aria-label="Favorite"></MudIconButton>
                 }
@@ -28,25 +30,22 @@
                 {
                     <MudIconButton @onclick="changeFavorite" Color="@Color.Error" Icon="@Icons.TwoTone.BookmarkBorder" aria-label="Not Favorite"></MudIconButton>
                 }
-            </MudStack>
-
-            <MudItem xs="12">
-                <MudStack Row="true" Spacing="16">
-                    <MudText Typo="Typo.h3">@vino.Nome</MudText> 
-                    <MudText>
-                        <MudText Typo="Typo.h3">@vino.avgPrice €</MudText>
-                    </MudText>
-                </MudStack>
             </MudItem>
-            <MudItem xs="12">
-                <MudStack>
-                    <MudText>· @vino.Nazione · @vino.Regione · @vino.Denominazione </MudText>
-                    <MudStack Row="true">
-                        @foreach (var uva in vino.Uva)
-                        {
-                            <MudText>· @uva</MudText>
-                        }
-                    </MudStack>
+            <MudItem xs="6" sm="6">
+                <MudText Typo="Typo.h4">@vino.Nome</MudText>
+            </MudItem>
+            <MudItem xs="6" sm="6">
+                <MudText Typo="Typo.h4">@vino.avgPrice €</MudText>
+            </MudItem>
+            <MudItem xs="12" sm="12">
+                <MudText>@vino.Nazione · @vino.Regione · @vino.Denominazione </MudText>
+            </MudItem>
+            <MudItem xs="12" sm="12">
+                <MudStack Row="true">
+                    @foreach (var uva in vino.Uva)
+                    {
+                        <MudText>@uva · </MudText>
+                    }
                 </MudStack>
                 <MudDivider DividerType="DividerType.Middle" Class="my-6" />
             </MudItem>
@@ -82,7 +81,7 @@
                     </MudLink>
                 </MudStack>
             </MudItem>
-            <MudItem xs="12" Class="">
+            <MudItem xs="12">
                 <MudStack>
                     <MudStack Row="true">
                         <MudIcon Icon="@Icons.Filled.RemoveCircle" @onclick="() => OnButtonClickedRemove(vino.ID)" Size="Size.Large" Color="Color.Error" Title="Remove" />
@@ -95,7 +94,8 @@
                             <MudItem xs="3" sm="3">
                                 <MudPaper Class="d-flex align-center justify-center mud-width-full py-5">
                                     <MudStack>
-                                        <MudText>@item.annata (@item.prezzo€)</MudText>
+                                        <MudText>@item.annata </MudText>
+                                        <MudText> (@item.prezzo€) </MudText>
                                     </MudStack>
                                 </MudPaper>
                             </MudItem>
@@ -105,29 +105,6 @@
             </MudItem>
         </MudGrid>
     </MudItem>
-    @*<MudItem xs="12" sm="12">
-            <MudDivider DividerType="DividerType.Middle" Class="my-12" />
-            <MudStack Row="true" Justify="Justify.SpaceBetween">
-                <MudItem xs="4">
-                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
-                        <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
-                        <MudText Typo="Typo.h6">  @vino.QuantitàBottiglePossedute</MudText>
-                    </MudStack>
-                </MudItem>
-                <MudItem xs="4">
-                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
-                        <MudIcon Icon="@Icons.Filled.Liquor" Color="Color.Primary" />
-                        <MudText Typo="Typo.h6">  @vino.bottglieInCantina</MudText>
-                    </MudStack>
-                </MudItem>
-                <MudItem xs="4">
-                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
-                        <MudIcon Icon="@Icons.Filled.WineBar" Color="Color.Error" />
-                        <MudText Typo="Typo.h6"> @vino.bottiglieBevute</MudText>
-                    </MudStack>
-                </MudItem>
-            </MudStack>
-        </MudItem>*@
     <MudItem xs="12" sm="12">
         <MudDivider DividerType="DividerType.Middle" Class="my-12" />
     </MudItem>
