@@ -202,7 +202,7 @@ namespace Cantina.Data
             VinoDto.Preferito = items.FirstOrDefault().Preferito;
             VinoDto.linkImmagine = items.FirstOrDefault().linkImmagine;
             VinoDto.annoPrezzo = annataPrezzo;
-            VinoDto.avgPrice = avgPrice;
+            VinoDto.avgPrice = (int)avgPrice;
 
             return Task.FromResult(VinoDto);
         }
@@ -257,8 +257,9 @@ namespace Cantina.Data
                 int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
                 int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
                 bool inCant = numBottigleCantina > 0 ? true : false;
+                int itemPrice = (int)GetVinoIDdto(vino.ID).Result.avgPrice;
                 if (inCant)
-                    listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
+                    listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine, avgPrice = itemPrice });
             }
             return Task.FromResult(listVinoDto);
         }

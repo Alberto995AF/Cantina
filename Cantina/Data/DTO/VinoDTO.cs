@@ -40,7 +40,7 @@ namespace Cantina.Data
 
         public List<annataPrezzo>? annoPrezzo { get; set; }
 
-        public decimal? avgPrice { get; set; }
+        public int? avgPrice { get; set; }
     }
 
     public struct annataPrezzo
