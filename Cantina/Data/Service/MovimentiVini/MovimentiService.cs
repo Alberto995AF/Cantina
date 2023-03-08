@@ -22,10 +22,7 @@ namespace Cantina.Data
 
         public async Task<List<MovimentiVino>> GetViniBevuti()
         {
-            List<VinoDTO> listVinoDto = new List<VinoDTO>();
             var items = _context.MovimentiVino.Where(x => x.Movimento<0).Include(x => x.Vino).OrderByDescending(x => x.Data).ToList();
-
-
             return items;
         }
     }

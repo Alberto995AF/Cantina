@@ -10,8 +10,17 @@
 
 
 <MudGrid>
-    <MudItem xs="12">
-        <MudText Typo="Typo.h4">CANTINA</MudText>
+    <MudItem xs="12" sm="12">
+        <MudStack Row="true" Justify="Justify.SpaceBetween">
+            <MudItem>
+                <MudText Typo="Typo.h4">CANTINA</MudText>
+            </MudItem>
+            <MudItem>
+                <MudTooltip Text="Per denominazione">
+                    <MudIconButton Href="/cantinaalbedenominazione" Icon="@Icons.Material.Filled.Terrain" aria-label="modView"></MudIconButton>
+                </MudTooltip>
+            </MudItem>
+        </MudStack>
     </MudItem>
     <MudItem xs="12" sm="12">
         <MudPaper Elevation="3" Class="pa-3">
@@ -74,17 +83,17 @@
                     <MudStack>
                         <MudStack Row="true" Justify="Justify.SpaceBetween">
                             <MudImage Width="64" Height="240" Src=@item.linkImmagine Alt="wine" Class="rounded-lg" />
-                                <MudStack>
-                                    <MudStack Row="true" AlignItems="AlignItems.Center">
-                                        <MudIcon Icon="@Icons.Filled.Numbers" Color="Color.Primary" />
-                                        <MudText Typo="Typo.h6">@item.bottglieInCantina</MudText>
-                                    </MudStack>
-                                    <MudStack Row="true" AlignItems="AlignItems.Center">
-                                        <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
-                                        <MudText Typo="Typo.h6">@item.avgPrice</MudText>
-                                    </MudStack>
-                                </MudStack> 
-                            </MudStack>
+                            <MudStack>
+                                <MudStack Row="true" AlignItems="AlignItems.Center">
+                                    <MudIcon Icon="@Icons.Filled.Numbers" Color="Color.Primary" />
+                                    <MudText Typo="Typo.h6">@item.bottglieInCantina</MudText>
+                                </MudStack>
+                                <MudStack Row="true" AlignItems="AlignItems.Center">
+                                    <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
+                                    <MudText Typo="Typo.h6">@item.avgPrice</MudText>
+                                </MudStack>
+                            </MudStack> 
+                        </MudStack>
                         <MudText Typo="Typo.h5">@item.Nome</MudText>
                         <MudText Typo="Typo.h6">@item.AziendaVinicola</MudText>
                     </MudStack>
@@ -116,9 +125,6 @@
     protected override async Task OnInitializedAsync()
     {
         listaVini = await VinoService.GetViniCantina();
-
-
-
         listTipoVino = await VinoService.GetTipoVino();
     }
 
@@ -222,27 +228,3 @@
     }
 }
 
-
-
-
-@*<MudStack Spacing="3" Row="true">
-        <MudSelect T="tipoVino" Label="Tipo Vino" MultiSelection="true" SelectedValuesChanged="@(x => changedTipoVinoSelection(x))" ToStringFunc="@(e=> e==null?null : $"{e.Tipo}")">
-            @foreach (var tipo in listTipoVino)
-            {
-                <MudSelectItem T="tipoVino" Value="@tipo">@tipo.Tipo</MudSelectItem>
-            }
-        </MudSelect>
-    </MudStack>
-        </MudItem>
-    <MudItem xs="12" sm="4">
-        <MudStack Spacing="3" Row="true">
-            <MudAutocomplete T="AziendaVinicola" ResetValueOnEmptyText="true" Label="Cerca Cantina.." CoerceText="true" ValueChanged="@(x => searchCantina(x))"
-                             SearchFunc="@functionResearchAziendaVinicola" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")">
-                <MoreItemsTemplate>
-                    <MudText Align="Align.Center" Class="px-4 py-1">
-                        Only the first 10 items are shown
-                    </MudText>
-                </MoreItemsTemplate>
-            </MudAutocomplete>
-        </MudStack>
-    </MudItem>*@

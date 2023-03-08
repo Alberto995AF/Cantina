@@ -61,7 +61,6 @@
     <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.eot" />
     <Content Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.otf" />
     <Content Remove="wwwroot\js\" />
-    <Content Remove="Pages\CantinaAlbe %28copia%29.razor" />
     <Content Remove="Pages\DettagliVino %28copia%29.razor" />
     <Content Remove="Pages\DettagliVino_bkk.razor" />
   </ItemGroup>
