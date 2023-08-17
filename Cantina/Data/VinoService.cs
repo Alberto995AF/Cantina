@@ -48,11 +48,9 @@ namespace Cantina.Data
 
             return Task.FromResult(listVinoDto);
         }
-        //*******************************************
-
 
         /// <summary>
-        /// GET VINI AZIENDA VINICOLA
+        /// GET VINI PER AZIENDA VINICOLA
         /// </summary>
         /// <returns></returns>
         public Task<List<VinoDTO>> GetViniAziendaVinicola(int idAzienda, int idVino)
@@ -73,7 +71,17 @@ namespace Cantina.Data
                 int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
                 int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
                 bool inCant = numBottigleCantina > 0 ? true : false;
-                listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
+                listVinoDto.Add(new VinoDTO() { ID = vino.ID,
+                                                Nome = vino.Nome,
+                                                AziendaVinicolaId = vino.AziendaVinicolaId,
+                                                AziendaVinicola = vino.AziendaVinicola.Nome,
+                                                tipoVino = vino.tipoVino.Tipo,
+                                                Barcode = vino.Barcode,
+                                                QuantitàBottiglePossedute = numBottigleViste,
+                                                inCantina = inCant,
+                                                bottglieInCantina = numBottigleCantina,
+                                                bottiglieBevute = numBottiglieBevute,
+                                                linkImmagine = vino.linkImmagine });
             }
 
             return Task.FromResult(listVinoDto.ToList());
@@ -81,28 +89,43 @@ namespace Cantina.Data
 
 
 
-        // ****** GET TIPI VINO ************************
+        /// <summary>
+        /// PRENDE TUTTI I TIPI DI VINO
+        /// </summary>
+        /// <returns></returns>
         public Task<List<tipoVino>> GetTipiVino()
         {
             var items = _context.tipoVino.ToList();
             return Task.FromResult(items);
         }
-        //***********************************************
 
-        // ****** GET TIPO VINO ID***********************
+
+        /// <summary>
+        /// PRENDE IL TIPO DI VINO CORRISPONDENTE ALL'ID
+        /// </summary>
+        /// <param name="id">id del tipo di vino da prendere</param>
+        /// <returns></returns>
         public Task<tipoVino> GetTipVinoId(int id)
         {
             var items = _context.tipoVino.Where(x => x.ID == id).FirstOrDefault();
             return Task.FromResult(items);
         }
-        //*********************************************
 
+        /// <summary>
+        /// PRENDE TUTTE LE AZIENDE VINICOLE
+        /// </summary>
+        /// <returns></returns>
         public Task<List<AziendaVinicola>> GetAziende()
         {
             var items = _context.AziendaVinicola.ToList();
             return Task.FromResult(items);
         }
 
+        /// <summary>
+        /// PRENDE L'AZIENDA VINICOLA CORRISPONDENTE ALL'ID
+        /// </summary>
+        /// <param name="id">id dell'azienda vinicola</param>
+        /// <returns></returns>
         public Task<AziendaVinicola> GetAziendeId(int id)
         {
             var items = _context.AziendaVinicola.Where(x => x.ID == id).FirstOrDefault();
@@ -115,12 +138,22 @@ namespace Cantina.Data
             return Task.FromResult(items);
         }
 
+        /// <summary>
+        /// PRENDE IL VINO CORRISPONDENTE ALL'ID
+        /// </summary>
+        /// <param name="id">id del vino</param>
+        /// <returns>Ritorna un tipo "Vino"</returns>
         public Task<Vino> GetVinoID(int id)
         {
             var items = _context.Vino.Where(x => x.ID == id).FirstOrDefault();
             return Task.FromResult(items);
         }
 
+        /// <summary>
+        /// PRENDE IL VINO CORRISPONDENTE ALL'ID
+        /// </summary>
+        /// <param name="id">id del vino</param>
+        /// <returns>Ritorna un tipo "VinoDTO"</returns>
         public Task<VinoDTO> GetVinoIDdto(int id)
         {
             VinoDTO VinoDto = new VinoDTO();
@@ -219,7 +252,7 @@ namespace Cantina.Data
         }
 
         /// <summary>
-        /// GET VINI PREFERITI
+        /// PRENDE I VINI PREFERITI
         /// </summary>
         /// <returns></returns>
         public Task<List<VinoDTO>> GetFavoriteVini()
@@ -237,12 +270,27 @@ namespace Cantina.Data
                 int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
                 bool inCant = numBottigleCantina > 0 ? true : false;
                 
-                listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
+                listVinoDto.Add(new VinoDTO() { ID = vino.ID,
+                                                Nome = vino.Nome,
+                                                AziendaVinicolaId = vino.AziendaVinicolaId,
+                                                AziendaVinicola = vino.AziendaVinicola.Nome,
+                                                tipoVino = vino.tipoVino.Tipo,
+                                                Barcode = vino.Barcode,
+                                                QuantitàBottiglePossedute = numBottigleViste,
+                                                inCantina = inCant,
+                                                bottglieInCantina = numBottigleCantina,
+                                                bottiglieBevute = numBottiglieBevute,
+                                                linkImmagine = vino.linkImmagine });
             }
 
             return Task.FromResult(listVinoDto);
         }
 
+        /// <summary>
+        /// PRENDE L'UVA CORRISPONDENTE ALL'ID DEL VINO PASSATO
+        /// </summary>
+        /// <param name="id">id del vino</param>
+        /// <returns>Restituisce una lista di tipi Uva</returns>
         public Task<List<Uva>> GetUvaVinoId(int id)
         {
             //recupero le uve del vino se sono presenti
@@ -256,12 +304,16 @@ namespace Cantina.Data
             return Task.FromResult(uvaList);
         }
 
-
+        /// <summary>
+        /// PRENDE TUTTI I VINI PRESENTI NELLA CANTINA
+        /// </summary>
+        /// <returns>Restituisce una lista di elmenti di tipo VinoDTO</returns>
         public Task<List<VinoDTO>> GetViniCantina()
         {
             List<VinoDTO> listVinoDto = new List<VinoDTO>();
             var items = _context.Vino.Include(a => a.AziendaVinicola).ToList();
             items = _context.Vino.Include(a => a.tipoVino).ToList();
+            items = _context.Vino.Include(a => a.Denominazione).ToList();
 
             var movimentiListComplete = _context.MovimentiVino.ToList();
 
@@ -307,7 +359,11 @@ namespace Cantina.Data
         }
 
 
-        // ********** GET VINO BARCODE *************************
+        /// <summary>
+        /// PRENDE IL VINO CORRISPONDENTE AL BARCODE
+        /// </summary>
+        /// <param name="barcode">barcode del vino</param>
+        /// <returns>Ritorna una lista di elementi di tipo Vino</returns>
         public Task<List<Vino>> GetVinoBarcode(int barcode)
         {
             List<Vino> listVino = new List<Vino>();

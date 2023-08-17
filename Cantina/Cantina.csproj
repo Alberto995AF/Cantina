@@ -48,6 +48,7 @@
     <None Remove="Data\Service\FunzioniCalcoloCosti\" />
     <None Remove="Data\Service\FunzioniFiltri\" />
     <None Remove="Data\Service\MovimentiVini\" />
+    <None Remove="Pages\ViniCantina\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
@@ -77,6 +78,7 @@
     <Folder Include="Data\Service\FunzioniCalcoloCosti\" />
     <Folder Include="Data\Service\FunzioniFiltri\" />
     <Folder Include="Data\Service\MovimentiVini\" />
+    <Folder Include="Pages\ViniCantina\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Data\AziendaVinicola %28copia%29.cs" />
