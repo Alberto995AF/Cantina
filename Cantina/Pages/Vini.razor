@@ -39,18 +39,16 @@
         <MudTable Items="@listaVini" Breakpoint="Breakpoint.Sm" Striped="true" LoadingProgressColor="Color.Info" Hover="@hover" OnRowClick="funDettagliVino" @bind-SelectedItem="selectedVino" T="VinoDTO">
             <HeaderContent>
                 <MudTh>Nome</MudTh>
-                <MudTh>AziendaVinicola</MudTh>
+                <MudTh>Azienda Vinicola</MudTh>
                 <MudTh>Tipo Vino</MudTh>
-                <MudTh>TotBottigle</MudTh>
-                <MudTh>BottigleInCantina</MudTh>
+                <MudTh>Denominazione</MudTh>
                 <MudTh>Edit</MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Nome">@context.Nome</MudTd>
                 <MudTd DataLabel="AziendaVinicola">@context.AziendaVinicola</MudTd>
                 <MudTd DataLabel="Tipo Vino">@context.tipoVino</MudTd>
-                <MudTd DataLabel="TotBottigle">@context.QuantitàBottiglePossedute</MudTd>
-                <MudTd DataLabel="BottigleInCantina">@context.bottglieInCantina</MudTd>
+                <MudTd DataLabel="Denominazione">@context.Denominazione</MudTd>
                 <MudTd DataLabel="Edit">
                     <MudFab Class="BlueGrey Darken3" Size="Size.Small" StartIcon="@Icons.Material.Filled.Edit" @onclick="() => OnclickEdit(context.ID)" />
                 </MudTd>

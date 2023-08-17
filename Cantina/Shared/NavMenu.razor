@@ -1,110 +1,62 @@
-﻿@*<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Cantina Alberto</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿@*@inject Microsoft.Extensions.Localization.IStringLocalizer<NavMenu> localizer*@
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="cantinaalbe">
-                <span class="oi oi-plus" aria-hidden="true"></span> Cantina
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="vini">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Vini
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="createvino">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Add Vino
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="createaziendavinicola">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Add AziendaVinicola
-            </NavLink>
-        </div>
-    </nav>
-</div>*@
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
-@*<MudPaper id="header" Width="100%" Height="100%" Class="rounded-0 pa-3 shades-text text-black d-flex flex-column" Elevation="0">
-    <MudStack Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Row="true">
-        <MudImage Width="140" Height="70" Src="https://getlogovector.com/wp-content/uploads/2019/08/vivino-logo-vector.png"/>
-        <MudStack>
-            <MudStack Row="true" Justify="Justify.Center">
-                <MudButton Variant="Variant.Outlined" Href="/">Home</MudButton>
-                <MudButton Variant="Variant.Outlined" Href="/cantinaalbe">Cantina</MudButton>
-                <MudButton Variant="Variant.Outlined" Href="/viniviewcard">Vini</MudButton>
-                <MudButton Variant="Variant.Outlined" Href="/timelineMovimenti">Timeline</MudButton>
-            </MudStack>
-        </MudStack>
-    </MudStack>
-</MudPaper>*@
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
 
-@*<MudStack Class="pa-3" id="header" Justify="Justify.SpaceBetween" Row="true">
-    <MudGrid Class="align-center">
-        <MudItem xs="12" sm="6">
-            <MudImage Width="140" Height="70" Src="https://getlogovector.com/wp-content/uploads/2019/08/vivino-logo-vector.png" />
-        </MudItem>
-        <MudItem xs="12" sm="6">
-            <MudStack Row="true" Justify="Justify.FlexEnd">
-                <MudButton Variant="Variant.Outlined" Href="/">Home</MudButton>
-                <MudButton Variant="Variant.Outlined" Href="/cantinaalbe">Cantina</MudButton>
-                <MudButton Variant="Variant.Outlined" Href="/viniviewcard">Vini</MudButton>
-                <MudButton Variant="Variant.Outlined" Href="/preferiti">Preferiti</MudButton>
-                <MudButton Variant="Variant.Outlined" Href="/bevute">Bevuti</MudButton>
-            </MudStack>
-        </MudItem>
-    </MudGrid>
-</MudStack>*@
+<MudNavMenu Bordered="true">
 
-<MudStack Class="pa-3" id="header" Justify="Justify.Center">
-    <MudItem xs="12" sm="12">
-        <MudImage Width="140" Height="70" Src="https://getlogovector.com/wp-content/uploads/2019/08/vivino-logo-vector.png" />
-    </MudItem>
-    <MudItem xs="12" sm="12">
-        <MudStack Row="true" Justify="Justify.Center">
-            <MudButton Variant="Variant.Outlined" Href="/">Home</MudButton>
-            <MudButton Variant="Variant.Outlined" Href="/cantinaalbe">Cantina</MudButton>
-            <MudButton Variant="Variant.Outlined" Href="/viniviewcard">Vini</MudButton>
-            <MudButton Variant="Variant.Outlined" Href="/preferiti">Preferiti</MudButton>
-            <MudButton Variant="Variant.Outlined" Href="/bevute">Bevuti</MudButton>
-        </MudStack>
-    </MudItem>
-</MudStack>
+    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Home">Home</MudNavLink>
+    <MudNavLink Href="cantinaalbe" Icon="@Icons.Material.Filled.Apps">Cantina</MudNavLink>
+    <MudNavLink Href="viniviewcard" Icon="@Icons.Material.Filled.AppRegistration">Catalogo Vini</MudNavLink>
+    <MudNavLink Href="bevute" Icon="@Icons.Material.Filled.WineBar">Bevuto</MudNavLink>
+    <MudNavLink Href="preferiti" Icon="@Icons.Material.Filled.Bookmarks">Preferiti</MudNavLink>
 
 
-@*<MudGrid id="header" Justify="Justify.SpaceBetween" Class="align-center">
-    <MudItem xs="12" sm="6" Class="align-center">
-        <MudImage Width="140" Height="70" Src="https://getlogovector.com/wp-content/uploads/2019/08/vivino-logo-vector.png" />
-    </MudItem>
-    <MudItem xs="12" sm="6" Class="align-center">
-        <MudStack Row="true" Justify="Justify.FlexEnd">
-            <MudButton Variant="Variant.Outlined" Href="/">Home</MudButton>
-            <MudButton Variant="Variant.Outlined" Href="/cantinaalbe">Cantina</MudButton>
-            <MudButton Variant="Variant.Outlined" Href="/viniviewcard">Vini</MudButton>
-            <MudButton Variant="Variant.Outlined" Href="/timelineMovimenti">Timeline</MudButton>
-        </MudStack>
-    </MudItem>
-</MudGrid>*@
+    @*<MudNavGroup Title="Gestione" Expanded="true">
+            <MudNavLink Href="catalog/displaydevice-list" Icon="@Icons.Material.Filled.Monitor" IconColor="Color.Info">
+                Display
+            </MudNavLink>
+            <MudNavLink Href="catalog/planner" Icon="@Icons.Material.Filled.Event" IconColor="Color.Primary">
+                Planner
+            </MudNavLink>
+        </MudNavGroup>*@
+
+    @*<MudNavGroup Title="Anagrafiche" Expanded="true">
+            <MudNavLink Href="catalog/department-list" Icon="@Icons.Material.Filled.Source">
+                Dipartimenti
+            </MudNavLink>
+
+            <MudNavLink Href="catalog/actualspace-list" Icon="@Icons.Material.Filled.LocationOn">
+                Aule e Spazi
+            </MudNavLink>
+        </MudNavGroup>*@
+
+    @*<MudNavGroup Title="Configurazioni" Expanded="true">
+            <MudNavLink Href="catalog/actualspacegroup-list" Icon="@Icons.Material.Filled.GroupWork">
+                Gruppi di Aule e Spazi
+            </MudNavLink>
+
+            <MudNavLink Href="catalog/rss-list" Icon="@Icons.Material.Filled.RssFeed">
+                RSS Feed
+            </MudNavLink>
+
+            <MudNavLink Href="catalog/meetingroomdefinition-list" Icon="@Icons.Material.Filled.CalendarMonth">
+                Calendari Meeting Rooms
+            </MudNavLink>
+        </MudNavGroup>*@
+
+</MudNavMenu>
 
 @code {
-    private bool collapseNavMenu = true;
+    //[CascadingParameter] public MyApplicationState? ApplicationState { get; set; }
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    //private ClaimsPrincipal? AuthenticationStateProviderUser { get; set; }
 
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
+    //protected override async Task OnParametersSetAsync()
+    //{
+    //    AuthenticationStateProviderUser = await _stateProvider.GetAuthenticationStateProviderUserAsync();
+    //}
+
 }

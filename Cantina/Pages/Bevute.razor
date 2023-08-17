@@ -35,13 +35,16 @@
                                         <MudStack Row="true" AlignItems="AlignItems.Center">
                                             <MudText Typo="Typo.h6">@item.Data.Value.Day/@item.Data.Value.Month/@item.Data.Value.Year</MudText>
                                         </MudStack>
+                                        <MudText>@item.Note</MudText>
                                     </MudStack>
                                 </MudStack>
                                 <MudStack Row="true">
                                     <MudText Typo="Typo.h5">@item.Vino.Nome</MudText>
                                     <MudText Typo="Typo.h6">@item.Annata</MudText>
                                 </MudStack>
-                                <MudText Typo="Typo.h6">@item.Vino.AziendaVinicola.Nome</MudText>
+                                <MudStack Row="true">
+                                    <MudText Typo="Typo.h6">@item.Vino.AziendaVinicola.Nome</MudText>
+                                </MudStack>
                             </MudStack>
                         </MudCardContent>
                     </MudCard>

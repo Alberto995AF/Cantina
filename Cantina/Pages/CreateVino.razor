@@ -129,7 +129,17 @@
         model.tipoVinoId = selectedTipoVino.ID;
         model.DenominazioneVinoId = selectedDenominazione.ID;
         if (model.linkImmagine == null)
-            model.linkImmagine = "https://www.vivino.com/packs/f1b798fa2a2afa4f598391f35cba7e57.png";
+        {
+            //model.linkImmagine = "https://www.vivino.com/packs/f1b798fa2a2afa4f598391f35cba7e57.png";
+            if(model.tipoVinoId == 5)
+                model.linkImmagine = "https://web-common.vivino.com/assets/bottleShot/fallback_3.png";
+            else if(model.tipoVinoId == 2 || model.tipoVinoId == 3)
+                model.linkImmagine = "https://web-common.vivino.com/assets/bottleShot/fallback_2.png";
+            else
+                model.linkImmagine = "https://web-common.vivino.com/assets/bottleShot/fallback_1.png";
+
+
+        }
         success = true;
         await VinoService.AddVino(model);
 

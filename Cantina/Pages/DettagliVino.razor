@@ -6,6 +6,12 @@
 
 
 @using Cantina.Data
+@using System;
+@using System.Net.Http;
+@using System.Net.Http.Headers;
+@using System.Text;
+@using System.Threading.Tasks;
+@using RestSharp;
 
 @inject Cantina.Data.VinoService VinoService
 @inject IDialogService DialogService
@@ -22,7 +28,7 @@
                 <MudText Typo="Typo.h6">@vino.AziendaVinicola</MudText>
             </MudItem>
             <MudItem xs="6" sm="6">
-                @if(prefVino)
+                @if (prefVino)
                 {
                     <MudIconButton @onclick="changeFavorite" Color="@Color.Success" Icon="@Icons.TwoTone.Bookmark" aria-label="Favorite"></MudIconButton>
                 }
@@ -196,7 +202,6 @@
         }
 
         StateHasChanged();
-
     }
 
     private async void OnButtonClickedRemove(int idVino)

@@ -25,6 +25,7 @@
         }
         <MudTextField Label="Prezzo" @bind-Value="price" />
         <MudDatePicker Label="Date" @bind-Date="date" />
+        <MudTextField Label="Note" @bind-Value="note"/>
     </DialogContent>
     <DialogActions>
         @if (string.Compare(remORadd, "add") == 0)
@@ -43,6 +44,8 @@
     MovimentiVino movimento = new MovimentiVino();
     bool disable = true;
     decimal price;
+
+    string note;
 
     //gestione annate
     int annata;
@@ -75,7 +78,7 @@
             movimento.Annata = selectedYear;
             movimento.Data = date;
             movimento.Prezzo = price;
-            movimento.Note = "-";
+            movimento.Note = note;
             MudDialog.Close(DialogResult.Ok(movimento));
         }
     }
@@ -89,7 +92,7 @@
             movimento.Annata = selectedYear;
             movimento.Data = date;
             movimento.Prezzo = 0;
-            movimento.Note = "-";
+            movimento.Note = note;
             MudDialog.Close(DialogResult.Ok(movimento));
         }
     }
