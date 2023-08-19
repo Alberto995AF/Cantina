@@ -8,6 +8,7 @@ namespace Cantina.Data
 
         public string tipoVino { get; set; }
 
+        public int TipoVinoId { get; set; }
         public int AziendaVinicolaId { get; set; }
 
         public string AziendaVinicola { get; set; }
@@ -15,6 +16,8 @@ namespace Cantina.Data
         public string Nazione { get; set; }
 
         public string Regione { get; set; }
+
+        public int DenominazioneId { get; set; }
 
         public string Denominazione { get; set; }
 
@@ -31,6 +34,8 @@ namespace Cantina.Data
         public bool Preferito { get; set; } = false;
 
         public List<String> Uva { get; set; }
+
+        public List<int> UvaId { get; set; }
 
         public string? linkAppVivino { get; set; }
 

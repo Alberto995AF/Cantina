@@ -52,6 +52,8 @@ namespace Cantina.Data
         /// <summary>
         /// GET VINI PER AZIENDA VINICOLA
         /// </summary>
+        /// Il parametro idVino serve nel caso si voglia mostrare altri vini dell'azienda vinicola del vino che stiamo guardato (pagina dettaglivino)
+        /// Viene messo a zero nel caso si volgiano tirare fuori tutti i vini di una particolare azienda vinicola
         /// <returns></returns>
         public Task<List<VinoDTO>> GetViniAziendaVinicola(int idAzienda, int idVino)
         {
@@ -87,6 +89,40 @@ namespace Cantina.Data
             return Task.FromResult(listVinoDto.ToList());
         }
 
+
+        public Task<List<VinoDTO>> GetViniDenominazione(int idDenominazione)
+        {
+            List<VinoDTO> listVinoDto = new List<VinoDTO>();
+            var items = _context.Vino.Include(a => a.AziendaVinicola).ToList();
+            items = _context.Vino.Include(a => a.tipoVino).ToList();
+            items = _context.Vino.Include(a => a.Denominazione).ToList();
+           
+            items = _context.Vino.Where(x => x.DenominazioneId == idDenominazione).ToList();
+
+            foreach (var vino in items)
+            {
+                int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
+                int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
+                int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
+                bool inCant = numBottigleCantina > 0 ? true : false;
+                listVinoDto.Add(new VinoDTO()
+                {
+                    ID = vino.ID,
+                    Nome = vino.Nome,
+                    AziendaVinicolaId = vino.AziendaVinicolaId,
+                    AziendaVinicola = vino.AziendaVinicola.Nome,
+                    tipoVino = vino.tipoVino.Tipo,
+                    Barcode = vino.Barcode,
+                    QuantitàBottiglePossedute = numBottigleViste,
+                    inCantina = inCant,
+                    bottglieInCantina = numBottigleCantina,
+                    bottiglieBevute = numBottiglieBevute,
+                    linkImmagine = vino.linkImmagine
+                });
+            }
+
+            return Task.FromResult(listVinoDto.ToList());
+        }
 
 
         /// <summary>
@@ -170,8 +206,8 @@ namespace Cantina.Data
 
             //recuper la denominazione del vino se presente
             Denominazione denominazione = null;
-            if (items.FirstOrDefault().DenominazioneVinoId != null)
-                denominazione = _context.Denominazione.Where(a => a.ID == items.FirstOrDefault().DenominazioneVinoId).FirstOrDefault();
+            if (items.FirstOrDefault().DenominazioneId != null)
+                denominazione = _context.Denominazione.Where(a => a.ID == items.FirstOrDefault().DenominazioneId).FirstOrDefault();
 
             //recupero le uve del vino se sono presenti
             var listaUve = _context.UvaVino.Where(a => a.VinoId == items.FirstOrDefault().ID);
@@ -332,10 +368,21 @@ namespace Cantina.Data
                 bool inCant = numBottiglieCantina > 0 ? true : false;
                 int itemPrice = (int)GetVinoIDdto(vino.ID).Result.avgPrice;
 
-                string denom = null;
-                if (vino.DenominazioneVinoId != null)
+                //recupero le uve del vino se sono presenti
+                var listaUve = _context.UvaVino.Where(a => a.VinoId == items.FirstOrDefault().ID);
+                List<String> uvaList = new();
+                List<int> uvaListId = new();
+                foreach (var uvaVino in listaUve)
                 {
-                    var denominazione = _context.Denominazione.Where(x => x.ID == vino.DenominazioneVinoId).FirstOrDefault();
+                    var uva = _context.Uva.Where(a => a.ID == uvaVino.UvaId).FirstOrDefault();
+                    uvaList.Add(uva.Nome.ToString());
+                    uvaListId.Add(uva.ID);
+                }
+
+                string denom = null;
+                if (vino.DenominazioneId != null)
+                {
+                    var denominazione = _context.Denominazione.Where(x => x.ID == vino.DenominazioneId).FirstOrDefault();
                     denom = denominazione.Nome;
                 }
 
@@ -344,9 +391,13 @@ namespace Cantina.Data
                                                     ID = vino.ID,
                                                     Nome = vino.Nome,
                                                     AziendaVinicola = vino.AziendaVinicola.Nome,
+                                                    AziendaVinicolaId = vino.AziendaVinicolaId,
                                                     tipoVino = vino.tipoVino.Tipo,
+                                                    TipoVinoId = vino.tipoVino.ID,
                                                     Denominazione = denom,
+                                                    DenominazioneId = vino.Denominazione.ID,
                                                     Barcode = vino.Barcode,
+                                                    Uva = uvaList,
                                                     QuantitàBottiglePossedute = numBottiglieViste,
                                                     inCantina = inCant,
                                                     bottglieInCantina = numBottiglieCantina,
@@ -400,7 +451,7 @@ namespace Cantina.Data
             newVino.AziendaVinicolaId = vino.AziendaVinicolaId;
             //newVino.Annata = annata;
             newVino.Barcode = vino.Barcode;
-            newVino.DenominazioneVinoId = vino.DenominazioneVinoId;
+            newVino.DenominazioneId = vino.DenominazioneId;
             newVino.linkAppVivino = vino.linkAppVivino;
             newVino.linkImmagine = vino.linkImmagine;
             newVino.tipoVinoId = vino.tipoVinoId;
@@ -658,7 +709,9 @@ namespace Cantina.Data
 
             foreach (var vino in items)
             {
-                if (vino.Nome.Contains(value) || vino.AziendaVinicola.Nome.Contains(value))
+                //var prova = vino.Nome.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0;
+                //if (vino.Nome.Contains(value) || vino.AziendaVinicola.Nome.Contains(value))
+                if (vino.Nome.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0 || vino.AziendaVinicola.Nome.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
                     int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
@@ -690,11 +743,53 @@ namespace Cantina.Data
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public Task<List<AziendaVinicola>> GetCantinaSearch(string value)
+        public Task<List<AziendaVinicola>> GetCantinaSearch(string value, List<VinoDTO> vinoList)
         {
-            var items = _context.AziendaVinicola.Where(x => x.Nome.Contains(value)).ToList();
+            if (vinoList == null)
+            {
+                var item = _context.AziendaVinicola.Where(x => x.Nome.Contains(value)).ToList();
+                return Task.FromResult(item);
+            }
 
-            return Task.FromResult(items);
+            List<AziendaVinicola> listAzd = new();
+            var items = vinoList.Where(x => x.AziendaVinicola.ToLower().Contains(value.ToLower())).ToList();
+
+            foreach (var den in items.Select(x => new { id = x.AziendaVinicolaId, nome = x.AziendaVinicola }).Distinct())
+            {
+                AziendaVinicola newAzd = new();
+                newAzd.ID = den.id;
+                newAzd.Nome = den.nome;
+                listAzd.Add(newAzd);
+            }
+
+            return Task.FromResult(listAzd);
+        }
+
+        /// <summary>
+        /// Funzione che restituisce le cantine che contengono la ricerca effettuata (parametro value)
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Task<List<Denominazione>> GetDenominazioneSearch(string value, List<VinoDTO> vinoList)
+        {
+            if(vinoList == null)
+            {
+                var item = _context.Denominazione.Where(x => x.Nome.ToLower().Contains(value.ToLower())).ToList();
+                return Task.FromResult(item);
+            }
+
+            List<Denominazione> listDenom = new();
+            var items = vinoList.Where(x => x.Denominazione.ToLower().Contains(value.ToLower())).ToList();
+
+            foreach(var den in items.Select(x=> new { id = x.DenominazioneId, nome = x.Denominazione}).Distinct())
+            {
+                Denominazione newDen = new();
+                newDen.ID = den.id;
+                newDen.Nome = den.nome;
+                listDenom.Add(newDen);
+            }
+
+            return Task.FromResult(listDenom);
         }
 
 
@@ -745,20 +840,20 @@ namespace Cantina.Data
         /// </summary>
         /// <param name="value"> stringa scritta nel campo di ricerca</param>
         /// <returns>ritorna una lista di tipi di denomiazioni</returns>
-        public Task<List<Denominazione>> GetDenominazioneSearch(string value)
-        {
-            List<Denominazione> denominazioneVino = new();
-            var item = _context.Denominazione;
+        //public Task<List<Denominazione>> GetDenominazioneSearch(string value)
+        //{
+        //    List<Denominazione> denominazioneVino = new();
+        //    var item = _context.Denominazione;
 
-            foreach (var azd in item)
-            {
-                if (azd.Nome.Contains(value))
-                {
-                    denominazioneVino.Add(azd);
-                }
-            }
-            return Task.FromResult(denominazioneVino);
-        }
+        //    foreach (var azd in item)
+        //    {
+        //        if (azd.Nome.Contains(value))
+        //        {
+        //            denominazioneVino.Add(azd);
+        //        }
+        //    }
+        //    return Task.FromResult(denominazioneVino);
+        //}
 
 
         /// <summary>

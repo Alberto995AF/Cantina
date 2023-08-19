@@ -16,7 +16,7 @@ namespace Cantina.Data
         public int AziendaVinicolaId { get; set; }
         public AziendaVinicola? AziendaVinicola { get; set; }
 
-        public int? DenominazioneVinoId { get; set; }
+        public int? DenominazioneId { get; set; }
         public Denominazione? Denominazione { get; set; }
 
         public int? Barcode { get; set; }

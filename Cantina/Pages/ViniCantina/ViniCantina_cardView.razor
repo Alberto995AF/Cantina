@@ -1,0 +1,347 @@
+﻿@page "/vinicantina_cardview"
+
+<PageTitle>Cantina</PageTitle>
+
+@using Cantina.Data
+@inject Cantina.Data.VinoService VinoService
+@inject Cantina.Data.FiltriService FiltriService
+@inject NavigationManager NavigationManager
+
+
+
+<MudGrid>
+    <MudItem xs="12" sm="12">
+        <MudStack Row="true" Justify="Justify.SpaceBetween">
+            <MudItem>
+                <MudText Typo="Typo.h4">CANTINA</MudText>
+            </MudItem>
+            <MudItem>
+                <MudStack Row="true">
+                    <MudTooltip Text="Lista">
+                        <MudIconButton Href="/vinicantina_tblview" Icon="@Icons.Material.Filled.List" aria-label="modView"></MudIconButton>
+                    </MudTooltip>
+                    <MudTooltip Text="Per Cantina">
+                        <MudIconButton Href="/vinicantina_aziendaview" Icon="@Icons.Material.Filled.House" aria-label="modView"></MudIconButton>
+                    </MudTooltip>
+                    <MudTooltip Text="Per denominazione">
+                        <MudIconButton Href="/vinicantina_denomiview" Icon="@Icons.Material.Filled.Terrain" aria-label="modView"></MudIconButton>
+                    </MudTooltip>
+                </MudStack>        
+            </MudItem>
+        </MudStack>
+    </MudItem>
+    <MudItem xs="12" sm="12">
+        <MudPaper Elevation="3" Class="pa-3">
+            <MudStack>
+                <MudAutocomplete T="VinoDTO" ResetValueOnEmptyText="true" Label="Cerca vino.." CoerceText="true" ValueChanged="@(x => ricercaVino(x))"
+                                 SearchFunc="@functionResearchField" ToStringFunc="@(e=> e==null?null : $"{e.Nome} - {e.AziendaVinicola}")" Clearable AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary">
+                    <MoreItemsTemplate>
+                        <MudText Align="Align.Center" Class="px-4 py-1">
+                            Only the first 10 items are shown
+                        </MudText>
+                    </MoreItemsTemplate>
+                </MudAutocomplete>
+            </MudStack>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="12">
+        <MudExpansionPanels>
+            <MudExpansionPanel Text="Filtri">
+                <MudGrid>
+                    <MudItem xs="12" sm="3">
+                        <MudStack Spacing="3" Row="true">
+                            <MudSelect T="tipoVino" Label="Tipo Vino" AnchorOrigin="Origin.BottomCenter" MultiSelection="false" SelectedValuesChanged="@(x => changedTipoVinoSelection(x))" ToStringFunc="@(e=> e==null?null : $"{e.Tipo}")" Clearable>
+                                @foreach (var tipo in listTipoVino)
+                                {
+                                    <MudSelectItem T="tipoVino" Value="@tipo">@tipo.Tipo</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="12" sm="3">
+                        <MudStack Spacing="3" Row="true">
+                            <MudAutocomplete T="AziendaVinicola" ResetValueOnEmptyText="true" Label="Cerca Cantina.." CoerceText="true" ValueChanged="@(x => searchCantina(x))"
+                                             SearchFunc="@functionResearchAziendaVinicola" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")" Clearable>
+                                <MoreItemsTemplate>
+                                    <MudText Align="Align.Center" Class="px-4 py-1">
+                                        Only the first 10 items are shown
+                                    </MudText>
+                                </MoreItemsTemplate>
+                            </MudAutocomplete>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="12" sm="3">
+                        <MudStack Spacing="3" Row="true">
+                            <MudAutocomplete T="Denominazione" ResetValueOnEmptyText="true" Label="Cerca Denominazione.." CoerceText="true" ValueChanged="@(x => searchDenominazione(x))"
+                                             SearchFunc="@functionResearchDenominazione" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")" Clearable>
+                                <MoreItemsTemplate>
+                                    <MudText Align="Align.Center" Class="px-4 py-1">
+                                        Only the first 10 items are shown
+                                    </MudText>
+                                </MoreItemsTemplate>
+                            </MudAutocomplete>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="12" sm="3">
+                        <MudStack Spacing="3" Row="true">
+                            <MudNumericField T="int?" @bind-Value="valueMIN" HideSpinButtons="true" Label="Prezzo minimo" Variant="Variant.Text" Min="0" Max="10000" @onblur="() => filterPriceWive()" Clearable />
+                            <MudNumericField @bind-Value="valueMAX" HideSpinButtons="true" Label="Prezzo massimo" Variant="Variant.Text" Min="0" Max="10000" @onblur="() => filterPriceWive()" Clearable />
+                        </MudStack>
+                    </MudItem>
+                </MudGrid>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+    </MudItem>
+
+    @foreach (var item in listaVini)
+    {
+        <MudItem xs="12" sm="3">
+            <MudCard Elevation="5" @onclick="() => OnclickDetail(item.ID)" Height="400px">
+                <MudCardContent>
+                    <MudStack>
+                        <MudStack Row="true" Justify="Justify.SpaceBetween">
+                            <MudImage Width="64" Height="240" Src=@item.linkImmagine Alt="wine" Class="rounded-lg" />
+                            <MudStack>
+                                <MudStack Row="true" AlignItems="AlignItems.Center">
+                                    <MudIcon Icon="@Icons.Filled.Numbers" Color="Color.Primary" />
+                                    <MudText Typo="Typo.h6">@item.bottglieInCantina</MudText>
+                                </MudStack>
+                                <MudStack Row="true" AlignItems="AlignItems.Center">
+                                    <MudIcon Icon="@Icons.Filled.Euro" Color="Color.Secondary" />
+                                    <MudText Typo="Typo.h6">@item.avgPrice</MudText>
+                                </MudStack>
+                                <MudStack Row="true" AlignItems="AlignItems.Center">
+                                    <MudText>@item.Denominazione</MudText>
+                                </MudStack>
+                            </MudStack> 
+                        </MudStack>
+                        <MudText Typo="Typo.h5">@item.Nome</MudText>
+                        <MudText Typo="Typo.h6">@item.AziendaVinicola</MudText>
+                    </MudStack>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+
+@code {
+    private List<VinoDTO> listaVini = new();
+    private List<VinoDTO> listaViniCompleta = new();
+
+    //parametri per la ricerca
+    List<VinoDTO> vinoListResearch = new();
+
+    //parametri per la ricerca di aziende vinicole
+    List<AziendaVinicola> aziendaListResearch = new();
+
+    //parametri per la ricerca di denominazioni
+    List<Denominazione> denominazioneListResearch = new();
+
+    //parametri per i filtri
+    tipoVino tipoVino = new();
+    List<tipoVino> listTipoVino = new();
+    private IEnumerable<tipoVino> selectedTipoVino { get; set; } = new HashSet<tipoVino>();
+
+    //parametri per selezione prezzo
+    public int? valueMAX { get; set; }
+    public int? valueMIN { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaViniCompleta = await VinoService.GetViniCantina();
+        listaVini = listaViniCompleta;
+        listTipoVino = await VinoService.GetTipoVino();
+    }
+
+    /// <summary>
+    /// Funzione per dettagli del vino
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    protected async Task OnclickDetail(int id)
+    {
+        NavigationManager.NavigateTo("/dettaglivino/" + id);
+    }
+
+    /// <summary>
+    /// Funzione per ricarca vino campo testo
+    /// </summary>
+    /// <param name="vino"></param>
+    /// <returns></returns>
+    protected async Task ricercaVino(VinoDTO vino)
+    {
+        listaVini.Clear();
+        if (vino == null)
+            listaVini = await VinoService.GetViniCantina();
+        else
+            listaVini.Add(vino);
+    }
+
+    /// <summary>
+    /// Funzione per ricerca azienda vinicola filtro
+    /// </summary>
+    /// <param name="azVin"></param>
+    /// <returns></returns>
+    protected async Task searchCantina(AziendaVinicola azVin)
+    {
+        listaVini.Clear();
+        if (azVin == null)
+            listaVini = await VinoService.GetViniCantina();
+        else
+            listaVini = await VinoService.GetViniAziendaVinicola(azVin.ID, 0);
+    }
+
+    /// <summary>
+    /// Funzione per la ricerca della denominazione nei filtri
+    /// </summary>
+    /// <param name="denomVin"></param>
+    /// <returns></returns>
+    protected async Task searchDenominazione(Denominazione denomVin)
+    {
+        listaVini.Clear();
+        if (denomVin == null)
+            listaVini = await VinoService.GetViniCantina();
+        else
+            listaVini = await VinoService.GetViniDenominazione(denomVin.ID);
+    }
+
+
+    /// <summary>
+    /// Funzione per la ricerca nel campo ricerca vino
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    private async Task<IEnumerable<VinoDTO>> functionResearchField(string value)
+    {
+        //TODO: Migliorare la ricerca -> togliere il case sensitive e fare in modo da cercare anche per cantina
+        //chiamo una funzione che in base a quello che è stato digitato tira fuori i vini che corrispondono
+        //alla ricerca
+        if (value is null)
+        {
+            vinoListResearch = null;
+            //listaVini = await VinoService.GetVini();
+        }
+        else
+        {
+            vinoListResearch = await VinoService.GetVinoDTOCantinaSearch(value);
+        }
+
+        if (vinoListResearch != null)
+        {
+            listaVini.Clear();
+            listaVini = vinoListResearch;
+        }
+
+        return vinoListResearch;
+    }
+
+    /// <summary>
+    /// Funzione per la ricerca delle aziende vinicole nei filtri
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    private async Task<IEnumerable<AziendaVinicola>> functionResearchAziendaVinicola(string value)
+    {
+        //chiamo una funzione che in base a quello che è stato digitato tira fuori i vini che corrispondono
+        //alla ricerca
+        if (value is null)
+        {
+            aziendaListResearch = null;
+        }
+        else
+        {
+            aziendaListResearch = await VinoService.GetCantinaSearch(value, listaVini);
+        }
+
+        //if (aziendaListResearch != null)
+        //{
+        //    listaVini.Clear();
+        //    listaVini = aziendaList;
+        //}
+        //listaVini = vinoListResearch;
+        return aziendaListResearch;
+    }
+
+    /// <summary>
+    /// Funzione per la ricerca della denominazione nei filtri
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    private async Task<IEnumerable<Denominazione>> functionResearchDenominazione(string value)
+    {
+        //chiamo una funzione che in base a quello che è stato digitato tira fuori i vini che corrispondono
+        //alla ricerca
+        if (value is null)
+        {
+            denominazioneListResearch = null;
+        }
+        else
+        {
+            denominazioneListResearch = await VinoService.GetDenominazioneSearch(value, listaVini);
+        }
+
+        //if (aziendaListResearch != null)
+        //{
+        //    listaVini.Clear();
+        //    listaVini = aziendaList;
+        //}
+        //listaVini = vinoListResearch;
+        return denominazioneListResearch;
+    }
+
+    /// <summary>
+    /// Funzione per il filtro sul tipo di vino
+    /// </summary>
+    /// <param name="tipoVino"></param>
+    /// <returns></returns>
+    private async Task changedTipoVinoSelection(IEnumerable<tipoVino> tipoVino)
+    {
+        if (tipoVino.Count() > 0)
+        {
+            listaVini = await VinoService.GetViniCantina();
+            listaVini = listaVini.Where(x => tipoVino.Select(x => x.Tipo).ToList().Contains(x.tipoVino)).ToList();
+        }
+        else
+        {
+            listaVini = await VinoService.GetViniCantina();
+        }
+    }
+
+    private async Task filterPriceWive()
+    {
+        if(valueMAX.HasValue && valueMIN.HasValue)
+        {
+            if(valueMAX < valueMIN && valueMAX == 0)
+            {
+                listaVini = await FiltriService.GetViniCantinaPriceFilter(listaViniCompleta, (int)valueMIN, 9999);
+            }
+            else if(valueMAX < valueMIN)
+            {
+                //valueMAX = valueMIN + 1;
+                listaVini = await FiltriService.GetViniCantinaPriceFilter(listaViniCompleta, (int)valueMIN, (int)valueMIN + 1);
+            }
+            else if(valueMAX == 0)
+            {
+                listaVini = await VinoService.GetViniCantina();
+            }
+            else
+            {
+                listaVini = await FiltriService.GetViniCantinaPriceFilter(listaViniCompleta, (int)valueMIN, (int)valueMAX);
+            }
+        }
+        else if(!valueMAX.HasValue && valueMIN.HasValue)
+        {
+            listaVini = await FiltriService.GetViniCantinaPriceFilter(listaViniCompleta, (int)valueMIN, 9999);
+        }
+        else if (valueMAX.HasValue && !valueMIN.HasValue)
+        {
+            listaVini = await FiltriService.GetViniCantinaPriceFilter(listaViniCompleta, 9999, (int)valueMAX);
+        }
+        else
+        {
+            listaVini = await VinoService.GetViniCantina();
+        }
+    }
+}
+

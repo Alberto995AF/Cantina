@@ -127,7 +127,7 @@
     {
         model.AziendaVinicolaId = selectedAziendaVino.ID;
         model.tipoVinoId = selectedTipoVino.ID;
-        model.DenominazioneVinoId = selectedDenominazione.ID;
+        model.DenominazioneId = selectedDenominazione.ID;
         if (model.linkImmagine == null)
         {
             //model.linkImmagine = "https://www.vivino.com/packs/f1b798fa2a2afa4f598391f35cba7e57.png";
@@ -212,7 +212,7 @@
     //funzione per restituire le denomincazioni nel campo di ricerca
     private async Task<IEnumerable<Denominazione>> functionResearchFieldDenominazione(string value)
     {
-        listDenominazioni = await VinoService.GetDenominazioneSearch(value);
+        listDenominazioni = await VinoService.GetDenominazioneSearch(value, null);
 
         return listDenominazioni;
     }

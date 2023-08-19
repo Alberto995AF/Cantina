@@ -1,0 +1,140 @@
+﻿@inject Cantina.Data.VinoService VinoService
+@using Cantina.Data
+
+<MudDialog>
+    <DialogContent>
+        <PageTitle>Edit Vino</PageTitle>
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudCard>
+                        <MudCardContent>
+                            <MudTextField Label="Nome" @bind-Value="model.Nome" For="@(() => model.Nome)" />
+                            <MudAutocomplete T="AziendaVinicola" Label="Cantina" @bind-Value="selectedAziendaVino"
+                                             SearchFunc="@functionResearchFieldAzienda" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")">
+                                <MoreItemsTemplate>
+                                    <MudText Align="Align.Center" Class="px-4 py-1">
+                                        Only the first 10 items are shown
+                                    </MudText>
+                                </MoreItemsTemplate>
+                            </MudAutocomplete>
+                            <MudAutocomplete T="tipoVino" Label="Tipo Vino" @bind-Value="selectedTipoVino"
+                                             SearchFunc="@functionResearchFieldTipoVino" ToStringFunc="@(e=> e==null?null : $"{e.Tipo}")">
+                                <MoreItemsTemplate>
+                                    <MudText Align="Align.Center" Class="px-4 py-1">
+                                        Only the first 10 items are shown
+                                    </MudText>
+                                </MoreItemsTemplate>
+                            </MudAutocomplete>
+                            <MudAutocomplete T="Denominazione" Label="Denominazione" @bind-Value="selectedDenominazione"
+                                             SearchFunc="@functionResearchFieldDenominazione" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")">
+                                <MoreItemsTemplate>
+                                    <MudText Align="Align.Center" Class="px-4 py-1">
+                                        Only the first 10 items are shown
+                                    </MudText>
+                                </MoreItemsTemplate>
+                            </MudAutocomplete>
+                            <MudSelect T="Uva" Label="Tipo Uva" MultiSelection="true" @bind-Value="Uva" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")" @bind-SelectedValues="selectedUva">
+                                @foreach (var uva in listUva)
+                                {
+                                    <MudSelectItem T="Uva" Value="@uva">@uva.Nome</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudCardContent>
+                    </MudCard>
+                    <MudCardActions>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">SALVA</MudButton>
+                    </MudCardActions>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+
+    [Parameter] public VinoDTO vino { get; set; }
+
+    VinoDTO model = new VinoDTO();
+
+    //parametri per aziendeVinicole
+    AziendaVinicola selectedAziendaVino = new();
+    List<AziendaVinicola> listAziende = new List<AziendaVinicola>();
+
+    //parametri per la selezione della denomincazione
+    List<Denominazione> listDenominazioni = new();
+    Denominazione selectedDenominazione = new();
+
+    //parametri per selezione tipo vino
+    List<tipoVino> listTipoVino = new List<tipoVino>();
+    tipoVino selectedTipoVino = new();
+
+    //parametri per la selezione dell'uva
+    Uva Uva = new();
+    List<Uva> listUva = new();
+    private IEnumerable<Uva> selectedUva { get; set; } = new HashSet<Uva>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = vino;
+        listAziende = await VinoService.GetAziende();
+        listTipoVino = await VinoService.GetTipoVino();
+        listUva = await VinoService.GetUvaSearch();
+        selectedAziendaVino = await VinoService.GetAziendeId(vino.AziendaVinicolaId);
+        selectedDenominazione = await VinoService.GetDenominazioneId(vino.DenominazioneId);
+        selectedTipoVino.Tipo = vino.tipoVino;
+
+        foreach(var item in vino.Uva)
+        {
+            Uva newUva = new();
+            newUva.Nome = item;
+            ((HashSet<Uva>)selectedUva).Add(newUva);
+            //var prova = item;
+            //selectedUva.Add(item);
+        }
+    }
+
+    private async Task OnValidSubmit(EditContext context)
+    {
+        VinoDTO modVino = new();
+
+        modVino = await VinoService.GetVinoIDdto(model.ID);
+
+        modVino.AziendaVinicolaId = selectedAziendaVino.ID;
+        modVino.TipoVinoId = selectedTipoVino.ID;
+        modVino.DenominazioneId = selectedDenominazione.ID;
+        foreach(var item in selectedUva.Distinct())
+        {
+            modVino.Uva.Add(item.Nome);
+        }
+
+        MudDialog.Close(DialogResult.Ok(modVino));
+    }
+
+    //funzione per restituire le cantine nel campo di ricerca
+    private async Task<IEnumerable<AziendaVinicola>> functionResearchFieldAzienda(string value)
+    {
+        listAziende = await VinoService.GetAziendeSearch(value);
+
+        return listAziende;
+    }
+
+    //funzione per restituire le denomincazioni nel campo di ricerca
+    private async Task<IEnumerable<Denominazione>> functionResearchFieldDenominazione(string value)
+    {
+        listDenominazioni = await VinoService.GetDenominazioneSearch(value, null);
+
+        return listDenominazioni;
+    }
+
+    //funzione per restituire le cantine nel campo di ricerca
+    private async Task<IEnumerable<tipoVino>> functionResearchFieldTipoVino(string value)
+    {
+        listTipoVino = await VinoService.GetTipoVinoSearch(value);
+
+        return listTipoVino;
+    }
+}

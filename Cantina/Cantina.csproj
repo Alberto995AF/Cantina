@@ -30,7 +30,6 @@
   <ItemGroup>
     <None Remove=".\Data\Cantina.db" />
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
-    <None Remove="Cantina.db" />
     <None Remove="Migrations\" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Logs\Logs\log20221015.txt" />
@@ -49,6 +48,9 @@
     <None Remove="Data\Service\FunzioniFiltri\" />
     <None Remove="Data\Service\MovimentiVini\" />
     <None Remove="Pages\ViniCantina\" />
+    <None Remove="Pages\Dialog\" />
+    <None Remove="Pages\Dialog\DialogAggiuntaVino\" />
+    <None Remove="Pages\Dialog\DialogModificaVino\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
@@ -79,6 +81,9 @@
     <Folder Include="Data\Service\FunzioniFiltri\" />
     <Folder Include="Data\Service\MovimentiVini\" />
     <Folder Include="Pages\ViniCantina\" />
+    <Folder Include="Pages\Dialog\" />
+    <Folder Include="Pages\Dialog\DialogAggiuntaVino\" />
+    <Folder Include="Pages\Dialog\DialogModificaVino\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Data\AziendaVinicola %28copia%29.cs" />

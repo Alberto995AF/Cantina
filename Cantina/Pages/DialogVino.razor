@@ -113,9 +113,9 @@
         listUva = await VinoService.GetUvaSearch();
         selectedUva = await VinoService.GetUvaVinoId(vino.ID);
         AlreadySelectedUva = selectedUva;
-        if (vino.DenominazioneVinoId is not null)
+        if (vino.DenominazioneId is not null)
         {
-            selectedDenominazione = await VinoService.GetDenominazioneId((int)vino.DenominazioneVinoId);
+            selectedDenominazione = await VinoService.GetDenominazioneId((int)vino.DenominazioneId);
         }
     }
 
@@ -128,7 +128,7 @@
         vino.tipoVinoId = selectedTipoVino.ID;
 
         //denominazione
-        vino.DenominazioneVinoId = selectedDenominazione.ID;
+        vino.DenominazioneId = selectedDenominazione.ID;
 
         //uva
         List<UvaVino> uvaVinoList = new();
@@ -167,7 +167,7 @@
     //funzione per restituire le denomincazioni nel campo di ricerca
     private async Task<IEnumerable<Denominazione>> functionResearchFieldDenominazione(string value)
     {
-        listDenominazioni = await VinoService.GetDenominazioneSearch(value);
+        listDenominazioni = await VinoService.GetDenominazioneSearch(value, null);
 
         return listDenominazioni;
     }
