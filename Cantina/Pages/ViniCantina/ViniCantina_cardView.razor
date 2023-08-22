@@ -214,9 +214,6 @@
     /// <returns></returns>
     private async Task<IEnumerable<VinoDTO>> functionResearchField(string value)
     {
-        //TODO: Migliorare la ricerca -> togliere il case sensitive e fare in modo da cercare anche per cantina
-        //chiamo una funzione che in base a quello che è stato digitato tira fuori i vini che corrispondono
-        //alla ricerca
         if (value is null)
         {
             vinoListResearch = null;
@@ -251,7 +248,7 @@
         }
         else
         {
-            aziendaListResearch = await VinoService.GetCantinaSearch(value, listaVini);
+            aziendaListResearch = await VinoService.GetCantinaSearch(value, listaVini, false);
         }
 
         //if (aziendaListResearch != null)
@@ -299,7 +296,7 @@
     {
         if (tipoVino.Count() > 0)
         {
-            listaVini = await VinoService.GetViniCantina();
+            //listaVini = await VinoService.GetViniCantina();
             listaVini = listaVini.Where(x => tipoVino.Select(x => x.Tipo).ToList().Contains(x.tipoVino)).ToList();
         }
         else

@@ -30,6 +30,20 @@
             </MudItem>
         </MudStack>
     </MudItem>
+    <MudItem xs="12" sm="12">
+        <MudPaper Elevation="3" Class="pa-3">
+            <MudStack>
+                <MudAutocomplete T="AziendaVinicola" ResetValueOnEmptyText="true" Label="Cerca cantina.." CoerceText="true" ValueChanged="@(x => ricercaCantina(x))"
+                                 SearchFunc="@functionResearchField" ToStringFunc="@(e=> e==null?null : $"{e.Nome}")" Clearable AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary">
+                    <MoreItemsTemplate>
+                        <MudText Align="Align.Center" Class="px-4 py-1">
+                            Only the first 10 items are shown
+                        </MudText>
+                    </MoreItemsTemplate>
+                </MudAutocomplete>
+            </MudStack>
+        </MudPaper>
+    </MudItem>
     @*<MudItem xs="12" sm="12">
             <MudPaper Elevation="3" Class="pa-3">
                 <MudStack>
@@ -128,7 +142,7 @@
     private List<VinoDTO> listaVini = new();
 
     //parametri per la ricerca
-    List<VinoDTO> vinoListResearch = new();
+    List<AziendaVinicola> azeindeListResearch = new();
 
     //lista denominazioni
     //List<String> listDenominazione;
@@ -159,6 +173,49 @@
     protected async Task OnclickDetail(int id)
     {
         NavigationManager.NavigateTo("/dettaglivino/" + id);
+    }
+
+    /// <summary>
+    /// Funzione per la ricerca nel campo ricerca cantina
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    private async Task<IEnumerable<AziendaVinicola>> functionResearchField(string value)
+    {
+        //chiamo una funzione che in base a quello che è stato digitato tira fuori i vini che corrispondono
+        //alla ricerca
+        if (value is null)
+        {
+            aziendaListResearch = null;
+        }
+        else
+        {
+            aziendaListResearch = await VinoService.GetCantinaSearch(value, listaVini, true);
+        }
+
+        return aziendaListResearch.Distinct();
+    }
+
+    /// <summary>
+    /// Funzione per ricerca dei vini nel campo ricerca azienda vinicola
+    /// </summary>
+    /// <param name="azVin"></param>
+    /// <returns></returns>
+    protected async Task ricercaCantina(AziendaVinicola azVin)
+    {
+        listaVini.Clear();
+        listCantine.Clear();
+        if (azVin == null)
+        {
+            listaVini = await VinoService.GetViniCantina();
+            listCantine = listaVini.Where(x => x.AziendaVinicola != null).OrderBy(x => x.AziendaVinicola).Select(x => x.AziendaVinicola).Distinct().ToList();
+        }
+        else
+        {
+            var azd = await VinoService.GetAziendeId(azVin.ID);
+            listCantine.Add(azd.Nome);
+            listaVini = await VinoService.GetViniAziendaVinicola(azVin.ID, 0);
+        }
     }
 
     //protected async Task searchCantina(AziendaVinicola azVin)

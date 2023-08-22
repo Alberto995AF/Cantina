@@ -127,12 +127,12 @@
         </MudStack>
     </MudItem>
     <MudItem xs="12" sm="12">
-        <MudDataGrid T="VinoDTO" ReadOnly="false" Items="@listaVini" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter" Hideable="true" RowsPerPage="25">
+        <MudDataGrid T="VinoDTO" ReadOnly="false" Hover="true" Items="@listaVini" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter" Hideable="true" RowsPerPage="25" RowClick="@RowClicked">
             <ToolBarContent>
-                @*<MudText Typo="Typo.h6">Periodic Elements</MudText>
-            <MudSpacer />*@
-                <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
-                              AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                @*<MudText Typo="Typo.h6">Periodic Elements</MudText>*@
+                <MudSpacer />
+                <MudSpacer />
+                <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
             </ToolBarContent>
             <Columns>
                 @*<SelectColumn T="VinoDTO" />*@
@@ -267,7 +267,7 @@
         }
         else
         {
-            aziendaListResearch = await VinoService.GetCantinaSearch(value, null);
+            aziendaListResearch = await VinoService.GetCantinaSearch(value, null, false);
         }
 
         //if (aziendaListResearch != null)
@@ -329,6 +329,12 @@
 
         return false;
     };
+
+    void RowClicked(DataGridRowClickEventArgs<VinoDTO> args)
+    {
+        OnclickDetail(args.Item.ID);
+        //_events.Insert(0, $"Event = RowClick, Index = {args.RowIndex}, Data = {System.Text.Json.JsonSerializer.Serialize(args.Item)}");
+    }
 
     // Edit vino
     //async Task StartedEditingItem(VinoDTO item)

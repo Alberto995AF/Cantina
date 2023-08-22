@@ -723,43 +723,85 @@ namespace Cantina.Data
                 }
             }
 
-            //foreach (var vino in items)
-            //{
-            //    if (vino.Nome.Contains(value) || vino.AziendaVinicola.Nome.Contains(value))
-            //    {
-            //        int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
-            //        int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
-            //        int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
-            //        bool inCant = numBottigleCantina > 0 ? true : false;
-            //        listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
-
-            //    }
-            //}
             return Task.FromResult(listVinoDto);
         }
+
+        ///// <summary>
+        ///// RESTITUISCE TUTTI I VINI DELL'AZIENDA VINICOLA CORRISPONDENTI ALLA RICERCA
+        ///// </summary>
+        ///// <param name="value"></param>
+        ///// <returns></returns>
+        //public Task<List<VinoDTO>> GetViniCantinaSearch(string value)
+        //{
+        //    //List<VinoDTO> listVinoDto = new List<VinoDTO>();
+        //    //List<AziendaVinicola> listAzienda = new List<AziendaVinicola>();
+
+        //    var items = _context.Vino.Include(a => a.AziendaVinicola).ToList();
+        //    items = _context.Vino.Include(a => a.tipoVino).ToList();
+
+        //    foreach (var vino in items)
+        //    {
+        //        if (vino.Nome.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0 || vino.AziendaVinicola.Nome.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
+        //        {
+        //            int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
+        //            bool inCant = numBottigleCantina > 0 ? true : false;
+        //            if (inCant)
+        //            {
+        //                listAzienda.Add(GetAziendeId(vino.ID).Result);
+        //            }
+        //        }
+        //    }
+
+        //    return Task.FromResult(listAzienda);
+        //}
+
 
         /// <summary>
         /// FUNZIONE CHE RESTITUISCE LE CANTINE IN FUNZIONE DELLA RICERCA EFFETTUATA (VALUE)
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">stringa inserita nel campo di ricerca</param>
+        /// <param name="vinoList">lista dei vini: viene passata nel caso in cui si voglia ricercare solo fra le cantine presenti nei vini che sono a video (nel caso di altri filtri già impostati)</param>
+        /// <param name="AziendeInCantina">Variabile booleana che se è true implica che si ricerchi solo fra le aziende vinicole presenti in cantina, altrimenti si veda condizioni sopra</param>
         /// <returns></returns>
-        public Task<List<AziendaVinicola>> GetCantinaSearch(string value, List<VinoDTO> vinoList)
+        public Task<List<AziendaVinicola>> GetCantinaSearch(string value, List<VinoDTO> vinoList, bool AziendeInCantina)
         {
-            if (vinoList == null)
-            {
-                var item = _context.AziendaVinicola.Where(x => x.Nome.Contains(value)).ToList();
-                return Task.FromResult(item);
-            }
-
             List<AziendaVinicola> listAzd = new();
-            var items = vinoList.Where(x => x.AziendaVinicola.ToLower().Contains(value.ToLower())).ToList();
 
-            foreach (var den in items.Select(x => new { id = x.AziendaVinicolaId, nome = x.AziendaVinicola }).Distinct())
+            if (AziendeInCantina)
             {
-                AziendaVinicola newAzd = new();
-                newAzd.ID = den.id;
-                newAzd.Nome = den.nome;
-                listAzd.Add(newAzd);
+                var items = _context.Vino.Include(a => a.AziendaVinicola).ToList();
+                items = _context.Vino.Include(a => a.tipoVino).ToList();
+
+                foreach (var vino in items)
+                {
+                    if (vino.AziendaVinicola.Nome.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
+                        bool inCant = numBottigleCantina > 0 ? true : false;
+                        if (inCant)
+                        {
+                            listAzd.Add(GetAziendeId(vino.AziendaVinicolaId).Result);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (vinoList == null)
+                {
+                    var item = _context.AziendaVinicola.Where(x => x.Nome.ToLower().Contains(value)).ToList();
+                    return Task.FromResult(item);
+                }
+
+                var items = vinoList.Where(x => x.AziendaVinicola.ToLower().Contains(value.ToLower())).ToList();
+
+                foreach (var den in items.Select(x => new { id = x.AziendaVinicolaId, nome = x.AziendaVinicola }).Distinct())
+                {
+                    AziendaVinicola newAzd = new();
+                    newAzd.ID = den.id;
+                    newAzd.Nome = den.nome;
+                    listAzd.Add(newAzd);
+                }
             }
 
             return Task.FromResult(listAzd);

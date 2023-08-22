@@ -17,9 +17,9 @@
 
     <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
         <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />
-        <MudTooltip>
+        @*<MudTooltip>
             <MudIconButton Icon="@Icons.Material.Filled.SupportAgent" Color="Color.Inherit" Href="https://tausoftware.it" Target="_blank" />
-        </MudTooltip>
+        </MudTooltip>*@
     </MudHidden>
 
     <MudMenu AnchorOrigin="Origin.BottomRight" LockScroll="true" TransformOrigin="Origin.TopRight">
@@ -61,7 +61,7 @@
     </MudDrawer>
 
     <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+        <MudContainer id="bodyZone" MaxWidth="MaxWidth.False" Class="mt-4">
             @Body
         </MudContainer>
 
