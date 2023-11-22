@@ -1,0 +1,37 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/obj/Debug/net6.0/scopedcss/projectbundle/Cantina.bundle.scp.css",
+      "PackagePath": "staticwebassets/Cantina.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/wwwroot/css/site.css",
+      "PackagePath": "staticwebassets/css/site.css"
+    },
+    {
+      "Id": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/wwwroot/js/utility.js",
+      "PackagePath": "staticwebassets/js/utility.js"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.Cantina.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.build.Cantina.props",
+      "PackagePath": "build\\Cantina.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.Cantina.props",
+      "PackagePath": "buildMultiTargeting\\Cantina.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.Cantina.props",
+      "PackagePath": "buildTransitive\\Cantina.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
