@@ -1,0 +1,1041 @@
+[17-08-2023 01:17:38 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 01:17:39 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 01:17:40 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 01:17:40 [IP ] [] [INF]  SeedData End...
+[17-08-2023 01:17:42 [IP ] [0HMSULRUDJB28:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 01:17:43 [IP ] [0HMSULRUDJB2E:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860"
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:17:43 [IP ] [0HMSULRUDJB2E:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"jatx2IVTCNxBzuiXkL2Th94Qgb9HV-0Rh9MWNQHWzCw"'.
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:17:49 [IP ] [0HMSULRUDJB2F:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860"
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:17:49 [IP ] [0HMSULRUDJB2F:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"4WtxRz1EgFKMZtCCJq4nx04tA20CgbOsUJA84puHtSo"'.
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:17:52 [IP ] [0HMSULRUDJB2G:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860"
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:17:52 [IP ] [0HMSULRUDJB2G:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"FEvisgeYlU05LI5D2vSSqrjJdvcpiOXJyLFbSDS3L6A"'.
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:18:00 [IP ] [0HMSULRUDJB2H:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860"
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:18:00 [IP ] [0HMSULRUDJB2H:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"bZRKZfKbZsguOMnMvUgN6mathkZKu37yvcFdDDCp2bY"'.
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:18:34 [IP ] [0HMSULRUDJB2I:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860"
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudCollapse.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:18:34 [IP ] [0HMSULRUDJB2I:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"CxRXyvP_xV5XlwFYKGmbbiWnzetmCJYnPlvZnnuHohg"'.
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudCollapse.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:18:51 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 01:18:54 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 01:18:55 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 01:18:56 [IP ] [] [INF]  SeedData End...
+[17-08-2023 01:19:01 [IP ] [0HMSULSM3MFSS:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 01:19:02 [IP ] [0HMSULSM3MFT2:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860"
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:19:02 [IP ] [0HMSULSM3MFT2:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"bqu1pn2-mAJ178wD8t9TDGuEN_TGR3OJ0u56uXKp3wA"'.
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:19:40 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 01:19:41 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 01:19:42 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 01:19:42 [IP ] [] [INF]  SeedData End...
+[17-08-2023 01:19:44 [IP ] [0HMSULT2QBKAU:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 01:20:22 [IP ] [0HMSULT2QBKB4:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860"
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:20:22 [IP ] [0HMSULT2QBKB4:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"jNxOzlc0JvKec-gBSJXAEyhT_IcIqg3U5KFOBquJNn0"'.
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:20:50 [IP ] [0HMSULT2QBKBA:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860"
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:20:50 [IP ] [0HMSULT2QBKBA:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"iQ4flw2hVjF6h7v8Zs5-kR9UAOTsc52u13HUmqF4R3g"'.
+Microsoft.JSInterop.JSException: Could not find 'mudElementRef.addEventListener' ('addEventListener' was undefined).
+@http://localhost:22147/_framework/blazor.server.js:1:506
+forEach@[native code]
+findFunction@http://localhost:22147/_framework/blazor.server.js:1:472
+@http://localhost:22147/_framework/blazor.server.js:1:3495
+Promise@[native code]
+beginInvokeJSFromDotNet@http://localhost:22147/_framework/blazor.server.js:1:3486
+forEach@[native code]
+_invokeClientMethod@http://localhost:22147/_framework/blazor.server.js:1:72079
+_processIncomingData@http://localhost:22147/_framework/blazor.server.js:1:70133
+@http://localhost:22147/_framework/blazor.server.js:1:48860
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at MudBlazor.MudDrawer.OnAfterRenderAsync(Boolean firstRender)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+[17-08-2023 01:27:33 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 01:27:37 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 01:27:38 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 01:27:38 [IP ] [] [INF]  SeedData End...
+[17-08-2023 01:27:40 [IP ] [0HMSUM1GNPCTQ:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 01:28:08 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 01:28:09 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 01:28:09 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 01:28:09 [IP ] [] [INF]  SeedData End...
+[17-08-2023 01:28:10 [IP ] [0HMSUM1PPPCD8:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 01:29:39 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 01:29:40 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 01:29:41 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 01:29:41 [IP ] [] [INF]  SeedData End...
+[17-08-2023 01:29:42 [IP ] [0HMSUM2L5LT02:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 01:31:41 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 01:31:42 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 01:31:43 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 01:31:43 [IP ] [] [INF]  SeedData End...
+[17-08-2023 01:31:44 [IP ] [0HMSUM3PHQ58I:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 01:31:44 [IP ] [0HMSUM3PHQ58I:00000002] [DBG] MudBlazor.PopoverService Adding entry for 77f7b694-bd86-45db-9372-e9bebf0af1aa/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 01:31:44 [IP ] [0HMSUM3PHQ58I:00000002] [DBG] MudBlazor.PopoverService Updating entry for 77f7b694-bd86-45db-9372-e9bebf0af1aa/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 01:31:45 [IP ] [0HMSUM3PHQ58I:00000002] [DBG] MudBlazor.PopoverService Removed entry for 77f7b694-bd86-45db-9372-e9bebf0af1aa. 0 total observers after remove.
+[17-08-2023 01:31:45 [IP ] [0HMSUM3PHQ58O:00000002] [DBG] MudBlazor.PopoverService Adding entry for 15e62e0e-280b-4e45-83e2-8e9b80b5bbf8/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 01:31:45 [IP ] [0HMSUM3PHQ58O:00000002] [DBG] MudBlazor.PopoverService Updating entry for 15e62e0e-280b-4e45-83e2-8e9b80b5bbf8/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 01:31:46 [IP ] [0HMSUM3PHQ58I:00000006] [DBG] MudBlazor.PopoverService Adding entry for f0b91b43-4d7c-4f70-ba9e-1a588ba4c166/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 01:31:46 [IP ] [0HMSUM3PHQ58I:00000006] [DBG] MudBlazor.PopoverService Updating entry for f0b91b43-4d7c-4f70-ba9e-1a588ba4c166/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 01:31:46 [IP ] [0HMSUM3PHQ58I:00000006] [DBG] MudBlazor.PopoverService Removed entry for f0b91b43-4d7c-4f70-ba9e-1a588ba4c166. 0 total observers after remove.
+[17-08-2023 01:31:46 [IP ] [0HMSUM3PHQ58P:00000002] [DBG] MudBlazor.PopoverService Adding entry for e4a0060d-96f8-4b05-974a-9083c578217d/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 01:31:46 [IP ] [0HMSUM3PHQ58P:00000002] [DBG] MudBlazor.PopoverService Updating entry for e4a0060d-96f8-4b05-974a-9083c578217d/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 01:31:47 [IP ] [0HMSUM3PHQ58I:0000000C] [DBG] MudBlazor.PopoverService Removed entry for 15e62e0e-280b-4e45-83e2-8e9b80b5bbf8. 0 total observers after remove.
+[17-08-2023 01:32:48 [IP ] [0HMSUM3PHQ58Q:00000002] [DBG] MudBlazor.PopoverService Adding entry for 68971697-6b89-45ac-8d26-0be6e03d4f46/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 01:32:48 [IP ] [0HMSUM3PHQ58Q:00000002] [DBG] MudBlazor.PopoverService Updating entry for 68971697-6b89-45ac-8d26-0be6e03d4f46/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 01:32:48 [IP ] [0HMSUM3PHQ58Q:00000002] [DBG] MudBlazor.PopoverService Removed entry for 68971697-6b89-45ac-8d26-0be6e03d4f46. 0 total observers after remove.
+[17-08-2023 01:32:48 [IP ] [0HMSUM3PHQ58Q:00000005] [DBG] MudBlazor.PopoverService Removed entry for e4a0060d-96f8-4b05-974a-9083c578217d. 0 total observers after remove.
+[17-08-2023 01:32:48 [IP ] [0HMSUM3PHQ590:00000002] [DBG] MudBlazor.PopoverService Adding entry for 7c4045c7-72ef-48ab-820b-b198141ce184/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 01:32:48 [IP ] [0HMSUM3PHQ590:00000002] [DBG] MudBlazor.PopoverService Updating entry for 7c4045c7-72ef-48ab-820b-b198141ce184/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 01:33:31 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 01:33:32 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 01:33:33 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 01:33:33 [IP ] [] [INF]  SeedData End...
+[17-08-2023 01:33:34 [IP ] [0HMSUM4QBDU58:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 01:33:34 [IP ] [0HMSUM4QBDU58:00000002] [DBG] MudBlazor.PopoverService Adding entry for 0299dcb0-0958-498d-b1bc-fc9d152774dc/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 01:33:34 [IP ] [0HMSUM4QBDU58:00000002] [DBG] MudBlazor.PopoverService Updating entry for 0299dcb0-0958-498d-b1bc-fc9d152774dc/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 01:33:35 [IP ] [0HMSUM4QBDU58:00000002] [DBG] MudBlazor.PopoverService Removed entry for 0299dcb0-0958-498d-b1bc-fc9d152774dc. 0 total observers after remove.
+[17-08-2023 01:33:35 [IP ] [0HMSUM4QBDU5E:00000002] [DBG] MudBlazor.PopoverService Adding entry for fedeb0bc-cbcf-4117-9d78-9eb35951927e/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 01:33:35 [IP ] [0HMSUM4QBDU5E:00000002] [DBG] MudBlazor.PopoverService Updating entry for fedeb0bc-cbcf-4117-9d78-9eb35951927e/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 01:33:43 [IP ] [0HMSUM4QBDU5E:00000002] [WRN] MudBlazor.MudAutocomplete The search function failed to return results: Value cannot be null. (Parameter 'value')
+[17-08-2023 01:33:57 [IP ] [0HMSUM4QBDU58:00000008] [DBG] MudBlazor.PopoverService Removed entry for fedeb0bc-cbcf-4117-9d78-9eb35951927e. 0 total observers after remove.
+[17-08-2023 20:01:14 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 20:01:15 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 20:01:15 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 20:01:15 [IP ] [] [INF]  SeedData End...
+[17-08-2023 20:01:17 [IP ] [0HMSV9FPNLH42:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 20:01:17 [IP ] [0HMSV9FPNLH42:00000002] [DBG] MudBlazor.PopoverService Adding entry for e432a658-6b50-4c83-8c7d-d197b050e381/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 20:01:17 [IP ] [0HMSV9FPNLH42:00000002] [DBG] MudBlazor.PopoverService Updating entry for e432a658-6b50-4c83-8c7d-d197b050e381/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 20:01:17 [IP ] [0HMSV9FPNLH42:00000002] [DBG] MudBlazor.PopoverService Removed entry for e432a658-6b50-4c83-8c7d-d197b050e381. 0 total observers after remove.
+[17-08-2023 20:01:18 [IP ] [0HMSV9FPNLH48:00000002] [DBG] MudBlazor.PopoverService Adding entry for d9b9aa91-cb7e-4189-ab86-b370e2a94be8/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 20:01:18 [IP ] [0HMSV9FPNLH48:00000002] [DBG] MudBlazor.PopoverService Updating entry for d9b9aa91-cb7e-4189-ab86-b370e2a94be8/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 20:01:30 [IP ] [0HMSV9FPNLH48:00000002] [WRN] MudBlazor.MudAutocomplete The search function failed to return results: Value cannot be null. (Parameter 'value')
+[17-08-2023 20:01:36 [IP ] [0HMSV9FPNLH42:00000007] [DBG] MudBlazor.PopoverService Removed entry for d9b9aa91-cb7e-4189-ab86-b370e2a94be8. 0 total observers after remove.
+[17-08-2023 21:46:22 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 21:46:24 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 21:46:24 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 21:46:24 [IP ] [] [INF]  SeedData End...
+[17-08-2023 21:46:25 [IP ] [0HMSVBAHQRBUS:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 21:46:26 [IP ] [0HMSVBAHQRBUS:00000002] [DBG] MudBlazor.PopoverService Adding entry for d9580ac8-8ec1-461e-809e-f45f19ed261a/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 21:46:26 [IP ] [0HMSVBAHQRBUS:00000002] [DBG] MudBlazor.PopoverService Updating entry for d9580ac8-8ec1-461e-809e-f45f19ed261a/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 21:46:26 [IP ] [0HMSVBAHQRBUS:00000002] [DBG] MudBlazor.PopoverService Removed entry for d9580ac8-8ec1-461e-809e-f45f19ed261a. 0 total observers after remove.
+[17-08-2023 21:46:26 [IP ] [0HMSVBAHQRBV2:00000002] [DBG] MudBlazor.PopoverService Adding entry for 88967ff3-7fce-45e3-852f-6a23c4b36906/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 21:46:26 [IP ] [0HMSVBAHQRBV2:00000002] [DBG] MudBlazor.PopoverService Updating entry for 88967ff3-7fce-45e3-852f-6a23c4b36906/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 21:46:28 [IP ] [0HMSVBAHQRBV2:00000002] [WRN] MudBlazor.MudAutocomplete The search function failed to return results: Value cannot be null. (Parameter 'value')
+[17-08-2023 21:46:32 [IP ] [0HMSVBAHQRBV2:00000002] [WRN] MudBlazor.MudAutocomplete The search function failed to return results: Value cannot be null. (Parameter 'value')
+[17-08-2023 21:46:37 [IP ] [0HMSVBAHQRBUS:00000006] [DBG] MudBlazor.PopoverService Removed entry for 88967ff3-7fce-45e3-852f-6a23c4b36906. 0 total observers after remove.
+[17-08-2023 21:51:37 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 21:51:38 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 21:51:38 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 21:51:38 [IP ] [] [INF]  SeedData End...
+[17-08-2023 21:51:40 [IP ] [0HMSVBDFGAOBM:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 21:51:40 [IP ] [0HMSVBDFGAOBM:00000002] [DBG] MudBlazor.PopoverService Adding entry for 97f9e523-bdd9-44d8-bf1f-460b41763ebf/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 21:51:40 [IP ] [0HMSVBDFGAOBM:00000002] [DBG] MudBlazor.PopoverService Updating entry for 97f9e523-bdd9-44d8-bf1f-460b41763ebf/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 21:51:41 [IP ] [0HMSVBDFGAOBM:00000002] [DBG] MudBlazor.PopoverService Removed entry for 97f9e523-bdd9-44d8-bf1f-460b41763ebf. 0 total observers after remove.
+[17-08-2023 21:51:41 [IP ] [0HMSVBDFGAOBS:00000002] [DBG] MudBlazor.PopoverService Adding entry for 0cb71400-bdc9-418d-b421-457b11f0c326/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 21:51:41 [IP ] [0HMSVBDFGAOBS:00000002] [DBG] MudBlazor.PopoverService Updating entry for 0cb71400-bdc9-418d-b421-457b11f0c326/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 21:51:42 [IP ] [0HMSVBDFGAOBS:00000002] [WRN] MudBlazor.MudAutocomplete The search function failed to return results: Value cannot be null. (Parameter 'value')
+[17-08-2023 21:51:51 [IP ] [0HMSVBDFGAOBM:0000000A] [DBG] MudBlazor.PopoverService Removed entry for 0cb71400-bdc9-418d-b421-457b11f0c326. 0 total observers after remove.
+[17-08-2023 21:52:51 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 21:52:52 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 21:52:52 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 21:52:52 [IP ] [] [INF]  SeedData End...
+[17-08-2023 21:52:54 [IP ] [0HMSVBE5JR9E8:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 21:52:54 [IP ] [0HMSVBE5JR9E8:00000002] [DBG] MudBlazor.PopoverService Adding entry for bdef9457-3f79-45a3-a820-293a0e438c1a/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 21:52:54 [IP ] [0HMSVBE5JR9E8:00000002] [DBG] MudBlazor.PopoverService Updating entry for bdef9457-3f79-45a3-a820-293a0e438c1a/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 21:52:54 [IP ] [0HMSVBE5JR9E8:00000002] [DBG] MudBlazor.PopoverService Removed entry for bdef9457-3f79-45a3-a820-293a0e438c1a. 0 total observers after remove.
+[17-08-2023 21:52:55 [IP ] [0HMSVBE5JR9EE:00000002] [DBG] MudBlazor.PopoverService Adding entry for 84f8ac41-13a6-4b51-b789-41d763a18813/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 21:52:55 [IP ] [0HMSVBE5JR9EE:00000002] [DBG] MudBlazor.PopoverService Updating entry for 84f8ac41-13a6-4b51-b789-41d763a18813/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 21:52:55 [IP ] [0HMSVBE5JR9EE:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 21:52:55 [IP ] [0HMSVBE5JR9EE:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 21:55:12 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 21:55:13 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 21:55:13 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 21:55:13 [IP ] [] [INF]  SeedData End...
+[17-08-2023 21:55:15 [IP ] [0HMSVBFFJ1EMQ:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 21:55:15 [IP ] [0HMSVBFFJ1EMQ:00000002] [DBG] MudBlazor.PopoverService Adding entry for 817a3d16-80a9-43ae-9309-7dd593252448/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 21:55:15 [IP ] [0HMSVBFFJ1EMQ:00000002] [DBG] MudBlazor.PopoverService Updating entry for 817a3d16-80a9-43ae-9309-7dd593252448/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 21:55:16 [IP ] [0HMSVBFFJ1EMQ:00000002] [DBG] MudBlazor.PopoverService Removed entry for 817a3d16-80a9-43ae-9309-7dd593252448. 0 total observers after remove.
+[17-08-2023 21:55:16 [IP ] [0HMSVBFFJ1EN0:00000002] [DBG] MudBlazor.PopoverService Adding entry for fdfdf71e-849e-4d9c-8670-41a77a7e0b5f/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 21:55:16 [IP ] [0HMSVBFFJ1EN0:00000002] [DBG] MudBlazor.PopoverService Updating entry for fdfdf71e-849e-4d9c-8670-41a77a7e0b5f/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 21:55:16 [IP ] [0HMSVBFFJ1EN0:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 21:55:16 [IP ] [0HMSVBFFJ1EN0:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 22:02:01 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 22:02:02 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 22:02:02 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 22:02:02 [IP ] [] [INF]  SeedData End...
+[17-08-2023 22:02:04 [IP ] [0HMSVBJ9HJH86:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 22:02:04 [IP ] [0HMSVBJ9HJH86:00000002] [DBG] MudBlazor.PopoverService Adding entry for d738e7df-1af9-46f3-a45b-9d9a660b27cf/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 22:02:04 [IP ] [0HMSVBJ9HJH86:00000002] [DBG] MudBlazor.PopoverService Updating entry for d738e7df-1af9-46f3-a45b-9d9a660b27cf/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 22:02:05 [IP ] [0HMSVBJ9HJH86:00000002] [DBG] MudBlazor.PopoverService Removed entry for d738e7df-1af9-46f3-a45b-9d9a660b27cf. 0 total observers after remove.
+[17-08-2023 22:02:05 [IP ] [0HMSVBJ9HJH8C:00000002] [DBG] MudBlazor.PopoverService Adding entry for 6981c005-785a-4501-aa1b-1afe8a151323/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 22:02:05 [IP ] [0HMSVBJ9HJH8C:00000002] [DBG] MudBlazor.PopoverService Updating entry for 6981c005-785a-4501-aa1b-1afe8a151323/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 22:02:06 [IP ] [0HMSVBJ9HJH8C:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 22:02:06 [IP ] [0HMSVBJ9HJH8C:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:10:20 [IP ] [0HMSVBJ9HJH8D:00000002] [DBG] MudBlazor.PopoverService Adding entry for b4fe8b65-0291-4d06-ae79-954af5a49674/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:10:20 [IP ] [0HMSVBJ9HJH8D:00000002] [DBG] MudBlazor.PopoverService Updating entry for b4fe8b65-0291-4d06-ae79-954af5a49674/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:10:21 [IP ] [0HMSVBJ9HJH8D:00000002] [DBG] MudBlazor.PopoverService Removed entry for b4fe8b65-0291-4d06-ae79-954af5a49674. 0 total observers after remove.
+[17-08-2023 23:10:21 [IP ] [0HMSVBJ9HJH8J:00000002] [DBG] MudBlazor.PopoverService Adding entry for 9f51796f-ca1d-4fa7-bbd9-748830f14519/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:10:21 [IP ] [0HMSVBJ9HJH8J:00000002] [DBG] MudBlazor.PopoverService Updating entry for 9f51796f-ca1d-4fa7-bbd9-748830f14519/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:10:22 [IP ] [0HMSVBJ9HJH8J:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:10:22 [IP ] [0HMSVBJ9HJH8J:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:18:28 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 23:18:29 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 23:18:30 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 23:18:30 [IP ] [] [INF]  SeedData End...
+[17-08-2023 23:18:31 [IP ] [0HMSVCU0KU8CP:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 23:18:32 [IP ] [0HMSVCU0KU8CO:00000002] [DBG] MudBlazor.PopoverService Adding entry for 0683593f-b12d-4492-8f0b-ce40bcfca7b7/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:18:32 [IP ] [0HMSVCU0KU8CO:00000002] [DBG] MudBlazor.PopoverService Updating entry for 0683593f-b12d-4492-8f0b-ce40bcfca7b7/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:18:32 [IP ] [0HMSVCU0KU8CO:00000002] [DBG] MudBlazor.PopoverService Removed entry for 0683593f-b12d-4492-8f0b-ce40bcfca7b7. 0 total observers after remove.
+[17-08-2023 23:18:33 [IP ] [0HMSVCU0KU8D0:00000002] [DBG] MudBlazor.PopoverService Adding entry for caf1912a-4504-4626-8203-0df247adf0e1/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:18:33 [IP ] [0HMSVCU0KU8D0:00000002] [DBG] MudBlazor.PopoverService Updating entry for caf1912a-4504-4626-8203-0df247adf0e1/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:18:33 [IP ] [0HMSVCU0KU8D0:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:18:33 [IP ] [0HMSVCU0KU8D0:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:18:34 [IP ] [0HMSVCU0KU8CO:00000008] [DBG] MudBlazor.PopoverService Adding entry for e700498a-01f9-4c7d-8073-9178c4777534/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:18:34 [IP ] [0HMSVCU0KU8CO:00000008] [DBG] MudBlazor.PopoverService Updating entry for e700498a-01f9-4c7d-8073-9178c4777534/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:18:34 [IP ] [0HMSVCU0KU8CO:00000008] [DBG] MudBlazor.PopoverService Removed entry for e700498a-01f9-4c7d-8073-9178c4777534. 0 total observers after remove.
+[17-08-2023 23:18:34 [IP ] [0HMSVCU0KU8D1:00000002] [DBG] MudBlazor.PopoverService Adding entry for 6cca1418-1b68-4794-ad72-35944f2a2304/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:18:34 [IP ] [0HMSVCU0KU8D1:00000002] [DBG] MudBlazor.PopoverService Updating entry for 6cca1418-1b68-4794-ad72-35944f2a2304/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:18:34 [IP ] [0HMSVCU0KU8CO:00000009] [DBG] MudBlazor.PopoverService Removed entry for caf1912a-4504-4626-8203-0df247adf0e1. 0 total observers after remove.
+[17-08-2023 23:18:34 [IP ] [0HMSVCU0KU8CO:00000009] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 1 total observers after remove.
+[17-08-2023 23:18:34 [IP ] [0HMSVCU0KU8D1:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:18:34 [IP ] [0HMSVCU0KU8CO:00000009] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 0 total observers after remove.
+[17-08-2023 23:18:34 [IP ] [0HMSVCU0KU8D1:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:18:36 [IP ] [0HMSVCU0KU8CO:0000000A] [DBG] MudBlazor.PopoverService Removed entry for 6cca1418-1b68-4794-ad72-35944f2a2304. 0 total observers after remove.
+[17-08-2023 23:18:36 [IP ] [0HMSVCU0KU8CO:0000000A] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 1 total observers after remove.
+[17-08-2023 23:18:36 [IP ] [0HMSVCU0KU8CO:0000000A] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 0 total observers after remove.
+[17-08-2023 23:18:48 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 23:18:49 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 23:18:49 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 23:18:49 [IP ] [] [INF]  SeedData End...
+[17-08-2023 23:18:50 [IP ] [0HMSVCU6CURUI:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 23:18:51 [IP ] [0HMSVCU6CURUI:00000002] [DBG] MudBlazor.PopoverService Adding entry for e2477ebf-9bac-48cb-8a01-39c703a5c2ad/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:18:51 [IP ] [0HMSVCU6CURUI:00000002] [DBG] MudBlazor.PopoverService Updating entry for e2477ebf-9bac-48cb-8a01-39c703a5c2ad/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:18:51 [IP ] [0HMSVCU6CURUI:00000002] [DBG] MudBlazor.PopoverService Removed entry for e2477ebf-9bac-48cb-8a01-39c703a5c2ad. 0 total observers after remove.
+[17-08-2023 23:18:51 [IP ] [0HMSVCU6CURUO:00000002] [DBG] MudBlazor.PopoverService Adding entry for c18434d1-b217-40da-b6e5-285fc0d2f41b/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:18:51 [IP ] [0HMSVCU6CURUO:00000002] [DBG] MudBlazor.PopoverService Updating entry for c18434d1-b217-40da-b6e5-285fc0d2f41b/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:18:52 [IP ] [0HMSVCU6CURUO:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:18:52 [IP ] [0HMSVCU6CURUO:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:18:52 [IP ] [0HMSVCU6CURUO:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "The expression 'a.DenominazioneVinoId' is invalid inside an 'Include' operation, since it does not represent a property access: 't => t.MyProperty'. To target navigations declared on derived types, use casting ('t => ((Derived)t).MyProperty') or the 'as' operator ('t => (t as Derived).MyProperty'). Collection navigation access can be filtered by composing Where, OrderBy(Descending), ThenBy(Descending), Skip or Take operations. For more information on including related data, see http://go.microsoft.com/fwlink/?LinkID=746393."
+System.InvalidOperationException: The expression 'a.DenominazioneVinoId' is invalid inside an 'Include' operation, since it does not represent a property access: 't => t.MyProperty'. To target navigations declared on derived types, use casting ('t => ((Derived)t).MyProperty') or the 'as' operator ('t => (t as Derived).MyProperty'). Collection navigation access can be filtered by composing Where, OrderBy(Descending), ThenBy(Descending), Skip or Take operations. For more information on including related data, see http://go.microsoft.com/fwlink/?LinkID=746393.
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.PopulateIncludeTree(IncludeTreeNode includeTreeNode, Expression expression, Boolean setLoaded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.ProcessInclude(NavigationExpansionExpression source, Expression expression, Boolean thenInclude, Boolean setLoaded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at System.Linq.Expressions.MethodCallExpression.Accept(ExpressionVisitor visitor)
+   at System.Linq.Expressions.ExpressionVisitor.Visit(Expression node)
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.Expand(Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryTranslationPreprocessor.Process(Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryable`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Cantina.Data.VinoService.GetViniCantina() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Data/VinoService.cs:line 316
+   at Cantina.Pages.ViniCantina.ViniCantina.OnInitializedAsync() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/ViniCantina/ViniCantina.razor:line 127
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+[17-08-2023 23:18:52 [IP ] [0HMSVCU6CURUO:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"YZ_yO8kj9GcNpf2DCZjrPMx26Wapj67fb5uV3KUpe3Y"'.
+System.InvalidOperationException: The expression 'a.DenominazioneVinoId' is invalid inside an 'Include' operation, since it does not represent a property access: 't => t.MyProperty'. To target navigations declared on derived types, use casting ('t => ((Derived)t).MyProperty') or the 'as' operator ('t => (t as Derived).MyProperty'). Collection navigation access can be filtered by composing Where, OrderBy(Descending), ThenBy(Descending), Skip or Take operations. For more information on including related data, see http://go.microsoft.com/fwlink/?LinkID=746393.
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.PopulateIncludeTree(IncludeTreeNode includeTreeNode, Expression expression, Boolean setLoaded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.ProcessInclude(NavigationExpansionExpression source, Expression expression, Boolean thenInclude, Boolean setLoaded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at System.Linq.Expressions.MethodCallExpression.Accept(ExpressionVisitor visitor)
+   at System.Linq.Expressions.ExpressionVisitor.Visit(Expression node)
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.Expand(Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryTranslationPreprocessor.Process(Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryable`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Cantina.Data.VinoService.GetViniCantina() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Data/VinoService.cs:line 316
+   at Cantina.Pages.ViniCantina.ViniCantina.OnInitializedAsync() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/ViniCantina/ViniCantina.razor:line 127
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+[17-08-2023 23:18:52 [IP ] [0HMSVCU6CURUO:00000002] [DBG] MudBlazor.PopoverService Removed entry for c18434d1-b217-40da-b6e5-285fc0d2f41b. 0 total observers after remove.
+[17-08-2023 23:18:52 [IP ] [0HMSVCU6CURUO:00000002] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 1 total observers after remove.
+[17-08-2023 23:18:52 [IP ] [0HMSVCU6CURUO:00000002] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 0 total observers after remove.
+[17-08-2023 23:18:52 [IP ] [0HMSVCU6CURUO:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Cannot access a disposed object."
+System.ObjectDisposedException: Cannot access a disposed object.
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.ThrowObjectDisposedException()
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.GrowBuffer(Int32 desiredCapacity)
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.Append(T[] source, Int32 startIndex, Int32 length)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InsertNewFrame(DiffContext& diffContext, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.ComputeDiff(Renderer renderer, RenderBatchBuilder batchBuilder, Int32 componentId, ArrayRange`1 oldTree, ArrayRange`1 newTree)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+[17-08-2023 23:18:52 [IP ] [0HMSVCU6CURUO:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"YZ_yO8kj9GcNpf2DCZjrPMx26Wapj67fb5uV3KUpe3Y"'.
+System.ObjectDisposedException: Cannot access a disposed object.
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.ThrowObjectDisposedException()
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.GrowBuffer(Int32 desiredCapacity)
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.Append(T[] source, Int32 startIndex, Int32 length)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InsertNewFrame(DiffContext& diffContext, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.ComputeDiff(Renderer renderer, RenderBatchBuilder batchBuilder, Int32 componentId, ArrayRange`1 oldTree, ArrayRange`1 newTree)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+[17-08-2023 23:18:58 [IP ] [0HMSVCU6CURUI:00000006] [DBG] MudBlazor.PopoverService Adding entry for 5c36ebf3-30ea-4440-a8d7-9b0a5f19bd44/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:18:58 [IP ] [0HMSVCU6CURUI:00000006] [DBG] MudBlazor.PopoverService Updating entry for 5c36ebf3-30ea-4440-a8d7-9b0a5f19bd44/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:18:58 [IP ] [0HMSVCU6CURUI:00000006] [ERR] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The expression 'a.DenominazioneVinoId' is invalid inside an 'Include' operation, since it does not represent a property access: 't => t.MyProperty'. To target navigations declared on derived types, use casting ('t => ((Derived)t).MyProperty') or the 'as' operator ('t => (t as Derived).MyProperty'). Collection navigation access can be filtered by composing Where, OrderBy(Descending), ThenBy(Descending), Skip or Take operations. For more information on including related data, see http://go.microsoft.com/fwlink/?LinkID=746393.
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.PopulateIncludeTree(IncludeTreeNode includeTreeNode, Expression expression, Boolean setLoaded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.ProcessInclude(NavigationExpansionExpression source, Expression expression, Boolean thenInclude, Boolean setLoaded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at System.Linq.Expressions.MethodCallExpression.Accept(ExpressionVisitor visitor)
+   at System.Linq.Expressions.ExpressionVisitor.Visit(Expression node)
+   at Microsoft.EntityFrameworkCore.Query.Internal.NavigationExpandingExpressionVisitor.Expand(Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryTranslationPreprocessor.Process(Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryable`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Cantina.Data.VinoService.GetViniCantina() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Data/VinoService.cs:line 316
+   at Cantina.Pages.ViniCantina.ViniCantina.OnInitializedAsync() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/ViniCantina/ViniCantina.razor:line 127
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+   at Microsoft.AspNetCore.Components.Rendering.HtmlRenderer.HandleException(Exception exception)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.HandleExceptionViaErrorBoundary(Exception error, ComponentState errorSourceOrNull)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.AddToPendingTasks(Task task, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SupplyCombinedParameters(ParameterView directAndCascadingParameters)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SetDirectParameters(ParameterView parameters)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InitializeNewComponentFrame(DiffContext& diffContext, Int32 frameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InitializeNewSubtree(DiffContext& diffContext, Int32 frameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InsertNewFrame(DiffContext& diffContext, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.ComputeDiff(Renderer renderer, RenderBatchBuilder batchBuilder, Int32 componentId, ArrayRange`1 oldTree, ArrayRange`1 newTree)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Components.Rendering.HtmlRenderer.HandleException(Exception exception)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessPendingRender()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.AddToRenderQueue(Int32 componentId, RenderFragment renderFragment)
+   at Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged()
+   at Microsoft.AspNetCore.Components.ComponentBase.CallOnParametersSetAsync()
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+   at Microsoft.AspNetCore.Components.Rendering.HtmlRenderer.HandleException(Exception exception)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.HandleExceptionViaErrorBoundary(Exception error, ComponentState errorSourceOrNull)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.AddToPendingTasks(Task task, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SupplyCombinedParameters(ParameterView directAndCascadingParameters)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SetDirectParameters(ParameterView parameters)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.RenderRootComponentAsync(Int32 componentId, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Rendering.HtmlRenderer.CreateInitialRenderAsync(Type componentType, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Rendering.HtmlRenderer.RenderComponentAsync(Type componentType, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Rendering.RendererSynchronizationContext.<>c__11`1.<<InvokeAsync>b__11_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.StaticComponentRenderer.PrerenderComponentAsync(ParameterView parameters, HttpContext httpContext, Type componentType)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ComponentRenderer.PrerenderedServerComponentAsync(HttpContext context, ServerComponentInvocationSequence invocationId, Type type, ParameterView parametersCollection)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ComponentRenderer.RenderComponentAsync(ViewContext viewContext, Type componentType, RenderMode renderMode, Object parameters)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at Cantina.Pages.Pages__Host.ExecuteAsync() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/_Host.cshtml:line 8
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+[17-08-2023 23:18:59 [IP ] [0HMSVCU6CURUI:00000006] [DBG] MudBlazor.PopoverService Removed entry for 5c36ebf3-30ea-4440-a8d7-9b0a5f19bd44. 0 total observers after remove.
+[17-08-2023 23:19:52 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 23:19:53 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 23:19:54 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 23:19:54 [IP ] [] [INF]  SeedData End...
+[17-08-2023 23:19:55 [IP ] [0HMSVCUPMK3MM:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 23:19:55 [IP ] [0HMSVCUPMK3MM:00000002] [DBG] MudBlazor.PopoverService Adding entry for 317af645-567d-46ca-913f-9d3663566e8d/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:19:55 [IP ] [0HMSVCUPMK3MM:00000002] [DBG] MudBlazor.PopoverService Updating entry for 317af645-567d-46ca-913f-9d3663566e8d/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:19:56 [IP ] [0HMSVCUPMK3MM:00000002] [DBG] MudBlazor.PopoverService Removed entry for 317af645-567d-46ca-913f-9d3663566e8d. 0 total observers after remove.
+[17-08-2023 23:19:56 [IP ] [0HMSVCUPMK3MS:00000002] [DBG] MudBlazor.PopoverService Adding entry for aa7664fa-bb33-489f-b8b2-9ddb75f29296/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:19:56 [IP ] [0HMSVCUPMK3MS:00000002] [DBG] MudBlazor.PopoverService Updating entry for aa7664fa-bb33-489f-b8b2-9ddb75f29296/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:19:57 [IP ] [0HMSVCUPMK3MS:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:19:57 [IP ] [0HMSVCUPMK3MS:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:19:58 [IP ] [0HMSVCUPMK3MS:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "An exception was thrown while attempting to evaluate a LINQ query parameter expression. See the inner exception for more information. To show additional information call 'DbContextOptionsBuilder.EnableSensitiveDataLogging'."
+System.InvalidOperationException: An exception was thrown while attempting to evaluate a LINQ query parameter expression. See the inner exception for more information. To show additional information call 'DbContextOptionsBuilder.EnableSensitiveDataLogging'.
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at lambda_method271(Closure )
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Evaluate(Expression expression, Boolean generateParameter)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitBinary(BinaryExpression node)
+   at System.Linq.Expressions.BinaryExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitLambda[T](Expression`1 node)
+   at System.Linq.Expressions.Expression`1.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitUnary(UnaryExpression node)
+   at System.Linq.Expressions.UnaryExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Dynamic.Utils.ExpressionVisitorUtils.VisitArguments(ExpressionVisitor visitor, IArgumentProvider nodes)
+   at System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(MethodCallExpression node)
+   at System.Linq.Expressions.MethodCallExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.ExtractParameters(Expression expression, Boolean clearEvaluatedValues)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryable`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Cantina.Data.VinoService.GetViniCantina() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Data/VinoService.cs:line 318
+   at Cantina.Pages.ViniCantina.ViniCantina.OnInitializedAsync() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/ViniCantina/ViniCantina.razor:line 127
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+[17-08-2023 23:19:58 [IP ] [0HMSVCUPMK3MS:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"982Kdm7iQDD-n17r-cW5ttPPZa09rjw3mLQ1YGebaf8"'.
+System.InvalidOperationException: An exception was thrown while attempting to evaluate a LINQ query parameter expression. See the inner exception for more information. To show additional information call 'DbContextOptionsBuilder.EnableSensitiveDataLogging'.
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at lambda_method271(Closure )
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Evaluate(Expression expression, Boolean generateParameter)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitBinary(BinaryExpression node)
+   at System.Linq.Expressions.BinaryExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitLambda[T](Expression`1 node)
+   at System.Linq.Expressions.Expression`1.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitUnary(UnaryExpression node)
+   at System.Linq.Expressions.UnaryExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Dynamic.Utils.ExpressionVisitorUtils.VisitArguments(ExpressionVisitor visitor, IArgumentProvider nodes)
+   at System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(MethodCallExpression node)
+   at System.Linq.Expressions.MethodCallExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.ExtractParameters(Expression expression, Boolean clearEvaluatedValues)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryable`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Cantina.Data.VinoService.GetViniCantina() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Data/VinoService.cs:line 318
+   at Cantina.Pages.ViniCantina.ViniCantina.OnInitializedAsync() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/ViniCantina/ViniCantina.razor:line 127
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+[17-08-2023 23:19:58 [IP ] [0HMSVCUPMK3MS:00000002] [DBG] MudBlazor.PopoverService Removed entry for aa7664fa-bb33-489f-b8b2-9ddb75f29296. 0 total observers after remove.
+[17-08-2023 23:19:58 [IP ] [0HMSVCUPMK3MS:00000002] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 1 total observers after remove.
+[17-08-2023 23:19:58 [IP ] [0HMSVCUPMK3MS:00000002] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 0 total observers after remove.
+[17-08-2023 23:19:58 [IP ] [0HMSVCUPMK3MS:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Cannot access a disposed object."
+System.ObjectDisposedException: Cannot access a disposed object.
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.ThrowObjectDisposedException()
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.GrowBuffer(Int32 desiredCapacity)
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.Append(T[] source, Int32 startIndex, Int32 length)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InsertNewFrame(DiffContext& diffContext, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.ComputeDiff(Renderer renderer, RenderBatchBuilder batchBuilder, Int32 componentId, ArrayRange`1 oldTree, ArrayRange`1 newTree)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+[17-08-2023 23:19:58 [IP ] [0HMSVCUPMK3MS:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"982Kdm7iQDD-n17r-cW5ttPPZa09rjw3mLQ1YGebaf8"'.
+System.ObjectDisposedException: Cannot access a disposed object.
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.ThrowObjectDisposedException()
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.GrowBuffer(Int32 desiredCapacity)
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.Append(T[] source, Int32 startIndex, Int32 length)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InsertNewFrame(DiffContext& diffContext, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.ComputeDiff(Renderer renderer, RenderBatchBuilder batchBuilder, Int32 componentId, ArrayRange`1 oldTree, ArrayRange`1 newTree)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+[17-08-2023 23:20:01 [IP ] [0HMSVCUPMK3MM:00000006] [DBG] MudBlazor.PopoverService Adding entry for 36fd7d06-85d0-4aa7-a73e-0d6882f60357/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:20:01 [IP ] [0HMSVCUPMK3MM:00000006] [DBG] MudBlazor.PopoverService Updating entry for 36fd7d06-85d0-4aa7-a73e-0d6882f60357/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:20:01 [IP ] [0HMSVCUPMK3MM:00000006] [ERR] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: An exception was thrown while attempting to evaluate a LINQ query parameter expression. See the inner exception for more information. To show additional information call 'DbContextOptionsBuilder.EnableSensitiveDataLogging'.
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at lambda_method272(Closure )
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Evaluate(Expression expression, Boolean generateParameter)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitBinary(BinaryExpression node)
+   at System.Linq.Expressions.BinaryExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitLambda[T](Expression`1 node)
+   at System.Linq.Expressions.Expression`1.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitUnary(UnaryExpression node)
+   at System.Linq.Expressions.UnaryExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Dynamic.Utils.ExpressionVisitorUtils.VisitArguments(ExpressionVisitor visitor, IArgumentProvider nodes)
+   at System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(MethodCallExpression node)
+   at System.Linq.Expressions.MethodCallExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.ExtractParameters(Expression expression, Boolean clearEvaluatedValues)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryable`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Cantina.Data.VinoService.GetViniCantina() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Data/VinoService.cs:line 318
+   at Cantina.Pages.ViniCantina.ViniCantina.OnInitializedAsync() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/ViniCantina/ViniCantina.razor:line 127
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+   at Microsoft.AspNetCore.Components.Rendering.HtmlRenderer.HandleException(Exception exception)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.HandleExceptionViaErrorBoundary(Exception error, ComponentState errorSourceOrNull)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.AddToPendingTasks(Task task, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SupplyCombinedParameters(ParameterView directAndCascadingParameters)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SetDirectParameters(ParameterView parameters)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InitializeNewComponentFrame(DiffContext& diffContext, Int32 frameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InitializeNewSubtree(DiffContext& diffContext, Int32 frameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InsertNewFrame(DiffContext& diffContext, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.ComputeDiff(Renderer renderer, RenderBatchBuilder batchBuilder, Int32 componentId, ArrayRange`1 oldTree, ArrayRange`1 newTree)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Components.Rendering.HtmlRenderer.HandleException(Exception exception)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessPendingRender()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.AddToRenderQueue(Int32 componentId, RenderFragment renderFragment)
+   at Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged()
+   at Microsoft.AspNetCore.Components.ComponentBase.CallOnParametersSetAsync()
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+   at Microsoft.AspNetCore.Components.Rendering.HtmlRenderer.HandleException(Exception exception)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.HandleExceptionViaErrorBoundary(Exception error, ComponentState errorSourceOrNull)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.AddToPendingTasks(Task task, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SupplyCombinedParameters(ParameterView directAndCascadingParameters)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SetDirectParameters(ParameterView parameters)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.RenderRootComponentAsync(Int32 componentId, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Rendering.HtmlRenderer.CreateInitialRenderAsync(Type componentType, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Rendering.HtmlRenderer.RenderComponentAsync(Type componentType, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Rendering.RendererSynchronizationContext.<>c__11`1.<<InvokeAsync>b__11_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.StaticComponentRenderer.PrerenderComponentAsync(ParameterView parameters, HttpContext httpContext, Type componentType)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ComponentRenderer.PrerenderedServerComponentAsync(HttpContext context, ServerComponentInvocationSequence invocationId, Type type, ParameterView parametersCollection)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ComponentRenderer.RenderComponentAsync(ViewContext viewContext, Type componentType, RenderMode renderMode, Object parameters)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at Cantina.Pages.Pages__Host.ExecuteAsync() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/_Host.cshtml:line 8
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+[17-08-2023 23:20:01 [IP ] [0HMSVCUPMK3MM:00000006] [DBG] MudBlazor.PopoverService Removed entry for 36fd7d06-85d0-4aa7-a73e-0d6882f60357. 0 total observers after remove.
+[17-08-2023 23:20:16 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 23:20:17 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 23:20:17 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 23:20:17 [IP ] [] [INF]  SeedData End...
+[17-08-2023 23:20:18 [IP ] [0HMSVCV0MOOKG:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 23:20:19 [IP ] [0HMSVCV0MOOKG:00000002] [DBG] MudBlazor.PopoverService Adding entry for f799b56f-3b7a-422f-a133-cbc07f581702/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:20:19 [IP ] [0HMSVCV0MOOKG:00000002] [DBG] MudBlazor.PopoverService Updating entry for f799b56f-3b7a-422f-a133-cbc07f581702/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:20:19 [IP ] [0HMSVCV0MOOKG:00000002] [DBG] MudBlazor.PopoverService Removed entry for f799b56f-3b7a-422f-a133-cbc07f581702. 0 total observers after remove.
+[17-08-2023 23:20:19 [IP ] [0HMSVCV0MOOKM:00000002] [DBG] MudBlazor.PopoverService Adding entry for 3af564ee-0fc3-4138-a71a-4f3da423efe1/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:20:19 [IP ] [0HMSVCV0MOOKM:00000002] [DBG] MudBlazor.PopoverService Updating entry for 3af564ee-0fc3-4138-a71a-4f3da423efe1/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:20:20 [IP ] [0HMSVCV0MOOKM:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:20:20 [IP ] [0HMSVCV0MOOKM:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:20:35 [IP ] [0HMSVCV0MOOKM:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "An exception was thrown while attempting to evaluate a LINQ query parameter expression. See the inner exception for more information. To show additional information call 'DbContextOptionsBuilder.EnableSensitiveDataLogging'."
+System.InvalidOperationException: An exception was thrown while attempting to evaluate a LINQ query parameter expression. See the inner exception for more information. To show additional information call 'DbContextOptionsBuilder.EnableSensitiveDataLogging'.
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at lambda_method271(Closure )
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Evaluate(Expression expression, Boolean generateParameter)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitBinary(BinaryExpression node)
+   at System.Linq.Expressions.BinaryExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitLambda[T](Expression`1 node)
+   at System.Linq.Expressions.Expression`1.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitUnary(UnaryExpression node)
+   at System.Linq.Expressions.UnaryExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Dynamic.Utils.ExpressionVisitorUtils.VisitArguments(ExpressionVisitor visitor, IArgumentProvider nodes)
+   at System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(MethodCallExpression node)
+   at System.Linq.Expressions.MethodCallExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.ExtractParameters(Expression expression, Boolean clearEvaluatedValues)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryable`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Cantina.Data.VinoService.GetViniCantina() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Data/VinoService.cs:line 318
+   at Cantina.Pages.ViniCantina.ViniCantina.OnInitializedAsync() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/ViniCantina/ViniCantina.razor:line 127
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+[17-08-2023 23:20:35 [IP ] [0HMSVCV0MOOKM:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"ggQhYaOGdUWLmVZ3HcBWnLBUR58sPBC8IuFnY16NskA"'.
+System.InvalidOperationException: An exception was thrown while attempting to evaluate a LINQ query parameter expression. See the inner exception for more information. To show additional information call 'DbContextOptionsBuilder.EnableSensitiveDataLogging'.
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at lambda_method271(Closure )
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Evaluate(Expression expression, Boolean generateParameter)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitBinary(BinaryExpression node)
+   at System.Linq.Expressions.BinaryExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitLambda[T](Expression`1 node)
+   at System.Linq.Expressions.Expression`1.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Linq.Expressions.ExpressionVisitor.VisitUnary(UnaryExpression node)
+   at System.Linq.Expressions.UnaryExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at System.Dynamic.Utils.ExpressionVisitorUtils.VisitArguments(ExpressionVisitor visitor, IArgumentProvider nodes)
+   at System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(MethodCallExpression node)
+   at System.Linq.Expressions.MethodCallExpression.Accept(ExpressionVisitor visitor)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.Visit(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.ExtractParameters(Expression expression, Boolean clearEvaluatedValues)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryable`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Cantina.Data.VinoService.GetViniCantina() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Data/VinoService.cs:line 318
+   at Cantina.Pages.ViniCantina.ViniCantina.OnInitializedAsync() in /Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/ViniCantina/ViniCantina.razor:line 127
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+[17-08-2023 23:20:35 [IP ] [0HMSVCV0MOOKM:00000002] [DBG] MudBlazor.PopoverService Removed entry for 3af564ee-0fc3-4138-a71a-4f3da423efe1. 0 total observers after remove.
+[17-08-2023 23:20:35 [IP ] [0HMSVCV0MOOKM:00000002] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 1 total observers after remove.
+[17-08-2023 23:20:35 [IP ] [0HMSVCV0MOOKM:00000002] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 0 total observers after remove.
+[17-08-2023 23:20:35 [IP ] [0HMSVCV0MOOKM:00000002] [WRN] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Cannot access a disposed object."
+System.ObjectDisposedException: Cannot access a disposed object.
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.ThrowObjectDisposedException()
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.GrowBuffer(Int32 desiredCapacity)
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.Append(T[] source, Int32 startIndex, Int32 length)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InsertNewFrame(DiffContext& diffContext, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.ComputeDiff(Renderer renderer, RenderBatchBuilder batchBuilder, Int32 componentId, ArrayRange`1 oldTree, ArrayRange`1 newTree)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+[17-08-2023 23:20:35 [IP ] [0HMSVCV0MOOKM:00000002] [ERR] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"ggQhYaOGdUWLmVZ3HcBWnLBUR58sPBC8IuFnY16NskA"'.
+System.ObjectDisposedException: Cannot access a disposed object.
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.ThrowObjectDisposedException()
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.GrowBuffer(Int32 desiredCapacity)
+   at Microsoft.AspNetCore.Components.RenderTree.ArrayBuilder`1.Append(T[] source, Int32 startIndex, Int32 length)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.InsertNewFrame(DiffContext& diffContext, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForFramesWithSameSequence(DiffContext& diffContext, Int32 oldFrameIndex, Int32 newFrameIndex)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.AppendDiffEntriesForRange(DiffContext& diffContext, Int32 oldStartIndex, Int32 oldEndIndexExcl, Int32 newStartIndex, Int32 newEndIndexExcl)
+   at Microsoft.AspNetCore.Components.RenderTree.RenderTreeDiffBuilder.ComputeDiff(Renderer renderer, RenderBatchBuilder batchBuilder, Int32 componentId, ArrayRange`1 oldTree, ArrayRange`1 newTree)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+[17-08-2023 23:20:56 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 23:20:57 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 23:20:57 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 23:20:57 [IP ] [] [INF]  SeedData End...
+[17-08-2023 23:20:59 [IP ] [0HMSVCVCL614Q:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 23:20:59 [IP ] [0HMSVCVCL614Q:00000002] [DBG] MudBlazor.PopoverService Adding entry for 3d032fa4-33a8-4107-85fc-df5d185e73b9/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:20:59 [IP ] [0HMSVCVCL614Q:00000002] [DBG] MudBlazor.PopoverService Updating entry for 3d032fa4-33a8-4107-85fc-df5d185e73b9/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:20:59 [IP ] [0HMSVCVCL614Q:00000002] [DBG] MudBlazor.PopoverService Removed entry for 3d032fa4-33a8-4107-85fc-df5d185e73b9. 0 total observers after remove.
+[17-08-2023 23:21:00 [IP ] [0HMSVCVCL6150:00000002] [DBG] MudBlazor.PopoverService Adding entry for 63a43c2b-df52-4068-b544-5d05ee3d16f8/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:21:00 [IP ] [0HMSVCVCL6150:00000002] [DBG] MudBlazor.PopoverService Updating entry for 63a43c2b-df52-4068-b544-5d05ee3d16f8/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:21:00 [IP ] [0HMSVCVCL6150:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:21:00 [IP ] [0HMSVCVCL6150:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:26:41 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 23:26:42 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 23:26:42 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 23:26:42 [IP ] [] [INF]  SeedData End...
+[17-08-2023 23:26:44 [IP ] [0HMSVD2JG7HH2:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 23:26:44 [IP ] [0HMSVD2JG7HH2:00000002] [DBG] MudBlazor.PopoverService Adding entry for 8f7dca4a-8e00-44d2-b3f5-36b42b289231/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:26:44 [IP ] [0HMSVD2JG7HH2:00000002] [DBG] MudBlazor.PopoverService Updating entry for 8f7dca4a-8e00-44d2-b3f5-36b42b289231/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:26:45 [IP ] [0HMSVD2JG7HH2:00000002] [DBG] MudBlazor.PopoverService Removed entry for 8f7dca4a-8e00-44d2-b3f5-36b42b289231. 0 total observers after remove.
+[17-08-2023 23:26:45 [IP ] [0HMSVD2JG7HH8:00000002] [DBG] MudBlazor.PopoverService Adding entry for 10dde477-8ded-4e97-b6cb-6b94a62d5183/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:26:45 [IP ] [0HMSVD2JG7HH8:00000002] [DBG] MudBlazor.PopoverService Updating entry for 10dde477-8ded-4e97-b6cb-6b94a62d5183/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:26:45 [IP ] [0HMSVD2JG7HH8:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:26:45 [IP ] [0HMSVD2JG7HH8:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:26:56 [IP ] [0HMSVD2JG7HH2:00000007] [DBG] MudBlazor.PopoverService Removed entry for 10dde477-8ded-4e97-b6cb-6b94a62d5183. 0 total observers after remove.
+[17-08-2023 23:26:56 [IP ] [0HMSVD2JG7HH2:00000007] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 1 total observers after remove.
+[17-08-2023 23:26:56 [IP ] [0HMSVD2JG7HH2:00000007] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 0 total observers after remove.
+[17-08-2023 23:33:07 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 23:33:08 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 23:33:09 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 23:33:09 [IP ] [] [INF]  SeedData End...
+[17-08-2023 23:33:10 [IP ] [0HMSVD66JJH3Q:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 23:33:10 [IP ] [0HMSVD66JJH3Q:00000002] [DBG] MudBlazor.PopoverService Adding entry for d350b077-3d15-4d03-906e-d8a5ebb4c941/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:33:10 [IP ] [0HMSVD66JJH3Q:00000002] [DBG] MudBlazor.PopoverService Updating entry for d350b077-3d15-4d03-906e-d8a5ebb4c941/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:33:11 [IP ] [0HMSVD66JJH3Q:00000002] [DBG] MudBlazor.PopoverService Removed entry for d350b077-3d15-4d03-906e-d8a5ebb4c941. 0 total observers after remove.
+[17-08-2023 23:33:11 [IP ] [0HMSVD66JJH40:00000002] [DBG] MudBlazor.PopoverService Adding entry for 0f9113be-199b-4d1c-87ee-8a83159013b2/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:33:11 [IP ] [0HMSVD66JJH40:00000002] [DBG] MudBlazor.PopoverService Updating entry for 0f9113be-199b-4d1c-87ee-8a83159013b2/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:33:11 [IP ] [0HMSVD66JJH40:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:33:11 [IP ] [0HMSVD66JJH40:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:42:54 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 23:42:55 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 23:42:55 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 23:42:55 [IP ] [] [INF]  SeedData End...
+[17-08-2023 23:42:56 [IP ] [0HMSVDBLCSHJO:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 23:42:57 [IP ] [0HMSVDBLCSHJO:00000002] [DBG] MudBlazor.PopoverService Adding entry for 66bdd5d4-0ab5-4ba5-a1d4-1fcbeb21cc6a/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:42:57 [IP ] [0HMSVDBLCSHJO:00000002] [DBG] MudBlazor.PopoverService Updating entry for 66bdd5d4-0ab5-4ba5-a1d4-1fcbeb21cc6a/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:42:57 [IP ] [0HMSVDBLCSHJO:00000002] [DBG] MudBlazor.PopoverService Removed entry for 66bdd5d4-0ab5-4ba5-a1d4-1fcbeb21cc6a. 0 total observers after remove.
+[17-08-2023 23:42:57 [IP ] [0HMSVDBLCSHJU:00000002] [DBG] MudBlazor.PopoverService Adding entry for 1e128764-7409-432a-a4cb-fce3d187ce3a/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:42:57 [IP ] [0HMSVDBLCSHJU:00000002] [DBG] MudBlazor.PopoverService Updating entry for 1e128764-7409-432a-a4cb-fce3d187ce3a/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:42:58 [IP ] [0HMSVDBLCSHJU:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:42:58 [IP ] [0HMSVDBLCSHJU:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:55:10 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 23:55:11 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 23:55:12 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 23:55:12 [IP ] [] [INF]  SeedData End...
+[17-08-2023 23:55:13 [IP ] [0HMSVDIGT262A:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 23:55:13 [IP ] [0HMSVDIGT262A:00000002] [DBG] MudBlazor.PopoverService Adding entry for 9bee3033-65b2-4ce0-acd2-08607914aa05/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:55:13 [IP ] [0HMSVDIGT262A:00000002] [DBG] MudBlazor.PopoverService Updating entry for 9bee3033-65b2-4ce0-acd2-08607914aa05/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:55:14 [IP ] [0HMSVDIGT262A:00000002] [DBG] MudBlazor.PopoverService Removed entry for 9bee3033-65b2-4ce0-acd2-08607914aa05. 0 total observers after remove.
+[17-08-2023 23:55:14 [IP ] [0HMSVDIGT262G:00000002] [DBG] MudBlazor.PopoverService Adding entry for d7373698-ce14-4c08-a365-c4f88c760d08/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:55:14 [IP ] [0HMSVDIGT262G:00000002] [DBG] MudBlazor.PopoverService Updating entry for d7373698-ce14-4c08-a365-c4f88c760d08/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:55:14 [IP ] [0HMSVDIGT262G:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:55:14 [IP ] [0HMSVDIGT262G:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:55:23 [IP ] [0HMSVDIGT262J:00000002] [DBG] MudBlazor.PopoverService Adding entry for a7ea233c-70fc-4f15-9a16-aea27fa4d467/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:55:23 [IP ] [0HMSVDIGT262J:00000002] [DBG] MudBlazor.PopoverService Updating entry for a7ea233c-70fc-4f15-9a16-aea27fa4d467/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:55:23 [IP ] [0HMSVDIGT262J:00000002] [DBG] MudBlazor.PopoverService Removed entry for a7ea233c-70fc-4f15-9a16-aea27fa4d467. 0 total observers after remove.
+[17-08-2023 23:55:24 [IP ] [0HMSVDIGT262P:00000002] [DBG] MudBlazor.PopoverService Adding entry for 66dfd935-62eb-4195-85d6-04499a2cd0fd/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:55:24 [IP ] [0HMSVDIGT262P:00000002] [DBG] MudBlazor.PopoverService Updating entry for 66dfd935-62eb-4195-85d6-04499a2cd0fd/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:55:24 [IP ] [0HMSVDIGT262J:00000003] [DBG] MudBlazor.PopoverService Removed entry for d7373698-ce14-4c08-a365-c4f88c760d08. 0 total observers after remove.
+[17-08-2023 23:55:24 [IP ] [0HMSVDIGT262J:00000003] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 1 total observers after remove.
+[17-08-2023 23:55:24 [IP ] [0HMSVDIGT262J:00000003] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 0 total observers after remove.
+[17-08-2023 23:55:24 [IP ] [0HMSVDIGT262P:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:55:24 [IP ] [0HMSVDIGT262P:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[17-08-2023 23:58:05 [IP ] [] [INF]  Server Booting Up...
+[17-08-2023 23:58:06 [IP ] [] [INF]  SeedData Start...
+[17-08-2023 23:58:06 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[17-08-2023 23:58:06 [IP ] [] [INF]  SeedData End...
+[17-08-2023 23:58:07 [IP ] [0HMSVDK4SUNJ6:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[17-08-2023 23:58:08 [IP ] [0HMSVDK4SUNJ6:00000002] [DBG] MudBlazor.PopoverService Adding entry for 28ab95e4-d1f3-4fa9-9146-5f64082ecf6f/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:58:08 [IP ] [0HMSVDK4SUNJ6:00000002] [DBG] MudBlazor.PopoverService Updating entry for 28ab95e4-d1f3-4fa9-9146-5f64082ecf6f/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:58:08 [IP ] [0HMSVDK4SUNJ6:00000002] [DBG] MudBlazor.PopoverService Removed entry for 28ab95e4-d1f3-4fa9-9146-5f64082ecf6f. 0 total observers after remove.
+[17-08-2023 23:58:08 [IP ] [0HMSVDK4SUNJC:00000002] [DBG] MudBlazor.PopoverService Adding entry for 8a76d336-567a-410e-a932-87d826ee8a73/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[17-08-2023 23:58:08 [IP ] [0HMSVDK4SUNJC:00000002] [DBG] MudBlazor.PopoverService Updating entry for 8a76d336-567a-410e-a932-87d826ee8a73/"MudBlazor.MudPopoverProvider". 1 total observers.
+[17-08-2023 23:58:09 [IP ] [0HMSVDK4SUNJC:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[17-08-2023 23:58:09 [IP ] [0HMSVDK4SUNJC:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.

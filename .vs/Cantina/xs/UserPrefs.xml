@@ -1,0 +1,42 @@
+﻿<Properties StartupConfiguration="{C22A2FDE-F6AF-46A7-A97F-2CE570920D47}|Default">
+  <MonoDevelop.Ide.ItemProperties.Cantina PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Cantina/Data/VinoService.cs">
+    <Files>
+      <File FileName="Cantina/Pages/ViniCantina/ViniCantina_cardView.razor" Line="122" Column="1" />
+      <File FileName="Cantina/Data/VinoService.cs" Line="373" Column="18" />
+      <File FileName="Cantina/Data/Vino.cs" Line="36" Column="2" />
+      <File FileName="Cantina/Pages/CreateVino.razor" Line="139" Column="101" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Option id="ShowAllFiles" value="True" />
+          <Node name="Cantina">
+            <Node name="Cantina" expanded="True">
+              <Node name="Data" expanded="True">
+                <Node name="VinoService.cs" selected="True" />
+              </Node>
+              <Node name="Pages" expanded="True">
+                <Node name="ViniCantina" expanded="True" />
+              </Node>
+              <Node name="Shared" expanded="True" />
+              <Node name="wwwroot" expanded="True">
+                <Node name="css" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/Dialog/DialogModificaVino/Dialog_EditVino.razor" relfile="Cantina/Pages/Dialog/DialogModificaVino/Dialog_EditVino.razor" line="114" column="1" />
+      <Breakpoint file="/Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/Dialog/DialogModificaVino/Dialog_EditVino.razor" relfile="Cantina/Pages/Dialog/DialogModificaVino/Dialog_EditVino.razor" line="109" column="1" />
+      <Breakpoint file="/Users/albertofiaschi/Progetti VS/DEV-OPS/Cantina/Cantina/Pages/ViniCantina/ViniCantina_cardView.razor" relfile="Cantina/Pages/ViniCantina/ViniCantina_cardView.razor" line="299" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>

@@ -1,0 +1,157 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Cantina
+build_property.RootNamespace = Cantina
+build_property.ProjectDir = /Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/Bevute.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQmV2dXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/CantinaAlbe_bottleView.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FudGluYUFsYmVfYm90dGxlVmlldy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/CreateAziendaVinicola.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ3JlYXRlQXppZW5kYVZpbmljb2xhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/CreateVino.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ3JlYXRlVmluby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/DettagliVino.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGV0dGFnbGlWaW5vLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/Dialog/DialogModificaVino/Dialog_EditVino.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlhbG9nL0RpYWxvZ01vZGlmaWNhVmluby9EaWFsb2dfRWRpdFZpbm8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/DialogAddAziendaVinicola.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlhbG9nQWRkQXppZW5kYVZpbmljb2xhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/DialogAddDenominazione.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlhbG9nQWRkRGVub21pbmF6aW9uZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/DialogAddOrRemoveVino.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlhbG9nQWRkT3JSZW1vdmVWaW5vLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/DialogAddOrRemoveWineYear.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlhbG9nQWRkT3JSZW1vdmVXaW5lWWVhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/DialogAddUva.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlhbG9nQWRkVXZhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/DialogNewAnnata.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlhbG9nTmV3QW5uYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/DialogVino.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlhbG9nVmluby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/page_old/CantinaAlbe_old.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvcGFnZV9vbGQvQ2FudGluYUFsYmVfb2xkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/page_old/Index_old.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvcGFnZV9vbGQvSW5kZXhfb2xkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/page_old/Movimenti.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvcGFnZV9vbGQvTW92aW1lbnRpLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/page_old/ViniViewCard_prova.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvcGFnZV9vbGQvVmluaVZpZXdDYXJkX3Byb3ZhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/Preferiti.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJlZmVyaXRpLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/Vini.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmluaS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/ViniCantina/ViniCantina_AziendaVinicola.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmluaUNhbnRpbmEvVmluaUNhbnRpbmFfQXppZW5kYVZpbmljb2xhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/ViniCantina/ViniCantina_cardView.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmluaUNhbnRpbmEvVmluaUNhbnRpbmFfY2FyZFZpZXcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/ViniCantina/ViniCantina_Denominazioni.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmluaUNhbnRpbmEvVmluaUNhbnRpbmFfRGVub21pbmF6aW9uaS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/ViniCantina/ViniCantina_tblView.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmluaUNhbnRpbmEvVmluaUNhbnRpbmFfdGJsVmlldy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/ViniViewCard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmluaVZpZXdDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1N1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-gh9rxy6w0w
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Shared/MainLayout_old.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXRfb2xkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-5vb1vyjoab
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL05hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-wfxqs9y6sw
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Shared/NavMenu_old.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL05hdk1lbnVfb2xkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-dfcoq13kc3
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
