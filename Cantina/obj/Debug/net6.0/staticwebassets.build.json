@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YJViDBsq6j4z5uVocc7nXXONu+4JThtuj+J7/y2t4aU=",
+  "Hash": "8oyCYmLGjyaYimzH9YjPYBvHcKTQ+MtE6Zh0yNREvq4=",
   "Source": "Cantina",
   "BasePath": "_content/Cantina",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "Cantina/wwwroot",
       "Source": "Cantina",
-      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/wwwroot/",
+      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/wwwroot/",
       "BasePath": "_content/Cantina",
       "Pattern": "**"
     }
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "/Users/albertofiaschi/.nuget/packages/mudblazor/6.8.0/staticwebassets/MudBlazor.min.js"
     },
     {
-      "Identity": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/obj/Debug/net6.0/scopedcss/bundle/Cantina.styles.css",
+      "Identity": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/obj/Debug/net6.0/scopedcss/bundle/Cantina.styles.css",
       "SourceId": "Cantina",
       "SourceType": "Computed",
-      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/obj/Debug/net6.0/scopedcss/bundle/",
+      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/obj/Debug/net6.0/scopedcss/bundle/",
       "BasePath": "_content/Cantina",
       "RelativePath": "Cantina.styles.css",
       "AssetKind": "All",
@@ -65,13 +65,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/obj/Debug/net6.0/scopedcss/bundle/Cantina.styles.css"
+      "OriginalItemSpec": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/obj/Debug/net6.0/scopedcss/bundle/Cantina.styles.css"
     },
     {
-      "Identity": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/obj/Debug/net6.0/scopedcss/projectbundle/Cantina.bundle.scp.css",
+      "Identity": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/obj/Debug/net6.0/scopedcss/projectbundle/Cantina.bundle.scp.css",
       "SourceId": "Cantina",
       "SourceType": "Computed",
-      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/obj/Debug/net6.0/scopedcss/projectbundle/",
+      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/obj/Debug/net6.0/scopedcss/projectbundle/",
       "BasePath": "_content/Cantina",
       "RelativePath": "Cantina.bundle.scp.css",
       "AssetKind": "All",
@@ -82,13 +82,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/obj/Debug/net6.0/scopedcss/projectbundle/Cantina.bundle.scp.css"
+      "OriginalItemSpec": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/obj/Debug/net6.0/scopedcss/projectbundle/Cantina.bundle.scp.css"
     },
     {
-      "Identity": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/wwwroot/css/site.css",
+      "Identity": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/wwwroot/css/site.css",
       "SourceId": "Cantina",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/wwwroot/",
+      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/wwwroot/",
       "BasePath": "_content/Cantina",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot/css/site.css"
     },
     {
-      "Identity": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/wwwroot/favicon.ico",
+      "Identity": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/wwwroot/favicon.ico",
       "SourceId": "Cantina",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/wwwroot/",
+      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/wwwroot/",
       "BasePath": "_content/Cantina",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot/favicon.ico"
     },
     {
-      "Identity": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/wwwroot/js/utility.js",
+      "Identity": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/wwwroot/js/utility.js",
       "SourceId": "Cantina",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/wwwroot/",
+      "ContentRoot": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/wwwroot/",
       "BasePath": "_content/Cantina",
       "RelativePath": "js/utility.js",
       "AssetKind": "All",

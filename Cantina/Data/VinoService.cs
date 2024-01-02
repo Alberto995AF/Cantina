@@ -10,7 +10,7 @@ namespace Cantina.Data
 {
     public class VinoService
     {
-        public Vino vino { get; set; } = default!;
+        //public Vino vino { get; set; } = default!;
         private CantinaContext _context;
 
         public VinoService(CantinaContext context)
@@ -346,11 +346,95 @@ namespace Cantina.Data
         /// <returns>Restituisce una lista di elmenti di tipo VinoDTO</returns>
         public Task<List<VinoDTO>> GetViniCantina()
         {
+            Log.Information("Inizio rihiesta: " + DateTime.Now.ToString("mm:ss:fff"));
+
+            //Seconda Versione - da valutare se migliora le tempistiche oppure no
             List<VinoDTO> listVinoDto = new List<VinoDTO>();
+
+            Log.Information("Richiesta movimenti: " + DateTime.Now.ToString("mm:ss:fff"));
+            //var movimentiTotali = _context.MovimentiVino.ToList();
+            var movimentiVini = _context.MovimentiVino.GroupBy(m => m.VinoId)
+                                                            .Select(g => new{
+                                                                                IdVino = g.Key,
+                                                                                SommaMovimenti = g.Sum(m => m.Movimento),
+                                                                                BottiglieAcquistate = g.Where(m => m.Movimento > 0).Sum(m => m.Movimento),
+                                                                                BottiglieBevute = g.Where(m => m.Movimento < 0).Sum(m => m.Movimento),
+                                                                                avgPrice = g.Where(m => m.Movimento > 0).Select(m => (double)m.Prezzo).Average()
+                                                                            });
+            Log.Information("Fine Richiesta movimenti: " + DateTime.Now.ToString("mm:ss:fff"));
+            //Vini che sono presenti in cantina
+            var viniConSommaPositiva = (
+                                            from vino in _context.Vino
+                                            join somma in movimentiVini.Where(s => s.SommaMovimenti > 0)
+                                            on vino.ID equals somma.IdVino
+                                            select vino
+                                        ).ToList();
+
+            Log.Information("Richiesta vini: " + DateTime.Now.ToString("mm:ss:fff"));
+
+            viniConSommaPositiva = _context.Vino.Include(a => a.AziendaVinicola).ToList();
+            viniConSommaPositiva = _context.Vino.Include(a => a.tipoVino).ToList();
+            viniConSommaPositiva = _context.Vino.Include(a => a.Denominazione).ToList();
+
+            Log.Information("Fine Richiesta vini: " + DateTime.Now.ToString("mm:ss:fff"));
+
+            Log.Information("Elabo varie: " + DateTime.Now.ToString("mm:ss:fff"));
+            foreach (var vino in viniConSommaPositiva)
+            {
+                var movimentiVinoId = movimentiVini.Where(x => x.IdVino == vino.ID);
+                int numBottiglieViste = movimentiVinoId.Select(x => x.BottiglieAcquistate).FirstOrDefault();
+                int numBottiglieCantina = movimentiVinoId.Select(x => x.SommaMovimenti).FirstOrDefault();
+                int numBottiglieBevute = movimentiVinoId.Select(x => x.BottiglieBevute).FirstOrDefault();
+
+                int itemPrice = Convert.ToInt32(movimentiVinoId.Select(x => x.avgPrice).FirstOrDefault());
+
+                //recupero le uve del vino se sono presenti
+                var listaUve = _context.UvaVino.Where(a => a.VinoId == vino.ID);
+                List<String> uvaList = new();
+                List<int> uvaListId = new();
+                foreach (var uvaVino in listaUve)
+                {
+                    var uva = _context.Uva.Where(a => a.ID == uvaVino.UvaId).FirstOrDefault();
+                    uvaList.Add(uva.Nome.ToString());
+                    uvaListId.Add(uva.ID);
+                }
+
+                string denom = null;
+                if (vino.DenominazioneId != null)
+                {
+                    var denominazione = _context.Denominazione.Where(x => x.ID == vino.DenominazioneId).FirstOrDefault();
+                    denom = denominazione.Nome;
+                }
+
+                listVinoDto.Add(new VinoDTO() {
+                                                    ID = vino.ID,
+                                                    Nome = vino.Nome,
+                                                    AziendaVinicola = vino.AziendaVinicola.Nome,
+                                                    AziendaVinicolaId = vino.AziendaVinicolaId,
+                                                    tipoVino = vino.tipoVino.Tipo,
+                                                    TipoVinoId = vino.tipoVino.ID,
+                                                    Denominazione = denom,
+                                                    DenominazioneId = vino.Denominazione.ID,
+                                                    Barcode = vino.Barcode,
+                                                    Uva = uvaList,
+                                                    QuantitàBottiglePossedute = numBottiglieViste,
+                                                    inCantina = true,
+                                                    bottglieInCantina = numBottiglieCantina,
+                                                    bottiglieBevute = numBottiglieBevute,
+                                                    linkImmagine = vino.linkImmagine,
+                                                    avgPrice = itemPrice
+                                                    });
+            }
+
+            Log.Information("Fine Elabo varie: " + DateTime.Now.ToString("mm:ss:fff"));
+
+            //Vecchia versione - forse la versione migliore
+            /* //Prendo tutti i vini nel catalogo
             var items = _context.Vino.Include(a => a.AziendaVinicola).ToList();
             items = _context.Vino.Include(a => a.tipoVino).ToList();
             items = _context.Vino.Include(a => a.Denominazione).ToList();
 
+            //Prendo tutti i movimenti
             var movimentiListComplete = _context.MovimentiVino.ToList();
 
             foreach (var vino in items)
@@ -405,7 +489,8 @@ namespace Cantina.Data
                                                     linkImmagine = vino.linkImmagine,
                                                     avgPrice = itemPrice
                                                     });
-            }
+            } */
+            Log.Information("Fine rihiesta: " + DateTime.Now.ToString("mm:ss:fff"));
             return Task.FromResult(listVinoDto);
         }
 

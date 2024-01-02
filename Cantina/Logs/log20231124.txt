@@ -1,0 +1,34 @@
+[24-11-2023 13:07:18 [IP ] [] [INF]  Server Booting Up...
+[24-11-2023 13:07:19 [IP ] [] [INF]  SeedData Start...
+[24-11-2023 13:07:19 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[24-11-2023 13:07:19 [IP ] [] [INF]  SeedData End...
+[24-11-2023 13:07:33 [IP ] [0HMVCSNOAPV6N:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[24-11-2023 13:07:33 [IP ] [0HMVCSNOAPV6N:00000002] [DBG] MudBlazor.PopoverService Adding entry for 86347538-067c-43d8-8331-137f0043b251/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[24-11-2023 13:07:33 [IP ] [0HMVCSNOAPV6N:00000002] [DBG] MudBlazor.PopoverService Updating entry for 86347538-067c-43d8-8331-137f0043b251/"MudBlazor.MudPopoverProvider". 1 total observers.
+[24-11-2023 13:07:34 [IP ] [0HMVCSNOAPV6N:00000002] [DBG] MudBlazor.PopoverService Removed entry for 86347538-067c-43d8-8331-137f0043b251. 0 total observers after remove.
+[24-11-2023 13:07:34 [IP ] [0HMVCSNOAPV6S:00000002] [DBG] MudBlazor.PopoverService Adding entry for cd5d3685-de44-4c45-9ae8-c91a824b4efc/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[24-11-2023 13:07:34 [IP ] [0HMVCSNOAPV6S:00000002] [DBG] MudBlazor.PopoverService Updating entry for cd5d3685-de44-4c45-9ae8-c91a824b4efc/"MudBlazor.MudPopoverProvider". 1 total observers.
+[24-11-2023 13:07:34 [IP ] [0HMVCSNOAPV6S:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[24-11-2023 13:07:34 [IP ] [0HMVCSNOAPV6S:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[24-11-2023 13:07:36 [IP ] [0HMVCSNOAPV6S:00000002] [INF]  Inizio rihiesta01.07.36.736985
+[24-11-2023 13:07:37 [IP ] [0HMVCSNOAPV6S:00000002] [INF]  Fine rihiesta01.07.37.012225
+[24-11-2023 13:07:57 [IP ] [0HMVCSNOAPV6S:00000002] [INF]  Inizio rihiesta01.07.57.153925
+[24-11-2023 13:07:57 [IP ] [0HMVCSNOAPV6S:00000002] [INF]  Fine rihiesta01.07.57.420508
+[24-11-2023 13:08:26 [IP ] [0HMVCSNOAPV6S:00000002] [INF]  Inizio rihiesta01.08.26.571897
+[24-11-2023 13:08:26 [IP ] [0HMVCSNOAPV6S:00000002] [INF]  Fine rihiesta01.08.26.827909
+[24-11-2023 13:08:42 [IP ] [0HMVCSNOAPV6T:00000002] [DBG] MudBlazor.PopoverService Removed entry for cd5d3685-de44-4c45-9ae8-c91a824b4efc. 0 total observers after remove.
+[24-11-2023 13:08:42 [IP ] [0HMVCSNOAPV6T:00000002] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 1 total observers after remove.
+[24-11-2023 13:08:42 [IP ] [0HMVCSNOAPV6T:00000002] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 0 total observers after remove.
+[24-11-2023 13:23:42 [IP ] [] [INF]  Server Booting Up...
+[24-11-2023 13:23:43 [IP ] [] [INF]  SeedData Start...
+[24-11-2023 13:23:44 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[24-11-2023 13:23:44 [IP ] [] [INF]  SeedData End...
+[24-11-2023 13:23:53 [IP ] [0HMVCT0SD53KF:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[24-11-2023 13:23:53 [IP ] [0HMVCT0SD53KF:00000002] [DBG] MudBlazor.PopoverService Adding entry for 17c5c4d5-e598-4e36-a4cf-2809fd46ab41/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[24-11-2023 13:23:53 [IP ] [0HMVCT0SD53KF:00000002] [DBG] MudBlazor.PopoverService Updating entry for 17c5c4d5-e598-4e36-a4cf-2809fd46ab41/"MudBlazor.MudPopoverProvider". 1 total observers.
+[24-11-2023 13:23:54 [IP ] [0HMVCT0SD53KF:00000002] [DBG] MudBlazor.PopoverService Removed entry for 17c5c4d5-e598-4e36-a4cf-2809fd46ab41. 0 total observers after remove.
+[24-11-2023 13:23:54 [IP ] [0HMVCT0SD53KL:00000002] [DBG] MudBlazor.PopoverService Adding entry for 18d26de3-ef8d-4a61-8466-965121387280/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[24-11-2023 13:23:54 [IP ] [0HMVCT0SD53KL:00000002] [DBG] MudBlazor.PopoverService Updating entry for 18d26de3-ef8d-4a61-8466-965121387280/"MudBlazor.MudPopoverProvider". 1 total observers.
+[24-11-2023 13:23:54 [IP ] [0HMVCT0SD53KL:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[24-11-2023 13:23:54 [IP ] [0HMVCT0SD53KL:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[24-11-2023 13:24:07 [IP ] [0HMVCT0SD53KL:00000002] [INF]  Inizio rihiesta01.24.07.346163

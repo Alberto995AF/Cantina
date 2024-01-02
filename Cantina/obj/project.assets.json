@@ -2386,11 +2386,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Cantina.csproj",
+      "projectUniqueName": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/Cantina.csproj",
       "projectName": "Cantina",
-      "projectPath": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/Cantina.csproj",
+      "projectPath": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/Cantina.csproj",
       "packagesPath": "/Users/albertofiaschi/.nuget/packages/",
-      "outputPath": "/Users/albertofiaschi/Progetti VS/GitHub_alberto/Cantina/Cantina/obj/",
+      "outputPath": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/albertofiaschi/.nuget/NuGet/NuGet.Config"

@@ -1,0 +1,122 @@
+[29-12-2023 19:38:23 [IP ] [] [INF]  Server Booting Up...
+[29-12-2023 19:38:25 [IP ] [] [INF]  SeedData Start...
+[29-12-2023 19:38:25 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[29-12-2023 19:38:25 [IP ] [] [INF]  SeedData End...
+[29-12-2023 19:38:34 [IP ] [0HN08JLEJLB6D:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[29-12-2023 19:38:36 [IP ] [0HN08JLEJLB6D:00000003] [DBG] MudBlazor.PopoverService Adding entry for 2ce7c40d-d490-45f4-833f-e18696e046ad/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[29-12-2023 19:38:36 [IP ] [0HN08JLEJLB6D:00000003] [DBG] MudBlazor.PopoverService Updating entry for 2ce7c40d-d490-45f4-833f-e18696e046ad/"MudBlazor.MudPopoverProvider". 1 total observers.
+[29-12-2023 19:38:36 [IP ] [0HN08JLEJLB6D:00000003] [INF]  Inizio rihiesta: 38:36:374
+[29-12-2023 19:38:36 [IP ] [0HN08JLEJLB6D:00000003] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+[29-12-2023 19:38:36 [IP ] [0HN08JLEJLB6D:00000003] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+[29-12-2023 19:38:36 [IP ] [0HN08JLEJLB6D:00000003] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+[29-12-2023 19:38:36 [IP ] [0HN08JLEJLB6D:00000003] [INF]  Fine rihiesta: 38:36:893
+[29-12-2023 19:38:37 [IP ] [0HN08JLEJLB6D:00000003] [DBG] MudBlazor.PopoverService Removed entry for 2ce7c40d-d490-45f4-833f-e18696e046ad. 0 total observers after remove.
+[29-12-2023 19:38:37 [IP ] [0HN08JLEJLB6K:00000002] [DBG] MudBlazor.PopoverService Adding entry for b55c64d6-efce-4dda-90dc-3723f15fe1db/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[29-12-2023 19:38:37 [IP ] [0HN08JLEJLB6K:00000002] [DBG] MudBlazor.PopoverService Updating entry for b55c64d6-efce-4dda-90dc-3723f15fe1db/"MudBlazor.MudPopoverProvider". 1 total observers.
+[29-12-2023 19:38:37 [IP ] [0HN08JLEJLB6K:00000002] [INF]  Inizio rihiesta: 38:37:450
+[29-12-2023 19:38:37 [IP ] [0HN08JLEJLB6K:00000002] [INF]  Fine rihiesta: 38:37:675
+[29-12-2023 19:38:38 [IP ] [0HN08JLEJLB6K:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[29-12-2023 19:38:38 [IP ] [0HN08JLEJLB6K:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[29-12-2023 19:38:40 [IP ] [0HN08JLEJLB6K:00000002] [INF]  Inizio rihiesta: 38:40:108
+[29-12-2023 19:38:40 [IP ] [0HN08JLEJLB6K:00000002] [INF]  Fine rihiesta: 38:40:390
+[29-12-2023 19:38:42 [IP ] [0HN08JLEJLB6K:00000002] [INF]  Inizio rihiesta: 38:42:652
+[29-12-2023 19:38:42 [IP ] [0HN08JLEJLB6K:00000002] [INF]  Fine rihiesta: 38:42:982
+[29-12-2023 19:38:44 [IP ] [0HN08JLEJLB6K:00000002] [INF]  Inizio rihiesta: 38:44:884
+[29-12-2023 19:38:45 [IP ] [0HN08JLEJLB6K:00000002] [INF]  Fine rihiesta: 38:45:123
+[29-12-2023 19:53:41 [IP ] [] [INF]  Server Booting Up...
+[29-12-2023 19:53:42 [IP ] [] [INF]  SeedData Start...
+[29-12-2023 19:53:43 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[29-12-2023 19:53:43 [IP ] [] [INF]  SeedData End...
+[29-12-2023 19:53:51 [IP ] [0HN08JTVNSUJP:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[29-12-2023 19:53:51 [IP ] [0HN08JTVNSUJP:00000002] [DBG] MudBlazor.PopoverService Adding entry for a9d2312e-cc00-4c74-a94a-f51086e0c28a/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[29-12-2023 19:53:51 [IP ] [0HN08JTVNSUJP:00000002] [DBG] MudBlazor.PopoverService Updating entry for a9d2312e-cc00-4c74-a94a-f51086e0c28a/"MudBlazor.MudPopoverProvider". 1 total observers.
+[29-12-2023 19:53:51 [IP ] [0HN08JTVNSUJP:00000002] [DBG] MudBlazor.PopoverService Removed entry for a9d2312e-cc00-4c74-a94a-f51086e0c28a. 0 total observers after remove.
+[29-12-2023 19:53:52 [IP ] [0HN08JTVNSUJU:00000002] [DBG] MudBlazor.PopoverService Adding entry for beccf2f4-805d-47a6-8ba7-820cca612f51/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[29-12-2023 19:53:52 [IP ] [0HN08JTVNSUJU:00000002] [DBG] MudBlazor.PopoverService Updating entry for beccf2f4-805d-47a6-8ba7-820cca612f51/"MudBlazor.MudPopoverProvider". 1 total observers.
+[29-12-2023 19:53:52 [IP ] [0HN08JTVNSUJU:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[29-12-2023 19:53:52 [IP ] [0HN08JTVNSUJU:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[29-12-2023 19:53:53 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Inizio rihiesta: 53:53:750
+[29-12-2023 19:53:53 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Richiesta movimenti: 53:53:750
+[29-12-2023 19:53:53 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine Richiesta movimenti: 53:53:751
+[29-12-2023 19:53:53 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Richiesta vini: 53:53:772
+[29-12-2023 19:53:53 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine Richiesta vini: 53:53:785
+[29-12-2023 19:53:53 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Elabo varie: 53:53:785
+[29-12-2023 19:53:53 [IP ] [0HN08JTVNSUJU:00000002] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+[29-12-2023 19:53:53 [IP ] [0HN08JTVNSUJU:00000002] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+[29-12-2023 19:53:53 [IP ] [0HN08JTVNSUJU:00000002] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+[29-12-2023 19:53:54 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine Elabo varie: 53:54:057
+[29-12-2023 19:53:54 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine rihiesta: 53:54:057
+[29-12-2023 19:53:56 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Inizio rihiesta: 53:56:534
+[29-12-2023 19:53:56 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Richiesta movimenti: 53:56:559
+[29-12-2023 19:53:56 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine Richiesta movimenti: 53:56:559
+[29-12-2023 19:53:56 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Richiesta vini: 53:56:561
+[29-12-2023 19:53:56 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine Richiesta vini: 53:56:563
+[29-12-2023 19:53:56 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Elabo varie: 53:56:563
+[29-12-2023 19:53:56 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine Elabo varie: 53:56:803
+[29-12-2023 19:53:56 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine rihiesta: 53:56:803
+[29-12-2023 19:53:59 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Inizio rihiesta: 53:59:789
+[29-12-2023 19:53:59 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Richiesta movimenti: 53:59:789
+[29-12-2023 19:53:59 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine Richiesta movimenti: 53:59:790
+[29-12-2023 19:53:59 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Richiesta vini: 53:59:793
+[29-12-2023 19:53:59 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine Richiesta vini: 53:59:797
+[29-12-2023 19:53:59 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Elabo varie: 53:59:797
+[29-12-2023 19:54:00 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine Elabo varie: 54:00:054
+[29-12-2023 19:54:00 [IP ] [0HN08JTVNSUJU:00000002] [INF]  Fine rihiesta: 54:00:054
+[29-12-2023 20:03:37 [IP ] [] [INF]  Server Booting Up...
+[29-12-2023 20:03:38 [IP ] [] [INF]  SeedData Start...
+[29-12-2023 20:03:38 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[29-12-2023 20:03:38 [IP ] [] [INF]  SeedData End...
+[29-12-2023 20:03:46 [IP ] [0HN08K3H4CH6J:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[29-12-2023 20:03:46 [IP ] [0HN08K3H4CH6J:00000002] [DBG] MudBlazor.PopoverService Adding entry for 9336b398-de6b-4764-9738-af613e3097e6/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[29-12-2023 20:03:46 [IP ] [0HN08K3H4CH6J:00000002] [DBG] MudBlazor.PopoverService Updating entry for 9336b398-de6b-4764-9738-af613e3097e6/"MudBlazor.MudPopoverProvider". 1 total observers.
+[29-12-2023 20:03:46 [IP ] [0HN08K3H4CH6K:00000002] [DBG] MudBlazor.PopoverService Adding entry for 3c4fba2b-0dae-424b-8b11-16e21ae9578c/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[29-12-2023 20:03:46 [IP ] [0HN08K3H4CH6K:00000002] [DBG] MudBlazor.PopoverService Updating entry for 3c4fba2b-0dae-424b-8b11-16e21ae9578c/"MudBlazor.MudPopoverProvider". 1 total observers.
+[29-12-2023 20:03:47 [IP ] [0HN08K3H4CH6J:00000002] [DBG] MudBlazor.PopoverService Removed entry for 9336b398-de6b-4764-9738-af613e3097e6. 0 total observers after remove.
+[29-12-2023 20:03:47 [IP ] [0HN08K3H4CH6K:00000002] [DBG] MudBlazor.PopoverService Removed entry for 3c4fba2b-0dae-424b-8b11-16e21ae9578c. 0 total observers after remove.
+[29-12-2023 20:03:47 [IP ] [0HN08K3H4CH6Q:00000002] [DBG] MudBlazor.PopoverService Adding entry for 4082f792-b3f4-4033-82fb-f5d726062706/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[29-12-2023 20:03:47 [IP ] [0HN08K3H4CH6Q:00000002] [DBG] MudBlazor.PopoverService Updating entry for 4082f792-b3f4-4033-82fb-f5d726062706/"MudBlazor.MudPopoverProvider". 1 total observers.
+[29-12-2023 20:03:47 [IP ] [0HN08K3H4CH6Q:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[29-12-2023 20:03:47 [IP ] [0HN08K3H4CH6Q:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[29-12-2023 20:03:48 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Inizio rihiesta: 03:48:271
+[29-12-2023 20:03:48 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Richiesta movimenti: 03:48:271
+[29-12-2023 20:03:48 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine Richiesta movimenti: 03:48:272
+[29-12-2023 20:03:48 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Richiesta vini: 03:48:293
+[29-12-2023 20:03:48 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine Richiesta vini: 03:48:295
+[29-12-2023 20:03:48 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Elabo varie: 03:48:295
+[29-12-2023 20:03:48 [IP ] [0HN08K3H4CH6Q:00000002] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+[29-12-2023 20:03:48 [IP ] [0HN08K3H4CH6Q:00000002] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+[29-12-2023 20:03:48 [IP ] [0HN08K3H4CH6Q:00000002] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+[29-12-2023 20:03:48 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine Elabo varie: 03:48:359
+[29-12-2023 20:03:48 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine rihiesta: 03:48:359
+[29-12-2023 20:03:50 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Inizio rihiesta: 03:50:857
+[29-12-2023 20:03:50 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Richiesta movimenti: 03:50:858
+[29-12-2023 20:03:50 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine Richiesta movimenti: 03:50:885
+[29-12-2023 20:03:50 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Richiesta vini: 03:50:887
+[29-12-2023 20:03:50 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine Richiesta vini: 03:50:890
+[29-12-2023 20:03:50 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Elabo varie: 03:50:890
+[29-12-2023 20:03:50 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine Elabo varie: 03:50:957
+[29-12-2023 20:03:50 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine rihiesta: 03:50:957
+[29-12-2023 20:03:52 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Inizio rihiesta: 03:52:699
+[29-12-2023 20:03:52 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Richiesta movimenti: 03:52:700
+[29-12-2023 20:03:52 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine Richiesta movimenti: 03:52:700
+[29-12-2023 20:03:52 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Richiesta vini: 03:52:702
+[29-12-2023 20:03:52 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine Richiesta vini: 03:52:705
+[29-12-2023 20:03:52 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Elabo varie: 03:52:705
+[29-12-2023 20:03:52 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine Elabo varie: 03:52:788
+[29-12-2023 20:03:52 [IP ] [0HN08K3H4CH6Q:00000002] [INF]  Fine rihiesta: 03:52:788
+[29-12-2023 20:08:28 [IP ] [] [INF]  Server Booting Up...
+[29-12-2023 20:08:29 [IP ] [] [INF]  SeedData Start...
+[29-12-2023 20:08:30 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[29-12-2023 20:08:30 [IP ] [] [INF]  SeedData End...
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [DBG] MudBlazor.PopoverService Adding entry for 31abf654-336c-4764-9595-6b3ded4436ad/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [DBG] MudBlazor.PopoverService Updating entry for 31abf654-336c-4764-9595-6b3ded4436ad/"MudBlazor.MudPopoverProvider". 1 total observers.
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [INF]  Inizio rihiesta: 08:34:298
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [INF]  Richiesta movimenti: 08:34:298
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [INF]  Fine Richiesta movimenti: 08:34:317
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [INF]  Richiesta vini: 08:34:485
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [INF]  Fine Richiesta vini: 08:34:529
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [INF]  Elabo varie: 08:34:529
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+[29-12-2023 20:08:34 [IP ] [0HN08K66RVFGR:00000002] [WRN] Microsoft.EntityFrameworkCore.Query The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
