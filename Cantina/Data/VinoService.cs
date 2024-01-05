@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using Cantina.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,13 +11,47 @@ namespace Cantina.Data
 {
     public class VinoService
     {
-        //public Vino vino { get; set; } = default!;
         private CantinaContext _context;
 
         public VinoService(CantinaContext context)
         {
             _context = context;
         }
+
+        // ************************************************************************************** //
+        // ******************************** FUNZIONI GENERICHE  ********************************* //
+        public class StatisticheMovimentiVino
+        {
+            public int IdVino { get; set; }
+            public int SommaMovimenti { get; set; }
+            public int BottiglieAcquistate { get; set; }
+            public int BottiglieBevute { get; set; }
+            public double AvgPrice { get; set; }
+            public Vino VinoObject {get; set;}
+        }
+
+        public List<StatisticheMovimentiVino> getMovimentiViniNumerici()
+        {
+            var listVino = _context.Vino;
+            var movimentiVini = _context.MovimentiVino.GroupBy(m => m.VinoId)
+                .Select(g => new StatisticheMovimentiVino
+                {
+                    IdVino = g.Key,
+                    SommaMovimenti = g.Sum(m => m.Movimento),
+                    BottiglieAcquistate = g.Where(m => m.Movimento > 0).Sum(m => m.Movimento),
+                    BottiglieBevute = g.Where(m => m.Movimento < 0).Sum(m => m.Movimento),
+                    AvgPrice = g.Where(m => m.Movimento > 0).Select(m => (double)m.Prezzo).Average(),
+                    VinoObject = listVino.Where(x => x.ID == g.Key)
+                                            .Include(a => a.AziendaVinicola)
+                                            .Include(a => a.tipoVino)
+                                            .Include(a => a.Denominazione).FirstOrDefault()
+                }).ToList();
+
+            return movimentiVini;
+        }
+        
+        // ************************************************************************************** //
+        // ************************************************************************************** //
 
         // ****** GET VINI DTO ***********************
         public Task<List<VinoDTO>> GetVini()
@@ -26,12 +61,14 @@ namespace Cantina.Data
             items = _context.Vino.Include(a => a.tipoVino).ToList();
             items = _context.Vino.Include(a => a.Denominazione).ToList();
 
+            var listMovimenti = getMovimentiViniNumerici();
+
             foreach (var vino in items)
             {
-                int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
-                int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
-                int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
-                bool inCant = numBottigleCantina > 0 ? true : false;
+                var movimentiVinoId = listMovimenti.Where(x => x.IdVino == vino.ID);
+                int numBottigleViste = movimentiVinoId.Select(x => x.BottiglieAcquistate).FirstOrDefault(); //_context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
+                int numBottigleCantina = movimentiVinoId.Select(x => x.SommaMovimenti).FirstOrDefault();
+                int numBottiglieBevute = movimentiVinoId.Select(x => x.BottiglieBevute).FirstOrDefault();
                 listVinoDto.Add(new VinoDTO() { ID = vino.ID,
                                                 Nome = vino.Nome,
                                                 AziendaVinicolaId = vino.AziendaVinicolaId,
@@ -40,7 +77,7 @@ namespace Cantina.Data
                                                 Denominazione = vino.Denominazione.Nome,
                                                 Barcode = vino.Barcode,
                                                 QuantitàBottiglePossedute = numBottigleViste,
-                                                inCantina = inCant,
+                                                inCantina = numBottigleCantina > 0 ? true : false,
                                                 bottglieInCantina = numBottigleCantina,
                                                 bottiglieBevute = numBottiglieBevute,
                                                 linkImmagine = vino.linkImmagine });
@@ -66,13 +103,15 @@ namespace Cantina.Data
             else
                 items = _context.Vino.Where(x => x.AziendaVinicolaId == idAzienda).ToList();
 
+            var listMovimenti = getMovimentiViniNumerici();
 
             foreach (var vino in items)
             {
-                int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
-                int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
-                int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
-                bool inCant = numBottigleCantina > 0 ? true : false;
+                var movimentiVinoId = listMovimenti.Where(x => x.IdVino == vino.ID);
+                int numBottigleViste = movimentiVinoId.Select(x => x.BottiglieAcquistate).FirstOrDefault(); //_context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
+                int numBottigleCantina = movimentiVinoId.Select(x => x.SommaMovimenti).FirstOrDefault();
+                int numBottiglieBevute = movimentiVinoId.Select(x => x.BottiglieBevute).FirstOrDefault();
+
                 listVinoDto.Add(new VinoDTO() { ID = vino.ID,
                                                 Nome = vino.Nome,
                                                 AziendaVinicolaId = vino.AziendaVinicolaId,
@@ -80,7 +119,7 @@ namespace Cantina.Data
                                                 tipoVino = vino.tipoVino.Tipo,
                                                 Barcode = vino.Barcode,
                                                 QuantitàBottiglePossedute = numBottigleViste,
-                                                inCantina = inCant,
+                                                inCantina = numBottigleCantina > 0 ? true : false,
                                                 bottglieInCantina = numBottigleCantina,
                                                 bottiglieBevute = numBottiglieBevute,
                                                 linkImmagine = vino.linkImmagine });
@@ -99,12 +138,15 @@ namespace Cantina.Data
            
             items = _context.Vino.Where(x => x.DenominazioneId == idDenominazione).ToList();
 
+            var listMovimenti = getMovimentiViniNumerici();
+
             foreach (var vino in items)
             {
-                int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
-                int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
-                int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
-                bool inCant = numBottigleCantina > 0 ? true : false;
+                var movimentiVinoId = listMovimenti.Where(x => x.IdVino == vino.ID);
+                int numBottigleViste = movimentiVinoId.Select(x => x.BottiglieAcquistate).FirstOrDefault(); //_context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
+                int numBottigleCantina = movimentiVinoId.Select(x => x.SommaMovimenti).FirstOrDefault();
+                int numBottiglieBevute = movimentiVinoId.Select(x => x.BottiglieBevute).FirstOrDefault();
+
                 listVinoDto.Add(new VinoDTO()
                 {
                     ID = vino.ID,
@@ -114,7 +156,7 @@ namespace Cantina.Data
                     tipoVino = vino.tipoVino.Tipo,
                     Barcode = vino.Barcode,
                     QuantitàBottiglePossedute = numBottigleViste,
-                    inCantina = inCant,
+                    inCantina = numBottigleCantina > 0 ? true : false,
                     bottglieInCantina = numBottigleCantina,
                     bottiglieBevute = numBottiglieBevute,
                     linkImmagine = vino.linkImmagine
@@ -199,12 +241,15 @@ namespace Cantina.Data
             items = _context.Vino.Include(a => a.AziendaVinicola.Regione).ToList();
             items = _context.Vino.Where(x => x.ID == id).ToList();
 
-            int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == items.FirstOrDefault().ID && x.Movimento > 0).Count();
-            int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == items.FirstOrDefault().ID)).Sum(x => x.Movimento);
-            int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == items.FirstOrDefault().ID && x.Movimento < 0).Count();
             List<MovimentiVino> movList = _context.MovimentiVino.Where(x => x.VinoId == items.FirstOrDefault().ID).ToList();
 
-            //recuper la denominazione del vino se presente
+            int numBottigleViste = movList.Where(x => x.Movimento > 0).Select(x => x.Movimento).Sum();
+            int numBottigleCantina = movList.Select(x => x.Movimento).Sum();
+            int numBottiglieBevute = movList.Where(x => x.Movimento < 0).Select(x => x.Movimento).Sum(); 
+
+            decimal avgPrice = (decimal)movList.Where(x => x.Movimento > 0).Select(x => x.Prezzo).Average();
+
+            //recupero la denominazione del vino se presente
             Denominazione denominazione = null;
             if (items.FirstOrDefault().DenominazioneId != null)
                 denominazione = _context.Denominazione.Where(a => a.ID == items.FirstOrDefault().DenominazioneId).FirstOrDefault();
@@ -219,7 +264,7 @@ namespace Cantina.Data
             }
 
             //calcoliamo il prezzo medio del vino su tutte le annate considerando solo i movimenti di acquisto
-            decimal avgPrice = 0;
+            /* decimal avgPrice = 0;
             int num = 0;
             foreach(var movItem in movList)
             {
@@ -230,7 +275,7 @@ namespace Cantina.Data
                 }
             }
             if(num > 0)
-                avgPrice = avgPrice / num;
+                avgPrice = avgPrice / num; */
 
             var movListGroupByYear = movList.GroupBy(x => x.Annata).ToList();
             List<int> annate = new();
@@ -249,20 +294,23 @@ namespace Cantina.Data
                         numPrezzi++;
                     mediaPrezzi += (decimal)item2.Prezzo;
                 }
+
                 if (sumAnnate > 0)
                 {
                     if(numPrezzi > 0)
-                        mediaPrezzi = mediaPrezzi / numPrezzi;
+                        mediaPrezzi = Math.Round(mediaPrezzi / numPrezzi, 2);
+                    
                     annataPrezzo newAnPr = new();
                     newAnPr.annata = mov.First().Annata;
                     newAnPr.prezzo = mediaPrezzi;
                     annataPrezzo.Add(newAnPr);
                 }
+
                 sumAnnate = 0;
                 numPrezzi = 0;
                 mediaPrezzi = 0;
             }
-            bool inCant = numBottigleCantina > 0 ? true : false;
+
             annate.Sort();
             VinoDto.ID = items.FirstOrDefault().ID;
             VinoDto.Nome = items.FirstOrDefault().Nome;
@@ -299,12 +347,14 @@ namespace Cantina.Data
             items = _context.Vino.Include(a => a.Denominazione).ToList();
             items = _context.Vino.Where(a => a.Preferito == true).ToList();
 
+            var listMovimenti = getMovimentiViniNumerici();
+
             foreach (var vino in items)
             {
-                int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
-                int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
-                int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
-                bool inCant = numBottigleCantina > 0 ? true : false;
+                var movimentiVinoId = listMovimenti.Where(x => x.IdVino == vino.ID);
+                int numBottigleViste = movimentiVinoId.Select(x => x.BottiglieAcquistate).FirstOrDefault(); //_context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
+                int numBottigleCantina = movimentiVinoId.Select(x => x.SommaMovimenti).FirstOrDefault();
+                int numBottiglieBevute = movimentiVinoId.Select(x => x.BottiglieBevute).FirstOrDefault();
                 
                 listVinoDto.Add(new VinoDTO() { ID = vino.ID,
                                                 Nome = vino.Nome,
@@ -313,7 +363,7 @@ namespace Cantina.Data
                                                 tipoVino = vino.tipoVino.Tipo,
                                                 Barcode = vino.Barcode,
                                                 QuantitàBottiglePossedute = numBottigleViste,
-                                                inCantina = inCant,
+                                                inCantina = numBottigleCantina > 0 ? true : false,
                                                 bottglieInCantina = numBottigleCantina,
                                                 bottiglieBevute = numBottiglieBevute,
                                                 linkImmagine = vino.linkImmagine });
@@ -344,52 +394,26 @@ namespace Cantina.Data
         /// PRENDE TUTTI I VINI PRESENTI NELLA CANTINA
         /// </summary>
         /// <returns>Restituisce una lista di elmenti di tipo VinoDTO</returns>
-        public Task<List<VinoDTO>> GetViniCantina()
+        public async Task<List<VinoDTO>> GetViniCantina()
         {
-            Log.Information("Inizio rihiesta: " + DateTime.Now.ToString("mm:ss:fff"));
-
             //Seconda Versione - da valutare se migliora le tempistiche oppure no
-            List<VinoDTO> listVinoDto = new List<VinoDTO>();
+            List<VinoDTO> listVinoDto = new();
 
-            Log.Information("Richiesta movimenti: " + DateTime.Now.ToString("mm:ss:fff"));
             //var movimentiTotali = _context.MovimentiVino.ToList();
-            var movimentiVini = _context.MovimentiVino.GroupBy(m => m.VinoId)
-                                                            .Select(g => new{
-                                                                                IdVino = g.Key,
-                                                                                SommaMovimenti = g.Sum(m => m.Movimento),
-                                                                                BottiglieAcquistate = g.Where(m => m.Movimento > 0).Sum(m => m.Movimento),
-                                                                                BottiglieBevute = g.Where(m => m.Movimento < 0).Sum(m => m.Movimento),
-                                                                                avgPrice = g.Where(m => m.Movimento > 0).Select(m => (double)m.Prezzo).Average()
-                                                                            });
-            Log.Information("Fine Richiesta movimenti: " + DateTime.Now.ToString("mm:ss:fff"));
-            //Vini che sono presenti in cantina
-            var viniConSommaPositiva = (
-                                            from vino in _context.Vino
-                                            join somma in movimentiVini.Where(s => s.SommaMovimenti > 0)
-                                            on vino.ID equals somma.IdVino
-                                            select vino
-                                        ).ToList();
+            List<StatisticheMovimentiVino> listMovimenti = new();
+            listMovimenti = getMovimentiViniNumerici();
 
-            Log.Information("Richiesta vini: " + DateTime.Now.ToString("mm:ss:fff"));
-
-            viniConSommaPositiva = _context.Vino.Include(a => a.AziendaVinicola).ToList();
-            viniConSommaPositiva = _context.Vino.Include(a => a.tipoVino).ToList();
-            viniConSommaPositiva = _context.Vino.Include(a => a.Denominazione).ToList();
-
-            Log.Information("Fine Richiesta vini: " + DateTime.Now.ToString("mm:ss:fff"));
-
-            Log.Information("Elabo varie: " + DateTime.Now.ToString("mm:ss:fff"));
-            foreach (var vino in viniConSommaPositiva)
+            foreach (var vino in listMovimenti.Where(x => x.SommaMovimenti > 0))
             {
-                var movimentiVinoId = movimentiVini.Where(x => x.IdVino == vino.ID);
+                var movimentiVinoId = listMovimenti.Where(x => x.IdVino == vino.IdVino);
                 int numBottiglieViste = movimentiVinoId.Select(x => x.BottiglieAcquistate).FirstOrDefault();
                 int numBottiglieCantina = movimentiVinoId.Select(x => x.SommaMovimenti).FirstOrDefault();
                 int numBottiglieBevute = movimentiVinoId.Select(x => x.BottiglieBevute).FirstOrDefault();
 
-                int itemPrice = Convert.ToInt32(movimentiVinoId.Select(x => x.avgPrice).FirstOrDefault());
+                int itemPrice = Convert.ToInt32(movimentiVinoId.Select(x => x.AvgPrice).FirstOrDefault());
 
                 //recupero le uve del vino se sono presenti
-                var listaUve = _context.UvaVino.Where(a => a.VinoId == vino.ID);
+                var listaUve = _context.UvaVino.Where(a => a.VinoId == vino.IdVino);
                 List<String> uvaList = new();
                 List<int> uvaListId = new();
                 foreach (var uvaVino in listaUve)
@@ -400,33 +424,34 @@ namespace Cantina.Data
                 }
 
                 string denom = null;
-                if (vino.DenominazioneId != null)
+                if (vino.VinoObject.DenominazioneId != null)
                 {
-                    var denominazione = _context.Denominazione.Where(x => x.ID == vino.DenominazioneId).FirstOrDefault();
+                    var denominazione = _context.Denominazione.Where(x => x.ID == vino.VinoObject.DenominazioneId).FirstOrDefault();
                     denom = denominazione.Nome;
                 }
 
                 listVinoDto.Add(new VinoDTO() {
-                                                    ID = vino.ID,
-                                                    Nome = vino.Nome,
-                                                    AziendaVinicola = vino.AziendaVinicola.Nome,
-                                                    AziendaVinicolaId = vino.AziendaVinicolaId,
-                                                    tipoVino = vino.tipoVino.Tipo,
-                                                    TipoVinoId = vino.tipoVino.ID,
+                                                    ID = vino.IdVino,
+                                                    Nome = vino.VinoObject.Nome,
+                                                    AziendaVinicola = vino.VinoObject.AziendaVinicola.Nome,
+                                                    AziendaVinicolaId = vino.VinoObject.AziendaVinicolaId,
+                                                    tipoVino = vino.VinoObject.tipoVino.Tipo,
+                                                    TipoVinoId = vino.VinoObject.tipoVino.ID,
                                                     Denominazione = denom,
-                                                    DenominazioneId = vino.Denominazione.ID,
-                                                    Barcode = vino.Barcode,
+                                                    DenominazioneId = vino.VinoObject.Denominazione.ID,
+                                                    Barcode = vino.VinoObject.Barcode,
                                                     Uva = uvaList,
                                                     QuantitàBottiglePossedute = numBottiglieViste,
                                                     inCantina = true,
                                                     bottglieInCantina = numBottiglieCantina,
                                                     bottiglieBevute = numBottiglieBevute,
-                                                    linkImmagine = vino.linkImmagine,
+                                                    linkImmagine = vino.VinoObject.linkImmagine,
                                                     avgPrice = itemPrice
                                                     });
             }
 
-            Log.Information("Fine Elabo varie: " + DateTime.Now.ToString("mm:ss:fff"));
+            return listVinoDto;
+            //return Task.FromResult(listVinoDto);
 
             //Vecchia versione - forse la versione migliore
             /* //Prendo tutti i vini nel catalogo
@@ -490,8 +515,6 @@ namespace Cantina.Data
                                                     avgPrice = itemPrice
                                                     });
             } */
-            Log.Information("Fine rihiesta: " + DateTime.Now.ToString("mm:ss:fff"));
-            return Task.FromResult(listVinoDto);
         }
 
 
@@ -569,12 +592,27 @@ namespace Cantina.Data
             items = _context.Vino.Include(a => a.tipoVino).ToList();
             items = _context.Vino.Where(x => numeriRandom.Contains(x.ID)).ToList();
 
+            var listMovimenti = getMovimentiViniNumerici();
+
             foreach (var vino in items)
             {
-                int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
-                int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
-                bool inCant = numBottigleCantina > 0 ? true : false;
-                listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, linkImmagine = vino.linkImmagine });
+                var movimentiVinoId = listMovimenti.Where(x => x.IdVino == vino.ID);
+                int numBottiglieViste = movimentiVinoId.Select(x => x.BottiglieAcquistate).FirstOrDefault();
+                int numBottiglieCantina = movimentiVinoId.Select(x => x.SommaMovimenti).FirstOrDefault();
+                int numBottiglieBevute = movimentiVinoId.Select(x => x.BottiglieBevute).FirstOrDefault();
+
+                bool inCant = numBottiglieCantina > 0 ? true : false;
+
+                listVinoDto.Add(new VinoDTO() { ID = vino.ID, 
+                                                Nome = vino.Nome, 
+                                                AziendaVinicolaId = vino.AziendaVinicolaId, 
+                                                AziendaVinicola = vino.AziendaVinicola.Nome, 
+                                                tipoVino = vino.tipoVino.Tipo, 
+                                                Barcode = vino.Barcode, 
+                                                QuantitàBottiglePossedute = numBottiglieViste, 
+                                                inCantina = inCant, 
+                                                bottglieInCantina = numBottiglieCantina, 
+                                                linkImmagine = vino.linkImmagine });
             }
             return Task.FromResult(listVinoDto);
         }
@@ -584,12 +622,13 @@ namespace Cantina.Data
         // ************** GET INFO NUMERICHE *******************
         public Task<List<int>> GetInfoNumeriche()
         {
-            var items = _context.Vino.Include(a => a.tipoVino).ToList();
-
             List<int> numeriBottiglie = new();
-            int numBottiglieBevute = _context.MovimentiVino.Where(x => x.Movimento < 0).Count();
-            int numBottiglieCantina = _context.MovimentiVino.Sum(x => x.Movimento);
-            int numBottigleAcquistate = _context.MovimentiVino.Where(x => x.Movimento > 0).Count();
+
+            var items = _context.Vino.Include(a => a.tipoVino).ToList();
+            var movimentiVino =  _context.MovimentiVino.ToList();
+            int numBottiglieBevute = movimentiVino.Where(x => x.Movimento < 0).Count();
+            int numBottiglieCantina = movimentiVino.Sum(x => x.Movimento);
+            int numBottigleAcquistate = movimentiVino.Where(x => x.Movimento > 0).Count();
 
             int numViniRossi = 0;
             int numViniBianchi = 0;
@@ -627,14 +666,10 @@ namespace Cantina.Data
         }
         // *****************************************************
 
-
-        //public async Task<IActionResult> UpdateVinoBarcode(string nome, int annata, string aziendaVinicola, decimal price, int quantità, int inCantina, int barcode, string linkAppVino)
-        //public async Task<IActionResult> UpdateVinoBarcode(Vino vino)
         public async Task UpdateVinoBarcode(Vino vino)
         {
             _context.Attach(vino).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
         }
 
         /// <summary>
@@ -720,10 +755,10 @@ namespace Cantina.Data
             var items = _context.MovimentiVino.Include(a => a.Vino).ToList();
             items.OrderBy(x => x.Data);
 
-            foreach (var movimento in items)
+            /* foreach (var movimento in items)
             {
                 //listMovimentiDto.Add(new MovimentoDTO() { ID = movimento.ID, Nome = movimento.Vino.Nome, Annata = (int)movimento.Vino.Annata, Movimento = movimento.Movimento, Data = movimento.Data});
-            }
+            } */
 
             return Task.FromResult(listMovimentiDto);
         }
@@ -766,16 +801,30 @@ namespace Cantina.Data
             var items = _context.Vino.Include(a => a.AziendaVinicola).ToList();
             items = _context.Vino.Include(a => a.tipoVino).ToList();
 
+            var listMovimenti = getMovimentiViniNumerici();
+
             foreach (var vino in items)
             {
                 if(vino.Nome.Contains(value) || vino.AziendaVinicola.Nome.Contains(value))
                 {
-                    int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
-                    int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
-                    int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
-                    bool inCant = numBottigleCantina > 0 ? true : false;
-                    listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicolaId = vino.AziendaVinicolaId, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine });
+                    var movimentiVinoId = listMovimenti.Where(x => x.IdVino == vino.ID);
+                    int numBottiglieViste = movimentiVinoId.Select(x => x.BottiglieAcquistate).FirstOrDefault();
+                    int numBottiglieCantina = movimentiVinoId.Select(x => x.SommaMovimenti).FirstOrDefault();
+                    int numBottiglieBevute = movimentiVinoId.Select(x => x.BottiglieBevute).FirstOrDefault();
 
+                    bool inCant = numBottiglieCantina > 0 ? true : false;
+
+                    listVinoDto.Add(new VinoDTO() { ID = vino.ID, 
+                                                    Nome = vino.Nome, 
+                                                    AziendaVinicolaId = vino.AziendaVinicolaId, 
+                                                    AziendaVinicola = vino.AziendaVinicola.Nome, 
+                                                    tipoVino = vino.tipoVino.Tipo, 
+                                                    Barcode = vino.Barcode, 
+                                                    QuantitàBottiglePossedute = numBottiglieViste, 
+                                                    inCantina = inCant, 
+                                                    bottglieInCantina = numBottiglieCantina, 
+                                                    bottiglieBevute = numBottiglieBevute, 
+                                                    linkImmagine = vino.linkImmagine });
                 }
             }
             return Task.FromResult(listVinoDto);
@@ -789,6 +838,11 @@ namespace Cantina.Data
         public Task<List<VinoDTO>> GetVinoDTOCantinaSearch(string value)
         {
             List<VinoDTO> listVinoDto = new List<VinoDTO>();
+            
+            //List<MovimentiVino> movimentiVino =  _context.MovimentiVino.ToList();
+
+            var listMovimenti = getMovimentiViniNumerici();
+
             var items = _context.Vino.Include(a => a.AziendaVinicola).ToList();
             items = _context.Vino.Include(a => a.tipoVino).ToList();
 
@@ -798,13 +852,27 @@ namespace Cantina.Data
                 //if (vino.Nome.Contains(value) || vino.AziendaVinicola.Nome.Contains(value))
                 if (vino.Nome.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0 || vino.AziendaVinicola.Nome.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    int numBottigleViste = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
-                    int numBottigleCantina = _context.MovimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
-                    int numBottiglieBevute = _context.MovimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
-                    bool inCant = numBottigleCantina > 0 ? true : false;
-                    int itemPrice = (int)GetVinoIDdto(vino.ID).Result.avgPrice;
-                    if (inCant)
-                        listVinoDto.Add(new VinoDTO() { ID = vino.ID, Nome = vino.Nome, AziendaVinicola = vino.AziendaVinicola.Nome, tipoVino = vino.tipoVino.Tipo, Barcode = vino.Barcode, QuantitàBottiglePossedute = numBottigleViste, inCantina = inCant, bottglieInCantina = numBottigleCantina, bottiglieBevute = numBottiglieBevute, linkImmagine = vino.linkImmagine, avgPrice = itemPrice });
+                    var movimentiVinoId = listMovimenti.Where(x => x.IdVino == vino.ID);
+                    int numBottigleViste = movimentiVinoId.Select(x => x.BottiglieAcquistate).FirstOrDefault(); //movimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento > 0).Count();
+                    int numBottigleCantina = movimentiVinoId.Select(x => x.SommaMovimenti).FirstOrDefault(); //movimentiVino.Where(x => (x.VinoId == vino.ID)).Sum(x => x.Movimento);
+                    int numBottiglieBevute = movimentiVinoId.Select(x => x.BottiglieBevute).FirstOrDefault(); //movimentiVino.Where(x => x.VinoId == vino.ID && x.Movimento < 0).Count();
+                    //bool inCant = numBottigleCantina > 0 ? true : false;
+                    //int itemPrice = (int)GetVinoIDdto(vino.ID).Result.avgPrice;
+                    int itemPrice = Convert.ToInt32(movimentiVinoId.Select(x => x.AvgPrice).FirstOrDefault());
+                    if (numBottigleCantina > 0)
+                    {
+                        listVinoDto.Add(new VinoDTO() { ID = vino.ID, 
+                                                        Nome = vino.Nome, 
+                                                        AziendaVinicola = vino.AziendaVinicola.Nome, 
+                                                        tipoVino = vino.tipoVino.Tipo, 
+                                                        Barcode = vino.Barcode, 
+                                                        QuantitàBottiglePossedute = numBottigleViste, 
+                                                        inCantina = true, 
+                                                        bottglieInCantina = numBottigleCantina, 
+                                                        bottiglieBevute = numBottiglieBevute, 
+                                                        linkImmagine = vino.linkImmagine, 
+                                                        avgPrice = itemPrice });
+                    }
                 }
             }
 
