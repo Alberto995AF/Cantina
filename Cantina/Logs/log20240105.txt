@@ -13,3 +13,15 @@
 [05-01-2024 17:40:18 [IP ] [0HN0E1K00O7SL:00000002] [DBG] MudBlazor.PopoverService Updating entry for 83dd3c7f-9ad4-4a2f-af58-ebdda1c7136b/"MudBlazor.MudPopoverProvider". 1 total observers.
 [05-01-2024 17:40:19 [IP ] [0HN0E1K00O7SL:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
 [05-01-2024 17:40:19 [IP ] [0HN0E1K00O7SL:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[05-01-2024 18:00:44 [IP ] [] [INF]  Server Booting Up...
+[05-01-2024 18:00:45 [IP ] [] [INF]  SeedData Start...
+[05-01-2024 18:00:45 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[05-01-2024 18:00:45 [IP ] [] [INF]  SeedData End...
+[05-01-2024 18:00:53 [IP ] [0HN0E1VG2H4AB:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[05-01-2024 18:00:53 [IP ] [0HN0E1VG2H4AB:00000002] [DBG] MudBlazor.PopoverService Adding entry for 99a06680-37bf-44c9-838c-478ade33fe03/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[05-01-2024 18:00:53 [IP ] [0HN0E1VG2H4AB:00000002] [DBG] MudBlazor.PopoverService Updating entry for 99a06680-37bf-44c9-838c-478ade33fe03/"MudBlazor.MudPopoverProvider". 1 total observers.
+[05-01-2024 18:00:54 [IP ] [0HN0E1VG2H4AB:00000002] [DBG] MudBlazor.PopoverService Removed entry for 99a06680-37bf-44c9-838c-478ade33fe03. 0 total observers after remove.
+[05-01-2024 18:00:54 [IP ] [0HN0E1VG2H4AH:00000002] [DBG] MudBlazor.PopoverService Adding entry for 7d004997-ae7e-4d18-825d-1c8666638efd/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[05-01-2024 18:00:54 [IP ] [0HN0E1VG2H4AH:00000002] [DBG] MudBlazor.PopoverService Updating entry for 7d004997-ae7e-4d18-825d-1c8666638efd/"MudBlazor.MudPopoverProvider". 1 total observers.
+[05-01-2024 18:00:54 [IP ] [0HN0E1VG2H4AH:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[05-01-2024 18:00:54 [IP ] [0HN0E1VG2H4AH:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.

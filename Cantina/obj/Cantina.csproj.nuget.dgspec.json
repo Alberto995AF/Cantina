@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/Cantina.csproj": {}
+    "/Users/albertofiaschi/Documents/GitHub/Cantina/Cantina/Cantina.csproj": {}
   },
   "projects": {
-    "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/Cantina.csproj": {
+    "/Users/albertofiaschi/Documents/GitHub/Cantina/Cantina/Cantina.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/Cantina.csproj",
+        "projectUniqueName": "/Users/albertofiaschi/Documents/GitHub/Cantina/Cantina/Cantina.csproj",
         "projectName": "Cantina",
-        "projectPath": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/Cantina.csproj",
+        "projectPath": "/Users/albertofiaschi/Documents/GitHub/Cantina/Cantina/Cantina.csproj",
         "packagesPath": "/Users/albertofiaschi/.nuget/packages/",
-        "outputPath": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/obj/",
+        "outputPath": "/Users/albertofiaschi/Documents/GitHub/Cantina/Cantina/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/albertofiaschi/.nuget/NuGet/NuGet.Config"

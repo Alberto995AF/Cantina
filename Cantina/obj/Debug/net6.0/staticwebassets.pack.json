@@ -1,19 +1,19 @@
 {
   "Files": [
     {
-      "Id": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/obj/Debug/net6.0/scopedcss/projectbundle/Cantina.bundle.scp.css",
+      "Id": "/Users/albertofiaschi/Documents/GitHub/Cantina/Cantina/obj/Debug/net6.0/scopedcss/projectbundle/Cantina.bundle.scp.css",
       "PackagePath": "staticwebassets/Cantina.bundle.scp.css"
     },
     {
-      "Id": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/wwwroot/css/site.css",
+      "Id": "/Users/albertofiaschi/Documents/GitHub/Cantina/Cantina/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
-      "Id": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/wwwroot/favicon.ico",
+      "Id": "/Users/albertofiaschi/Documents/GitHub/Cantina/Cantina/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/wwwroot/js/utility.js",
+      "Id": "/Users/albertofiaschi/Documents/GitHub/Cantina/Cantina/wwwroot/js/utility.js",
       "PackagePath": "staticwebassets/js/utility.js"
     },
     {

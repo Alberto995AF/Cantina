@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mwb2zRIXhdFvgYSPZx+g1b70+l+hTzxhEjpF6SLGTTaK4f+7mN0Nbeu+NxXZLjup46gH2nubImMOT1HLw6A5wA==",
+  "dgSpecHash": "XSa+LUdxxWLtQINHF8NjieS7lw330lr0yyOHP8knF3pQ9K81Ye4pJ8z1wQr3rgC5jmoLrWKiPtVaXOw6y1OsfA==",
   "success": true,
-  "projectFilePath": "/Users/albertofiaschi/Progetti VS/GitHub/Cantina/Cantina/Cantina.csproj",
+  "projectFilePath": "/Users/albertofiaschi/Documents/GitHub/Cantina/Cantina/Cantina.csproj",
   "expectedPackageFiles": [
     "/Users/albertofiaschi/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/albertofiaschi/.nuget/packages/microsoft.aspnetcore.authorization/6.0.16/microsoft.aspnetcore.authorization.6.0.16.nupkg.sha512",
