@@ -1,0 +1,16 @@
+[23-03-2024 14:25:56 [IP ] [] [INF]  Server Booting Up...
+[23-03-2024 14:25:58 [IP ] [] [INF]  SeedData Start...
+[23-03-2024 14:25:58 [IP ] [] [INF]  SeedData Ignored for Data already present...
+[23-03-2024 14:25:58 [IP ] [] [INF]  SeedData End...
+[23-03-2024 14:25:58 [IP ] [] [WRN] Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager No XML encryptor configured. Key {1d64c9b3-eff4-4016-8653-f8f5294e7c56} may be persisted to storage in unencrypted form.
+[23-03-2024 14:26:01 [IP ] [0HN2B7J3FD9V4:00000002] [WRN] Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware Failed to determine the https port for redirect.
+[23-03-2024 14:26:01 [IP ] [0HN2B7J3FD9V4:00000002] [DBG] MudBlazor.PopoverService Adding entry for 36e6a3c1-8253-4eec-b891-3ae1071b5cd7/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[23-03-2024 14:26:01 [IP ] [0HN2B7J3FD9V4:00000002] [DBG] MudBlazor.PopoverService Updating entry for 36e6a3c1-8253-4eec-b891-3ae1071b5cd7/"MudBlazor.MudPopoverProvider". 1 total observers.
+[23-03-2024 14:26:02 [IP ] [0HN2B7J3FD9V4:00000002] [DBG] MudBlazor.PopoverService Removed entry for 36e6a3c1-8253-4eec-b891-3ae1071b5cd7. 0 total observers after remove.
+[23-03-2024 14:26:02 [IP ] [0HN2B7J3FD9VA:00000002] [DBG] MudBlazor.PopoverService Adding entry for 8d9ec0c0-0a29-4202-a9ab-9a80db8822f0/"MudBlazor.MudPopoverProvider". 1 total observers after add.
+[23-03-2024 14:26:02 [IP ] [0HN2B7J3FD9VA:00000002] [DBG] MudBlazor.PopoverService Updating entry for 8d9ec0c0-0a29-4202-a9ab-9a80db8822f0/"MudBlazor.MudPopoverProvider". 1 total observers.
+[23-03-2024 14:26:02 [IP ] [0HN2B7J3FD9VA:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudHidden". 1 total observers after add.
+[23-03-2024 14:26:02 [IP ] [0HN2B7J3FD9VA:00000002] [DBG] MudBlazor.BrowserViewportService Adding entry for "MudBlazor.BrowserViewportSubscription"/"MudBlazor.MudDrawer". 2 total observers after add.
+[23-03-2024 14:26:08 [IP ] [0HN2B7J3FD9V4:00000009] [DBG] MudBlazor.PopoverService Removed entry for 8d9ec0c0-0a29-4202-a9ab-9a80db8822f0. 0 total observers after remove.
+[23-03-2024 14:26:08 [IP ] [0HN2B7J3FD9V4:00000009] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 1 total observers after remove.
+[23-03-2024 14:26:08 [IP ] [0HN2B7J3FD9V4:00000009] [DBG] MudBlazor.BrowserViewportService Removed entry for "MudBlazor.BrowserViewportSubscription". 0 total observers after remove.
