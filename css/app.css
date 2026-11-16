@@ -485,3 +485,7 @@ svg { display: block; }
 .chat-input { display: flex; gap: 8px; align-items: flex-end; background: var(--surface); border-radius: 22px; padding: 6px 6px 6px 14px; box-shadow: var(--shadow); }
 .chat-input textarea { flex: 1; border: 0; outline: 0; background: transparent; resize: none; font-size: 16px; padding: 8px 0; max-height: 140px; }
 .chat-input .btn { width: 38px; height: 38px; padding: 0; border-radius: 50%; font-size: 18px; }
+
+/* freccia sulle righe con menu a tendina (Modello, Corpo, Stile…) */
+.field:has(select)::after { content: "›"; flex: none; color: var(--muted); font-size: 22px; line-height: 1; margin-left: -4px; transform: translateY(-1px); pointer-events: none; }
+.field select { cursor: pointer; }
