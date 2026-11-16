@@ -4,6 +4,7 @@ import { TYPES, STYLES, BEER_STYLES, beerStyleById, infer, styleOf, drinkWindow,
 import { suggestForDish, dishesForItem, QUICK_DISHES } from './pairing.js';
 import { lookupBarcode, searchImages, fileToDataURL } from './lookup.js';
 import { scanBarcode } from './scanner.js';
+import { PROVIDERS, getAI, setAI, aiReady, aiLabel, listModels, testConnection, aiPairDish, aiPairWine, aiReadLabel, aiChat } from './ai.js';
 import { h, icon, thumb, typeTag, stars, toast, sheet, confirmSheet, fmtDate, dLocal, money, parseNum } from './ui.js';
 
 const S = {
@@ -11,6 +12,7 @@ const S = {
   filter: 'all', query: '', sort: 'recent', showEmpty: false,
   pairMode: 'dish', dishText: '', pickId: null,
   histQuery: '',
+  chat: [], chatBusy: false,
   draft: null,          // dati precompilati per il form "nuovo"
   scroll: {},
 };
@@ -317,6 +319,37 @@ async function handleBarcode(code) {
   go('/new');
 }
 
+// Lettura etichetta con AI: scatta/scegli foto → campi della scheda
+const LABEL_FIELDS = ['name', 'producer', 'vintage', 'type', 'denomination', 'grapes', 'region', 'country', 'abv', 'size', 'beerStyle', 'drinkFrom', 'drinkTo', 'notes'];
+function pickImageFile() {
+  return new Promise(resolve => {
+    const fi = h('input', { type: 'file', accept: 'image/*', style: 'display:none' });
+    fi.onchange = () => { resolve(fi.files[0] || null); fi.remove(); };
+    document.body.append(fi); fi.click();
+  });
+}
+async function readLabel() {
+  if (!aiReady()) { toast('Attiva prima il Sommelier AI'); go('/settings'); return null; }
+  const file = await pickImageFile();
+  if (!file) return null;
+  const dataURL = await fileToDataURL(file, 1280);
+  const close = sheet(box => box.append(h('div', { class: 'loading' }, h('div', { class: 'spin' }), `Leggo l’etichetta con ${aiLabel().split(' · ')[0]}…`)));
+  try {
+    const r = await aiReadLabel(dataURL);
+    const out = { image: await fileToDataURL(file, 900) };
+    for (const k of LABEL_FIELDS) {
+      let v = r[k]; if (v == null) continue; v = String(v).trim(); if (!v) continue;
+      if (k === 'type' && !TYPES[v]) continue;
+      if (k === 'beerStyle' && !beerStyleById(v)) continue;
+      if (k === 'vintage' || k === 'drinkFrom' || k === 'drinkTo') { v = (v.match(/\d{4}/) || [''])[0]; if (!v) continue; }
+      if (k === 'abv') v = v.replace('.', ',').replace(/[^\d,]/g, '');
+      out[k] = v;
+    }
+    close();
+    return out;
+  } catch (e) { close(); toast(e.message || 'Lettura non riuscita'); return null; }
+}
+
 function viewAdd() {
   return [
     h('div', { class: 'hdr' }, h('div', {}, h('h1', {}, 'Aggiungi'), h('div', { class: 'sub' }, 'Una nuova bottiglia in cantina'))),
@@ -324,6 +357,9 @@ function viewAdd() {
       h('button', { class: 'big-action scan', onclick: startScan },
         h('div', { class: 'ic' }, icon('barcode')),
         h('div', {}, h('div', { class: 'tt' }, 'Scansiona il codice a barre'), h('div', { class: 'ds' }, 'Riconosco la bottiglia e cerco foto e dati online'))),
+      h('button', { class: 'big-action', onclick: async () => { const r = await readLabel(); if (r) { S.draft = { qty: 1, type: 'rosso', ...r }; toast(r.name ? `Letto: ${r.name}` : 'Etichetta letta'); go('/new'); } } },
+        h('div', { class: 'ic', style: 'background:linear-gradient(135deg,#F3E6FF,#FFE3EC);color:#8E2443' }, icon('camera')),
+        h('div', {}, h('div', { class: 'tt' }, 'Foto dell’etichetta ✨'), h('div', { class: 'ds' }, aiReady() ? `L’AI legge l’etichetta e compila la scheda (${aiLabel().split(' · ')[0]})` : 'Attiva il Sommelier AI in “Altro” per usarla'))),
       h('button', { class: 'big-action', onclick: () => { S.draft = { type: 'rosso', qty: 1 }; go('/new'); } },
         h('div', { class: 'ic', style: 'background:var(--wine-soft);color:var(--wine)' }, icon('glass')),
         h('div', {}, h('div', { class: 'tt' }, 'Vino a mano'), h('div', { class: 'ds' }, 'Scrivi nome e denominazione, il resto lo suggerisco io'))),
@@ -377,6 +413,12 @@ function viewForm(id) {
       h('div', { class: 'acts' },
         h('button', { class: 'btn sm', type: 'button', onclick: () => imageSheet(f, url => { f.image = url; photo.replaceWith(photo = pickPhoto()); }) }, icon('search'), 'Cerca su internet'),
         h('button', { class: 'btn sm', type: 'button', onclick: () => fileIn.click() }, icon('camera'), 'Scatta o scegli'),
+        aiReady() ? h('button', { class: 'btn sm', type: 'button', onclick: async () => {
+          const r = await readLabel(); if (!r) return;
+          let n = 0;
+          for (const [k, v] of Object.entries(r)) { if (k === 'image' ? !f.image : !f[k] || (k === 'type' && !f._typeTouched && !editing)) { if (f[k] !== v) { f[k] = v; n++; } } }
+          draw(); toast(n ? `Ho compilato ${n} campi ✨` : 'Nessun campo nuovo dall’etichetta');
+        } }, '✨ Leggi etichetta') : null,
         f.image ? h('button', { class: 'btn sm ghost', type: 'button', onclick: () => { f.image = ''; photo.replaceWith(photo = pickPhoto()); } }, 'Rimuovi foto') : null),
       fileIn));
   };
@@ -495,9 +537,8 @@ function imageSheet(f, onPick) {
 // ============ Abbinamenti ============
 function viewPairing() {
   const body = h('div');
-  const tabs = h('div', { class: 'seg-tabs' },
-    h('button', { class: S.pairMode === 'dish' ? 'on' : '', onclick: () => { S.pairMode = 'dish'; render(); } }, 'Ho un piatto'),
-    h('button', { class: S.pairMode === 'wine' ? 'on' : '', onclick: () => { S.pairMode = 'wine'; render(); } }, 'Ho una bottiglia'));
+  const tab = (k, l) => h('button', { class: S.pairMode === k ? 'on' : '', onclick: () => { S.pairMode = k; render(); } }, l);
+  const tabs = h('div', { class: 'seg-tabs three' }, tab('dish', 'Piatto'), tab('wine', 'Bottiglia'), tab('ask', 'Chiedi ✨'));
 
   if (S.pairMode === 'dish') {
     const out = h('div');
@@ -505,9 +546,11 @@ function viewPairing() {
     const run = () => {
       S.dishText = inp.value;
       if (!inp.value.trim()) { out.replaceChildren(); return; }
-      const r = suggestForDish(inp.value, S.items);
+      const dish = inp.value.trim();
+      const r = suggestForDish(dish, S.items);
+      const aiBox = aiAction(`Chiedi al sommelier AI`, async () => renderAIDish(await aiPairDish(dish, S.items, windowStatus)));
       if (!r.matches.length) {
-        out.replaceChildren(h('div', { class: 'empty', style: 'padding:28px 10px' }, h('h3', {}, 'Non ho riconosciuto il piatto'), h('p', {}, 'Prova con l’ingrediente principale o il tipo di cottura (es. “pesce alla griglia”, “brasato”, “formaggi stagionati”).')));
+        out.replaceChildren(h('div', { class: 'empty', style: 'padding:24px 10px 10px' }, h('h3', {}, 'Non ho riconosciuto il piatto'), h('p', {}, aiReady() ? 'Chiedi al sommelier AI: capisce anche le descrizioni più complesse.' : 'Prova con l’ingrediente principale o il tipo di cottura (es. “pesce alla griglia”, “brasato”).')), aiBox);
         return;
       }
       out.replaceChildren(
@@ -516,24 +559,19 @@ function viewPairing() {
           h('div', { class: 'b' }, r.ideal.map(i => i.label).join(' · ')),
           h('div', { class: 's' }, `Per esempio: ${r.ideal[0].ex}. ${r.matches[0].cat.why}`),
           h('div', { class: 'hint', style: 'margin:8px 0 0' }, 'Riconosciuto: ' + r.matches.map(m => m.cat.label.toLowerCase()).join(', '))),
+        aiBox,
         h('div', { class: 'section-t' }, h('h2', {}, 'Dalla tua cantina')),
         r.wines.length
-          ? h('div', { class: 'list' }, r.wines.map(w => h('div', { class: 'card', onclick: () => go('/item/' + w.it.id) },
-              thumb(w.it),
-              h('div', { class: 'bd' },
-                h('div', { class: 'match' }, `${w.match}% compatibile`),
-                h('div', { class: 'nm' }, w.it.name + (w.it.vintage ? ' ' + w.it.vintage : '')),
-                h('div', { class: 'pr' }, [w.it.producer, (STYLES[w.style] || {}).label].filter(Boolean).join(' · ')),
-                h('div', { class: 'reason' }, w.reasons[0] || '')))))
+          ? h('div', { class: 'list' }, r.wines.map(w => wineMatchCard(w.it, w.match, w.reasons[0] || '', (STYLES[w.style] || {}).label)))
           : h('div', { class: 'notes' }, S.items.length ? 'Nessuna bottiglia adatta in cantina: forse è il momento di fare un salto in enoteca! 🛒' : 'Aggiungi qualche bottiglia per ricevere suggerimenti dalla tua cantina.'));
     };
-    inp.oninput = () => { clearTimeout(inp._t); inp._t = setTimeout(run, 250); };
+    inp.oninput = () => { clearTimeout(inp._t); inp._t = setTimeout(run, 300); };
     body.append(
       h('form', { onsubmit: e => { e.preventDefault(); inp.blur(); run(); } }, h('label', { class: 'search' }, icon('search'), inp)),
       h('div', { class: 'quick' }, QUICK_DISHES.map(d => h('button', { onclick: () => { inp.value = d; run(); } }, d))),
       out);
     if (S.dishText) run();
-  } else {
+  } else if (S.pairMode === 'wine') {
     const out = h('div');
     const avail = S.items.filter(i => (+i.qty || 0) > 0);
     const free = h('input', { type: 'search', placeholder: 'Oppure scrivi un vino o una birra', enterkeyhint: 'search' });
@@ -541,8 +579,9 @@ function viewPairing() {
       const p = dishesForItem(it);
       out.replaceChildren(
         p.info ? h('div', { class: 'ideal' }, h('div', { class: 'h' }, 'Profilo'), h('div', { class: 'b' }, p.info.label), h('div', { class: 's' }, `Servire a ${p.info.temp} · ${p.info.glass}`)) : null,
+        aiAction('Approfondisci con l’AI', async () => renderAIWine(await aiPairWine(it))),
         h('div', { class: 'section-t' }, h('h2', {}, 'Piatti consigliati')),
-        h('div', { class: 'pair-grid' }, p.dishes.map(d => h('div', { class: 'dish' }, h('div', { class: 'em' }, d.em), h('div', { class: 'nm' }, d.nm), h('div', { class: 'why' }, d.why)))));
+        dishGrid(p.dishes.map(d => ({ em: d.em, nm: d.nm, why: d.why }))));
       out.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
     const pickList = h('div', { class: 'picker' }, avail.map(it => {
@@ -556,19 +595,125 @@ function viewPairing() {
         e.preventDefault(); free.blur();
         const v = free.value.trim(); if (!v) return;
         const inf = infer({ name: v });
-        const it = { name: v, type: inf.type || 'rosso', beerStyle: inf.beerStyle };
+        const it = { name: v, type: inf.type || 'rosso', beerStyle: inf.beerStyle, denomination: '' };
         S.pickId = null; pickList.querySelectorAll('.pick-row').forEach(r => r.classList.remove('on'));
         showFor(it);
       } }, h('label', { class: 'search' }, icon('search'), free)),
-      avail.length ? [h('div', { class: 'section-t' }, h('h2', {}, 'Scegli dalla cantina')), pickList] : h('p', { class: 'hint' }, 'Scrivi ad esempio “Barolo”, “Vermentino”, “IPA”, “Prosecco”.'),
+      ...(avail.length ? [h('div', { class: 'section-t' }, h('h2', {}, 'Scegli dalla cantina')), pickList] : [h('p', { class: 'hint' }, 'Scrivi ad esempio “Barolo”, “Vermentino”, “IPA”, “Prosecco”.')]),
       out);
     const sel = S.pickId && byId(S.pickId);
     if (sel) setTimeout(() => showFor(sel), 50);
+  } else {
+    body.append(...viewChat());
   }
 
   return [
-    h('div', { class: 'hdr' }, h('div', {}, h('h1', {}, 'Abbinamenti'), h('div', { class: 'sub' }, 'Il sommelier in tasca'))),
+    h('div', { class: 'hdr' }, h('div', {}, h('h1', {}, 'Abbinamenti'), h('div', { class: 'sub' }, aiReady() ? `Il sommelier in tasca · ✨ ${aiLabel()}` : 'Il sommelier in tasca'))),
     tabs, body,
+  ];
+}
+
+function wineMatchCard(it, match, reason, sub) {
+  return h('div', { class: 'card', onclick: () => go('/item/' + it.id) },
+    thumb(it),
+    h('div', { class: 'bd' },
+      match != null ? h('div', { class: 'match' }, `${match}% compatibile`) : null,
+      h('div', { class: 'nm' }, it.name + (it.vintage ? ' ' + it.vintage : '')),
+      h('div', { class: 'pr' }, [it.producer, sub].filter(Boolean).join(' · ')),
+      reason ? h('div', { class: 'reason' }, reason) : null));
+}
+const dishGrid = dishes => h('div', { class: 'pair-grid' }, dishes.map(d => h('div', { class: 'dish' }, h('div', { class: 'em' }, d.em || '🍽'), h('div', { class: 'nm' }, d.nm), h('div', { class: 'why' }, d.why || ''))));
+
+// Pulsante "AI" con stato di caricamento ed errori; se l'AI non è configurata invita ad attivarla
+function aiAction(label, run) {
+  const box = h('div', { class: 'ai-box' });
+  if (!aiReady()) {
+    box.append(h('button', { class: 'ai-cta off', onclick: () => go('/settings') }, '✨ Attiva il Sommelier AI', h('span', {}, 'Gemini o Claude, con la tua chiave')));
+    return box;
+  }
+  const btn = h('button', { class: 'ai-cta', onclick: async () => {
+    btn.disabled = true;
+    box.replaceChildren(h('div', { class: 'ai-card' }, h('div', { class: 'loading' }, h('div', { class: 'spin' }), `${aiLabel().split(' · ')[0]} sta pensando…`)));
+    try { box.replaceChildren(await run()); }
+    catch (e) { box.replaceChildren(h('div', { class: 'ai-card err' }, e.message || 'Errore'), btn); btn.disabled = false; }
+  } }, '✨ ' + label, h('span', {}, aiLabel()));
+  box.append(btn);
+  return box;
+}
+
+function renderAIDish(r) {
+  const picks = (r.scelte || []).map(p => ({ p, it: byId(p.id) })).filter(x => x.it);
+  return h('div', { class: 'ai-card' },
+    h('div', { class: 'ai-h' }, '✨ Il sommelier AI'),
+    r.ideale ? h('div', { class: 'b' }, r.ideale) : null,
+    r.spiegazione ? h('div', { class: 's' }, r.spiegazione) : null,
+    picks.length ? h('div', { class: 'list', style: 'margin-top:12px' }, picks.map(({ p, it }) => wineMatchCard(it, Math.round(+p.percentuale) || null, p.motivo, TYPES[it.type]?.label))) : h('div', { class: 's', style: 'margin-top:10px' }, 'Nessuna bottiglia della cantina è davvero adatta.'),
+    (r.da_comprare || []).length ? h('div', { class: 's', style: 'margin-top:12px' }, h('b', {}, '🛒 Da comprare: '), r.da_comprare.join(' · ')) : null,
+    h('div', { class: 'ai-foot' }, aiLabel()));
+}
+
+function renderAIWine(r) {
+  return h('div', { class: 'ai-card' },
+    h('div', { class: 'ai-h' }, '✨ Il sommelier AI'),
+    r.profilo ? h('div', { class: 's' }, r.profilo) : null,
+    r.servizio ? h('div', { class: 's', style: 'margin-top:8px' }, h('b', {}, 'Servizio: '), r.servizio) : null,
+    (r.piatti || []).length ? h('div', { style: 'margin-top:12px' }, dishGrid(r.piatti.map(d => ({ em: d.emoji, nm: d.nome, why: d.perche })))) : null,
+    r.da_evitare ? h('div', { class: 's', style: 'margin-top:12px' }, h('b', {}, 'Da evitare: '), r.da_evitare) : null,
+    h('div', { class: 'ai-foot' }, aiLabel()));
+}
+
+// ---------- Chat con il sommelier ----------
+function mdLite(text) {
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  return esc(text)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/^#{1,4}\s*(.+)$/gm, '<b>$1</b>')
+    .replace(/^\s*[-*•]\s+(.+)$/gm, '<span class="li">$1</span>')
+    .replace(/<\/span>\n/g, '</span>')
+    .replace(/\n/g, '<br>');
+}
+
+function viewChat() {
+  if (!aiReady()) {
+    return [h('div', { class: 'empty', style: 'padding:30px 16px' },
+      h('div', { class: 'art', html: '<svg viewBox="0 0 24 24"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8zM19 14l.9 2.1L22 17l-2.1.9L19 20l-.9-2.1L16 17l2.1-.9z"/></svg>' }),
+      h('h3', {}, 'Chiedi al sommelier AI'),
+      h('p', {}, 'Fai domande libere sulla tua cantina: “cosa apro sabato con 6 amici e una grigliata?”. Funziona con Gemini o Claude, con la tua chiave API.'),
+      h('button', { class: 'btn primary', onclick: () => go('/settings') }, 'Configura il Sommelier AI'))];
+  }
+  const log = h('div', { class: 'chat' });
+  const draw = () => {
+    log.replaceChildren(...S.chat.map(m => h('div', { class: 'bubble ' + (m.role === 'user' ? 'me' : 'ai') + (m.error ? ' err' : ''), html: m.role === 'user' ? mdLite(m.text) : mdLite(m.text) })));
+    if (S.chatBusy) log.append(h('div', { class: 'bubble ai' }, h('div', { class: 'loading', style: 'padding:4px' }, h('div', { class: 'spin' }), 'Sto pensando…')));
+  };
+  const inp = h('textarea', { rows: 1, placeholder: 'Scrivi una domanda…', enterkeyhint: 'send' });
+  inp.oninput = () => { inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 140) + 'px'; };
+  const send = async text => {
+    text = (text || '').trim();
+    if (!text || S.chatBusy) return;
+    S.chat.push({ role: 'user', text });
+    inp.value = ''; inp.oninput();
+    S.chatBusy = true; draw(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    try {
+      const history = S.chat.filter(m => !m.error).slice(-12).map(m => ({ role: m.role, text: m.text }));
+      const reply = await aiChat(history, S.items, windowStatus);
+      S.chat.push({ role: 'assistant', text: reply });
+    } catch (e) {
+      S.chat.push({ role: 'assistant', text: e.message || 'Errore', error: true });
+    }
+    S.chatBusy = false;
+    if (current === '/pairing' && S.pairMode === 'ask') { draw(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }
+  };
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); send(inp.value); } });
+  draw();
+  const ideas = ['Cosa apro stasera con una pizza?', 'Quali bottiglie devo bere per prime?', 'Organizza una cena di 4 portate con i miei vini', 'Cosa mi manca in cantina?'];
+  return [
+    S.chat.length ? null : h('div', { class: 'quick', style: 'margin-top:0' }, ideas.map(q => h('button', { onclick: () => send(q) }, q))),
+    log,
+    h('form', { class: 'chat-input', onsubmit: e => { e.preventDefault(); send(inp.value); } },
+      inp, h('button', { class: 'btn primary sm', type: 'submit', 'aria-label': 'Invia' }, '↑')),
+    S.chat.length ? h('button', { class: 'btn ghost sm', style: 'margin:6px auto 0;display:flex', onclick: () => { S.chat = []; render(); } }, 'Nuova conversazione') : null,
+    h('p', { class: 'hint', style: 'text-align:center' }, `Risponde ${aiLabel()} · conosce l’elenco della tua cantina`),
   ];
 }
 
@@ -665,6 +810,78 @@ function installTip() {
     'apri questa pagina in Safari, tocca il pulsante Condividi ', h('b', {}, '⎋'), ' e scegli ', h('b', {}, '“Aggiungi alla schermata Home”'), '. Si aprirà a tutto schermo come un’app, anche offline.');
 }
 
+// ---------- Impostazioni Sommelier AI ----------
+function pickDefaultModel(provider, list) {
+  const ids = list.map(m => m.id);
+  if (provider === 'gemini') {
+    return ids.find(id => /^gemini-[\d.]+-flash$/.test(id)) || ids.find(id => /flash/.test(id) && !/lite|preview|exp/.test(id)) || ids.find(id => /flash/.test(id)) || ids[0];
+  }
+  return ids.find(id => /sonnet/.test(id)) || ids[0];
+}
+
+function aiSettingsSection() {
+  const wrap = h('div');
+  const draw = () => {
+    const s = getAI();
+    const seg = h('div', { class: 'seg', style: 'padding:12px 14px' },
+      [['off', 'Spento'], ['gemini', 'Gemini'], ['claude', 'Claude']].map(([k, l]) =>
+        h('button', { type: 'button', class: s.provider === k ? 'on' : '', onclick: () => {
+          if (k !== 'off' && !s.keys[k]) toast(`Inserisci prima la chiave ${PROVIDERS[k].short}`);
+          setAI({ provider: k }); draw();
+        } }, l)));
+
+    const providerGroup = p => {
+      const P = PROVIDERS[p];
+      const lists = s.lists || {};
+      const list = lists[p] || [];
+      const cur = s.models[p] || P.defaultModel;
+      const opts = list.length ? list : [{ id: cur, label: cur }];
+      if (!opts.some(o => o.id === cur)) opts.unshift({ id: cur, label: cur });
+      const keyIn = h('input', { type: 'password', value: s.keys[p] || '', placeholder: P.keyHint, autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false' });
+      const status = h('div', { class: 'hint', style: 'margin:0;padding:0 14px 12px' });
+      const loadModels = async (quiet) => {
+        const key = getAI().keys[p]; if (!key) return;
+        status.textContent = 'Carico i modelli disponibili…';
+        try {
+          const l = await listModels(p, key);
+          const st = getAI();
+          setAI({ lists: { ...(st.lists || {}), [p]: l }, models: st.models[p] && l.some(m => m.id === st.models[p]) ? {} : { [p]: pickDefaultModel(p, l) || '' } });
+          if (!quiet) toast(`${l.length} modelli trovati`);
+          draw();
+        } catch (e) { status.textContent = e.message; }
+      };
+      keyIn.onchange = async () => {
+        const v = keyIn.value.trim();
+        const st = getAI();
+        setAI({ keys: { [p]: v }, ...(v && st.provider === 'off' ? { provider: p } : {}), ...(!v && st.provider === p ? { provider: 'off' } : {}) });
+        if (v) { toast(`Chiave ${P.short} salvata`); await loadModels(true); } else draw();
+      };
+      const sel = h('select', {}, opts.map(m => h('option', { value: m.id, selected: m.id === cur }, m.label === m.id ? m.id : `${m.label}`)));
+      sel.onchange = () => { setAI({ models: { [p]: sel.value } }); toast('Modello aggiornato'); };
+      return h('div', { class: 'group', style: s.provider === p ? 'box-shadow:0 0 0 2px var(--wine)' : '' },
+        h('div', { class: 'field' }, h('label', { style: 'font-weight:600;color:var(--ink)' }, P.label), s.provider === p ? h('span', { class: 'tag ok', style: 'margin-left:auto' }, 'In uso') : (s.keys[p] ? h('button', { class: 'btn sm ghost', style: 'margin-left:auto;height:30px', onclick: () => { setAI({ provider: p }); draw(); toast(`Ora usi ${P.short}`); } }, 'Usa questo') : null)),
+        h('div', { class: 'field' }, h('label', {}, 'Chiave API'), keyIn),
+        h('div', { class: 'field' }, h('label', {}, 'Modello'), sel),
+        s.keys[p] ? h('div', { class: 'field', style: 'gap:8px;justify-content:flex-end' },
+          h('button', { class: 'btn sm', type: 'button', onclick: () => loadModels(false) }, 'Aggiorna modelli'),
+          h('button', { class: 'btn sm', type: 'button', onclick: async () => {
+            status.textContent = 'Provo la connessione…';
+            try { await testConnection(p); status.textContent = `✅ ${P.short} risponde correttamente.`; }
+            catch (e) { status.textContent = '⚠️ ' + e.message; }
+          } }, 'Prova')) : h('div', { class: 'hint', style: 'margin:0;padding:10px 14px 0' }, h('a', { href: P.keyUrl, target: '_blank', rel: 'noopener', style: 'color:var(--wine)' }, `Dove trovo la chiave ${P.short}? ›`)),
+        status);
+    };
+
+    wrap.replaceChildren(
+      h('div', { class: 'section-t' }, h('h2', {}, '✨ Sommelier AI')),
+      h('div', { class: 'group' }, seg),
+      h('div', { style: 'display:grid;gap:12px;margin-top:12px' }, providerGroup('gemini'), providerGroup('claude')),
+      h('p', { class: 'hint' }, 'Puoi salvare entrambe le chiavi e passare da Gemini a Claude in qualunque momento. Le chiavi restano solo su questo telefono e non vengono incluse nei backup. Quando usi l’AI, il piatto, la foto dell’etichetta o l’elenco della cantina vengono inviati al fornitore scelto; il costo dipende dal tuo piano.'));
+  };
+  draw();
+  return wrap;
+}
+
 function viewSettings() {
   const fileIn = h('input', { type: 'file', accept: 'application/json,.json', style: 'display:none' });
   fileIn.onchange = async () => {
@@ -685,6 +902,7 @@ function viewSettings() {
   return [
     h('div', { class: 'hdr' }, h('div', {}, h('h1', {}, 'Altro'), h('div', { class: 'sub' }, `${totalBottles()} bottiglie · ${S.history.length} nello storico`))),
     installTip(),
+    aiSettingsSection(),
     h('div', { class: 'section-t' }, h('h2', {}, 'I tuoi dati')),
     h('div', { class: 'menu' },
       row('download', '#3C8D5A', 'Esporta backup', 'Salva un file con cantina e storico', exportBackup),
@@ -701,8 +919,9 @@ function viewSettings() {
     h('div', { class: 'notes', style: 'font-size:14px;line-height:1.5' },
       '• ', h('b', {}, 'Barcode: '), 'i dati e la foto arrivano da Open Food Facts, un database aperto. I vini meno diffusi potrebbero mancare: in quel caso completa a mano e cerca la foto con “Cerca su internet”.\n',
       '• ', h('b', {}, 'Abbinamenti: '), 'un motore di regole da sommelier (tipologia, vitigno, denominazione, stile di birra) che funziona anche offline.\n',
-      '• ', h('b', {}, 'Finestra di consumo: '), 'stimata da annata e denominazione; puoi impostarla tu nella scheda.'),
-    h('p', { class: 'hint', style: 'text-align:center;margin-top:24px' }, 'Cantina · v1.0'),
+      '• ', h('b', {}, 'Finestra di consumo: '), 'stimata da annata e denominazione; puoi impostarla tu nella scheda.\n',
+      '• ', h('b', {}, 'Sommelier AI (facoltativo): '), 'con una chiave Gemini o Claude ottieni abbinamenti spiegati anche per piatti complessi, la lettura dell’etichetta da foto e una chat sulla tua cantina.'),
+    h('p', { class: 'hint', style: 'text-align:center;margin-top:24px' }, 'Cantina · v1.1'),
   ];
 }
 

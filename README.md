@@ -14,6 +14,12 @@ Si installa sulla schermata Home come un'app vera (PWA), funziona anche offline 
 - **Abbinamenti** (offline, motore a regole):
   - *Ho un piatto* → profilo ideale e bottiglie della tua cantina ordinate per compatibilità;
   - *Ho una bottiglia* → piatti consigliati, temperatura di servizio e bicchiere.
+- **Sommelier AI (facoltativo)**: con la tua chiave **Google Gemini** o **Anthropic Claude** (salvabili entrambe, si passa dall'una all'altra in *Altro › Sommelier AI*):
+  - abbinamenti spiegati anche per piatti complessi, scegliendo tra le bottiglie della cantina;
+  - approfondimento di una bottiglia (profilo, servizio, piatti);
+  - **foto dell'etichetta** → scheda compilata automaticamente;
+  - **chat** libera con il sommelier che conosce la tua cantina.
+  Le chiavi restano solo sul telefono (localStorage), non finiscono nei backup né nel repository; le richieste partono direttamente dal telefono verso Google o Anthropic.
 - **Backup**: esporta/importa un file JSON (consigliato salvarlo su iCloud Drive).
 - Modalità chiara/scura automatica.
 
@@ -49,6 +55,7 @@ css/app.css           stile
 js/app.js             router e schermate
 js/kb.js              base di conoscenza (tipologie, vitigni, denominazioni, birre, piatti)
 js/pairing.js         motore di abbinamento
+js/ai.js              Sommelier AI (Gemini / Claude)
 js/lookup.js          barcode (Open Food Facts) e ricerca immagini
 js/scanner.js         lettore barcode (BarcodeDetector / ZXing)
 js/db.js              archivio IndexedDB, backup
