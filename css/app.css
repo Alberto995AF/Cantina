@@ -489,3 +489,10 @@ svg { display: block; }
 /* freccia sulle righe con menu a tendina (Modello, Corpo, Stile…) */
 .field:has(select)::after { content: "›"; flex: none; color: var(--muted); font-size: 22px; line-height: 1; margin-left: -4px; transform: translateY(-1px); pointer-events: none; }
 .field select { cursor: pointer; }
+
+/* scanner: suggerimenti e strumenti */
+.scanner .tip { color: rgba(255,255,255,.75); font-size: 13px; text-align: center; padding: 0 8px; }
+.scanner .tools { display: flex; gap: 8px; justify-content: center; }
+.scanner .tools:empty { display: none; }
+.scanner .chip-btn { border: 0; border-radius: 999px; padding: 8px 16px; background: rgba(255,255,255,.18); color: #fff; font-weight: 600; font-size: 15px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: pointer; }
+.scanner .chip-btn.on { background: #fff; color: #000; }

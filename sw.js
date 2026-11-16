@@ -1,9 +1,9 @@
 // Service worker: app shell offline, immagini remote in cache "stale-while-revalidate".
-const VERSION = 'cantina-v3';
+const VERSION = 'cantina-v4';
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
   'js/app.js', 'js/db.js', 'js/kb.js', 'js/pairing.js', 'js/lookup.js', 'js/scanner.js', 'js/ui.js', 'js/ai.js',
-  'vendor/zxing.min.js', 'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/favicon-32.png'
+  'vendor/zxing-wasm-reader.js', 'vendor/zxing_reader.wasm', 'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/favicon-32.png'
 ];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
