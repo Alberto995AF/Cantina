@@ -4,7 +4,7 @@ import { TYPES, STYLES, BEER_STYLES, beerStyleById, infer, styleOf, drinkWindow,
 import { suggestForDish, dishesForItem, QUICK_DISHES } from './pairing.js';
 import { lookupBarcode, searchImages, fileToDataURL } from './lookup.js';
 import { scanBarcode } from './scanner.js';
-import { PROVIDERS, getAI, setAI, aiReady, aiLabel, listModels, testConnection, aiPairDish, aiPairWine, aiReadLabel, aiChat } from './ai.js';
+import { PROVIDERS, getAI, setAI, aiReady, aiLabel, listModels, testConnection, aiPairDish, aiPairWine, aiReadLabel, aiChat, aiImageReady, aiCutout, listImageModels, imageModel, DEFAULT_IMAGE_MODEL } from './ai.js';
 import { h, icon, thumb, typeTag, stars, toast, sheet, confirmSheet, fmtDate, dLocal, money, parseNum } from './ui.js';
 
 const S = {
@@ -203,7 +203,12 @@ function viewItem(id) {
   }
 
   return [
-    h('div', { class: 'hero' + (it.image ? ' has-img' : '') }, thumb(it)),
+    h('div', { class: 'hero' + (it.image ? ' has-img' : '') }, thumb(it),
+      it.image && aiImageReady() && !it.imageCatalog ? h('button', { class: 'hero-ai', onclick: async () => {
+        const r = await runCutout(it.image); if (!r) return;
+        it.imageOriginal = it.image; it.image = r; it.imageCatalog = true; it.updatedAt = new Date().toISOString();
+        await db.put('items', it); await load(); toast('Foto da catalogo salvata ✨ (puoi ripristinare l’originale da Modifica)'); render();
+      } }, '✨ Foto da catalogo') : null),
     h('div', { class: 'floating-bar' },
       h('button', { class: 'icon-btn stroke', 'aria-label': 'Indietro', onclick: () => history.length > 1 ? history.back() : go('/') }, icon('back')),
       h('button', { class: 'icon-btn stroke', 'aria-label': 'Modifica', onclick: () => go('/edit/' + it.id) }, icon('pen'))),
@@ -370,6 +375,13 @@ function viewAdd() {
   ];
 }
 
+// Foto da catalogo con Gemini (scontorno su sfondo bianco)
+async function runCutout(src) {
+  const close = sheet(box => box.append(h('div', { class: 'loading', style: 'flex-direction:column;gap:12px;padding:30px' }, h('div', { class: 'spin' }), 'Creo la foto da catalogo con Gemini…', h('div', { class: 'hint', style: 'margin:0' }, 'Di solito servono 10–20 secondi'))));
+  try { const r = await aiCutout(src); close(); return r; }
+  catch (e) { close(); toast(e.message || 'Scontorno non riuscito'); return null; }
+}
+
 // ============ Form ============
 function viewForm(id) {
   const editing = id ? byId(id) : null;
@@ -408,10 +420,10 @@ function viewForm(id) {
   const pickPhoto = () => {
     const ph = thumb(f);
     const fileIn = h('input', { type: 'file', accept: 'image/*', style: 'display:none' });
-    fileIn.onchange = async () => { if (!fileIn.files[0]) return; f.image = await fileToDataURL(fileIn.files[0]); photo.replaceWith(photo = pickPhoto()); };
+    fileIn.onchange = async () => { if (!fileIn.files[0]) return; f.image = await fileToDataURL(fileIn.files[0]); f.imageCatalog = false; f.imageOriginal = ''; photo.replaceWith(photo = pickPhoto()); };
     return h('div', { class: 'group' }, h('div', { class: 'photo-pick' }, ph,
       h('div', { class: 'acts' },
-        h('button', { class: 'btn sm', type: 'button', onclick: () => imageSheet(f, url => { f.image = url; photo.replaceWith(photo = pickPhoto()); }) }, icon('search'), 'Cerca su internet'),
+        h('button', { class: 'btn sm', type: 'button', onclick: () => imageSheet(f, url => { f.image = url; f.imageCatalog = false; f.imageOriginal = ''; photo.replaceWith(photo = pickPhoto()); }) }, icon('search'), 'Cerca su internet'),
         h('button', { class: 'btn sm', type: 'button', onclick: () => fileIn.click() }, icon('camera'), 'Scatta o scegli'),
         aiReady() ? h('button', { class: 'btn sm', type: 'button', onclick: async () => {
           const r = await readLabel(); if (!r) return;
@@ -419,7 +431,15 @@ function viewForm(id) {
           for (const [k, v] of Object.entries(r)) { if (k === 'image' ? !f.image : !f[k] || (k === 'type' && !f._typeTouched && !editing)) { if (f[k] !== v) { f[k] = v; n++; } } }
           draw(); toast(n ? `Ho compilato ${n} campi ✨` : 'Nessun campo nuovo dall’etichetta');
         } }, '✨ Leggi etichetta') : null,
-        f.image ? h('button', { class: 'btn sm ghost', type: 'button', onclick: () => { f.image = ''; photo.replaceWith(photo = pickPhoto()); } }, 'Rimuovi foto') : null),
+        f.image && aiImageReady() && !f.imageCatalog ? h('button', { class: 'btn sm', type: 'button', onclick: async () => {
+          const r = await runCutout(f.image); if (!r) return;
+          f.imageOriginal = f.image; f.image = r; f.imageCatalog = true;
+          photo.replaceWith(photo = pickPhoto()); toast('Foto da catalogo pronta ✨');
+        } }, '✨ Foto da catalogo') : null,
+        f.imageCatalog && f.imageOriginal ? h('button', { class: 'btn sm ghost', type: 'button', onclick: () => {
+          f.image = f.imageOriginal; f.imageOriginal = ''; f.imageCatalog = false; photo.replaceWith(photo = pickPhoto());
+        } }, 'Ripristina originale') : null,
+        f.image ? h('button', { class: 'btn sm ghost', type: 'button', onclick: () => { f.image = ''; f.imageOriginal = ''; f.imageCatalog = false; photo.replaceWith(photo = pickPhoto()); } }, 'Rimuovi foto') : null),
       fileIn));
   };
 
@@ -846,6 +866,13 @@ function aiSettingsSection() {
           const l = await listModels(p, key);
           const st = getAI();
           setAI({ lists: { ...(st.lists || {}), [p]: l }, models: st.models[p] && l.some(m => m.id === st.models[p]) ? {} : { [p]: pickDefaultModel(p, l) || '' } });
+          if (p === 'gemini') {
+            const li = await listImageModels(key).catch(() => []);
+            const st2 = getAI();
+            const keep = st2.models.geminiImage && li.some(m => m.id === st2.models.geminiImage);
+            const def = li.find(m => m.id === DEFAULT_IMAGE_MODEL) || li.find(m => /flash-image$/.test(m.id)) || li[0];
+            setAI({ lists: { ...(st2.lists || {}), geminiImage: li }, models: keep || !def ? {} : { geminiImage: def.id } });
+          }
           if (!quiet) toast(`${l.length} modelli trovati`);
           draw();
         } catch (e) { status.textContent = e.message; }
@@ -862,6 +889,15 @@ function aiSettingsSection() {
         h('div', { class: 'field' }, h('label', { style: 'font-weight:600;color:var(--ink)' }, P.label), s.provider === p ? h('span', { class: 'tag ok', style: 'margin-left:auto' }, 'In uso') : (s.keys[p] ? h('button', { class: 'btn sm ghost', style: 'margin-left:auto;height:30px', onclick: () => { setAI({ provider: p }); draw(); toast(`Ora usi ${P.short}`); } }, 'Usa questo') : null)),
         h('div', { class: 'field' }, h('label', {}, 'Chiave API'), keyIn),
         h('div', { class: 'field' }, h('label', {}, 'Modello'), sel),
+        p === 'gemini' ? (() => {
+          const li = (s.lists && s.lists.geminiImage) || [];
+          const cur = imageModel();
+          const o = li.length ? [...li] : [{ id: cur, label: cur }];
+          if (!o.some(m => m.id === cur)) o.unshift({ id: cur, label: cur });
+          const isel = h('select', {}, o.map(m => h('option', { value: m.id, selected: m.id === cur }, m.label)));
+          isel.onchange = () => { setAI({ models: { geminiImage: isel.value } }); toast('Modello immagini aggiornato'); };
+          return h('div', { class: 'field' }, h('label', {}, 'Modello immagini'), isel);
+        })() : null,
         s.keys[p] ? h('div', { class: 'field', style: 'gap:8px;justify-content:flex-end' },
           h('button', { class: 'btn sm', type: 'button', onclick: () => loadModels(false) }, 'Aggiorna modelli'),
           h('button', { class: 'btn sm', type: 'button', onclick: async () => {
@@ -876,7 +912,7 @@ function aiSettingsSection() {
       h('div', { class: 'section-t' }, h('h2', {}, '✨ Sommelier AI')),
       h('div', { class: 'group' }, seg),
       h('div', { style: 'display:grid;gap:12px;margin-top:12px' }, providerGroup('gemini'), providerGroup('claude')),
-      h('p', { class: 'hint' }, 'Puoi salvare entrambe le chiavi e passare da Gemini a Claude in qualunque momento. Le chiavi restano solo su questo telefono e non vengono incluse nei backup. Quando usi l’AI, il piatto, la foto dell’etichetta o l’elenco della cantina vengono inviati al fornitore scelto; il costo dipende dal tuo piano.'));
+      h('p', { class: 'hint' }, 'Puoi salvare entrambe le chiavi e passare da Gemini a Claude in qualunque momento. La “Foto da catalogo” usa sempre Gemini (modello immagini), anche se per i testi hai scelto Claude. Le chiavi restano solo su questo telefono e non vengono incluse nei backup. Quando usi l’AI, il piatto, la foto dell’etichetta o l’elenco della cantina vengono inviati al fornitore scelto; il costo dipende dal tuo piano.'));
   };
   draw();
   return wrap;

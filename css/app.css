@@ -496,3 +496,32 @@ svg { display: block; }
 .scanner .tools:empty { display: none; }
 .scanner .chip-btn { border: 0; border-radius: 999px; padding: 8px 16px; background: rgba(255,255,255,.18); color: #fff; font-weight: 600; font-size: 15px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: pointer; }
 .scanner .chip-btn.on { background: #fff; color: #000; }
+
+/* ---------- Foto in stile catalogo (Vivino/Tannico) ----------
+   Le immagini con sfondo chiaro si "fondono" con un piatto chiaro (multiply),
+   così la bottiglia sembra appoggiata sulla card, con un'ombra morbida alla base. */
+.ph.contain { background: linear-gradient(180deg, #FDFBF9 0%, #F2ECE6 100%); isolation: isolate; }
+.ph.contain img { background: transparent; mix-blend-mode: multiply; padding: 8px 6px 10px; position: relative; z-index: 1; }
+.ph.contain::before {
+  content: ""; position: absolute; left: 20%; right: 20%; bottom: 5%; height: 9%; z-index: 0;
+  background: radial-gradient(ellipse at center, rgba(70, 35, 25, .22) 0%, rgba(70, 35, 25, 0) 70%);
+}
+@media (prefers-color-scheme: dark) {
+  .ph.contain { background: linear-gradient(180deg, #F3EEE9 0%, #DED4CA 100%); }
+}
+.hero.has-img { background: radial-gradient(120% 85% at 50% 38%, #FFFFFF 0%, #F4EEE8 62%, #E9E0D6 100%); }
+.hero .ph.contain { background: transparent; }
+.hero .ph.contain img { padding: calc(var(--sat) + 40px) 48px 70px; }
+.hero .ph.contain::before { left: 34%; right: 34%; bottom: 52px; height: 22px; }
+.hero-ai {
+  position: absolute; right: 16px; bottom: 44px; z-index: 3; border: 0; cursor: pointer;
+  padding: 8px 14px; border-radius: 999px; font-size: 13.5px; font-weight: 600; color: #fff;
+  background: linear-gradient(120deg, #5B2A86, #8E2443 60%, #C2502F); box-shadow: 0 6px 16px rgba(91, 42, 134, .3);
+}
+.photo-pick .ph { border-radius: 14px; }
+/* hero: la fusione deve avvenire con lo sfondo della hero, non dentro la .ph trasparente */
+.hero.has-img { isolation: isolate; height: calc(380px + var(--sat)); }
+.hero .ph.contain { isolation: auto; }
+.hero .ph.contain img { padding: calc(var(--sat) + 44px) 48px 96px; }
+.hero .ph.contain::before { bottom: 86px; }
+.hero-ai { bottom: 52px; }

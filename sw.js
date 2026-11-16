@@ -1,5 +1,5 @@
 // Service worker: app shell offline, immagini remote in cache "stale-while-revalidate".
-const VERSION = 'cantina-v4';
+const VERSION = 'cantina-v5';
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
   'js/app.js', 'js/db.js', 'js/kb.js', 'js/pairing.js', 'js/lookup.js', 'js/scanner.js', 'js/ui.js', 'js/ai.js',

@@ -202,3 +202,79 @@ export async function aiChat(history, items, windowStatus) {
   const sys = `${SYSTEM}\nRisposte brevi e pratiche (massimo ~150 parole), con elenchi puntati quando utile. Quando citi una bottiglia della cantina scrivi il suo nome, non l'id.\n\n${cellarContext(items, windowStatus)}`;
   return generate({ system: sys, messages: history, maxTokens: 1200 });
 }
+
+// ---------- Foto da catalogo (scontorno) con Gemini ----------
+// Usa sempre la chiave Gemini, anche se per i testi è selezionato Claude (Claude non genera immagini).
+export const DEFAULT_IMAGE_MODEL = 'gemini-2.5-flash-image';
+export function aiImageReady() { return !!getAI().keys.gemini; }
+export function imageModel() {
+  const s = getAI();
+  return s.models.geminiImage || DEFAULT_IMAGE_MODEL;
+}
+export async function listImageModels(key) {
+  const b = await call('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200', { headers: { 'x-goog-api-key': key } }, 'gemini', 20000);
+  return (b.models || [])
+    .filter(m => (m.supportedGenerationMethods || []).includes('generateContent') && /gemini.*image/i.test(m.name))
+    .map(m => ({ id: m.name.replace(/^models\//, ''), label: m.displayName || m.name }))
+    .sort((a, b) => b.id.localeCompare(a.id, undefined, { numeric: true }));
+}
+
+async function toDataURL(src) {
+  if (src.startsWith('data:')) return src;
+  let r;
+  try { r = await fetch(src, { mode: 'cors' }); } catch { throw new AIError('Non posso scaricare questa immagine: scatta o scegli una foto dal telefono e riprova.'); }
+  if (!r.ok) throw new AIError('Immagine non raggiungibile: scatta o scegli una foto e riprova.');
+  const blob = await r.blob();
+  return new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(blob); });
+}
+
+// Ricomprime il risultato (PNG grande) in JPEG leggero con sfondo bianco
+function compress(dataURL, max = 1000) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const s = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(img, 0, 0, c.width, c.height);
+      resolve(c.toDataURL('image/jpeg', 0.86));
+    };
+    img.onerror = () => reject(new AIError('Immagine generata non valida, riprova.'));
+    img.src = dataURL;
+  });
+}
+
+const CUTOUT_PROMPT = `Trasforma questa foto in una foto prodotto da catalogo e-commerce di vini (stile Vivino/Tannico).
+- Mostra SOLO la bottiglia (o lattina) principale, intera, dritta in verticale e centrata, con l'etichetta frontale rivolta verso l'osservatore.
+- Sfondo bianco puro e uniforme (#FFFFFF), nessun altro oggetto, nessuna mano, nessun riflesso dell'ambiente.
+- Una leggera ombra morbida sotto la base.
+- Mantieni fedeli forma, colore del vetro, capsula ed etichetta: non inventare né modificare testi, loghi o grafica dell'etichetta.
+- Inquadratura verticale 3:4 con un piccolo margine bianco attorno alla bottiglia. Fotorealistico.`;
+
+export async function aiCutout(src) {
+  const s = getAI();
+  const key = s.keys.gemini;
+  if (!key) throw new AIError('Serve una chiave Gemini: aggiungila in Altro › Sommelier AI.');
+  const input = splitDataURL(await toDataURL(src));
+  if (!input) throw new AIError('Formato immagine non supportato.');
+  const model = imageModel();
+  const body = cfg => JSON.stringify({
+    contents: [{ role: 'user', parts: [{ inline_data: { mime_type: input.mime, data: input.data } }, { text: CUTOUT_PROMPT }] }],
+    generationConfig: { responseModalities: ['TEXT', 'IMAGE'], ...cfg },
+  });
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+  const headers = { 'x-goog-api-key': key, 'content-type': 'application/json' };
+  let b;
+  try { b = await call(url, { method: 'POST', headers, body: body({ imageConfig: { aspectRatio: '3:4' } }) }, 'gemini', 90000); }
+  catch (e) {
+    // alcuni modelli non accettano imageConfig: riprova senza
+    if (!/Errore 400/.test(e.message)) throw e;
+    b = await call(url, { method: 'POST', headers, body: body({}) }, 'gemini', 90000);
+  }
+  const parts = (b.candidates && b.candidates[0] && b.candidates[0].content && b.candidates[0].content.parts) || [];
+  const img = parts.map(p => p.inlineData || p.inline_data).find(Boolean);
+  if (!img) {
+    const txt = parts.map(p => p.text || '').join(' ').trim();
+    throw new AIError(b.promptFeedback?.blockReason ? 'Richiesta bloccata dal filtro di Gemini.' : (txt ? `Gemini non ha restituito un'immagine: ${txt.slice(0, 140)}` : `Il modello ${model} non ha restituito un'immagine: scegli un modello immagini nelle impostazioni.`));
+  }
+  return compress(`data:${img.mimeType || img.mime_type || 'image/png'};base64,${img.data}`);
+}

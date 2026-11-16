@@ -19,8 +19,10 @@ Si installa sulla schermata Home come un'app vera (PWA), funziona anche offline 
   - approfondimento di una bottiglia (profilo, servizio, piatti);
   - **foto dell'etichetta** → scheda compilata automaticamente;
   - **chat** libera con il sommelier che conosce la tua cantina.
+  - **foto da catalogo** (solo Gemini, modello immagini): isola la bottiglia su sfondo bianco, dritta e centrata, con possibilità di ripristinare l'originale.
   Le chiavi restano solo sul telefono (localStorage), non finiscono nei backup né nel repository; le richieste partono direttamente dal telefono verso Google o Anthropic.
 - **Backup**: esporta/importa un file JSON (consigliato salvarlo su iCloud Drive).
+- Foto in stile catalogo: le immagini con sfondo chiaro si fondono con la card, con un'ombra morbida alla base.
 - Modalità chiara/scura automatica.
 
 ## Pubblicazione (serve HTTPS per fotocamera e installazione)
