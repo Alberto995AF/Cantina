@@ -18,17 +18,17 @@ async function getJSON(url, ms = 12000) {
 const COUNTRY = { italy: 'Italia', france: 'Francia', spain: 'Spagna', germany: 'Germania', portugal: 'Portogallo', belgium: 'Belgio', austria: 'Austria', 'united-states': 'USA', 'united-kingdom': 'Regno Unito', ireland: 'Irlanda', netherlands: 'Paesi Bassi', 'czech-republic': 'Rep. Ceca', chile: 'Cile', argentina: 'Argentina', australia: 'Australia', 'new-zealand': 'Nuova Zelanda', 'south-africa': 'Sudafrica', mexico: 'Messico', denmark: 'Danimarca', hungary: 'Ungheria', greece: 'Grecia', slovenia: 'Slovenia', croatia: 'Croazia' };
 
 function typeFromCategories(tags = []) {
-  const s = tags.join(' ');
-  if (/beers|bieres|birre|-ale|lager|stout|ipa/.test(s)) return 'birra';
-  if (/sparkling|champagne|prosecco|spumant|cava|cremant|vins-effervescents/.test(s)) return 'bollicine';
-  if (/rose-wines|vins-roses|rosati/.test(s)) return 'rosato';
-  if (/white-wines|vins-blancs|vini-bianchi/.test(s)) return 'bianco';
-  if (/red-wines|vins-rouges|vini-rossi/.test(s)) return 'rosso';
-  if (/fortified|port-wines|porto|sherr|marsala/.test(s)) return 'fortificato';
-  if (/dessert-wines|sweet-wines|passito|vins-doux|moscato/.test(s)) return 'dolce';
-  if (/wines|vins|vini/.test(s)) return null;
+  const s = tags.join(' ').toLowerCase();
+  if (/\bbeers?\b|bieres?|birr[ae]|-ales?\b|lagers?|stouts?|\bipa\b|pilsner/.test(s)) return 'birra';
+  if (/sparkling|champagne|prosecco|spumant|\bcava\b|cremant|effervescent|franciacorta|frizzant/.test(s)) return 'bollicine';
+  if (/ros[eé]-wines?|vins?-ros[eé]s?|vin[io]-rosat[io]|rosati/.test(s)) return 'rosato';
+  if (/fortified|port-wines?|\bportos?\b|sherr|marsala|madeira/.test(s)) return 'fortificato';
+  if (/dessert-wines?|sweet-wines?|passit|vins?-doux|moscato|vin-santo/.test(s)) return 'dolce';
+  if (/white-wines?|vins?-blancs?|vin[io]-bianc[oh]i?|weisswein/.test(s)) return 'bianco';
+  if (/red-wines?|vins?-rouges?|vin[io]-ross[io]|rotwein/.test(s)) return 'rosso';
   return null;
 }
+const isWineish = (tags = []) => /wines?|vins?\b|vin[io]|weine?/.test(tags.join(' '));
 
 function parseVolume(q) {
   if (!q) return '';
@@ -52,6 +52,7 @@ export async function lookupBarcode(code) {
     image: p.image_front_url || p.image_url || '',
     size: parseVolume(p.quantity),
     source: 'Open Food Facts',
+    generic: (p.generic_name_it || p.generic_name || '').trim(),
   };
   const alc = p.nutriments && (p.nutriments.alcohol_100g ?? p.nutriments.alcohol ?? p.nutriments.alcohol_value);
   if (alc) out.abv = String(Math.round(alc * 10) / 10).replace('.', ',');
@@ -61,6 +62,8 @@ export async function lookupBarcode(code) {
   if (yr) out.vintage = yr[1];
   const inf = infer({ name, producer: brand, denomination: p.generic_name_it || p.generic_name || '' });
   out.type = typeFromCategories(p.categories_tags) || inf.type || null;
+  out.typeSource = out.type ? 'barcode' : null;
+  out.isWine = isWineish(p.categories_tags) || !!inf.type;
   if (inf.grapes) out.grapes = inf.grapes;
   if (inf.region) out.region = inf.region;
   if (inf.country && !out.country) out.country = inf.country;

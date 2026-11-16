@@ -525,3 +525,8 @@ svg { display: block; }
 .hero .ph.contain img { padding: calc(var(--sat) + 44px) 48px 96px; }
 .hero .ph.contain::before { bottom: 86px; }
 .hero-ai { bottom: 52px; }
+
+/* tipologia da confermare dopo il barcode */
+.type-warn { margin: 4px 4px -8px; font-size: 13.5px; color: var(--orange); font-weight: 500; }
+.type-warn.ai { color: #7A45B8; }
+.group.need { box-shadow: 0 0 0 2px var(--orange), var(--shadow); }

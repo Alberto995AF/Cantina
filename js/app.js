@@ -4,7 +4,7 @@ import { TYPES, STYLES, BEER_STYLES, beerStyleById, infer, styleOf, drinkWindow,
 import { suggestForDish, dishesForItem, QUICK_DISHES } from './pairing.js';
 import { lookupBarcode, searchImages, fileToDataURL } from './lookup.js';
 import { scanBarcode } from './scanner.js';
-import { PROVIDERS, getAI, setAI, aiReady, aiLabel, listModels, testConnection, aiPairDish, aiPairWine, aiReadLabel, aiChat, aiImageReady, aiCutout, listImageModels, imageModel, DEFAULT_IMAGE_MODEL } from './ai.js';
+import { PROVIDERS, getAI, setAI, aiReady, aiLabel, listModels, testConnection, aiPairDish, aiPairWine, aiReadLabel, aiChat, aiImageReady, aiCutout, listImageModels, imageModel, DEFAULT_IMAGE_MODEL, aiIdentify } from './ai.js';
 import { h, icon, thumb, typeTag, stars, toast, sheet, confirmSheet, fmtDate, dLocal, money, parseNum } from './ui.js';
 
 const S = {
@@ -310,18 +310,38 @@ async function handleBarcode(code) {
         h('button', { class: 'btn ghost block', onclick: () => { close(); S.draft = { ...existing, id: null, qty: 1, vintage: '' }; go('/new'); } }, 'Nuova annata dello stesso vino'))));
     return;
   }
-  const close = sheet(box => box.append(h('div', { class: 'loading' }, h('div', { class: 'spin' }), `Cerco ${code}…`)));
+  const status = h('span', {}, `Cerco ${code}…`);
+  const close = sheet(box => box.append(h('div', { class: 'loading' }, h('div', { class: 'spin' }), status)));
   let found = null;
   try { found = await lookupBarcode(code); } catch { /* offline o errore */ }
+  // Tipologia o dati del vino mancanti: chiedo all'AI partendo dal nome del prodotto
+  if (found && found.name && aiReady() && (!found.type || (found.type !== 'birra' && !found.denomination && !found.grapes))) {
+    status.textContent = `Riconosco il vino con ${aiLabel().split(' · ')[0]}…`;
+    try {
+      const r = await aiIdentify({ name: found.name, producer: found.producer, generic: found.generic, barcode: code });
+      const sure = r.confidence !== 'bassa';
+      if (!found.type && r.type && TYPES[r.type] && sure) { found.type = r.type; found.typeSource = 'ai'; }
+      for (const k of ['denomination', 'grapes', 'region', 'country']) if (!found[k] && r[k] && sure) found[k] = String(r[k]);
+      if (found.type === 'birra' && !found.beerStyle && r.beerStyle && beerStyleById(r.beerStyle)) found.beerStyle = r.beerStyle;
+    } catch { /* l'AI è facoltativa */ }
+  }
   close();
   if (found) {
-    S.draft = { qty: 1, ...found };
-    toast(found.name ? `Trovato: ${found.name}` : 'Prodotto trovato');
+    const { isWine, generic, ...rest } = found;
+    S.draft = { qty: 1, ...rest, type: found.type || '' };
+    toast(found.name ? `Trovato: ${found.name}` + (found.type ? '' : ' · scegli la tipologia') : 'Prodotto trovato');
+    go('/new');
   } else {
-    S.draft = { barcode: code, qty: 1, type: 'rosso' };
-    toast('Non trovato online: completa tu i dati');
+    // Non presente su Open Food Facts: propongo la foto dell'etichetta (AI) o l'inserimento a mano
+    sheet((box, close) => box.append(
+      h('h3', {}, 'Codice non trovato'),
+      h('div', { class: 'sub' }, `Il codice ${code} non è nel database di Open Food Facts.`),
+      h('div', { style: 'display:grid;gap:10px' },
+        aiReady() ? h('button', { class: 'btn primary block', onclick: async () => {
+          close(); const r = await readLabel(); S.draft = { barcode: code, qty: 1, type: '', ...(r || {}) }; go('/new');
+        } }, icon('camera'), 'Fotografa l’etichetta ✨') : null,
+        h('button', { class: 'btn block' + (aiReady() ? '' : ' primary'), onclick: () => { close(); S.draft = { barcode: code, qty: 1, type: '' }; go('/new'); } }, 'Compila a mano'))));
   }
-  go('/new');
 }
 
 // Lettura etichetta con AI: scatta/scegli foto → campi della scheda
@@ -450,7 +470,9 @@ function viewForm(id) {
     container.replaceChildren(h('div', { class: 'form' },
       photo,
       h('div', { class: 'group-t' }, 'Tipologia'),
-      h('div', { class: 'group' }, h('div', { class: 'seg' }, Object.entries(TYPES).map(([k, t]) =>
+      !f.type ? h('div', { class: 'type-warn' }, 'Non sono riuscito a capire la tipologia dal codice: sceglila qui sotto.') : null,
+      f.type && f.typeSource === 'ai' && !f._typeTouched ? h('div', { class: 'type-warn ai' }, '✨ Tipologia suggerita dall’AI: controlla che sia giusta.') : null,
+      h('div', { class: 'group' + (!f.type ? ' need' : '') }, h('div', { class: 'seg' }, Object.entries(TYPES).map(([k, t]) =>
         h('button', { type: 'button', class: f.type === k ? 'on' : '', onclick: () => { f.type = k; f._typeTouched = true; draw(); } }, h('span', { class: 'dot', style: `background:${t.color}` }), t.label)))),
       h('div', { class: 'group-t' }, isBeer ? 'La birra' : 'Il vino'),
       h('div', { class: 'group' },
@@ -491,6 +513,7 @@ function viewForm(id) {
 
   async function save() {
     if (!(f.name || '').trim()) { toast('Inserisci almeno il nome'); return; }
+    if (!f.type) { toast('Scegli la tipologia (rosso, bianco…)'); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
     const now = new Date().toISOString();
     const it = {
       ...f,
@@ -503,7 +526,7 @@ function viewForm(id) {
       createdAt: editing ? editing.createdAt : now,
       updatedAt: now,
     };
-    delete it._typeTouched;
+    delete it._typeTouched; delete it.typeSource; delete it.source;
     await db.put('items', it);
     await load();
     S.draft = null;

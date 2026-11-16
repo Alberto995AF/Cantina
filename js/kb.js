@@ -69,6 +69,13 @@ export const GRAPES = [
   ['Nosiola', 'bianco', 1], ['Erbaluce', 'bianco', 1], ['Nascetta', 'bianco', 2], ['Bombino', 'bianco', 1],
   ['Coda di Volpe', 'bianco', 2], ['Biancolella', 'bianco', 1], ['Inzolia', 'bianco', 1], ['Zibibbo', 'bianco', 1, true],
   ['Manzoni Bianco', 'bianco', 2], ['Lugana', 'bianco', 2], ['Semillon', 'bianco', 2], ['Marsanne', 'bianco', 3],
+  ['Verduzzo', 'bianco', 2], ['Hárslevelű', 'bianco', 2], ['Harslevelu', 'bianco', 2], ['Furmint', 'bianco', 2], ['Silvaner', 'bianco', 1],
+  ['Grechetto', 'bianco', 1], ['Pigato', 'bianco', 1], ['Picolit', 'bianco', 2, true], ['Torbato', 'bianco', 1], ['Nuragus', 'bianco', 1],
+  ['Riesling Renano', 'bianco', 2, true], ['Welschriesling', 'bianco', 1], ['Chasselas', 'bianco', 1], ['Macabeo', 'bianco', 1], ['Verdejo', 'bianco', 1],
+  ['Spätburgunder', 'rosso', 1], ['Spatburgunder', 'rosso', 1], ['Blauburgunder', 'rosso', 1], ['Pinot Noir', 'rosso', 1], ['Negramaro', 'rosso', 2], ['Negromaro', 'rosso', 2],
+  ['Rossese', 'rosso', 1], ['Ormeasco', 'rosso', 1], ['Cesanese', 'rosso', 2], ['Sciascinoso', 'rosso', 2], ['Piedirosso', 'rosso', 1], ['Monica', 'rosso', 1],
+  ['Raboso', 'rosso', 2], ['Vespolina', 'rosso', 1], ['Uva Rara', 'rosso', 1], ['Bonarda', 'rosso', 1], ['Lacrima', 'rosso', 1], ['Vernaccia Nera', 'rosso', 1],
+  ['Touriga Nacional', 'rosso', 3], ['Blaufränkisch', 'rosso', 2], ['Zweigelt', 'rosso', 1], ['Shiraz', 'rosso', 3], ['Garnacha', 'rosso', 2], ['Monastrell', 'rosso', 3],
 ].map(([name, type, body, aro]) => ({ name, type, body, aro: !!aro, k: norm(name) }));
 
 // ---------- Denominazioni e vini famosi ----------
@@ -279,6 +286,9 @@ export function infer({ name = '', denomination = '', grapes = '', producer = ''
   if (!out.type && gs.length) out.type = gs[0].type;
   if (!out.grapes && gs.length) out.grapes = gs.map(g => g.name).join(', ');
   const t = norm(text + ' ' + producer);
+  // colore scritto nel nome ("Vino rosso", "Vipra Rossa", "Bianco di Custoza", "Rotwein"…)
+  if (/\b(rosso|rossa|rossi|red|rouge|tinto|rotwein|rot)\b/.test(t)) out.type = 'rosso';
+  else if (/\b(bianco|bianca|bianchi|biancp|white|blanc|blanco|branco|weisswein)\b/.test(t)) out.type = 'bianco';
   if (/\b(spumante|brut|metodo classico|extra dry|pas dose|dosaggio zero|satèn|saten|millesimato|cuvee)\b/.test(t) && out.type !== 'dolce') out.type = 'bollicine';
   if (/\b(passito|vendemmia tardiva|late harvest|muffato|eiswein|icewine)\b/.test(t)) out.type = 'dolce';
   if (/\b(rosato|rose|chiaretto|cerasuolo d abruzzo|kretzer)\b/.test(t) && !/cerasuolo di vittoria/.test(t)) out.type = out.type === 'bollicine' ? 'bollicine' : 'rosato';

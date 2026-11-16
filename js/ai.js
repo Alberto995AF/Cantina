@@ -278,3 +278,17 @@ export async function aiCutout(src) {
   }
   return compress(`data:${img.mimeType || img.mime_type || 'image/png'};base64,${img.data}`);
 }
+
+// ---------- Identificazione da nome (dopo il barcode) ----------
+// Usata quando Open Food Facts trova il prodotto ma non dice la tipologia o mancano i dati del vino.
+export async function aiIdentify({ name, producer, generic, barcode }) {
+  return generate({
+    system: SYSTEM, json: true, maxTokens: 600,
+    messages: [{ role: 'user', text: `Prodotto trovato tramite codice a barre ${barcode || ''}:
+nome: "${name || ''}"; marca/produttore: "${producer || ''}"; descrizione: "${generic || ''}".
+Se è un vino o una birra che conosci, rispondi con JSON:
+{"type": "rosso|bianco|rosato|bollicine|dolce|fortificato|birra|altro", "denomination": "", "grapes": "", "region": "", "country": "",
+ "beerStyle": "solo per birre, uno tra: ${BEER_IDS}", "confidence": "alta|media|bassa"}
+Lascia vuoti i campi che non conosci con ragionevole certezza; non inventare. Se il nome è ambiguo (es. una linea con più colori) usa confidence "bassa".` }],
+  });
+}
