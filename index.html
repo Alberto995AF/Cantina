@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cantina</title>
+  <meta name="description" content="La tua cantina di vini e birre">
+  <meta name="theme-color" content="#FBF7F2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#16110F" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Cantina">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div id="app">
+    <main id="view" class="view"></main>
+    <nav class="tabbar" id="tabbar">
+      <a href="#/" data-tab="cellar"><svg viewBox="0 0 24 24"><path d="M8 2h8v2c0 3-1 5-2.5 6.2-.4.3-.5.7-.5 1.1V20h2.5a1 1 0 0 1 0 2h-7a1 1 0 0 1 0-2H11v-8.7c0-.4-.2-.8-.5-1.1C9 9 8 7 8 4z"/></svg><span>Cantina</span></a>
+      <a href="#/pairing" data-tab="pairing"><svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v5a2 2 0 0 1-1 1.7V21a1 1 0 0 1-2 0V9.7A2 2 0 0 1 4 8V3a1 1 0 0 1 2 0v4h.5V3a1 1 0 0 1 .5-1zm10 0c1.7 0 3 2.2 3 5.5 0 2-.8 3.4-2 4V21a1 1 0 0 1-2 0v-9.5c-1.2-.6-2-2-2-4C14 4.2 15.3 2 17 2z"/></svg><span>Abbina</span></a>
+      <a href="#/add" data-tab="add" class="tab-add" aria-label="Aggiungi"><span class="plus"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg></span></a>
+      <a href="#/history" data-tab="history"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 1-8.5 6 1 1 0 1 1 1.9.7A7 7 0 1 0 7 7.2V8a1 1 0 0 1-2 0V5a1 1 0 0 1 1-1h3a1 1 0 0 1 0 2h-.9A9 9 0 0 1 12 3zm0 4a1 1 0 0 1 1 1v3.6l2.7 2.7a1 1 0 0 1-1.4 1.4l-3-3A1 1 0 0 1 11 12V8a1 1 0 0 1 1-1z"/></svg><span>Storico</span></a>
+      <a href="#/settings" data-tab="settings"><svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="16" cy="6" r="2" fill="none" stroke-width="2"/><circle cx="10" cy="12" r="2" fill="none" stroke-width="2"/><circle cx="18" cy="18" r="2" fill="none" stroke-width="2"/></svg><span>Altro</span></a>
+    </nav>
+  </div>
+  <div id="sheet-root"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="vendor/zxing.min.js" defer></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
